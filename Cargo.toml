@@ -1,0 +1,20 @@
+[package]
+name = "rounac-agra"
+version = "0.0.0"
+edition = "2024"
+rust-version = "1.96.0"
+description = "A-GRA bindings used by the rounac crate."
+repository = "https://github.com/rounac-crates/rounac-agra"
+readme = "README.md"
+license = "MIT or Apache-2.0"
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+uuid = { version = "1.23", features = ["serde"] }
+chrono = { version = "0.4.45", features = ["serde"] }
+paste = "1.0"
+iso8601 = "0.6.3"
+
+[features]
+default = ["v5_0"]
+v5_0 = []
