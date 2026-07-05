@@ -382,7 +382,7 @@ choice_convert_impls! {
 #[serde(try_from = "ArchiveRequestTypeSerde")]
 pub enum ArchiveRequestType {
 	#[doc = r#"The item or items should be kept until the Time given by this element."#]
-	Time(crate::v5_0::common::DateTimeType),
+	Time(chrono::DateTime<chrono::Utc>),
 	#[doc = r#"The item or items should be kept for the number of days specified by this element."#]
 	NumberOfDays(u32),
 	#[doc = r#"The item or items should be kept until storage capacity is reached and "old" items must be deleted because space is needed for more recent items."#]
@@ -582,11 +582,11 @@ pub enum AtomicValueType {
 	#[doc = r#"A double value."#]
 	DoubleValue(f64),
 	#[doc = r#"A dateTime value."#]
-	DateTimeValue(crate::v5_0::common::DateTimeType),
+	DateTimeValue(chrono::DateTime<chrono::Utc>),
 	#[doc = r#"A duration value."#]
-	DurationValue(crate::v5_0::common::DurationType),
+	DurationValue(chrono::TimeDelta),
 	#[doc = r#"A time value."#]
-	TimeValue(crate::v5_0::common::TimeType),
+	TimeValue(chrono::NaiveTime),
 	#[doc = r#"A string value that is evaluated case-sensitively."#]
 	StringValueCaseSensitive(crate::v5_0::common::QueryString4096Type),
 	#[doc = r#"A string value that is evaluated case-insensitively."#]
@@ -1159,7 +1159,7 @@ pub enum CommRangeDelayChoiceType {
 	#[doc = r#"When Range Mode is Active, no time delay is specified (EmptyType) between sending a signal from the terminal to the satellite and from the satellite back to the terminal."#]
 	Active(crate::v5_0::common::EmptyType),
 	#[doc = r#"When Range Mode is Passive, the time delay is specified in seconds (DurationType) between sending a signal from the terminal to the satellite and from the satellite back to the terminal."#]
-	Passive(crate::v5_0::common::DurationType),
+	Passive(chrono::TimeDelta),
 }
 choice_convert_impls! {
 	CommRangeDelayChoiceType - CommRangeDelayChoiceTypeSerde
@@ -1269,11 +1269,11 @@ pub enum ComparableAtomicValueType {
 	#[doc = r#"A double value."#]
 	DoubleValue(f64),
 	#[doc = r#"A dateTime value."#]
-	DateTimeValue(crate::v5_0::common::DateTimeType),
+	DateTimeValue(chrono::DateTime<chrono::Utc>),
 	#[doc = r#"A duration value."#]
-	DurationValue(crate::v5_0::common::DurationType),
+	DurationValue(chrono::TimeDelta),
 	#[doc = r#"A time value."#]
-	TimeValue(crate::v5_0::common::TimeType),
+	TimeValue(chrono::NaiveTime),
 	#[doc = r#"A string value. String values are compared by the Unicode Collation Algorithm."#]
 	StringValue(crate::v5_0::common::QueryString4096Type),
 }
@@ -1364,7 +1364,7 @@ choice_convert_impls! {
 #[serde(try_from = "ContingencyPathSpacingTypeSerde")]
 pub enum ContingencyPathSpacingType {
 	#[doc = r#"Time along the primary path between contingency path start points."#]
-	Duration(crate::v5_0::common::DurationType),
+	Duration(chrono::TimeDelta),
 	#[doc = r#"Distance along the primary path between contingency path start points."#]
 	Distance(crate::v5_0::common::DistanceType),
 	#[doc = r#"Specifies that contingency paths should be generated starting at previously existing segment endpoints that are contained in the system's primary path."#]
@@ -2248,11 +2248,11 @@ pub enum EntityCharacteristicType {
 	#[doc = r#"Indicates the identity to be compared to the identity in the Entity message."#]
 	Identity(crate::v5_0::types::IdentityComparisonType),
 	#[doc = r#"Indicates the identity staleness to be compared to the identity staleness in the Entity message.  This choice requires a corresponding Identity TargetClause."#]
-	IdentityStaleness(crate::v5_0::common::DurationType),
+	IdentityStaleness(chrono::TimeDelta),
 	#[doc = r#"Indicates the position uncertainty to be compared to the position uncertainty in the Entity message.  This element represents the positional accuracy of the target.  It is the area, in square data miles, within which it is assessed that there is a 95% probability that the target lies.  The value given in this element can be compared to either the Quality element of the target or a calculated uncertainty area for the target based on its uncertainty ellipse."#]
 	PositionUncertainty(f32),
 	#[doc = r#"Indicates the position staleness to be compared to the kinematic staleness in the Entity message."#]
-	PositionStaleness(crate::v5_0::common::DurationType),
+	PositionStaleness(chrono::TimeDelta),
 	#[doc = r#"Indicates a value priority/rank  to be compared to the priority/rank in PrioritizationList referencing the Entity."#]
 	PrioritizationList(crate::v5_0::types::PrioritizationListValueType),
 	#[doc = r#"Indicates behaviors, activities, use of capabilities, etc. to be compared to those of the battlespace object associated with the Entity."#]
@@ -2645,7 +2645,7 @@ choice_convert_impls! {
 #[serde(try_from = "EventOffsetChoiceTypeSerde")]
 pub enum EventOffsetChoiceType {
 	#[doc = r#"The offset time from the associated OrbitalEvent."#]
-	OffsetTime(crate::v5_0::common::DurationType),
+	OffsetTime(chrono::TimeDelta),
 	#[doc = r#"The offset angle from the associated Event."#]
 	OffsetAngle(crate::v5_0::common::AngleType),
 	#[doc = r#"The Azimuth, Elevation, and Range of the Offset from the Event."#]
@@ -2666,7 +2666,7 @@ pub enum EventWindowChoiceType {
 	#[doc = r#"Indicates a boundary for an Event described as an angle."#]
 	WindowAngle(crate::v5_0::common::AnglePositiveType),
 	#[doc = r#"Indicates a boundary for an OrbitalEvent described as a time-based offset."#]
-	WindowDuration(crate::v5_0::common::DurationType),
+	WindowDuration(chrono::TimeDelta),
 	#[doc = r#"Indicates a boundary for an Event described as a radius."#]
 	WindowRadius(crate::v5_0::common::DistanceType),
 }
@@ -2795,7 +2795,7 @@ pub enum FuzeTriggerType {
 	#[doc = r#"Weapon fuze distance setting applies to proximity and hydrostatic fuze modes.  Hydrostatic values will be negative to denote subsurface.  Proximity values will be positive to denote height of burst above ground or distance to the target depending on the fuze's sensing."#]
 	FuzeDistance(crate::v5_0::common::DistanceType),
 	#[doc = r#"Weapon fuze delay time setting; applies to impact and time fuze modes."#]
-	FuzeDelayTime(crate::v5_0::common::DurationType),
+	FuzeDelayTime(chrono::TimeDelta),
 }
 choice_convert_impls! {
 	FuzeTriggerType - FuzeTriggerTypeSerde
@@ -3089,7 +3089,7 @@ pub enum IntervalChoiceType {
 	#[doc = r#"Indicates the interval amount is a distance."#]
 	Distance(crate::v5_0::common::DistanceType),
 	#[doc = r#"Indicates the interval amount is a duration."#]
-	Duration(crate::v5_0::common::DurationType),
+	Duration(chrono::TimeDelta),
 }
 choice_convert_impls! {
 	IntervalChoiceType - IntervalChoiceTypeSerde
@@ -3359,7 +3359,7 @@ choice_convert_impls! {
 #[serde(try_from = "LoiterProgressTypeSerde")]
 pub enum LoiterProgressType {
 	#[doc = r#"Indicates the time at which the loiter will end."#]
-	LoiterEndTime(crate::v5_0::common::DateTimeType),
+	LoiterEndTime(chrono::DateTime<chrono::Utc>),
 	#[doc = r#"Indicates the number of completed orbits of the loiter.  This is the required progress choice when the corresponding MissionPlan indicates a number of orbits."#]
 	CompletedOrbits(u32),
 }
@@ -3706,7 +3706,7 @@ pub enum MaCurveTraversingType {
 	#[doc = r#"Speed constraint to be applied to commanded curve traversal"#]
 	SpeedRange(crate::v5_0::types::SpeedRangeType),
 	#[doc = r#"Time contraint to inform intended duration of the commanded curve traversal"#]
-	Duration(chrono::TimeDelta),
+	Duration(i64),
 }
 choice_convert_impls! {
 	MaCurveTraversingType - MaCurveTraversingTypeSerde
@@ -3827,11 +3827,11 @@ pub enum MaEntityCharacteristicType {
 	#[doc = r#"Indicates the identity to be compared to the identity in the Entity message."#]
 	Identity(crate::v5_0::types::IdentityComparisonType),
 	#[doc = r#"Indicates the identity staleness to be compared to the identity staleness in the Entity message.  This choice requires a corresponding Identity TargetClause."#]
-	IdentityStaleness(crate::v5_0::common::DurationType),
+	IdentityStaleness(chrono::TimeDelta),
 	#[doc = r#"Indicates the position uncertainty to be compared to the position uncertainty in the Entity message.  This element represents the positional accuracy of the target.  It is the area, in square data miles, within which it is assessed that there is a 95% probability that the target lies.  The value given in this element can be compared to either the Quality element of the target or a calculated uncertainty area for the target based on its uncertainty ellipse."#]
 	PositionUncertainty(f32),
 	#[doc = r#"Indicates the position staleness to be compared to the kinematic staleness in the Entity message."#]
-	PositionStaleness(crate::v5_0::common::DurationType),
+	PositionStaleness(chrono::TimeDelta),
 	#[doc = r#"Indicates a value priority/rank  to be compared to the priority/rank in PrioritizationList referencing the Entity."#]
 	PrioritizationList(crate::v5_0::types::MaPrioritizationListValueType),
 	#[doc = r#"Indicates behaviors, activities, use of capabilities, etc. to be compared to those of the battlespace object associated with the Entity."#]
@@ -3955,7 +3955,7 @@ choice_convert_impls! {
 #[serde(try_from = "MaHoldLegSpecificationTypeSerde")]
 pub enum MaHoldLegSpecificationType {
 	#[doc = r#"Duration to fly the inbound leg in seconds."#]
-	LegTime(crate::v5_0::common::DurationType),
+	LegTime(chrono::TimeDelta),
 	#[doc = r#"Length to fly the inbound leg in meters."#]
 	LegLength(crate::v5_0::common::DistanceType),
 }
@@ -4284,7 +4284,7 @@ choice_convert_impls! {
 #[serde(try_from = "MaOrbitDurationTypeSerde")]
 pub enum MaOrbitDurationType {
 	#[doc = r#"Radius of the hold turns in meters."#]
-	Time(crate::v5_0::common::DurationType),
+	Time(chrono::TimeDelta),
 	#[doc = r#"Turn rate at which the hold turns are to be executed in radians per second."#]
 	NumberOfOrbits(u32),
 	#[doc = r#"Required time(s) to enter and/or exit the hold."#]
@@ -4637,7 +4637,7 @@ pub enum MaSystemCharacteristicType {
 	#[doc = r#"Indicates the position uncertainty to be compared to the position uncertainty of the System's kinematics.  This element represents the positional accuracy of the target.  It is the area, in square data miles, within which it is assessed that there is a 95% probability that the target lies.  The value given in this element can be compared to either the Quality element of the target or a calculated uncertainty area for the target based on its uncertainty ellipse."#]
 	PositionUncertainty(f32),
 	#[doc = r#"Indicates the position staleness to be compared to the kinematic staleness of the System's kinematics."#]
-	PositionStaleness(crate::v5_0::common::DurationType),
+	PositionStaleness(chrono::TimeDelta),
 	#[doc = r#"Indicates a value priority/rank  to be compared to the priority/rank in PrioritizationList referencing the System."#]
 	PrioritizationList(crate::v5_0::types::MaPrioritizationListValueType),
 	#[doc = r#"Indicates behaviors, activities, use of capabilities, etc. to be compared to those of the battlespace object associated with the System."#]
@@ -5494,7 +5494,7 @@ choice_convert_impls! {
 #[serde(try_from = "OrbitDurationTypeSerde")]
 pub enum OrbitDurationType {
 	#[doc = r#"Required amount of time to be spent in the loiter pattern."#]
-	Time(crate::v5_0::common::DurationType),
+	Time(chrono::TimeDelta),
 	#[doc = r#"Required number of laps to be spent in the loiter patter."#]
 	NumberOfOrbits(u32),
 }
@@ -5797,7 +5797,7 @@ pub enum OrbitalSurveillanceSensorMinimumCollectionRequirementsType {
 	#[doc = r#"Collection duration (in number of rotations)."#]
 	TargetRotationalPeriods(i32),
 	#[doc = r#"Collection duration (in seconds)."#]
-	Time(crate::v5_0::common::DurationType),
+	Time(chrono::TimeDelta),
 }
 choice_convert_impls! {
 	OrbitalSurveillanceSensorMinimumCollectionRequirementsType - OrbitalSurveillanceSensorMinimumCollectionRequirementsTypeSerde
@@ -6038,7 +6038,7 @@ pub enum PlanWindowModificationTypeChoiceType {
 	#[doc = r#"The new time window within which this Plan, or set of Plans, should apply."#]
 	Window(crate::v5_0::types::DateTimeRangeType),
 	#[doc = r#"Indicates the time offset that the existing Window for a Plan, or set of Plans, should be shifted by."#]
-	TimeOffset(crate::v5_0::common::DurationType),
+	TimeOffset(chrono::TimeDelta),
 }
 choice_convert_impls! {
 	PlanWindowModificationTypeChoiceType - PlanWindowModificationTypeChoiceTypeSerde
@@ -6157,7 +6157,7 @@ pub enum PlanningPointType {
 	#[doc = r#"Specifies an OpPoint to use for planning.  This choice is intended for cases including pre-mission planning initiated at an ingress OpPoint, the first cycle of dynamic mission planning prior to the vehicle reaching its ingress OpPoint, etc."#]
 	OpPointId(crate::v5_0::types::OpPointIdType),
 	#[doc = r#"Specifies a future time to use to establish/calculate/determine the point to use for planning.  This choice is intended for users/services which don't necessarily have, or care to specify, detailed vehicle position data.  Allocation and planning services would then be expected to determine a location corresponding to this Time, based on the current/previous *Plan or other information."#]
-	Time(crate::v5_0::common::DateTimeType),
+	Time(chrono::DateTime<chrono::Utc>),
 }
 choice_convert_impls! {
 	PlanningPointType - PlanningPointTypeSerde
@@ -6354,7 +6354,7 @@ choice_convert_impls! {
 #[serde(try_from = "PoComponentSettingsFocalPlaneArrayCollectionTypeSerde")]
 pub enum PoComponentSettingsFocalPlaneArrayCollectionType {
 	#[doc = r#"The new setting for this channel's collection time."#]
-	CollectionTimeSetting(crate::v5_0::common::DurationType),
+	CollectionTimeSetting(chrono::TimeDelta),
 	#[doc = r#"Enabling auto collection time defers control of the channel's collection time settings to the Subsystem."#]
 	CollectionTimeControls(crate::v5_0::types::ComponentControlsBType),
 }
@@ -6532,7 +6532,7 @@ pub enum PoComponentSettingsFocusSweepSettingsStepTimeType {
 	#[doc = r#"The size specified as the number of lines collected per step."#]
 	NumberOfLines(u32),
 	#[doc = r#"The time for each step in the focus sweep."#]
-	CollectionTime(chrono::TimeDelta),
+	CollectionTime(i64),
 }
 choice_convert_impls! {
 	PoComponentSettingsFocusSweepSettingsStepTimeType - PoComponentSettingsFocusSweepSettingsStepTimeTypeSerde
@@ -6918,9 +6918,9 @@ pub enum ProductNeededByType {
 	#[doc = r#"Indicates that the product or products is needed as soon as possible."#]
 	AsSoonAsPossible(crate::v5_0::common::EmptyType),
 	#[doc = r#"Indicates that the product is needed by a particular Date/Time."#]
-	AbsoluteTime(crate::v5_0::common::DateTimeType),
+	AbsoluteTime(chrono::DateTime<chrono::Utc>),
 	#[doc = r#"Indicates that the product is needed no later by a particular time duration after an observed event (e.g. Maneuver or Detection)."#]
-	RelativeToEventTime(crate::v5_0::common::DurationType),
+	RelativeToEventTime(chrono::TimeDelta),
 }
 choice_convert_impls! {
 	ProductNeededByType - ProductNeededByTypeSerde
@@ -8634,7 +8634,7 @@ pub enum SystemCharacteristicType {
 	#[doc = r#"Indicates the position uncertainty to be compared to the position uncertainty of the System's kinematics.  This element represents the positional accuracy of the target.  It is the area, in square data miles, within which it is assessed that there is a 95% probability that the target lies.  The value given in this element can be compared to either the Quality element of the target or a calculated uncertainty area for the target based on its uncertainty ellipse."#]
 	PositionUncertainty(f32),
 	#[doc = r#"Indicates the position staleness to be compared to the kinematic staleness of the System's kinematics."#]
-	PositionStaleness(crate::v5_0::common::DurationType),
+	PositionStaleness(chrono::TimeDelta),
 	#[doc = r#"Indicates a value priority/rank  to be compared to the priority/rank in PrioritizationList referencing the System."#]
 	PrioritizationList(crate::v5_0::types::PrioritizationListValueType),
 	#[doc = r#"Indicates behaviors, activities, use of capabilities, etc. to be compared to those of the battlespace object associated with the System."#]
@@ -8677,7 +8677,7 @@ choice_convert_impls! {
 #[serde(try_from = "SystemEstimationStartTypeSerde")]
 pub enum SystemEstimationStartType {
 	#[doc = r#"This element contains the time to use for the start of the estimation."#]
-	StartTime(crate::v5_0::common::DateTimeType),
+	StartTime(chrono::DateTime<chrono::Utc>),
 	#[doc = r#"This element contains the estimation initial conditions for a route based system.  If this element is populated with a segment ID and SegmentCaptureTime is omitted, then the use of current system time is appropriate."#]
 	RouteEstimationStart(crate::v5_0::types::EstimationStartType),
 	#[doc = r#"This element contains the estimation initial conditions for a space based system."#]
@@ -8696,7 +8696,7 @@ choice_convert_impls! {
 #[serde(try_from = "SystemEstimationStopTypeSerde")]
 pub enum SystemEstimationStopType {
 	#[doc = r#"This element is used to specify the time at which to stop estimation."#]
-	Time(crate::v5_0::common::DateTimeType),
+	Time(chrono::DateTime<chrono::Utc>),
 	#[doc = r#"This element is used to specify the route segment at which to stop estimation."#]
 	RouteSegmentId(crate::v5_0::types::SegmentIdType),
 	#[doc = r#"This element is used to specify the orbit maneuver segment at which to stop estimation."#]

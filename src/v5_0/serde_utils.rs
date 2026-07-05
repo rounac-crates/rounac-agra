@@ -7,10 +7,13 @@ pub mod naive_time {
 	use chrono::NaiveTime;
 	use serde::{de::Error, Deserialize, Deserializer, Serializer};
 
-	pub fn serialize<S: Serializer>(t: &NaiveTime, ser: S) -> Result<S::Ok, S::Error> {
+	pub fn get_raw_value(t: &NaiveTime) -> String {
 		let mut st = t.to_string();
 		st.push('Z');
-		ser.serialize_str(st.as_str())
+		st
+	}
+	pub fn serialize<S: Serializer>(t: &NaiveTime, ser: S) -> Result<S::Ok, S::Error> {
+		ser.serialize_str(get_raw_value(t).as_str())
 	}
 	pub fn deserialize<'de, D: Deserializer<'de>>(de: D) -> Result<NaiveTime, D::Error> {
 		let st = String::deserialize(de)?;
@@ -24,6 +27,42 @@ pub mod naive_time {
 		}
 	}
 }
+/// Pass-through mod when [chrono::NaiveTime] is wrapped in [Option].
+pub mod naive_time_opt {
+	use super::naive_time;
+	use chrono::NaiveTime;
+	use serde::{de::{Error, Visitor}, Deserializer, Serializer};
+	use core::fmt;
+
+	type SerdeType = Option<NaiveTime>;
+
+	pub fn serialize<S: Serializer>(t: &SerdeType, ser: S) -> Result<S::Ok, S::Error> {
+		match t.as_ref() {
+			Some(v) => ser.serialize_some(naive_time::get_raw_value(v).as_str()),
+			None => ser.serialize_none(),
+		}
+	}
+	pub fn deserialize<'de, D: Deserializer<'de>>(de: D) -> Result<SerdeType, D::Error> {
+		de.deserialize_option(NtVisitor)
+	}
+
+	struct NtVisitor;
+	impl<'de> Visitor<'de> for NtVisitor {
+		type Value = SerdeType;
+
+		fn expecting(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+			f.write_str("optional chrono::NaiveTime")
+		}
+
+		fn visit_none<E: Error>(self) -> Result<SerdeType, E> {
+			Ok(None)
+		}
+		fn visit_some<D: Deserializer<'de>>(self, deserializer: D) -> Result<SerdeType, D::Error> {
+			naive_time::deserialize(deserializer).map(|v| Some(v))
+		}
+	}
+}
+
 
 /// (De)Serializer for [`TimeDelta`](chrono::TimeDelta) that uses
 /// [`Duration`](iso8601::Duration) to parse, then converts to/from
@@ -34,8 +73,11 @@ pub mod time_delta {
 	use iso8601::Duration;
 	use serde::{de::Error, Deserialize, Deserializer, Serializer};
 
+	pub fn get_raw_value(t: &TimeDelta) -> String {
+		t.to_string()
+	}
 	pub fn serialize<S: Serializer>(t: &TimeDelta, ser: S) -> Result<S::Ok, S::Error> {
-		ser.serialize_str(&t.to_string())
+		ser.serialize_str(get_raw_value(t).as_str())
 	}
 	pub fn deserialize<'de, D: Deserializer<'de>>(de: D) -> Result<TimeDelta, D::Error> {
 		let time_string = String::deserialize(de)?;
@@ -76,6 +118,89 @@ pub mod time_delta {
 				})
 			}
 			Err(e) => Err(D::Error::custom(e))
+		}
+	}
+}
+/// Pass-through mod when [chrono::TimeDelta] is wrapped in [Option].
+pub mod time_delta_opt {
+	use super::time_delta;
+	use core::fmt;
+	use chrono::TimeDelta;
+	use serde::{de::{Error, Visitor}, Deserializer, Serializer};
+
+	type SerdeType = Option<TimeDelta>;
+
+	pub fn serialize<S: Serializer>(t: &SerdeType, ser: S) -> Result<S::Ok, S::Error> {
+		match t.as_ref() {
+			Some(v) => ser.serialize_some(time_delta::get_raw_value(v).as_str()),
+			None => ser.serialize_none(),
+		}
+	}
+	pub fn deserialize<'de, D: Deserializer<'de>>(de: D) -> Result<SerdeType, D::Error> {
+		de.deserialize_option(TdVisitor)
+	}
+
+	struct TdVisitor;
+	impl<'de> Visitor<'de> for TdVisitor {
+		type Value = SerdeType;
+
+		fn expecting(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+			f.write_str("optional chrono::TimeDelta")
+		}
+
+		fn visit_none<E: Error>(self) -> Result<SerdeType, E> {
+			Ok(None)
+		}
+		fn visit_some<D: Deserializer<'de>>(self, deserializer: D) -> Result<SerdeType, D::Error> {
+			time_delta::deserialize(deserializer).map(|v| Some(v))
+		}
+	}
+}
+/// Pass-through mod when [chrono::TimeDelta] is wrapped in [Vec].
+pub mod time_delta_vec {
+	use super::time_delta;
+	use core::fmt;
+	use chrono::TimeDelta;
+	use serde::{
+		de::{SeqAccess, Visitor},
+		ser::SerializeSeq,
+		Deserializer,
+		Serializer
+	};
+
+	type SerdeType = Vec<TimeDelta>;
+
+	pub fn serialize<S: Serializer>(t: &SerdeType, ser: S) -> Result<S::Ok, S::Error> {
+		let mut seq = ser.serialize_seq(Some(t.len()))?;
+		for v in t.iter() {
+			let rv = time_delta::get_raw_value(v);
+			seq.serialize_element(rv.as_str())?;
+		}
+		seq.end()
+	}
+	pub fn deserialize<'de, D: Deserializer<'de>>(de: D) -> Result<SerdeType, D::Error> {
+		de.deserialize_seq(TdVisitor)
+	}
+
+	struct TdVisitor;
+	impl<'de> Visitor<'de> for TdVisitor {
+		type Value = SerdeType;
+
+		fn expecting(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+			f.write_str("sequence of chrono::TimeDelta")
+		}
+
+		fn visit_seq<A: SeqAccess<'de>>(self, mut seq: A) -> Result<SerdeType, A::Error> {
+			let mut values = match seq.size_hint() {
+				Some(s) => Vec::with_capacity(s),
+				None => Vec::new(),
+			};
+
+			while let Some(v) = seq.next_element()? {
+				values.push(v);
+			}
+
+			Ok(values)
 		}
 	}
 }

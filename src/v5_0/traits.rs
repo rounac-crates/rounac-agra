@@ -37,8 +37,8 @@ pub trait Acceleration3DType:
 	fn get_down_acceleration(&self) -> &crate::v5_0::common::AccelerationType;
 	fn get_down_acceleration_mut(&mut self) -> &mut crate::v5_0::common::AccelerationType;
 	fn has_timestamp(&self) -> bool;
-	fn get_timestamp(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_timestamp_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_timestamp(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_timestamp_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait AccelerationAccelerationCovarianceType:
@@ -126,8 +126,8 @@ pub trait AccessAssessmentMdt:
 	fn get_associated_access_assessment_info_mut(&mut self) -> &mut Vec<crate::v5_0::types::AssociatedAccessAssessmentInfoType>;
 	fn get_assessment(&self) -> &Vec<crate::v5_0::types::AccessAssessmentType>;
 	fn get_assessment_mut(&mut self) -> &mut Vec<crate::v5_0::types::AccessAssessmentType>;
-	fn get_completion_time(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_completion_time_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_completion_time(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_completion_time_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn has_assessment_narrative(&self) -> bool;
 	fn get_assessment_narrative(&self) -> Option<&crate::v5_0::common::VisibleString1024Type>;
 	fn get_assessment_narrative_mut(&mut self) -> Option<&mut crate::v5_0::common::VisibleString1024Type>;
@@ -152,8 +152,8 @@ pub trait AccessAssessmentRequestMdt:
 	fn get_assessment_period(&self) -> Option<&crate::v5_0::types::DateTimeRangeType>;
 	fn get_assessment_period_mut(&mut self) -> Option<&mut crate::v5_0::types::DateTimeRangeType>;
 	fn has_assessment_interval(&self) -> bool;
-	fn get_assessment_interval(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_assessment_interval_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_assessment_interval(&self) -> Option<&chrono::TimeDelta>;
+	fn get_assessment_interval_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn get_subject_object(&self) -> &Vec<crate::v5_0::choices::IdentityKindAssetType>;
 	fn get_subject_object_mut(&mut self) -> &mut Vec<crate::v5_0::choices::IdentityKindAssetType>;
 	fn get_object_to_assess(&self) -> &Vec<crate::v5_0::choices::IdentityKindAssetType>;
@@ -256,11 +256,11 @@ pub trait AccessEventType:
 {
 	fn get_effort(&self) -> &crate::v5_0::enums::AccessEffortEnum;
 	fn get_effort_mut(&mut self) -> &mut crate::v5_0::enums::AccessEffortEnum;
-	fn get_time(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_time_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_time(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_time_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn has_duration(&self) -> bool;
-	fn get_duration(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_duration_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_duration(&self) -> Option<&chrono::TimeDelta>;
+	fn get_duration_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_probability_of_access_attempt(&self) -> bool;
 	fn get_probability_of_access_attempt(&self) -> Option<&crate::v5_0::common::PercentType>;
 	fn get_probability_of_access_attempt_mut(&mut self) -> Option<&mut crate::v5_0::common::PercentType>;
@@ -277,8 +277,8 @@ pub trait AccessEventType:
 	fn get_object_separation(&self) -> Option<&crate::v5_0::common::DistanceType>;
 	fn get_object_separation_mut(&mut self) -> Option<&mut crate::v5_0::common::DistanceType>;
 	fn has_unambiguous_time(&self) -> bool;
-	fn get_unambiguous_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_unambiguous_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_unambiguous_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_unambiguous_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_resource_consumption(&self) -> bool;
 	fn get_resource_consumption(&self) -> Option<&crate::v5_0::choices::EnduranceMultiStandardType>;
 	fn get_resource_consumption_mut(&mut self) -> Option<&mut crate::v5_0::choices::EnduranceMultiStandardType>;
@@ -371,8 +371,8 @@ pub trait AchievabilityAssessmentRequestPet:
 	fn get_timing_constraints(&self) -> Option<&crate::v5_0::choices::TimingConstraintsType>;
 	fn get_timing_constraints_mut(&mut self) -> Option<&mut crate::v5_0::choices::TimingConstraintsType>;
 	fn has_request_frequency_period(&self) -> bool;
-	fn get_request_frequency_period(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_request_frequency_period_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_request_frequency_period(&self) -> Option<&chrono::TimeDelta>;
+	fn get_request_frequency_period_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait AcoFileTraceabilityType:
@@ -1141,11 +1141,11 @@ pub trait ActivityBaseType:
 	fn get_source(&self) -> &Vec<crate::v5_0::choices::ActivitySourceType>;
 	fn get_source_mut(&mut self) -> &mut Vec<crate::v5_0::choices::ActivitySourceType>;
 	fn has_estimated_start_time(&self) -> bool;
-	fn get_estimated_start_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_estimated_start_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_estimated_start_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_estimated_start_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_estimated_completion_time(&self) -> bool;
-	fn get_estimated_completion_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_estimated_completion_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_estimated_completion_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_estimated_completion_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_estimated_percent_complete(&self) -> bool;
 	fn get_estimated_percent_complete(&self) -> Option<&crate::v5_0::common::PercentType>;
 	fn get_estimated_percent_complete_mut(&mut self) -> Option<&mut crate::v5_0::common::PercentType>;
@@ -1721,8 +1721,8 @@ pub trait AirDataType:
 	fn get_beta(&self) -> Option<&crate::v5_0::common::AngleHalfType>;
 	fn get_beta_mut(&mut self) -> Option<&mut crate::v5_0::common::AngleHalfType>;
 	fn has_timestamp(&self) -> bool;
-	fn get_timestamp(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_timestamp_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_timestamp(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_timestamp_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait AirSampleActivityMdt:
@@ -1752,11 +1752,11 @@ pub trait AirSampleActivityType:
 	ActivityBaseType
 {
 	fn has_actual_start_time(&self) -> bool;
-	fn get_actual_start_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_actual_start_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_actual_start_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_actual_start_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_actual_end_time(&self) -> bool;
-	fn get_actual_end_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_actual_end_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_actual_end_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_actual_end_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait AirSampleCapabilityCommandType:
@@ -2034,8 +2034,8 @@ pub trait AirfieldReportMdt:
 	fn get_airfield_id_mut(&mut self) -> &mut crate::v5_0::types::AirfieldIdType;
 	fn get_identity_reference_id(&self) -> &crate::v5_0::choices::AirfieldReferenceIdChoiceType;
 	fn get_identity_reference_id_mut(&mut self) -> &mut crate::v5_0::choices::AirfieldReferenceIdChoiceType;
-	fn get_observation_time(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_observation_time_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_observation_time(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_observation_time_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn has_information(&self) -> bool;
 	fn get_information(&self) -> Option<&crate::v5_0::types::AirfieldInformationType>;
 	fn get_information_mut(&mut self) -> Option<&mut crate::v5_0::types::AirfieldInformationType>;
@@ -2189,8 +2189,8 @@ pub trait AlongOrbitalArcDeltaType:
 	fn has_mean_anomaly(&self) -> bool;
 	fn get_mean_anomaly(&self) -> Option<&crate::v5_0::common::AngleType>;
 	fn get_mean_anomaly_mut(&mut self) -> Option<&mut crate::v5_0::common::AngleType>;
-	fn get_time_delta(&self) -> &crate::v5_0::common::DurationType;
-	fn get_time_delta_mut(&mut self) -> &mut crate::v5_0::common::DurationType;
+	fn get_time_delta(&self) -> &chrono::TimeDelta;
+	fn get_time_delta_mut(&mut self) -> &mut chrono::TimeDelta;
 }
 
 pub trait AltitudeConstraintsType:
@@ -2681,8 +2681,8 @@ pub trait AnalysisRouteMdt:
 	fn has_request_id(&self) -> bool;
 	fn get_request_id(&self) -> Option<&crate::v5_0::types::RequestIdType>;
 	fn get_request_id_mut(&mut self) -> Option<&mut crate::v5_0::types::RequestIdType>;
-	fn get_time_analysis_performed(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_time_analysis_performed_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_time_analysis_performed(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_time_analysis_performed_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_analysis_route_inputs(&self) -> &crate::v5_0::types::RoutePlanAnalysisInputsType;
 	fn get_analysis_route_inputs_mut(&mut self) -> &mut crate::v5_0::types::RoutePlanAnalysisInputsType;
 	fn has_route_analysis(&self) -> bool;
@@ -2724,8 +2724,8 @@ pub trait AnalysisRouteRequestMdt:
 	fn get_request_frequency(&self) -> &crate::v5_0::enums::RepeatEnum;
 	fn get_request_frequency_mut(&mut self) -> &mut crate::v5_0::enums::RepeatEnum;
 	fn has_request_frequency_period(&self) -> bool;
-	fn get_request_frequency_period(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_request_frequency_period_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_request_frequency_period(&self) -> Option<&chrono::TimeDelta>;
+	fn get_request_frequency_period_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn get_analysis_route_inputs(&self) -> &crate::v5_0::types::RoutePlanAnalysisInputsType;
 	fn get_analysis_route_inputs_mut(&mut self) -> &mut crate::v5_0::types::RoutePlanAnalysisInputsType;
 }
@@ -3526,8 +3526,8 @@ pub trait ApprovalPolicyMdt:
 	fn get_timed_zone(&self) -> Option<&crate::v5_0::types::TimedZoneType>;
 	fn get_timed_zone_mut(&mut self) -> Option<&mut crate::v5_0::types::TimedZoneType>;
 	fn has_expires(&self) -> bool;
-	fn get_expires(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_expires_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_expires(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_expires_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_mission_traceability(&self) -> bool;
 	fn get_mission_traceability(&self) -> Option<&crate::v5_0::types::MissionTraceabilityType>;
 	fn get_mission_traceability_mut(&mut self) -> Option<&mut crate::v5_0::types::MissionTraceabilityType>;
@@ -3563,8 +3563,8 @@ pub trait ApprovalRequestMdt:
 	fn get_approver_mut(&mut self) -> &mut crate::v5_0::choices::OperatorRoleType;
 	fn get_approval_references(&self) -> &crate::v5_0::types::ApprovalRequestPolicyReferenceType;
 	fn get_approval_references_mut(&mut self) -> &mut crate::v5_0::types::ApprovalRequestPolicyReferenceType;
-	fn get_respond_by(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_respond_by_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_respond_by(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_respond_by_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 }
 
 pub trait ApprovalRequestMt:
@@ -3660,11 +3660,11 @@ pub trait ArrivalDataType:
 	+ serde::Serialize
 {
 	fn has_time_of_arrival(&self) -> bool;
-	fn get_time_of_arrival(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_time_of_arrival_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_time_of_arrival(&self) -> Option<&chrono::TimeDelta>;
+	fn get_time_of_arrival_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_time_difference_of_arrival(&self) -> bool;
-	fn get_time_difference_of_arrival(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_time_difference_of_arrival_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_time_difference_of_arrival(&self) -> Option<&chrono::TimeDelta>;
+	fn get_time_difference_of_arrival_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_frequency_of_arrival(&self) -> bool;
 	fn get_frequency_of_arrival(&self) -> Option<&crate::v5_0::common::FrequencyType>;
 	fn get_frequency_of_arrival_mut(&mut self) -> Option<&mut crate::v5_0::common::FrequencyType>;
@@ -3748,8 +3748,8 @@ pub trait AssessmentRequestMdt:
 	fn get_request_frequency_type(&self) -> &crate::v5_0::enums::RepeatEnum;
 	fn get_request_frequency_type_mut(&mut self) -> &mut crate::v5_0::enums::RepeatEnum;
 	fn has_request_frequency_period(&self) -> bool;
-	fn get_request_frequency_period(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_request_frequency_period_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_request_frequency_period(&self) -> Option<&chrono::TimeDelta>;
+	fn get_request_frequency_period_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn get_results_in_assessment_message(&self) -> &bool;
 	fn get_results_in_assessment_message_mut(&mut self) -> &mut bool;
 	fn get_category(&self) -> &crate::v5_0::choices::AssessmentRequestType;
@@ -4085,8 +4085,8 @@ pub trait AvailabilityInfoType:
 	fn get_availability_reason(&self) -> Option<&crate::v5_0::types::CannotComplyType>;
 	fn get_availability_reason_mut(&mut self) -> Option<&mut crate::v5_0::types::CannotComplyType>;
 	fn has_next_available_window(&self) -> bool;
-	fn get_next_available_window(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_next_available_window_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_next_available_window(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_next_available_window_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait AvailableConnectionType:
@@ -4188,8 +4188,8 @@ pub trait AzimuthElevationRangePointType:
 	+ PartialEq
 	+ serde::Serialize
 {
-	fn get_time(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_time_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_time(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_time_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_azimuth(&self) -> &crate::v5_0::common::AnglePositiveType;
 	fn get_azimuth_mut(&mut self) -> &mut crate::v5_0::common::AnglePositiveType;
 	fn get_elevation(&self) -> &crate::v5_0::common::AngleType;
@@ -4267,8 +4267,8 @@ pub trait BcrsKinematicsType:
 	+ PartialEq
 	+ serde::Serialize
 {
-	fn get_epoch(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_epoch_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_epoch(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_epoch_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_position(&self) -> &crate::v5_0::types::BcrsPositionType;
 	fn get_position_mut(&mut self) -> &mut crate::v5_0::types::BcrsPositionType;
 	fn get_velocity(&self) -> &crate::v5_0::types::OrbitalKinematicsVelocityType;
@@ -4649,8 +4649,8 @@ pub trait CapabilityCoverageAreaDataType:
 	fn get_capability_coverage_area_factor(&self) -> &Vec<crate::v5_0::enums::CapabilityCoverageAreaFactorEnum>;
 	fn get_capability_coverage_area_factor_mut(&mut self) -> &mut Vec<crate::v5_0::enums::CapabilityCoverageAreaFactorEnum>;
 	fn has_valid_time(&self) -> bool;
-	fn get_valid_time(&self) -> Option<&crate::v5_0::common::TimeType>;
-	fn get_valid_time_mut(&mut self) -> Option<&mut crate::v5_0::common::TimeType>;
+	fn get_valid_time(&self) -> Option<&chrono::NaiveTime>;
+	fn get_valid_time_mut(&mut self) -> Option<&mut chrono::NaiveTime>;
 	fn has_sensor_position(&self) -> bool;
 	fn get_sensor_position(&self) -> Option<&crate::v5_0::types::Point3DType>;
 	fn get_sensor_position_mut(&mut self) -> Option<&mut crate::v5_0::types::Point3DType>;
@@ -4806,8 +4806,8 @@ pub trait CapabilityRfProfileStatusType:
 	fn get_timed_zone(&self) -> Option<&crate::v5_0::types::TimedZoneType>;
 	fn get_timed_zone_mut(&mut self) -> Option<&mut crate::v5_0::types::TimedZoneType>;
 	fn has_expires(&self) -> bool;
-	fn get_expires(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_expires_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_expires(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_expires_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait CapabilitySettingsCommandBaseType:
@@ -5467,8 +5467,8 @@ pub trait ColorPhotometryParamsType:
 	fn get_sensor_spectrum(&self) -> &Vec<crate::v5_0::enums::SensorSpectrumEnum>;
 	fn get_sensor_spectrum_mut(&mut self) -> &mut Vec<crate::v5_0::enums::SensorSpectrumEnum>;
 	fn has_product_resolution_time(&self) -> bool;
-	fn get_product_resolution_time(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_product_resolution_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_product_resolution_time(&self) -> Option<&chrono::TimeDelta>;
+	fn get_product_resolution_time_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait ComintAcquisitionTargetType:
@@ -5508,8 +5508,8 @@ pub trait ComintActivityMdt:
 	fn get_subsystem_id(&self) -> &crate::v5_0::types::SubsystemIdType;
 	fn get_subsystem_id_mut(&mut self) -> &mut crate::v5_0::types::SubsystemIdType;
 	fn has_entity_list_cleared(&self) -> bool;
-	fn get_entity_list_cleared(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_entity_list_cleared_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_entity_list_cleared(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_entity_list_cleared_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_entity_overload(&self) -> bool;
 	fn get_entity_overload(&self) -> Option<&bool>;
 	fn get_entity_overload_mut(&mut self) -> Option<&mut bool>;
@@ -5555,11 +5555,11 @@ pub trait ComintActivityType:
 	fn get_consent_state(&self) -> Option<&crate::v5_0::enums::ConsentEnum>;
 	fn get_consent_state_mut(&mut self) -> Option<&mut crate::v5_0::enums::ConsentEnum>;
 	fn has_actual_start_time(&self) -> bool;
-	fn get_actual_start_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_actual_start_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_actual_start_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_actual_start_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_actual_end_time(&self) -> bool;
-	fn get_actual_end_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_actual_end_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_actual_end_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_actual_end_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_spectral_density_reporting(&self) -> bool;
 	fn get_spectral_density_reporting(&self) -> Option<&bool>;
 	fn get_spectral_density_reporting_mut(&mut self) -> Option<&mut bool>;
@@ -5798,16 +5798,16 @@ pub trait ComintDataCollectCommandType:
 {
 	fn get_collection_frequency(&self) -> &crate::v5_0::types::CollectionFrequencyType;
 	fn get_collection_frequency_mut(&mut self) -> &mut crate::v5_0::types::CollectionFrequencyType;
-	fn get_start_time(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_start_time_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
-	fn get_dwell_duration(&self) -> &crate::v5_0::common::DurationType;
-	fn get_dwell_duration_mut(&mut self) -> &mut crate::v5_0::common::DurationType;
+	fn get_start_time(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_start_time_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
+	fn get_dwell_duration(&self) -> &chrono::TimeDelta;
+	fn get_dwell_duration_mut(&mut self) -> &mut chrono::TimeDelta;
 	fn has_dwells(&self) -> bool;
 	fn get_dwells(&self) -> Option<&u32>;
 	fn get_dwells_mut(&mut self) -> Option<&mut u32>;
 	fn has_repetition_interval(&self) -> bool;
-	fn get_repetition_interval(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_repetition_interval_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_repetition_interval(&self) -> Option<&chrono::TimeDelta>;
+	fn get_repetition_interval_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_signal_bandwidth(&self) -> bool;
 	fn get_signal_bandwidth(&self) -> Option<&crate::v5_0::types::FrequencyRangeType>;
 	fn get_signal_bandwidth_mut(&mut self) -> Option<&mut crate::v5_0::types::FrequencyRangeType>;
@@ -5856,8 +5856,8 @@ pub trait ComintGeolocationType:
 	fn get_geolocation_control_state(&self) -> Option<&crate::v5_0::enums::SignalGeolocationControlEnum>;
 	fn get_geolocation_control_state_mut(&mut self) -> Option<&mut crate::v5_0::enums::SignalGeolocationControlEnum>;
 	fn has_actual_duration(&self) -> bool;
-	fn get_actual_duration(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_actual_duration_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_actual_duration(&self) -> Option<&chrono::TimeDelta>;
+	fn get_actual_duration_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait ComintIdentificationType:
@@ -5958,8 +5958,8 @@ pub trait ComintProcessingParametersType:
 	fn get_signal_bandwidth(&self) -> Option<&crate::v5_0::types::FrequencyRangeType>;
 	fn get_signal_bandwidth_mut(&mut self) -> Option<&mut crate::v5_0::types::FrequencyRangeType>;
 	fn has_max_lob_time_offset(&self) -> bool;
-	fn get_max_lob_time_offset(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_max_lob_time_offset_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_max_lob_time_offset(&self) -> Option<&chrono::TimeDelta>;
+	fn get_max_lob_time_offset_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait ComintReceiveDwellType:
@@ -5980,27 +5980,27 @@ pub trait ComintReceiveDwellType:
 	fn get_dwell_fov(&self) -> Option<&crate::v5_0::types::NedConeType>;
 	fn get_dwell_fov_mut(&mut self) -> Option<&mut crate::v5_0::types::NedConeType>;
 	fn has_start_time(&self) -> bool;
-	fn get_start_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_start_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_start_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_start_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_cumulative_dwell_time(&self) -> bool;
-	fn get_cumulative_dwell_time(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_cumulative_dwell_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_cumulative_dwell_time(&self) -> Option<&chrono::TimeDelta>;
+	fn get_cumulative_dwell_time_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn get_component_id(&self) -> &Vec<crate::v5_0::types::ComponentIdType>;
 	fn get_component_id_mut(&mut self) -> &mut Vec<crate::v5_0::types::ComponentIdType>;
 	fn get_frequency(&self) -> &Vec<crate::v5_0::types::FrequencyRangeType>;
 	fn get_frequency_mut(&mut self) -> &mut Vec<crate::v5_0::types::FrequencyRangeType>;
 	fn has_dwell_revisit_interval(&self) -> bool;
-	fn get_dwell_revisit_interval(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_dwell_revisit_interval_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_dwell_revisit_interval(&self) -> Option<&chrono::TimeDelta>;
+	fn get_dwell_revisit_interval_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_pulse_width_low(&self) -> bool;
-	fn get_pulse_width_low(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_pulse_width_low_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_pulse_width_low(&self) -> Option<&chrono::TimeDelta>;
+	fn get_pulse_width_low_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_pulse_width_high(&self) -> bool;
-	fn get_pulse_width_high(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_pulse_width_high_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_pulse_width_high(&self) -> Option<&chrono::TimeDelta>;
+	fn get_pulse_width_high_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_pri_high(&self) -> bool;
-	fn get_pri_high(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_pri_high_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_pri_high(&self) -> Option<&chrono::TimeDelta>;
+	fn get_pri_high_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_native_sensitivity(&self) -> bool;
 	fn get_native_sensitivity(&self) -> Option<&crate::v5_0::common::DecibelType>;
 	fn get_native_sensitivity_mut(&mut self) -> Option<&mut crate::v5_0::common::DecibelType>;
@@ -6014,8 +6014,8 @@ pub trait ComintReceiveDwellType:
 	fn get_comint_interactive(&self) -> Option<&crate::v5_0::types::ComintInteractiveType>;
 	fn get_comint_interactive_mut(&mut self) -> Option<&mut crate::v5_0::types::ComintInteractiveType>;
 	fn has_stop_time(&self) -> bool;
-	fn get_stop_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_stop_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_stop_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_stop_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_sample_rate(&self) -> bool;
 	fn get_sample_rate(&self) -> Option<&f32>;
 	fn get_sample_rate_mut(&mut self) -> Option<&mut f32>;
@@ -6255,14 +6255,14 @@ pub trait CommAssetEstimationRequestMdt:
 	fn get_results_in_native_message(&self) -> &bool;
 	fn get_results_in_native_message_mut(&mut self) -> &mut bool;
 	fn has_time_step(&self) -> bool;
-	fn get_time_step(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_time_step_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_time_step(&self) -> Option<&chrono::TimeDelta>;
+	fn get_time_step_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_estimation_start(&self) -> bool;
-	fn get_estimation_start(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_estimation_start_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_estimation_start(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_estimation_start_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_estimation_end(&self) -> bool;
-	fn get_estimation_end(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_estimation_end_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_estimation_end(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_estimation_end_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait CommAssetEstimationRequestMt:
@@ -6299,8 +6299,8 @@ pub trait CommAssetEstimationResultType:
 	fn has_comm_asset_position_report(&self) -> bool;
 	fn get_comm_asset_position_report(&self) -> Option<&crate::v5_0::types::CommAssetPositionReportMdt>;
 	fn get_comm_asset_position_report_mut(&mut self) -> Option<&mut crate::v5_0::types::CommAssetPositionReportMdt>;
-	fn get_timestamp(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_timestamp_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_timestamp(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_timestamp_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 }
 
 pub trait CommAssetIdType:
@@ -6626,14 +6626,14 @@ pub trait CommConnectionType:
 	fn get_external_time_ref(&self) -> Option<&bool>;
 	fn get_external_time_ref_mut(&mut self) -> Option<&mut bool>;
 	fn has_network_time(&self) -> bool;
-	fn get_network_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_network_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_network_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_network_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_network_time_uncertainty_range(&self) -> bool;
 	fn get_network_time_uncertainty_range(&self) -> Option<&f32>;
 	fn get_network_time_uncertainty_range_mut(&mut self) -> Option<&mut f32>;
 	fn has_network_time_offset(&self) -> bool;
-	fn get_network_time_offset(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_network_time_offset_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_network_time_offset(&self) -> Option<&chrono::TimeDelta>;
+	fn get_network_time_offset_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait CommControlType:
@@ -7064,11 +7064,11 @@ pub trait CommLinkStatisticsType:
 	fn get_bit_error_rate(&self) -> Option<&crate::v5_0::common::PercentType>;
 	fn get_bit_error_rate_mut(&mut self) -> Option<&mut crate::v5_0::common::PercentType>;
 	fn has_tx_latency(&self) -> bool;
-	fn get_tx_latency(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_tx_latency_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_tx_latency(&self) -> Option<&chrono::TimeDelta>;
+	fn get_tx_latency_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_rx_latency(&self) -> bool;
-	fn get_rx_latency(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_rx_latency_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_rx_latency(&self) -> Option<&chrono::TimeDelta>;
+	fn get_rx_latency_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_fixed_data_rate(&self) -> bool;
 	fn get_fixed_data_rate(&self) -> Option<&bool>;
 	fn get_fixed_data_rate_mut(&mut self) -> Option<&mut bool>;
@@ -7390,11 +7390,11 @@ pub trait CommRelayActivityType:
 	fn get_frequency_set(&self) -> &Vec<crate::v5_0::types::FrequencySetType>;
 	fn get_frequency_set_mut(&mut self) -> &mut Vec<crate::v5_0::types::FrequencySetType>;
 	fn has_actual_start_time(&self) -> bool;
-	fn get_actual_start_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_actual_start_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_actual_start_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_actual_start_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_actual_end_time(&self) -> bool;
-	fn get_actual_end_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_actual_end_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_actual_end_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_actual_end_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait CommRelayCapabilityCommandType:
@@ -7553,8 +7553,8 @@ pub trait CommRelayTaskMetricsType:
 	+ PartialEq
 	+ serde::Serialize
 {
-	fn get_time_on_station(&self) -> &crate::v5_0::common::DurationType;
-	fn get_time_on_station_mut(&mut self) -> &mut crate::v5_0::common::DurationType;
+	fn get_time_on_station(&self) -> &chrono::TimeDelta;
+	fn get_time_on_station_mut(&mut self) -> &mut chrono::TimeDelta;
 	fn get_num_drop_outs(&self) -> &u32;
 	fn get_num_drop_outs_mut(&mut self) -> &mut u32;
 	fn get_link_metrics(&self) -> &Vec<crate::v5_0::types::LinkMetricsType>;
@@ -8486,8 +8486,8 @@ pub trait CommUhfSatcomCommWaveformActivityCommandType:
 pub trait CommUhfSatcomCommWaveformActivityType:
 	CommWaveformActivityPet
 {
-	fn get_range_delay(&self) -> &crate::v5_0::common::DurationType;
-	fn get_range_delay_mut(&mut self) -> &mut crate::v5_0::common::DurationType;
+	fn get_range_delay(&self) -> &chrono::TimeDelta;
+	fn get_range_delay_mut(&mut self) -> &mut chrono::TimeDelta;
 	fn has_range_mode(&self) -> bool;
 	fn get_range_mode(&self) -> Option<&crate::v5_0::enums::CommRangeModeTypeEnum>;
 	fn get_range_mode_mut(&mut self) -> Option<&mut crate::v5_0::enums::CommRangeModeTypeEnum>;
@@ -8667,8 +8667,8 @@ pub trait CommsLostTriggerDataType:
 	+ serde::Serialize
 {
 	fn has_threshold(&self) -> bool;
-	fn get_threshold(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_threshold_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_threshold(&self) -> Option<&chrono::TimeDelta>;
+	fn get_threshold_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait CommunicationsEmitterIdentityType:
@@ -8705,8 +8705,8 @@ pub trait ComparableRankingType:
 pub trait CompletedRequirementMetricsType:
 	RequirementMetricsReportType
 {
-	fn get_time_of_completion(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_time_of_completion_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_time_of_completion(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_time_of_completion_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_category(&self) -> &Vec<crate::v5_0::choices::RequirementMetricsCategoryType>;
 	fn get_category_mut(&mut self) -> &mut Vec<crate::v5_0::choices::RequirementMetricsCategoryType>;
 }
@@ -8719,17 +8719,17 @@ pub trait CompletionStatusType:
 	+ serde::Serialize
 {
 	fn has_estimated_time_complete(&self) -> bool;
-	fn get_estimated_time_complete(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_estimated_time_complete_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_estimated_time_complete(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_estimated_time_complete_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_estimated_percent_complete(&self) -> bool;
 	fn get_estimated_percent_complete(&self) -> Option<&crate::v5_0::common::PercentType>;
 	fn get_estimated_percent_complete_mut(&mut self) -> Option<&mut crate::v5_0::common::PercentType>;
 	fn has_actual_time_started(&self) -> bool;
-	fn get_actual_time_started(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_actual_time_started_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_actual_time_started(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_actual_time_started_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_actual_time_complete(&self) -> bool;
-	fn get_actual_time_complete(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_actual_time_complete_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_actual_time_complete(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_actual_time_complete_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_description(&self) -> bool;
 	fn get_description(&self) -> Option<&crate::v5_0::common::VisibleString1024Type>;
 	fn get_description_mut(&mut self) -> Option<&mut crate::v5_0::common::VisibleString1024Type>;
@@ -9140,8 +9140,8 @@ pub trait ComponentType:
 	fn get_component_state(&self) -> &crate::v5_0::enums::ComponentStateEnum;
 	fn get_component_state_mut(&mut self) -> &mut crate::v5_0::enums::ComponentStateEnum;
 	fn has_data_timestamp(&self) -> bool;
-	fn get_data_timestamp(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_data_timestamp_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_data_timestamp(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_data_timestamp_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn get_temperature(&self) -> &Vec<crate::v5_0::types::TemperatureStatusType>;
 	fn get_temperature_mut(&mut self) -> &mut Vec<crate::v5_0::types::TemperatureStatusType>;
 	fn get_bit_id(&self) -> &Vec<crate::v5_0::types::BitIdType>;
@@ -10229,8 +10229,8 @@ pub trait CryptoLoadCommandType:
 	fn get_key_source(&self) -> &crate::v5_0::choices::CryptoKeySourceType;
 	fn get_key_source_mut(&mut self) -> &mut crate::v5_0::choices::CryptoKeySourceType;
 	fn has_load_schedule_time(&self) -> bool;
-	fn get_load_schedule_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_load_schedule_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_load_schedule_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_load_schedule_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait CryptoLoadStatusType:
@@ -10247,8 +10247,8 @@ pub trait CryptoLoadStatusType:
 	fn get_slot_identifier(&self) -> &Vec<crate::v5_0::common::CryptoSlotIdentifierType>;
 	fn get_slot_identifier_mut(&mut self) -> &mut Vec<crate::v5_0::common::CryptoSlotIdentifierType>;
 	fn has_load_time(&self) -> bool;
-	fn get_load_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_load_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_load_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_load_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait CryptoLocationType:
@@ -10300,8 +10300,8 @@ pub trait CryptoRolloverCommandType:
 	fn get_crypto_rollover_action(&self) -> &crate::v5_0::enums::CryptoRolloverActionEnum;
 	fn get_crypto_rollover_action_mut(&mut self) -> &mut crate::v5_0::enums::CryptoRolloverActionEnum;
 	fn has_rollover_schedule_time(&self) -> bool;
-	fn get_rollover_schedule_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_rollover_schedule_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_rollover_schedule_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_rollover_schedule_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_zeroize_previous_slot(&self) -> bool;
 	fn get_zeroize_previous_slot(&self) -> Option<&bool>;
 	fn get_zeroize_previous_slot_mut(&mut self) -> Option<&mut bool>;
@@ -10317,8 +10317,8 @@ pub trait CryptoRolloverStatusType:
 	fn get_rollover_state(&self) -> &crate::v5_0::enums::CryptoRolloverStateEnum;
 	fn get_rollover_state_mut(&mut self) -> &mut crate::v5_0::enums::CryptoRolloverStateEnum;
 	fn has_rollover_time(&self) -> bool;
-	fn get_rollover_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_rollover_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_rollover_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_rollover_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait CryptoSlotGroupIdType:
@@ -10709,8 +10709,8 @@ pub trait CsPostureType:
 {
 	fn get_posture(&self) -> &crate::v5_0::enums::CsPostureEnum;
 	fn get_posture_mut(&mut self) -> &mut crate::v5_0::enums::CsPostureEnum;
-	fn get_time(&self) -> &crate::v5_0::common::DurationType;
-	fn get_time_mut(&mut self) -> &mut crate::v5_0::common::DurationType;
+	fn get_time(&self) -> &chrono::TimeDelta;
+	fn get_time_mut(&mut self) -> &mut chrono::TimeDelta;
 }
 
 pub trait CsSatBandDeconType:
@@ -10886,8 +10886,8 @@ pub trait DamageAssessmentMdt:
 	fn get_assessment_type_mut(&mut self) -> &mut crate::v5_0::enums::DamageCategoryEnum;
 	fn get_subject(&self) -> &crate::v5_0::choices::DamageSubjectType;
 	fn get_subject_mut(&mut self) -> &mut crate::v5_0::choices::DamageSubjectType;
-	fn get_completion_time(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_completion_time_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_completion_time(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_completion_time_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn has_assessment_zone(&self) -> bool;
 	fn get_assessment_zone(&self) -> Option<&crate::v5_0::types::ZoneType>;
 	fn get_assessment_zone_mut(&mut self) -> Option<&mut crate::v5_0::types::ZoneType>;
@@ -10933,8 +10933,8 @@ pub trait DamageAssessmentRequestMdt:
 	fn get_damage_summary_id(&self) -> &Vec<crate::v5_0::types::DamageSummaryIdType>;
 	fn get_damage_summary_id_mut(&mut self) -> &mut Vec<crate::v5_0::types::DamageSummaryIdType>;
 	fn has_respond_by(&self) -> bool;
-	fn get_respond_by(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_respond_by_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_respond_by(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_respond_by_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait DamageAssessmentRequestMt:
@@ -10993,8 +10993,8 @@ pub trait DamageEstimateMdt:
 	fn has_release_point(&self) -> bool;
 	fn get_release_point(&self) -> Option<&crate::v5_0::types::Point3DType>;
 	fn get_release_point_mut(&mut self) -> Option<&mut crate::v5_0::types::Point3DType>;
-	fn get_completion_time(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_completion_time_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_completion_time(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_completion_time_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn has_estimate_zone(&self) -> bool;
 	fn get_estimate_zone(&self) -> Option<&crate::v5_0::types::ZoneType>;
 	fn get_estimate_zone_mut(&mut self) -> Option<&mut crate::v5_0::types::ZoneType>;
@@ -11050,8 +11050,8 @@ pub trait DamageEstimateRequestMdt:
 	fn get_product_metadata_id(&self) -> &Vec<crate::v5_0::types::ProductMetadataIdType>;
 	fn get_product_metadata_id_mut(&mut self) -> &mut Vec<crate::v5_0::types::ProductMetadataIdType>;
 	fn has_respond_by(&self) -> bool;
-	fn get_respond_by(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_respond_by_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_respond_by(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_respond_by_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_estimate_zone(&self) -> bool;
 	fn get_estimate_zone(&self) -> Option<&crate::v5_0::types::ZoneType>;
 	fn get_estimate_zone_mut(&mut self) -> Option<&mut crate::v5_0::types::ZoneType>;
@@ -11169,8 +11169,8 @@ pub trait DamageReportMdt:
 	fn get_reporting_system_id_mut(&mut self) -> Option<&mut crate::v5_0::types::SystemIdType>;
 	fn get_subject(&self) -> &crate::v5_0::choices::DamageSubjectType;
 	fn get_subject_mut(&mut self) -> &mut crate::v5_0::choices::DamageSubjectType;
-	fn get_report_completion_time(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_report_completion_time_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_report_completion_time(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_report_completion_time_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn has_report_zone(&self) -> bool;
 	fn get_report_zone(&self) -> Option<&crate::v5_0::types::ZoneType>;
 	fn get_report_zone_mut(&mut self) -> Option<&mut crate::v5_0::types::ZoneType>;
@@ -11205,8 +11205,8 @@ pub trait DamageSummaryMdt:
 {
 	fn get_damage_summary_id(&self) -> &crate::v5_0::types::DamageSummaryIdType;
 	fn get_damage_summary_id_mut(&mut self) -> &mut crate::v5_0::types::DamageSummaryIdType;
-	fn get_summary_completion_time(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_summary_completion_time_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_summary_completion_time(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_summary_completion_time_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_subject(&self) -> &crate::v5_0::choices::DamageSubjectType;
 	fn get_subject_mut(&mut self) -> &mut crate::v5_0::choices::DamageSubjectType;
 	fn has_summary_zone(&self) -> bool;
@@ -11286,8 +11286,8 @@ pub trait DamagedFunctionType:
 	fn get_level(&self) -> &crate::v5_0::enums::DamageLevelEnum;
 	fn get_level_mut(&mut self) -> &mut crate::v5_0::enums::DamageLevelEnum;
 	fn has_duration(&self) -> bool;
-	fn get_duration(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_duration_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_duration(&self) -> Option<&chrono::TimeDelta>;
+	fn get_duration_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_details(&self) -> bool;
 	fn get_details(&self) -> Option<&crate::v5_0::common::VisibleString1024Type>;
 	fn get_details_mut(&mut self) -> Option<&mut crate::v5_0::common::VisibleString1024Type>;
@@ -12035,11 +12035,11 @@ pub trait DateTimeRangeBeginType:
 	+ PartialEq
 	+ serde::Serialize
 {
-	fn get_begin(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_begin_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_begin(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_begin_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn has_end(&self) -> bool;
-	fn get_end(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_end_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_end(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_end_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait DateTimeRangeDeconType:
@@ -12049,10 +12049,10 @@ pub trait DateTimeRangeDeconType:
 	+ PartialEq
 	+ serde::Serialize
 {
-	fn get_time_frame_start(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_time_frame_start_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
-	fn get_time_frame_stop(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_time_frame_stop_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_time_frame_start(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_time_frame_start_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
+	fn get_time_frame_stop(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_time_frame_stop_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_deconfliction_windows(&self) -> &Vec<crate::v5_0::types::DeconflictionWindowType>;
 	fn get_deconfliction_windows_mut(&mut self) -> &mut Vec<crate::v5_0::types::DeconflictionWindowType>;
 }
@@ -12065,11 +12065,11 @@ pub trait DateTimeRangeType:
 	+ serde::Serialize
 {
 	fn has_begin(&self) -> bool;
-	fn get_begin(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_begin_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_begin(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_begin_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_end(&self) -> bool;
-	fn get_end(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_end_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_end(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_end_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait DateTimeSigmaType:
@@ -12079,11 +12079,11 @@ pub trait DateTimeSigmaType:
 	+ PartialEq
 	+ serde::Serialize
 {
-	fn get_date_time(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_date_time_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_date_time(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_date_time_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn has_date_time_sigma(&self) -> bool;
-	fn get_date_time_sigma(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_date_time_sigma_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_date_time_sigma(&self) -> Option<&chrono::TimeDelta>;
+	fn get_date_time_sigma_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait DebrisCloudBoundaryType:
@@ -12107,10 +12107,10 @@ pub trait DeconflictionWindowType:
 	+ PartialEq
 	+ serde::Serialize
 {
-	fn get_window_start(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_window_start_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
-	fn get_window_stop(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_window_stop_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_window_start(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_window_start_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
+	fn get_window_stop(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_window_stop_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_window_power(&self) -> &crate::v5_0::common::PowerType;
 	fn get_window_power_mut(&mut self) -> &mut crate::v5_0::common::PowerType;
 }
@@ -12124,8 +12124,8 @@ pub trait DefaultResponseType:
 {
 	fn get_approval_type(&self) -> &crate::v5_0::enums::ApprovalResponseEnum;
 	fn get_approval_type_mut(&mut self) -> &mut crate::v5_0::enums::ApprovalResponseEnum;
-	fn get_timeout(&self) -> &crate::v5_0::common::DurationType;
-	fn get_timeout_mut(&mut self) -> &mut crate::v5_0::common::DurationType;
+	fn get_timeout(&self) -> &chrono::TimeDelta;
+	fn get_timeout_mut(&mut self) -> &mut chrono::TimeDelta;
 }
 
 pub trait DefensiveJammerSystemInfoType:
@@ -12198,11 +12198,11 @@ pub trait DependentTaskType:
 	fn get_dependent_task_id(&self) -> &crate::v5_0::types::TaskIdType;
 	fn get_dependent_task_id_mut(&mut self) -> &mut crate::v5_0::types::TaskIdType;
 	fn has_min_relative_time(&self) -> bool;
-	fn get_min_relative_time(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_min_relative_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_min_relative_time(&self) -> Option<&chrono::TimeDelta>;
+	fn get_min_relative_time_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_max_relative_time(&self) -> bool;
-	fn get_max_relative_time(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_max_relative_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_max_relative_time(&self) -> Option<&chrono::TimeDelta>;
+	fn get_max_relative_time_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn get_task_required(&self) -> &bool;
 	fn get_task_required_mut(&mut self) -> &mut bool;
 }
@@ -12707,19 +12707,19 @@ pub trait DlzDataType:
 	fn has_digital_maneuvering_cue_angle(&self) -> bool;
 	fn get_digital_maneuvering_cue_angle(&self) -> Option<&crate::v5_0::common::AnglePositiveType>;
 	fn get_digital_maneuvering_cue_angle_mut(&mut self) -> Option<&mut crate::v5_0::common::AnglePositiveType>;
-	fn get_time_of_intercept(&self) -> &crate::v5_0::common::TimeType;
-	fn get_time_of_intercept_mut(&mut self) -> &mut crate::v5_0::common::TimeType;
-	fn get_time_to_release(&self) -> &crate::v5_0::common::TimeType;
-	fn get_time_to_release_mut(&mut self) -> &mut crate::v5_0::common::TimeType;
+	fn get_time_of_intercept(&self) -> &chrono::NaiveTime;
+	fn get_time_of_intercept_mut(&mut self) -> &mut chrono::NaiveTime;
+	fn get_time_to_release(&self) -> &chrono::NaiveTime;
+	fn get_time_to_release_mut(&mut self) -> &mut chrono::NaiveTime;
 	fn has_time_of_activation(&self) -> bool;
-	fn get_time_of_activation(&self) -> Option<&crate::v5_0::common::TimeType>;
-	fn get_time_of_activation_mut(&mut self) -> Option<&mut crate::v5_0::common::TimeType>;
+	fn get_time_of_activation(&self) -> Option<&chrono::NaiveTime>;
+	fn get_time_of_activation_mut(&mut self) -> Option<&mut chrono::NaiveTime>;
 	fn has_time_of_mprf(&self) -> bool;
-	fn get_time_of_mprf(&self) -> Option<&crate::v5_0::common::TimeType>;
-	fn get_time_of_mprf_mut(&mut self) -> Option<&mut crate::v5_0::common::TimeType>;
+	fn get_time_of_mprf(&self) -> Option<&chrono::NaiveTime>;
+	fn get_time_of_mprf_mut(&mut self) -> Option<&mut chrono::NaiveTime>;
 	fn has_time_of_autonomous(&self) -> bool;
-	fn get_time_of_autonomous(&self) -> Option<&crate::v5_0::common::TimeType>;
-	fn get_time_of_autonomous_mut(&mut self) -> Option<&mut crate::v5_0::common::TimeType>;
+	fn get_time_of_autonomous(&self) -> Option<&chrono::NaiveTime>;
+	fn get_time_of_autonomous_mut(&mut self) -> Option<&mut chrono::NaiveTime>;
 }
 
 pub trait DlzIdType:
@@ -12951,8 +12951,8 @@ pub trait DmpiDesignationRequestMdt:
 	fn get_available_weapons(&self) -> &Vec<crate::v5_0::types::AvailableWeaponsType>;
 	fn get_available_weapons_mut(&mut self) -> &mut Vec<crate::v5_0::types::AvailableWeaponsType>;
 	fn has_respond_by(&self) -> bool;
-	fn get_respond_by(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_respond_by_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_respond_by(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_respond_by_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_proposed_dmpi_coordinates(&self) -> bool;
 	fn get_proposed_dmpi_coordinates(&self) -> Option<&crate::v5_0::types::Point2DType>;
 	fn get_proposed_dmpi_coordinates_mut(&mut self) -> Option<&mut crate::v5_0::types::Point2DType>;
@@ -13148,8 +13148,8 @@ pub trait DmpiStoreStatusType:
 	fn get_reason(&self) -> Option<&crate::v5_0::common::VisibleString1024Type>;
 	fn get_reason_mut(&mut self) -> Option<&mut crate::v5_0::common::VisibleString1024Type>;
 	fn has_time_of_impact(&self) -> bool;
-	fn get_time_of_impact(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_time_of_impact_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_time_of_impact(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_time_of_impact_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait DmpiTraceabilityType:
@@ -13341,10 +13341,10 @@ pub trait DurationRangeType:
 	+ PartialEq
 	+ serde::Serialize
 {
-	fn get_min(&self) -> &crate::v5_0::common::DurationType;
-	fn get_min_mut(&mut self) -> &mut crate::v5_0::common::DurationType;
-	fn get_max(&self) -> &crate::v5_0::common::DurationType;
-	fn get_max_mut(&mut self) -> &mut crate::v5_0::common::DurationType;
+	fn get_min(&self) -> &chrono::TimeDelta;
+	fn get_min_mut(&mut self) -> &mut chrono::TimeDelta;
+	fn get_max(&self) -> &chrono::TimeDelta;
+	fn get_max_mut(&mut self) -> &mut chrono::TimeDelta;
 }
 
 pub trait DvrProcessingParametersType:
@@ -13353,11 +13353,11 @@ pub trait DvrProcessingParametersType:
 	fn get_operation(&self) -> &crate::v5_0::enums::DvrOperationEnum;
 	fn get_operation_mut(&mut self) -> &mut crate::v5_0::enums::DvrOperationEnum;
 	fn has_start_time(&self) -> bool;
-	fn get_start_time(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_start_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_start_time(&self) -> Option<&chrono::TimeDelta>;
+	fn get_start_time_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_end_time(&self) -> bool;
-	fn get_end_time(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_end_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_end_time(&self) -> Option<&chrono::TimeDelta>;
+	fn get_end_time_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait DwellIdType:
@@ -13628,8 +13628,8 @@ pub trait EaComponentType:
 	fn get_component_id_mut(&mut self) -> &mut crate::v5_0::types::ComponentIdType;
 	fn get_field_of_regard(&self) -> &crate::v5_0::types::FieldOfRegardType;
 	fn get_field_of_regard_mut(&mut self) -> &mut crate::v5_0::types::FieldOfRegardType;
-	fn get_frequency_change_time(&self) -> &crate::v5_0::common::DurationType;
-	fn get_frequency_change_time_mut(&mut self) -> &mut crate::v5_0::common::DurationType;
+	fn get_frequency_change_time(&self) -> &chrono::TimeDelta;
+	fn get_frequency_change_time_mut(&mut self) -> &mut chrono::TimeDelta;
 	fn get_duty_factor_limit(&self) -> &crate::v5_0::common::PercentType;
 	fn get_duty_factor_limit_mut(&mut self) -> &mut crate::v5_0::common::PercentType;
 	fn get_beam_limit(&self) -> &u32;
@@ -13810,8 +13810,8 @@ pub trait EaTargetType:
 	fn get_power(&self) -> Option<&crate::v5_0::choices::EaPowerType>;
 	fn get_power_mut(&mut self) -> Option<&mut crate::v5_0::choices::EaPowerType>;
 	fn has_last_signal_timestamp(&self) -> bool;
-	fn get_last_signal_timestamp(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_last_signal_timestamp_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_last_signal_timestamp(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_last_signal_timestamp_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait EaTaskEscortType:
@@ -13940,8 +13940,8 @@ pub trait EarthOrientationParametersMdt:
 {
 	fn get_earth_orientation_parameters_id(&self) -> &crate::v5_0::types::EarthOrientationParametersIdType;
 	fn get_earth_orientation_parameters_id_mut(&mut self) -> &mut crate::v5_0::types::EarthOrientationParametersIdType;
-	fn get_creation_time(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_creation_time_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_creation_time(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_creation_time_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_epoch(&self) -> &crate::v5_0::types::DateTimeRangeType;
 	fn get_epoch_mut(&mut self) -> &mut crate::v5_0::types::DateTimeRangeType;
 	fn get_parameters(&self) -> &Vec<crate::v5_0::types::TimeAndPolarRecordType>;
@@ -14001,8 +14001,8 @@ pub trait EcefKinematicsType:
 	+ PartialEq
 	+ serde::Serialize
 {
-	fn get_time_valid(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_time_valid_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_time_valid(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_time_valid_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_position(&self) -> &crate::v5_0::types::EcefPositionType;
 	fn get_position_mut(&mut self) -> &mut crate::v5_0::types::EcefPositionType;
 	fn has_velocity(&self) -> bool;
@@ -14143,8 +14143,8 @@ pub trait EcefSensorKinematicsType:
 	+ PartialEq
 	+ serde::Serialize
 {
-	fn get_timestamp(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_timestamp_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_timestamp(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_timestamp_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_sensor_kinematics(&self) -> &crate::v5_0::types::EcefKinematicsType;
 	fn get_sensor_kinematics_mut(&mut self) -> &mut crate::v5_0::types::EcefKinematicsType;
 	fn has_sensor_attitude(&self) -> bool;
@@ -15341,11 +15341,11 @@ pub trait EnduranceBaseType:
 	fn get_fuel(&self) -> Option<&crate::v5_0::common::MassType>;
 	fn get_fuel_mut(&mut self) -> Option<&mut crate::v5_0::common::MassType>;
 	fn has_duration(&self) -> bool;
-	fn get_duration(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_duration_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_duration(&self) -> Option<&chrono::TimeDelta>;
+	fn get_duration_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_duration_end(&self) -> bool;
-	fn get_duration_end(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_duration_end_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_duration_end(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_duration_end_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_percent(&self) -> bool;
 	fn get_percent(&self) -> Option<&crate::v5_0::common::PercentType>;
 	fn get_percent_mut(&mut self) -> Option<&mut crate::v5_0::common::PercentType>;
@@ -15364,8 +15364,8 @@ pub trait EnduranceFootprintType:
 	fn get_reference_altitude(&self) -> Option<&crate::v5_0::common::AltitudeType>;
 	fn get_reference_altitude_mut(&mut self) -> Option<&mut crate::v5_0::common::AltitudeType>;
 	fn has_duration(&self) -> bool;
-	fn get_duration(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_duration_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_duration(&self) -> Option<&chrono::TimeDelta>;
+	fn get_duration_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait EnduranceRemainingType:
@@ -15482,8 +15482,8 @@ pub trait EntityConfirmationRequestMdt:
 	fn get_requirement_id_mut(&mut self) -> &mut crate::v5_0::choices::RequirementInstanceIdChoiceType;
 	fn get_entity_id(&self) -> &crate::v5_0::types::EntityIdType;
 	fn get_entity_id_mut(&mut self) -> &mut crate::v5_0::types::EntityIdType;
-	fn get_time_stamp(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_time_stamp_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_time_stamp(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_time_stamp_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn has_entity_dimension_estimate_uncertainty(&self) -> bool;
 	fn get_entity_dimension_estimate_uncertainty(&self) -> Option<&crate::v5_0::types::EntityDimensionEstimateUncertaintyType>;
 	fn get_entity_dimension_estimate_uncertainty_mut(&mut self) -> Option<&mut crate::v5_0::types::EntityDimensionEstimateUncertaintyType>;
@@ -15646,8 +15646,8 @@ pub trait EntityFusionSourceType:
 	fn get_system_id(&self) -> Option<&crate::v5_0::types::SystemIdType>;
 	fn get_system_id_mut(&mut self) -> Option<&mut crate::v5_0::types::SystemIdType>;
 	fn has_timestamp(&self) -> bool;
-	fn get_timestamp(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_timestamp_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_timestamp(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_timestamp_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait EntityIdType:
@@ -15664,8 +15664,8 @@ pub trait EntityIdentityType:
 	fn has_difference_indicator(&self) -> bool;
 	fn get_difference_indicator(&self) -> Option<&bool>;
 	fn get_difference_indicator_mut(&mut self) -> Option<&mut bool>;
-	fn get_identity_timestamp(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_identity_timestamp_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_identity_timestamp(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_identity_timestamp_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_qualifying_tags(&self) -> &Vec<crate::v5_0::types::QualifyingTagsType>;
 	fn get_qualifying_tags_mut(&mut self) -> &mut Vec<crate::v5_0::types::QualifyingTagsType>;
 	fn get_associated_time(&self) -> &Vec<crate::v5_0::types::TimeFunctionType>;
@@ -15681,8 +15681,8 @@ pub trait EntityLostMdt:
 {
 	fn get_entity_id(&self) -> &crate::v5_0::types::EntityIdType;
 	fn get_entity_id_mut(&mut self) -> &mut crate::v5_0::types::EntityIdType;
-	fn get_last_observation_time(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_last_observation_time_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_last_observation_time(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_last_observation_time_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn has_days_lost(&self) -> bool;
 	fn get_days_lost(&self) -> Option<&u32>;
 	fn get_days_lost_mut(&mut self) -> Option<&mut u32>;
@@ -16543,8 +16543,8 @@ pub trait EntityPropagationMdt:
 	+ PartialEq
 	+ serde::Serialize
 {
-	fn get_extrapolation_time(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_extrapolation_time_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_extrapolation_time(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_extrapolation_time_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_extrapolated_entity(&self) -> &Vec<crate::v5_0::types::ExtrapolatedEntityType>;
 	fn get_extrapolated_entity_mut(&mut self) -> &mut Vec<crate::v5_0::types::ExtrapolatedEntityType>;
 }
@@ -16580,8 +16580,8 @@ pub trait EntitySignalSummaryType:
 	fn get_signal_description(&self) -> &crate::v5_0::types::SignalSummaryType;
 	fn get_signal_description_mut(&mut self) -> &mut crate::v5_0::types::SignalSummaryType;
 	fn has_latest_detection_timestamp(&self) -> bool;
-	fn get_latest_detection_timestamp(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_latest_detection_timestamp_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_latest_detection_timestamp(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_latest_detection_timestamp_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_signal_id(&self) -> bool;
 	fn get_signal_id(&self) -> Option<&crate::v5_0::types::SignalIdType>;
 	fn get_signal_id_mut(&mut self) -> Option<&mut crate::v5_0::types::SignalIdType>;
@@ -16647,14 +16647,14 @@ pub trait EntityStalenessThresholdsType:
 	+ serde::Serialize
 {
 	fn has_observed_entity_threshold(&self) -> bool;
-	fn get_observed_entity_threshold(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_observed_entity_threshold_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_observed_entity_threshold(&self) -> Option<&chrono::TimeDelta>;
+	fn get_observed_entity_threshold_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_tracked_entity_threshold(&self) -> bool;
-	fn get_tracked_entity_threshold(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_tracked_entity_threshold_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_tracked_entity_threshold(&self) -> Option<&chrono::TimeDelta>;
+	fn get_tracked_entity_threshold_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_correlated_entity_threshold(&self) -> bool;
-	fn get_correlated_entity_threshold(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_correlated_entity_threshold_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_correlated_entity_threshold(&self) -> Option<&chrono::TimeDelta>;
+	fn get_correlated_entity_threshold_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_applicable_zone(&self) -> bool;
 	fn get_applicable_zone(&self) -> Option<&crate::v5_0::types::ZoneType>;
 	fn get_applicable_zone_mut(&mut self) -> Option<&mut crate::v5_0::types::ZoneType>;
@@ -16773,8 +16773,8 @@ pub trait EobCorrelationRecordType:
 	fn get_eob_correlation_record_id_mut(&mut self) -> &mut crate::v5_0::types::EobCorrelationRecordIdType;
 	fn get_correlation_type(&self) -> &crate::v5_0::enums::EobCorrelationTypeEnum;
 	fn get_correlation_type_mut(&mut self) -> &mut crate::v5_0::enums::EobCorrelationTypeEnum;
-	fn get_correlation_timestamp(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_correlation_timestamp_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_correlation_timestamp(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_correlation_timestamp_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn has_correlated_to(&self) -> bool;
 	fn get_correlated_to(&self) -> Option<&crate::v5_0::types::EobCorrelatedToType>;
 	fn get_correlated_to_mut(&mut self) -> Option<&mut crate::v5_0::types::EobCorrelatedToType>;
@@ -16944,8 +16944,8 @@ pub trait EobSignalType:
 	+ serde::Serialize
 {
 	fn has_last_heard_timestamp(&self) -> bool;
-	fn get_last_heard_timestamp(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_last_heard_timestamp_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_last_heard_timestamp(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_last_heard_timestamp_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_frequency(&self) -> bool;
 	fn get_frequency(&self) -> Option<&crate::v5_0::types::FrequencyDataBaseType>;
 	fn get_frequency_mut(&mut self) -> Option<&mut crate::v5_0::types::FrequencyDataBaseType>;
@@ -17002,8 +17002,8 @@ pub trait EphemerisOrbitalModelType:
 	fn get_orbital_model(&self) -> Option<&crate::v5_0::types::OrbitalModelType>;
 	fn get_orbital_model_mut(&mut self) -> Option<&mut crate::v5_0::types::OrbitalModelType>;
 	fn has_step_size(&self) -> bool;
-	fn get_step_size(&self) -> Option<&chrono::TimeDelta>;
-	fn get_step_size_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
+	fn get_step_size(&self) -> Option<&i64>;
+	fn get_step_size_mut(&mut self) -> Option<&mut i64>;
 	fn has_solar_radiation_pressure_coefficient(&self) -> bool;
 	fn get_solar_radiation_pressure_coefficient(&self) -> Option<&f64>;
 	fn get_solar_radiation_pressure_coefficient_mut(&mut self) -> Option<&mut f64>;
@@ -17106,8 +17106,8 @@ pub trait EsmActivityMdt:
 	fn get_subsystem_id(&self) -> &crate::v5_0::types::SubsystemIdType;
 	fn get_subsystem_id_mut(&mut self) -> &mut crate::v5_0::types::SubsystemIdType;
 	fn has_entity_list_cleared(&self) -> bool;
-	fn get_entity_list_cleared(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_entity_list_cleared_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_entity_list_cleared(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_entity_list_cleared_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_entity_overload(&self) -> bool;
 	fn get_entity_overload(&self) -> Option<&bool>;
 	fn get_entity_overload_mut(&mut self) -> Option<&mut bool>;
@@ -17153,11 +17153,11 @@ pub trait EsmActivityType:
 	fn get_consent_state(&self) -> Option<&crate::v5_0::enums::ConsentEnum>;
 	fn get_consent_state_mut(&mut self) -> Option<&mut crate::v5_0::enums::ConsentEnum>;
 	fn has_actual_start_time(&self) -> bool;
-	fn get_actual_start_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_actual_start_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_actual_start_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_actual_start_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_actual_end_time(&self) -> bool;
-	fn get_actual_end_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_actual_end_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_actual_end_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_actual_end_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_spectral_density_reporting(&self) -> bool;
 	fn get_spectral_density_reporting(&self) -> Option<&bool>;
 	fn get_spectral_density_reporting_mut(&mut self) -> Option<&mut bool>;
@@ -17464,8 +17464,8 @@ pub trait EsmPerformanceProfileType:
 	fn get_beam_limit(&self) -> Option<&u32>;
 	fn get_beam_limit_mut(&mut self) -> Option<&mut u32>;
 	fn has_frequency_change_time(&self) -> bool;
-	fn get_frequency_change_time(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_frequency_change_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_frequency_change_time(&self) -> Option<&chrono::TimeDelta>;
+	fn get_frequency_change_time_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait EsmProfileEditType:
@@ -17516,27 +17516,27 @@ pub trait EsmReceiveDwellType:
 	fn get_dwell_fov(&self) -> Option<&crate::v5_0::types::NedConeType>;
 	fn get_dwell_fov_mut(&mut self) -> Option<&mut crate::v5_0::types::NedConeType>;
 	fn has_start_time(&self) -> bool;
-	fn get_start_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_start_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_start_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_start_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_cumulative_dwell_time(&self) -> bool;
-	fn get_cumulative_dwell_time(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_cumulative_dwell_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_cumulative_dwell_time(&self) -> Option<&chrono::TimeDelta>;
+	fn get_cumulative_dwell_time_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn get_component_id(&self) -> &Vec<crate::v5_0::types::ComponentIdType>;
 	fn get_component_id_mut(&mut self) -> &mut Vec<crate::v5_0::types::ComponentIdType>;
 	fn get_frequency(&self) -> &Vec<crate::v5_0::types::FrequencyRangeType>;
 	fn get_frequency_mut(&mut self) -> &mut Vec<crate::v5_0::types::FrequencyRangeType>;
 	fn has_dwell_revisit_interval(&self) -> bool;
-	fn get_dwell_revisit_interval(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_dwell_revisit_interval_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_dwell_revisit_interval(&self) -> Option<&chrono::TimeDelta>;
+	fn get_dwell_revisit_interval_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_pulse_width_low(&self) -> bool;
-	fn get_pulse_width_low(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_pulse_width_low_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_pulse_width_low(&self) -> Option<&chrono::TimeDelta>;
+	fn get_pulse_width_low_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_pulse_width_high(&self) -> bool;
-	fn get_pulse_width_high(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_pulse_width_high_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_pulse_width_high(&self) -> Option<&chrono::TimeDelta>;
+	fn get_pulse_width_high_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_pri_high(&self) -> bool;
-	fn get_pri_high(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_pri_high_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_pri_high(&self) -> Option<&chrono::TimeDelta>;
+	fn get_pri_high_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_native_sensitivity(&self) -> bool;
 	fn get_native_sensitivity(&self) -> Option<&crate::v5_0::common::DecibelType>;
 	fn get_native_sensitivity_mut(&mut self) -> Option<&mut crate::v5_0::common::DecibelType>;
@@ -17711,8 +17711,8 @@ pub trait EstimationResultType:
 	fn has_package_status(&self) -> bool;
 	fn get_package_status(&self) -> Option<&crate::v5_0::types::PackageStatusMdt>;
 	fn get_package_status_mut(&mut self) -> Option<&mut crate::v5_0::types::PackageStatusMdt>;
-	fn get_timestamp(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_timestamp_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_timestamp(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_timestamp_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 }
 
 pub trait EstimationStartType:
@@ -17728,8 +17728,8 @@ pub trait EstimationStartType:
 	fn get_segment_id(&self) -> &crate::v5_0::types::SegmentIdType;
 	fn get_segment_id_mut(&mut self) -> &mut crate::v5_0::types::SegmentIdType;
 	fn has_capture_time(&self) -> bool;
-	fn get_capture_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_capture_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_capture_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_capture_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait EwConfigurationIdType:
@@ -18231,8 +18231,8 @@ pub trait FileMetadataMdt:
 	fn get_creation_source_mut(&mut self) -> &mut crate::v5_0::enums::CreationSourceEnum;
 	fn get_untrusted_modification(&self) -> &bool;
 	fn get_untrusted_modification_mut(&mut self) -> &mut bool;
-	fn get_timestamp(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_timestamp_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_timestamp(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_timestamp_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_security_information(&self) -> &crate::v5_0::types::SecurityInformationType;
 	fn get_security_information_mut(&mut self) -> &mut crate::v5_0::types::SecurityInformationType;
 	fn has_sha2_hash(&self) -> bool;
@@ -18328,8 +18328,8 @@ pub trait FlightActivityType:
 	fn get_actual_end_point(&self) -> &Vec<crate::v5_0::choices::EndPointType>;
 	fn get_actual_end_point_mut(&mut self) -> &mut Vec<crate::v5_0::choices::EndPointType>;
 	fn has_actual_completion_time(&self) -> bool;
-	fn get_actual_completion_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_actual_completion_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_actual_completion_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_actual_completion_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait FlightCapabilityMdt:
@@ -18570,8 +18570,8 @@ pub trait FovActivityType:
 	fn get_ground_fov(&self) -> Option<&crate::v5_0::types::PolygonType>;
 	fn get_ground_fov_mut(&mut self) -> Option<&mut crate::v5_0::types::PolygonType>;
 	fn has_fov_timestamp(&self) -> bool;
-	fn get_fov_timestamp(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_fov_timestamp_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_fov_timestamp(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_fov_timestamp_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_maximum_effective_range(&self) -> bool;
 	fn get_maximum_effective_range(&self) -> Option<&crate::v5_0::common::DistanceType>;
 	fn get_maximum_effective_range_mut(&mut self) -> Option<&mut crate::v5_0::common::DistanceType>;
@@ -18675,8 +18675,8 @@ pub trait FrequencyDataType:
 	fn get_switching_values(&self) -> Option<&crate::v5_0::enums::FrequencySwitchingPatternEnum>;
 	fn get_switching_values_mut(&mut self) -> Option<&mut crate::v5_0::enums::FrequencySwitchingPatternEnum>;
 	fn has_modulation_pattern_period(&self) -> bool;
-	fn get_modulation_pattern_period(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_modulation_pattern_period_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_modulation_pattern_period(&self) -> Option<&chrono::TimeDelta>;
+	fn get_modulation_pattern_period_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_frequency_bins(&self) -> bool;
 	fn get_frequency_bins(&self) -> Option<&u32>;
 	fn get_frequency_bins_mut(&mut self) -> Option<&mut u32>;
@@ -18712,8 +18712,8 @@ pub trait FrequencyParamsType:
 	fn get_rf_frequency_resolution(&self) -> Option<&f64>;
 	fn get_rf_frequency_resolution_mut(&mut self) -> Option<&mut f64>;
 	fn has_product_resolution_time(&self) -> bool;
-	fn get_product_resolution_time(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_product_resolution_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_product_resolution_time(&self) -> Option<&chrono::TimeDelta>;
+	fn get_product_resolution_time_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait FrequencyRangeType:
@@ -18960,8 +18960,8 @@ pub trait FuzeType:
 	fn get_mnemonic(&self) -> Option<&crate::v5_0::common::VisibleString1024Type>;
 	fn get_mnemonic_mut(&mut self) -> Option<&mut crate::v5_0::common::VisibleString1024Type>;
 	fn has_fuze_separation_arm_time(&self) -> bool;
-	fn get_fuze_separation_arm_time(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_fuze_separation_arm_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_fuze_separation_arm_time(&self) -> Option<&chrono::TimeDelta>;
+	fn get_fuze_separation_arm_time_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait GainRangeType:
@@ -19484,8 +19484,8 @@ pub trait GcrsKinematicsType:
 	+ PartialEq
 	+ serde::Serialize
 {
-	fn get_epoch(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_epoch_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_epoch(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_epoch_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_position(&self) -> &crate::v5_0::types::GcrsPositionType;
 	fn get_position_mut(&mut self) -> &mut crate::v5_0::types::GcrsPositionType;
 	fn get_velocity(&self) -> &crate::v5_0::types::OrbitalKinematicsVelocityType;
@@ -19556,10 +19556,10 @@ pub trait GeomagneticApRecordType:
 {
 	fn get_ap_index(&self) -> &crate::v5_0::common::GeomagneticApIndexType;
 	fn get_ap_index_mut(&mut self) -> &mut crate::v5_0::common::GeomagneticApIndexType;
-	fn get_time_computed(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_time_computed_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
-	fn get_time_valid(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_time_valid_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_time_computed(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_time_computed_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
+	fn get_time_valid(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_time_valid_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 }
 
 pub trait GeomagneticKpRecordType:
@@ -19571,10 +19571,10 @@ pub trait GeomagneticKpRecordType:
 {
 	fn get_kp_index(&self) -> &crate::v5_0::common::GeomagneticKpIndexType;
 	fn get_kp_index_mut(&mut self) -> &mut crate::v5_0::common::GeomagneticKpIndexType;
-	fn get_time_computed(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_time_computed_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
-	fn get_time_valid(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_time_valid_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_time_computed(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_time_computed_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
+	fn get_time_valid(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_time_valid_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 }
 
 pub trait GeomagneticStormApType:
@@ -19711,8 +19711,8 @@ pub trait HeaderType:
 {
 	fn get_system_id(&self) -> &crate::v5_0::types::SystemIdType;
 	fn get_system_id_mut(&mut self) -> &mut crate::v5_0::types::SystemIdType;
-	fn get_timestamp(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_timestamp_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_timestamp(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_timestamp_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_schema_version(&self) -> &crate::v5_0::common::UciSchemaVersionStringType;
 	fn get_schema_version_mut(&mut self) -> &mut crate::v5_0::common::UciSchemaVersionStringType;
 	fn get_mode(&self) -> &crate::v5_0::enums::MessageModeEnum;
@@ -19749,8 +19749,8 @@ pub trait HoverType:
 {
 	fn get_point3_d(&self) -> &crate::v5_0::choices::PointChoice3DType;
 	fn get_point3_d_mut(&mut self) -> &mut crate::v5_0::choices::PointChoice3DType;
-	fn get_duration(&self) -> &crate::v5_0::common::DurationType;
-	fn get_duration_mut(&mut self) -> &mut crate::v5_0::common::DurationType;
+	fn get_duration(&self) -> &chrono::TimeDelta;
+	fn get_duration_mut(&mut self) -> &mut chrono::TimeDelta;
 }
 
 pub trait HrrChipSizeType:
@@ -20699,8 +20699,8 @@ pub trait IncRaPeriodVolumeType:
 	fn get_delta_inclination_mut(&mut self) -> &mut crate::v5_0::common::AngleType;
 	fn get_delta_right_ascension(&self) -> &crate::v5_0::common::AngleType;
 	fn get_delta_right_ascension_mut(&mut self) -> &mut crate::v5_0::common::AngleType;
-	fn get_delta_period(&self) -> &crate::v5_0::common::DurationType;
-	fn get_delta_period_mut(&mut self) -> &mut crate::v5_0::common::DurationType;
+	fn get_delta_period(&self) -> &chrono::TimeDelta;
+	fn get_delta_period_mut(&mut self) -> &mut chrono::TimeDelta;
 }
 
 pub trait IncompleteProcessingType:
@@ -21223,8 +21223,8 @@ pub trait IrImageParamsType:
 	fn get_ir_image_setting(&self) -> Option<&crate::v5_0::types::FrequencyRangeType>;
 	fn get_ir_image_setting_mut(&mut self) -> Option<&mut crate::v5_0::types::FrequencyRangeType>;
 	fn has_product_resolution_time(&self) -> bool;
-	fn get_product_resolution_time(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_product_resolution_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_product_resolution_time(&self) -> Option<&chrono::TimeDelta>;
+	fn get_product_resolution_time_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait IsarSubCapabilityType:
@@ -21236,8 +21236,8 @@ pub trait IsarSubCapabilityType:
 {
 	fn get_target(&self) -> &crate::v5_0::choices::IsarTargetType;
 	fn get_target_mut(&mut self) -> &mut crate::v5_0::choices::IsarTargetType;
-	fn get_isar_duration(&self) -> &crate::v5_0::common::TimeType;
-	fn get_isar_duration_mut(&mut self) -> &mut crate::v5_0::common::TimeType;
+	fn get_isar_duration(&self) -> &chrono::NaiveTime;
+	fn get_isar_duration_mut(&mut self) -> &mut chrono::NaiveTime;
 }
 
 pub trait J2kKinematicsType:
@@ -21247,8 +21247,8 @@ pub trait J2kKinematicsType:
 	+ PartialEq
 	+ serde::Serialize
 {
-	fn get_epoch(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_epoch_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_epoch(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_epoch_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_position(&self) -> &crate::v5_0::types::J2kPositionType;
 	fn get_position_mut(&mut self) -> &mut crate::v5_0::types::J2kPositionType;
 	fn get_velocity(&self) -> &crate::v5_0::types::OrbitalKinematicsVelocityType;
@@ -21367,17 +21367,17 @@ pub trait JreapGatewayNativeStatisticsType:
 	fn get_total_tn_count(&self) -> &u32;
 	fn get_total_tn_count_mut(&mut self) -> &mut u32;
 	fn has_retry_time(&self) -> bool;
-	fn get_retry_time(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_retry_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_retry_time(&self) -> Option<&chrono::TimeDelta>;
+	fn get_retry_time_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_session_status(&self) -> bool;
 	fn get_session_status(&self) -> Option<&crate::v5_0::enums::TcpSessionStatusEnum>;
 	fn get_session_status_mut(&mut self) -> Option<&mut crate::v5_0::enums::TcpSessionStatusEnum>;
 	fn get_common_time_reference(&self) -> &crate::v5_0::types::JreapCommonTimeReferenceType;
 	fn get_common_time_reference_mut(&mut self) -> &mut crate::v5_0::types::JreapCommonTimeReferenceType;
-	fn get_average_received_latency(&self) -> &crate::v5_0::common::DurationType;
-	fn get_average_received_latency_mut(&mut self) -> &mut crate::v5_0::common::DurationType;
-	fn get_last_received_activity_time(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_last_received_activity_time_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_average_received_latency(&self) -> &chrono::TimeDelta;
+	fn get_average_received_latency_mut(&mut self) -> &mut chrono::TimeDelta;
+	fn get_last_received_activity_time(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_last_received_activity_time_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_kilobytes_received(&self) -> &u32;
 	fn get_kilobytes_received_mut(&mut self) -> &mut u32;
 	fn get_kilobytes_sent(&self) -> &u32;
@@ -21433,8 +21433,8 @@ pub trait KinematicsType:
 	+ serde::Serialize
 {
 	fn has_kinematics_time_stamp(&self) -> bool;
-	fn get_kinematics_time_stamp(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_kinematics_time_stamp_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_kinematics_time_stamp(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_kinematics_time_stamp_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn get_position(&self) -> &crate::v5_0::types::EntityPositionType;
 	fn get_position_mut(&mut self) -> &mut crate::v5_0::types::EntityPositionType;
 	fn has_velocity(&self) -> bool;
@@ -21461,12 +21461,12 @@ pub trait LarAnalysisType:
 	+ PartialEq
 	+ serde::Serialize
 {
-	fn get_lar_entrance_time(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_lar_entrance_time_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_lar_entrance_time(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_lar_entrance_time_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_distance_to_enter_lar(&self) -> &crate::v5_0::common::DistanceType;
 	fn get_distance_to_enter_lar_mut(&mut self) -> &mut crate::v5_0::common::DistanceType;
-	fn get_lar_exit_time(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_lar_exit_time_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_lar_exit_time(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_lar_exit_time_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_distance_to_exit_lar(&self) -> &crate::v5_0::common::DistanceType;
 	fn get_distance_to_exit_lar_mut(&mut self) -> &mut crate::v5_0::common::DistanceType;
 }
@@ -21664,11 +21664,11 @@ pub trait LaunchObservationMdt:
 	fn get_launch_observation_id(&self) -> &crate::v5_0::types::LaunchObservationIdType;
 	fn get_launch_observation_id_mut(&mut self) -> &mut crate::v5_0::types::LaunchObservationIdType;
 	fn has_initial_create_time(&self) -> bool;
-	fn get_initial_create_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_initial_create_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_initial_create_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_initial_create_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_last_update_time(&self) -> bool;
-	fn get_last_update_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_last_update_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_last_update_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_last_update_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_static_launch_characteristics(&self) -> bool;
 	fn get_static_launch_characteristics(&self) -> Option<&crate::v5_0::types::LaunchStaticDetailsType>;
 	fn get_static_launch_characteristics_mut(&mut self) -> Option<&mut crate::v5_0::types::LaunchStaticDetailsType>;
@@ -21712,8 +21712,8 @@ pub trait LaunchStaticDetailsType:
 	+ serde::Serialize
 {
 	fn has_launch_time(&self) -> bool;
-	fn get_launch_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_launch_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_launch_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_launch_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_launch_site(&self) -> bool;
 	fn get_launch_site(&self) -> Option<&crate::v5_0::types::EobSiteIdentityType>;
 	fn get_launch_site_mut(&mut self) -> Option<&mut crate::v5_0::types::EobSiteIdentityType>;
@@ -22084,8 +22084,8 @@ pub trait Link16MetadataType:
 	fn get_mission_commander_indicator(&self) -> Option<&bool>;
 	fn get_mission_commander_indicator_mut(&mut self) -> Option<&mut bool>;
 	fn has_precision_time(&self) -> bool;
-	fn get_precision_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_precision_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_precision_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_precision_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_position_time_quality(&self) -> bool;
 	fn get_position_time_quality(&self) -> Option<&crate::v5_0::enums::PositionTimeQualityEnum>;
 	fn get_position_time_quality_mut(&mut self) -> Option<&mut crate::v5_0::enums::PositionTimeQualityEnum>;
@@ -22279,11 +22279,11 @@ pub trait LobeType:
 	fn get_peak_amplitude(&self) -> Option<&crate::v5_0::common::DecibelType>;
 	fn get_peak_amplitude_mut(&mut self) -> Option<&mut crate::v5_0::common::DecibelType>;
 	fn has_peak_time(&self) -> bool;
-	fn get_peak_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_peak_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_peak_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_peak_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_time_in_main_beam(&self) -> bool;
-	fn get_time_in_main_beam(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_time_in_main_beam_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_time_in_main_beam(&self) -> Option<&chrono::TimeDelta>;
+	fn get_time_in_main_beam_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_great_depth(&self) -> bool;
 	fn get_great_depth(&self) -> Option<&bool>;
 	fn get_great_depth_mut(&mut self) -> Option<&mut bool>;
@@ -22320,8 +22320,8 @@ pub trait LocationAndStatusExpireType:
 	LocationAndStatusBaseType
 {
 	fn has_expires(&self) -> bool;
-	fn get_expires(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_expires_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_expires(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_expires_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait LogMdt:
@@ -22331,11 +22331,11 @@ pub trait LogMdt:
 	+ PartialEq
 	+ serde::Serialize
 {
-	fn get_timestamp(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_timestamp_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_timestamp(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_timestamp_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn has_service_up_time(&self) -> bool;
-	fn get_service_up_time(&self) -> Option<&chrono::TimeDelta>;
-	fn get_service_up_time_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
+	fn get_service_up_time(&self) -> Option<&i64>;
+	fn get_service_up_time_mut(&mut self) -> Option<&mut i64>;
 	fn has_service_id(&self) -> bool;
 	fn get_service_id(&self) -> Option<&crate::v5_0::types::ServiceIdType>;
 	fn get_service_id_mut(&mut self) -> Option<&mut crate::v5_0::types::ServiceIdType>;
@@ -22374,8 +22374,8 @@ pub trait LoiterPointType:
 	fn get_loiter(&self) -> &crate::v5_0::choices::LoiterType;
 	fn get_loiter_mut(&mut self) -> &mut crate::v5_0::choices::LoiterType;
 	fn has_end_time(&self) -> bool;
-	fn get_end_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_end_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_end_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_end_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait LongBaselineInterferometerInfoType:
@@ -22629,8 +22629,8 @@ pub trait LosMeasurementWithUncertaintyType:
 	+ PartialEq
 	+ serde::Serialize
 {
-	fn get_timestamp(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_timestamp_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_timestamp(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_timestamp_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_reference(&self) -> &crate::v5_0::enums::LosMeasurementEnum;
 	fn get_reference_mut(&mut self) -> &mut crate::v5_0::enums::LosMeasurementEnum;
 	fn has_capability_id(&self) -> bool;
@@ -23397,8 +23397,8 @@ pub trait MaAirDataType:
 	fn get_beta(&self) -> Option<&crate::v5_0::common::AngleHalfType>;
 	fn get_beta_mut(&mut self) -> Option<&mut crate::v5_0::common::AngleHalfType>;
 	fn has_timestamp(&self) -> bool;
-	fn get_timestamp(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_timestamp_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_timestamp(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_timestamp_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait MaAirfieldLandType:
@@ -23597,8 +23597,8 @@ pub trait MaApprovalPolicyMdt:
 	fn get_timed_zone(&self) -> Option<&crate::v5_0::types::TimedZoneType>;
 	fn get_timed_zone_mut(&mut self) -> Option<&mut crate::v5_0::types::TimedZoneType>;
 	fn has_expires(&self) -> bool;
-	fn get_expires(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_expires_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_expires(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_expires_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_mission_traceability(&self) -> bool;
 	fn get_mission_traceability(&self) -> Option<&crate::v5_0::types::MissionTraceabilityType>;
 	fn get_mission_traceability_mut(&mut self) -> Option<&mut crate::v5_0::types::MissionTraceabilityType>;
@@ -23621,8 +23621,8 @@ pub trait MaApprovalRequestMdt:
 	fn get_approver_mut(&mut self) -> &mut crate::v5_0::choices::OperatorRoleType;
 	fn get_approval_references(&self) -> &crate::v5_0::types::MaApprovalRequestPolicyReferenceType;
 	fn get_approval_references_mut(&mut self) -> &mut crate::v5_0::types::MaApprovalRequestPolicyReferenceType;
-	fn get_respond_by(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_respond_by_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_respond_by(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_respond_by_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 }
 
 pub trait MaApprovalRequestMt:
@@ -23705,8 +23705,8 @@ pub trait MaAssessmentRequestMdt:
 	fn get_request_frequency_type(&self) -> &crate::v5_0::enums::RepeatEnum;
 	fn get_request_frequency_type_mut(&mut self) -> &mut crate::v5_0::enums::RepeatEnum;
 	fn has_request_frequency_period(&self) -> bool;
-	fn get_request_frequency_period(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_request_frequency_period_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_request_frequency_period(&self) -> Option<&chrono::TimeDelta>;
+	fn get_request_frequency_period_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn get_results_in_assessment_message(&self) -> &bool;
 	fn get_results_in_assessment_message_mut(&mut self) -> &mut bool;
 	fn get_category(&self) -> &crate::v5_0::choices::MaAssessmentRequestType;
@@ -23867,8 +23867,8 @@ pub trait MaAvailabilityInfoType:
 	fn get_availability_reason(&self) -> Option<&crate::v5_0::types::MaCannotComplyType>;
 	fn get_availability_reason_mut(&mut self) -> Option<&mut crate::v5_0::types::MaCannotComplyType>;
 	fn has_next_available_window(&self) -> bool;
-	fn get_next_available_window(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_next_available_window_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_next_available_window(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_next_available_window_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait MaAvailableNetworkEndPointsType:
@@ -23910,8 +23910,8 @@ pub trait MaBodyReferenceAccelerationType:
 	fn get_z_accel(&self) -> &crate::v5_0::common::AccelerationType;
 	fn get_z_accel_mut(&mut self) -> &mut crate::v5_0::common::AccelerationType;
 	fn has_timestamp(&self) -> bool;
-	fn get_timestamp(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_timestamp_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_timestamp(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_timestamp_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait MaBodyReferenceOrientationRateType:
@@ -23928,8 +23928,8 @@ pub trait MaBodyReferenceOrientationRateType:
 	fn get_yaw_rate(&self) -> &crate::v5_0::common::AngleRateType;
 	fn get_yaw_rate_mut(&mut self) -> &mut crate::v5_0::common::AngleRateType;
 	fn has_timestamp(&self) -> bool;
-	fn get_timestamp(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_timestamp_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_timestamp(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_timestamp_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait MaCannotComplyDetailsType:
@@ -23982,8 +23982,8 @@ pub trait MaCapEstimatedDownrangeTimeGapType:
 	+ PartialEq
 	+ serde::Serialize
 {
-	fn get_time_gap(&self) -> &crate::v5_0::common::DurationType;
-	fn get_time_gap_mut(&mut self) -> &mut crate::v5_0::common::DurationType;
+	fn get_time_gap(&self) -> &chrono::TimeDelta;
+	fn get_time_gap_mut(&mut self) -> &mut chrono::TimeDelta;
 	fn get_applicable_timespan(&self) -> &crate::v5_0::types::DateTimeRangeType;
 	fn get_applicable_timespan_mut(&mut self) -> &mut crate::v5_0::types::DateTimeRangeType;
 }
@@ -23997,8 +23997,8 @@ pub trait MaCapEstimatedToaType:
 {
 	fn get_point(&self) -> &crate::v5_0::enums::MaCapLegIndexEnum;
 	fn get_point_mut(&mut self) -> &mut crate::v5_0::enums::MaCapLegIndexEnum;
-	fn get_toa(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_toa_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_toa(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_toa_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 }
 
 pub trait MaCapExecutionStatusReportMdt:
@@ -24311,8 +24311,8 @@ pub trait MaCarrierRecoveryType:
 	fn get_carrier_playbox_id(&self) -> Option<&crate::v5_0::types::OpZoneIdType>;
 	fn get_carrier_playbox_id_mut(&mut self) -> Option<&mut crate::v5_0::types::OpZoneIdType>;
 	fn has_expected_arrival_time(&self) -> bool;
-	fn get_expected_arrival_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_expected_arrival_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_expected_arrival_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_expected_arrival_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait MaCarrierReportIdType:
@@ -24472,8 +24472,8 @@ pub trait MaCarrierStateMdt:
 	fn get_carrier_id_mut(&mut self) -> &mut crate::v5_0::types::SystemIdType;
 	fn get_identity_reference_id(&self) -> &crate::v5_0::choices::CarrierReferenceIdChoiceType;
 	fn get_identity_reference_id_mut(&mut self) -> &mut crate::v5_0::choices::CarrierReferenceIdChoiceType;
-	fn get_observation_time(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_observation_time_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_observation_time(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_observation_time_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn has_information(&self) -> bool;
 	fn get_information(&self) -> Option<&crate::v5_0::types::MaCarrierStateInformationType>;
 	fn get_information_mut(&mut self) -> Option<&mut crate::v5_0::types::MaCarrierStateInformationType>;
@@ -25250,8 +25250,8 @@ pub trait MaDeltaType:
 	+ PartialEq
 	+ serde::Serialize
 {
-	fn get_time_delta_seconds(&self) -> &crate::v5_0::common::DurationType;
-	fn get_time_delta_seconds_mut(&mut self) -> &mut crate::v5_0::common::DurationType;
+	fn get_time_delta_seconds(&self) -> &chrono::TimeDelta;
+	fn get_time_delta_seconds_mut(&mut self) -> &mut chrono::TimeDelta;
 }
 
 pub trait MaDesignationDataType:
@@ -25961,8 +25961,8 @@ pub trait MaFlightActivityType:
 	fn get_actual_end_point(&self) -> &Vec<crate::v5_0::choices::MaEndPointType>;
 	fn get_actual_end_point_mut(&mut self) -> &mut Vec<crate::v5_0::choices::MaEndPointType>;
 	fn has_actual_completion_time(&self) -> bool;
-	fn get_actual_completion_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_actual_completion_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_actual_completion_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_actual_completion_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn get_vehicle_command_state(&self) -> &crate::v5_0::types::MaVehicleCommandStateType;
 	fn get_vehicle_command_state_mut(&mut self) -> &mut crate::v5_0::types::MaVehicleCommandStateType;
 	fn has_curve_following_control(&self) -> bool;
@@ -26419,8 +26419,8 @@ pub trait MaInteroperabilityPolicyMdt:
 	fn get_timed_zone(&self) -> Option<&crate::v5_0::types::TimedZoneType>;
 	fn get_timed_zone_mut(&mut self) -> Option<&mut crate::v5_0::types::TimedZoneType>;
 	fn has_expires(&self) -> bool;
-	fn get_expires(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_expires_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_expires(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_expires_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_mission_traceability(&self) -> bool;
 	fn get_mission_traceability(&self) -> Option<&crate::v5_0::types::MissionTraceabilityType>;
 	fn get_mission_traceability_mut(&mut self) -> Option<&mut crate::v5_0::types::MissionTraceabilityType>;
@@ -26559,8 +26559,8 @@ pub trait MaLoiterPointType:
 	fn get_loiter(&self) -> &crate::v5_0::choices::MaLoiterType;
 	fn get_loiter_mut(&mut self) -> &mut crate::v5_0::choices::MaLoiterType;
 	fn has_end_time(&self) -> bool;
-	fn get_end_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_end_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_end_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_end_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait MaMessageNumberingType:
@@ -27022,8 +27022,8 @@ pub trait MaMissionPlanningAutonomySettingType:
 	fn get_planning_process_id(&self) -> Option<&crate::v5_0::types::PlanningProcessIdType>;
 	fn get_planning_process_id_mut(&mut self) -> Option<&mut crate::v5_0::types::PlanningProcessIdType>;
 	fn has_minimum_response_interval(&self) -> bool;
-	fn get_minimum_response_interval(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_minimum_response_interval_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_minimum_response_interval(&self) -> Option<&chrono::TimeDelta>;
+	fn get_minimum_response_interval_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait MaMissionRequirementStatusMdt:
@@ -27995,14 +27995,14 @@ pub trait MaPeriodRangeType:
 	+ serde::Serialize
 {
 	fn has_period(&self) -> bool;
-	fn get_period(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_period_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_period(&self) -> Option<&chrono::TimeDelta>;
+	fn get_period_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_minimum_period(&self) -> bool;
-	fn get_minimum_period(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_minimum_period_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_minimum_period(&self) -> Option<&chrono::TimeDelta>;
+	fn get_minimum_period_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_maximum_period(&self) -> bool;
-	fn get_maximum_period(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_maximum_period_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_maximum_period(&self) -> Option<&chrono::TimeDelta>;
+	fn get_maximum_period_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait MaPlanActivationPermissionsType:
@@ -28377,8 +28377,8 @@ pub trait MaPlannedSequentialTriggerType:
 	fn get_way_point(&self) -> Option<&crate::v5_0::types::WayPointType>;
 	fn get_way_point_mut(&mut self) -> Option<&mut crate::v5_0::types::WayPointType>;
 	fn has_time(&self) -> bool;
-	fn get_time(&self) -> Option<&crate::v5_0::common::TimeType>;
-	fn get_time_mut(&mut self) -> Option<&mut crate::v5_0::common::TimeType>;
+	fn get_time(&self) -> Option<&chrono::NaiveTime>;
+	fn get_time_mut(&mut self) -> Option<&mut chrono::NaiveTime>;
 }
 
 pub trait MaPlanningAllowedEscalationType:
@@ -28399,8 +28399,8 @@ pub trait MaPlanningAllowedEscalationType:
 pub trait MaPlanningAllowedType:
 	MaAutonomousPlanCommandType
 {
-	fn get_plan_ahead_duration(&self) -> &crate::v5_0::common::DurationType;
-	fn get_plan_ahead_duration_mut(&mut self) -> &mut crate::v5_0::common::DurationType;
+	fn get_plan_ahead_duration(&self) -> &chrono::TimeDelta;
+	fn get_plan_ahead_duration_mut(&mut self) -> &mut chrono::TimeDelta;
 }
 
 pub trait MaPlanningCandidateBaseType:
@@ -29356,8 +29356,8 @@ pub trait MaResponseActivityMt:
 pub trait MaResponseActivityType:
 	ActivityBaseType
 {
-	fn get_instantiation_time(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_instantiation_time_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_instantiation_time(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_instantiation_time_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn has_option_index(&self) -> bool;
 	fn get_option_index(&self) -> Option<&u32>;
 	fn get_option_index_mut(&mut self) -> Option<&mut u32>;
@@ -29959,16 +29959,16 @@ pub trait MaRxDataPayloadMdt:
 	fn get_data_payload_originator_id_mut(&mut self) -> &mut crate::v5_0::types::SystemIdType;
 	fn get_encoded_payload(&self) -> &String;
 	fn get_encoded_payload_mut(&mut self) -> &mut String;
-	fn get_timestamp(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_timestamp_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_timestamp(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_timestamp_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_message_type(&self) -> &crate::v5_0::enums::MessageTypeEnum;
 	fn get_message_type_mut(&mut self) -> &mut crate::v5_0::enums::MessageTypeEnum;
 	fn has_priority(&self) -> bool;
 	fn get_priority(&self) -> Option<&crate::v5_0::types::ComparableRankingType>;
 	fn get_priority_mut(&mut self) -> Option<&mut crate::v5_0::types::ComparableRankingType>;
 	fn has_message_expiry(&self) -> bool;
-	fn get_message_expiry(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_message_expiry_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_message_expiry(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_message_expiry_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn get_destination_routing(&self) -> &crate::v5_0::enums::MaDestinationHandlingEnum;
 	fn get_destination_routing_mut(&mut self) -> &mut crate::v5_0::enums::MaDestinationHandlingEnum;
 	fn get_specific_destination_id(&self) -> &Vec<crate::v5_0::types::SystemIdType>;
@@ -30113,8 +30113,8 @@ pub trait MaStrikeActivityType:
 	fn get_munition_active(&self) -> Option<&crate::v5_0::types::MaMunitionActiveType>;
 	fn get_munition_active_mut(&mut self) -> Option<&mut crate::v5_0::types::MaMunitionActiveType>;
 	fn has_time_to_release(&self) -> bool;
-	fn get_time_to_release(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_time_to_release_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_time_to_release(&self) -> Option<&chrono::TimeDelta>;
+	fn get_time_to_release_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait MaStrikeCapabilityMdt:
@@ -30200,8 +30200,8 @@ pub trait MaSubsystemFaultType:
 	fn get_fault_data(&self) -> &Vec<crate::v5_0::types::FaultDataType>;
 	fn get_fault_data_mut(&mut self) -> &mut Vec<crate::v5_0::types::FaultDataType>;
 	fn has_detection_time(&self) -> bool;
-	fn get_detection_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_detection_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_detection_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_detection_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn get_fault_code(&self) -> &crate::v5_0::common::VisibleString256Type;
 	fn get_fault_code_mut(&mut self) -> &mut crate::v5_0::common::VisibleString256Type;
 	fn has_fault_code_count(&self) -> bool;
@@ -30738,11 +30738,11 @@ pub trait MaTxDataPayloadCommandMdt:
 	fn get_message_type_mut(&mut self) -> &mut crate::v5_0::enums::MessageTypeEnum;
 	fn get_priority(&self) -> &crate::v5_0::types::ComparableRankingType;
 	fn get_priority_mut(&mut self) -> &mut crate::v5_0::types::ComparableRankingType;
-	fn get_timestamp(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_timestamp_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_timestamp(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_timestamp_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn has_message_expiry(&self) -> bool;
-	fn get_message_expiry(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_message_expiry_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_message_expiry(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_message_expiry_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn get_specific_destination_id(&self) -> &Vec<crate::v5_0::types::SystemIdType>;
 	fn get_specific_destination_id_mut(&mut self) -> &mut Vec<crate::v5_0::types::SystemIdType>;
 	fn get_destination_routing(&self) -> &crate::v5_0::enums::MaDestinationHandlingEnum;
@@ -30831,8 +30831,8 @@ pub trait MaVehicleCommandDataType:
 	fn get_survivability_mode(&self) -> Option<&crate::v5_0::enums::VehicleSurvivabilityModeEnum>;
 	fn get_survivability_mode_mut(&mut self) -> Option<&mut crate::v5_0::enums::VehicleSurvivabilityModeEnum>;
 	fn has_lost_comm_timeout(&self) -> bool;
-	fn get_lost_comm_timeout(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_lost_comm_timeout_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_lost_comm_timeout(&self) -> Option<&chrono::TimeDelta>;
+	fn get_lost_comm_timeout_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_los(&self) -> bool;
 	fn get_los(&self) -> Option<&bool>;
 	fn get_los_mut(&mut self) -> Option<&mut bool>;
@@ -30922,11 +30922,11 @@ pub trait MaWezDataType:
 	fn get_range_optimal_mut(&mut self) -> &mut Vec<crate::v5_0::types::MaWeaponRangeType>;
 	fn get_range_max_aero(&self) -> &Vec<crate::v5_0::types::MaWeaponRangeType>;
 	fn get_range_max_aero_mut(&mut self) -> &mut Vec<crate::v5_0::types::MaWeaponRangeType>;
-	fn get_time_to_release(&self) -> &crate::v5_0::common::TimeType;
-	fn get_time_to_release_mut(&mut self) -> &mut crate::v5_0::common::TimeType;
+	fn get_time_to_release(&self) -> &chrono::NaiveTime;
+	fn get_time_to_release_mut(&mut self) -> &mut chrono::NaiveTime;
 	fn has_time_of_activation(&self) -> bool;
-	fn get_time_of_activation(&self) -> Option<&crate::v5_0::common::TimeType>;
-	fn get_time_of_activation_mut(&mut self) -> Option<&mut crate::v5_0::common::TimeType>;
+	fn get_time_of_activation(&self) -> Option<&chrono::NaiveTime>;
+	fn get_time_of_activation_mut(&mut self) -> Option<&mut chrono::NaiveTime>;
 }
 
 pub trait MaWezIdType:
@@ -31398,8 +31398,8 @@ pub trait MeasurementType:
 	fn has_uncorrelated_measurement(&self) -> bool;
 	fn get_uncorrelated_measurement(&self) -> Option<&bool>;
 	fn get_uncorrelated_measurement_mut(&mut self) -> Option<&mut bool>;
-	fn get_timestamp(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_timestamp_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_timestamp(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_timestamp_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_measurement_group_id(&self) -> &Vec<crate::v5_0::types::MeasurementGroupIdType>;
 	fn get_measurement_group_id_mut(&mut self) -> &mut Vec<crate::v5_0::types::MeasurementGroupIdType>;
 	fn has_local_track_identifier(&self) -> bool;
@@ -31459,8 +31459,8 @@ pub trait MessageConfigurationType:
 	fn get_remote_system_id(&self) -> &Vec<crate::v5_0::types::SystemIdType>;
 	fn get_remote_system_id_mut(&mut self) -> &mut Vec<crate::v5_0::types::SystemIdType>;
 	fn has_transmit_periodicity(&self) -> bool;
-	fn get_transmit_periodicity(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_transmit_periodicity_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_transmit_periodicity(&self) -> Option<&chrono::TimeDelta>;
+	fn get_transmit_periodicity_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_data_link_native_filter(&self) -> bool;
 	fn get_data_link_native_filter(&self) -> Option<&crate::v5_0::types::DataLinkNativeFilterPet>;
 	fn get_data_link_native_filter_mut(&mut self) -> Option<&mut crate::v5_0::types::DataLinkNativeFilterPet>;
@@ -31620,8 +31620,8 @@ pub trait MetricParamsType:
 	fn get_pos_metric_resolution(&self) -> Option<&crate::v5_0::common::DistanceType>;
 	fn get_pos_metric_resolution_mut(&mut self) -> Option<&mut crate::v5_0::common::DistanceType>;
 	fn has_product_resolution_time(&self) -> bool;
-	fn get_product_resolution_time(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_product_resolution_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_product_resolution_time(&self) -> Option<&chrono::TimeDelta>;
+	fn get_product_resolution_time_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait MetricValueType:
@@ -32767,8 +32767,8 @@ pub trait MissionPlanningAutonomySettingType:
 	fn get_planning_process_id(&self) -> Option<&crate::v5_0::types::PlanningProcessIdType>;
 	fn get_planning_process_id_mut(&mut self) -> Option<&mut crate::v5_0::types::PlanningProcessIdType>;
 	fn has_minimum_response_interval(&self) -> bool;
-	fn get_minimum_response_interval(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_minimum_response_interval_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_minimum_response_interval(&self) -> Option<&chrono::TimeDelta>;
+	fn get_minimum_response_interval_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait MissionPlanningOrchestrationIdType:
@@ -32920,14 +32920,14 @@ pub trait ModulationOnPulseDataType:
 	ModulationOnPulseDataBaseType
 {
 	fn has_fmop_span(&self) -> bool;
-	fn get_fmop_span(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_fmop_span_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_fmop_span(&self) -> Option<&chrono::TimeDelta>;
+	fn get_fmop_span_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_fmop_range(&self) -> bool;
 	fn get_fmop_range(&self) -> Option<&crate::v5_0::types::FrequencyRangeType>;
 	fn get_fmop_range_mut(&mut self) -> Option<&mut crate::v5_0::types::FrequencyRangeType>;
 	fn has_pmop_bit_duration(&self) -> bool;
-	fn get_pmop_bit_duration(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_pmop_bit_duration_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_pmop_bit_duration(&self) -> Option<&chrono::TimeDelta>;
+	fn get_pmop_bit_duration_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_pmop_sequence(&self) -> bool;
 	fn get_pmop_sequence(&self) -> Option<&crate::v5_0::choices::PmopSequenceType>;
 	fn get_pmop_sequence_mut(&mut self) -> Option<&mut crate::v5_0::choices::PmopSequenceType>;
@@ -33031,23 +33031,23 @@ pub trait MtiActivityStatusBaseType:
 	fn get_number_of_times_searched(&self) -> Option<&u32>;
 	fn get_number_of_times_searched_mut(&mut self) -> Option<&mut u32>;
 	fn has_time_last_searched(&self) -> bool;
-	fn get_time_last_searched(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_time_last_searched_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_time_last_searched(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_time_last_searched_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_attempts(&self) -> bool;
 	fn get_attempts(&self) -> Option<&u32>;
 	fn get_attempts_mut(&mut self) -> Option<&mut u32>;
 	fn has_actual_revisit_period(&self) -> bool;
-	fn get_actual_revisit_period(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_actual_revisit_period_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_actual_revisit_period(&self) -> Option<&chrono::TimeDelta>;
+	fn get_actual_revisit_period_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_percentage_in_for(&self) -> bool;
 	fn get_percentage_in_for(&self) -> Option<&crate::v5_0::common::PercentType>;
 	fn get_percentage_in_for_mut(&mut self) -> Option<&mut crate::v5_0::common::PercentType>;
 	fn has_actual_start_time(&self) -> bool;
-	fn get_actual_start_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_actual_start_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_actual_start_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_actual_start_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_actual_stop_time(&self) -> bool;
-	fn get_actual_stop_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_actual_stop_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_actual_stop_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_actual_stop_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_percent_searched(&self) -> bool;
 	fn get_percent_searched(&self) -> Option<&crate::v5_0::common::PercentType>;
 	fn get_percent_searched_mut(&mut self) -> Option<&mut crate::v5_0::common::PercentType>;
@@ -33091,11 +33091,11 @@ pub trait MtiActivityStatusDetailType:
 	fn get_target_area_scanned(&self) -> Option<&crate::v5_0::choices::AreaChoiceType>;
 	fn get_target_area_scanned_mut(&mut self) -> Option<&mut crate::v5_0::choices::AreaChoiceType>;
 	fn has_time_to_service(&self) -> bool;
-	fn get_time_to_service(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_time_to_service_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_time_to_service(&self) -> Option<&chrono::TimeDelta>;
+	fn get_time_to_service_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_average_time_to_service(&self) -> bool;
-	fn get_average_time_to_service(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_average_time_to_service_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_average_time_to_service(&self) -> Option<&chrono::TimeDelta>;
+	fn get_average_time_to_service_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait MtiOpZoneFilterAreaType:
@@ -33149,17 +33149,17 @@ pub trait MtiPredictedActivityDetailType:
 	fn get_revisit_index(&self) -> Option<&u32>;
 	fn get_revisit_index_mut(&mut self) -> Option<&mut u32>;
 	fn has_estimated_revisit_period(&self) -> bool;
-	fn get_estimated_revisit_period(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_estimated_revisit_period_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_estimated_revisit_period(&self) -> Option<&chrono::TimeDelta>;
+	fn get_estimated_revisit_period_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_estimated_percentage_in_for(&self) -> bool;
 	fn get_estimated_percentage_in_for(&self) -> Option<&crate::v5_0::common::PercentType>;
 	fn get_estimated_percentage_in_for_mut(&mut self) -> Option<&mut crate::v5_0::common::PercentType>;
 	fn has_estimated_start_time(&self) -> bool;
-	fn get_estimated_start_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_estimated_start_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_estimated_start_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_estimated_start_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_estimated_stop_time(&self) -> bool;
-	fn get_estimated_stop_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_estimated_stop_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_estimated_stop_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_estimated_stop_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_estimated_erp(&self) -> bool;
 	fn get_estimated_erp(&self) -> Option<&crate::v5_0::common::DecibelType>;
 	fn get_estimated_erp_mut(&mut self) -> Option<&mut crate::v5_0::common::DecibelType>;
@@ -33168,8 +33168,8 @@ pub trait MtiPredictedActivityDetailType:
 	fn get_concurrent_execution_assumed(&self) -> &bool;
 	fn get_concurrent_execution_assumed_mut(&mut self) -> &mut bool;
 	fn has_estimated_sweep_time(&self) -> bool;
-	fn get_estimated_sweep_time(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_estimated_sweep_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_estimated_sweep_time(&self) -> Option<&chrono::TimeDelta>;
+	fn get_estimated_sweep_time_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_estimated_target_area_scanned(&self) -> bool;
 	fn get_estimated_target_area_scanned(&self) -> Option<&crate::v5_0::choices::AreaChoiceType>;
 	fn get_estimated_target_area_scanned_mut(&mut self) -> Option<&mut crate::v5_0::choices::AreaChoiceType>;
@@ -33308,13 +33308,13 @@ pub trait MunitionInFlightType:
 	+ serde::Serialize
 {
 	fn has_time_to_active(&self) -> bool;
-	fn get_time_to_active(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_time_to_active_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_time_to_active(&self) -> Option<&chrono::TimeDelta>;
+	fn get_time_to_active_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_time_to_autonomous(&self) -> bool;
-	fn get_time_to_autonomous(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_time_to_autonomous_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
-	fn get_time_to_impact(&self) -> &crate::v5_0::common::DurationType;
-	fn get_time_to_impact_mut(&mut self) -> &mut crate::v5_0::common::DurationType;
+	fn get_time_to_autonomous(&self) -> Option<&chrono::TimeDelta>;
+	fn get_time_to_autonomous_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
+	fn get_time_to_impact(&self) -> &chrono::TimeDelta;
+	fn get_time_to_impact_mut(&mut self) -> &mut chrono::TimeDelta;
 }
 
 pub trait MustFlyType:
@@ -33370,8 +33370,8 @@ pub trait MvObservationType:
 {
 	fn get_entity_id(&self) -> &crate::v5_0::types::EntityIdType;
 	fn get_entity_id_mut(&mut self) -> &mut crate::v5_0::types::EntityIdType;
-	fn get_observation_time(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_observation_time_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_observation_time(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_observation_time_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_observation_measurement_id(&self) -> &Vec<crate::v5_0::types::ObservationMeasurementIdType>;
 	fn get_observation_measurement_id_mut(&mut self) -> &mut Vec<crate::v5_0::types::ObservationMeasurementIdType>;
 	fn has_sensor_location(&self) -> bool;
@@ -33429,8 +33429,8 @@ pub trait NarrowbandSoiParamsType:
 	fn get_amplitude_resolution(&self) -> Option<&crate::v5_0::common::DecibelType>;
 	fn get_amplitude_resolution_mut(&mut self) -> Option<&mut crate::v5_0::common::DecibelType>;
 	fn has_product_resolution_time(&self) -> bool;
-	fn get_product_resolution_time(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_product_resolution_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_product_resolution_time(&self) -> Option<&chrono::TimeDelta>;
+	fn get_product_resolution_time_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait NatoLink1DataLinkIdentifierType:
@@ -33657,8 +33657,8 @@ pub trait NotificationBaseType:
 	fn get_notification_id_mut(&mut self) -> &mut crate::v5_0::types::NotificationIdType;
 	fn get_notification_state(&self) -> &crate::v5_0::enums::NotificationStateEnum;
 	fn get_notification_state_mut(&mut self) -> &mut crate::v5_0::enums::NotificationStateEnum;
-	fn get_timestamp(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_timestamp_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_timestamp(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_timestamp_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_source(&self) -> &crate::v5_0::types::NotificationSourceType;
 	fn get_source_mut(&mut self) -> &mut crate::v5_0::types::NotificationSourceType;
 	fn get_severity(&self) -> &crate::v5_0::enums::NotificationSeverityEnum;
@@ -34080,11 +34080,11 @@ pub trait OffsetTimeType:
 	+ serde::Serialize
 {
 	fn has_before(&self) -> bool;
-	fn get_before(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_before_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_before(&self) -> Option<&chrono::TimeDelta>;
+	fn get_before_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_after(&self) -> bool;
-	fn get_after(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_after_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_after(&self) -> Option<&chrono::TimeDelta>;
+	fn get_after_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait OpBaseType:
@@ -34192,8 +34192,8 @@ pub trait OpInteractingAssetType:
 	fn get_schedule_active_mut(&mut self) -> &mut bool;
 	fn get_violation(&self) -> &bool;
 	fn get_violation_mut(&mut self) -> &mut bool;
-	fn get_time_stamp(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_time_stamp_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_time_stamp(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_time_stamp_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 }
 
 pub trait OpLineIdType:
@@ -34678,8 +34678,8 @@ pub trait OperatorActionAutonomousType:
 	fn get_description(&self) -> Option<&crate::v5_0::common::VisibleString64Type>;
 	fn get_description_mut(&mut self) -> Option<&mut crate::v5_0::common::VisibleString64Type>;
 	fn has_execution_time(&self) -> bool;
-	fn get_execution_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_execution_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_execution_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_execution_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait OperatorActionCommandMdt:
@@ -34760,8 +34760,8 @@ pub trait OperatorAnnotationMdt:
 	fn get_service_id(&self) -> &crate::v5_0::types::ServiceIdType;
 	fn get_service_id_mut(&mut self) -> &mut crate::v5_0::types::ServiceIdType;
 	fn has_timestamp_for_annotation(&self) -> bool;
-	fn get_timestamp_for_annotation(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_timestamp_for_annotation_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_timestamp_for_annotation(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_timestamp_for_annotation_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn get_object_id(&self) -> &Vec<crate::v5_0::types::IdType>;
 	fn get_object_id_mut(&mut self) -> &mut Vec<crate::v5_0::types::IdType>;
 	fn get_annotation_text(&self) -> &Vec<crate::v5_0::common::VisibleString1024Type>;
@@ -34803,8 +34803,8 @@ pub trait OperatorDefaultActionType:
 {
 	fn get_operator_action_id(&self) -> &crate::v5_0::types::OperatorActionIdType;
 	fn get_operator_action_id_mut(&mut self) -> &mut crate::v5_0::types::OperatorActionIdType;
-	fn get_timeout(&self) -> &crate::v5_0::common::DurationType;
-	fn get_timeout_mut(&mut self) -> &mut crate::v5_0::common::DurationType;
+	fn get_timeout(&self) -> &chrono::TimeDelta;
+	fn get_timeout_mut(&mut self) -> &mut chrono::TimeDelta;
 }
 
 pub trait OperatorGatewayDesignationStatusType:
@@ -35007,8 +35007,8 @@ pub trait OperatorNotificationMdt:
 	fn get_count(&self) -> Option<&u32>;
 	fn get_count_mut(&mut self) -> Option<&mut u32>;
 	fn has_occurrence_timestamp(&self) -> bool;
-	fn get_occurrence_timestamp(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_occurrence_timestamp_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_occurrence_timestamp(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_occurrence_timestamp_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_priority(&self) -> bool;
 	fn get_priority(&self) -> Option<&u8>;
 	fn get_priority_mut(&mut self) -> Option<&mut u8>;
@@ -35148,8 +35148,8 @@ pub trait OpticalImageParamsType:
 	fn get_product_resolution(&self) -> Option<&crate::v5_0::types::ProductResolutionType>;
 	fn get_product_resolution_mut(&mut self) -> Option<&mut crate::v5_0::types::ProductResolutionType>;
 	fn has_product_resolution_time(&self) -> bool;
-	fn get_product_resolution_time(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_product_resolution_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_product_resolution_time(&self) -> Option<&chrono::TimeDelta>;
+	fn get_product_resolution_time_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait OrbitAccuracyType:
@@ -35725,8 +35725,8 @@ pub trait OrbitConjunctionAssessmentMdt:
 	fn get_request_id_mut(&mut self) -> Option<&mut crate::v5_0::types::RequestIdType>;
 	fn get_conjunction(&self) -> &Vec<crate::v5_0::types::OrbitalConjunctionType>;
 	fn get_conjunction_mut(&mut self) -> &mut Vec<crate::v5_0::types::OrbitalConjunctionType>;
-	fn get_completion_time(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_completion_time_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_completion_time(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_completion_time_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn has_estimate_narrative(&self) -> bool;
 	fn get_estimate_narrative(&self) -> Option<&crate::v5_0::common::VisibleString1024Type>;
 	fn get_estimate_narrative_mut(&mut self) -> Option<&mut crate::v5_0::common::VisibleString1024Type>;
@@ -35755,8 +35755,8 @@ pub trait OrbitConjunctionAssessmentRequestMdt:
 	fn get_analysis_period(&self) -> &crate::v5_0::types::DateTimeRangeType;
 	fn get_analysis_period_mut(&mut self) -> &mut crate::v5_0::types::DateTimeRangeType;
 	fn has_respond_by(&self) -> bool;
-	fn get_respond_by(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_respond_by_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_respond_by(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_respond_by_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait OrbitConjunctionAssessmentRequestMt:
@@ -35800,8 +35800,8 @@ pub trait OrbitEstimationStartType:
 	fn get_segment_id(&self) -> Option<&crate::v5_0::types::OrbitManeuverSegmentIdType>;
 	fn get_segment_id_mut(&mut self) -> Option<&mut crate::v5_0::types::OrbitManeuverSegmentIdType>;
 	fn has_start_time(&self) -> bool;
-	fn get_start_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_start_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_start_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_start_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait OrbitExecutionPlanSetType:
@@ -36023,8 +36023,8 @@ pub trait OrbitManeuverSegmentType:
 	fn get_segment_id_mut(&mut self) -> &mut crate::v5_0::types::OrbitManeuverSegmentIdType;
 	fn get_source(&self) -> &crate::v5_0::enums::PathSegmentSourceEnum;
 	fn get_source_mut(&mut self) -> &mut crate::v5_0::enums::PathSegmentSourceEnum;
-	fn get_start_epoch(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_start_epoch_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_start_epoch(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_start_epoch_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_end_point(&self) -> &crate::v5_0::choices::OrbitalKinematicsChoiceType;
 	fn get_end_point_mut(&mut self) -> &mut crate::v5_0::choices::OrbitalKinematicsChoiceType;
 	fn get_locked(&self) -> &bool;
@@ -36643,8 +36643,8 @@ pub trait OrbitPlanningStateType:
 	+ serde::Serialize
 {
 	fn has_time(&self) -> bool;
-	fn get_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_kinematics(&self) -> bool;
 	fn get_kinematics(&self) -> Option<&crate::v5_0::choices::OrbitalKinematicsChoiceType>;
 	fn get_kinematics_mut(&mut self) -> Option<&mut crate::v5_0::choices::OrbitalKinematicsChoiceType>;
@@ -36675,8 +36675,8 @@ pub trait OrbitRegimeType:
 pub trait OrbitSequenceCompletedType:
 	OrbitSequenceEstimateType
 {
-	fn get_actual_capture_time(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_actual_capture_time_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_actual_capture_time(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_actual_capture_time_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 }
 
 pub trait OrbitSequenceEstimateType:
@@ -36694,8 +36694,8 @@ pub trait OrbitSequenceEstimateType:
 	fn get_segment_id(&self) -> Option<&crate::v5_0::types::OrbitManeuverSegmentIdType>;
 	fn get_segment_id_mut(&mut self) -> Option<&mut crate::v5_0::types::OrbitManeuverSegmentIdType>;
 	fn has_estimated_capture_time(&self) -> bool;
-	fn get_estimated_capture_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_estimated_capture_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_estimated_capture_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_estimated_capture_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait OrbitTransitionSequenceType:
@@ -36778,8 +36778,8 @@ pub trait OrbitalConjunctionType:
 {
 	fn get_conjunction_id(&self) -> &crate::v5_0::types::OrbitalConjunctionIdType;
 	fn get_conjunction_id_mut(&mut self) -> &mut crate::v5_0::types::OrbitalConjunctionIdType;
-	fn get_conjunction_time(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_conjunction_time_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_conjunction_time(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_conjunction_time_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_conjunction_type(&self) -> &crate::v5_0::enums::OrbitalConjunctionEnum;
 	fn get_conjunction_type_mut(&mut self) -> &mut crate::v5_0::enums::OrbitalConjunctionEnum;
 	fn has_conjunction_range(&self) -> bool;
@@ -36811,8 +36811,8 @@ pub trait OrbitalDebrisCloudType:
 	fn get_orbital_debris_cloud_id_mut(&mut self) -> &mut crate::v5_0::types::OrbitalDebrisCloudIdType;
 	fn get_identity(&self) -> &crate::v5_0::choices::SatelliteIdentityChoiceType;
 	fn get_identity_mut(&mut self) -> &mut crate::v5_0::choices::SatelliteIdentityChoiceType;
-	fn get_event_time(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_event_time_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_event_time(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_event_time_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_debris(&self) -> &Vec<crate::v5_0::types::OrbitalDebrisType>;
 	fn get_debris_mut(&mut self) -> &mut Vec<crate::v5_0::types::OrbitalDebrisType>;
 	fn has_debris_cloud_boundary(&self) -> bool;
@@ -36863,8 +36863,8 @@ pub trait OrbitalDebrisEstimateRequestMdt:
 	fn get_causal_event(&self) -> &crate::v5_0::choices::OrbitBreakupEventDetailsType;
 	fn get_causal_event_mut(&mut self) -> &mut crate::v5_0::choices::OrbitBreakupEventDetailsType;
 	fn has_respond_by(&self) -> bool;
-	fn get_respond_by(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_respond_by_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_respond_by(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_respond_by_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_analysis_window(&self) -> bool;
 	fn get_analysis_window(&self) -> Option<&crate::v5_0::types::TimeWindowType>;
 	fn get_analysis_window_mut(&mut self) -> Option<&mut crate::v5_0::types::TimeWindowType>;
@@ -36959,8 +36959,8 @@ pub trait OrbitalDockingEventType:
 	+ PartialEq
 	+ serde::Serialize
 {
-	fn get_dock_time(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_dock_time_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_dock_time(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_dock_time_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 }
 
 pub trait OrbitalElementSetParametersType:
@@ -36970,8 +36970,8 @@ pub trait OrbitalElementSetParametersType:
 	+ PartialEq
 	+ serde::Serialize
 {
-	fn get_creation_time(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_creation_time_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_creation_time(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_creation_time_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn has_orbital_model(&self) -> bool;
 	fn get_orbital_model(&self) -> Option<&crate::v5_0::types::OrbitalModelType>;
 	fn get_orbital_model_mut(&mut self) -> Option<&mut crate::v5_0::types::OrbitalModelType>;
@@ -36995,11 +36995,11 @@ pub trait OrbitalEphemerisParametersType:
 	+ PartialEq
 	+ serde::Serialize
 {
-	fn get_creation_time(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_creation_time_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_creation_time(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_creation_time_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn has_step_size(&self) -> bool;
-	fn get_step_size(&self) -> Option<&chrono::TimeDelta>;
-	fn get_step_size_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
+	fn get_step_size(&self) -> Option<&i64>;
+	fn get_step_size_mut(&mut self) -> Option<&mut i64>;
 	fn get_propagator_type(&self) -> &crate::v5_0::choices::EphemerisPropagatorChoiceType;
 	fn get_propagator_type_mut(&mut self) -> &mut crate::v5_0::choices::EphemerisPropagatorChoiceType;
 }
@@ -37131,8 +37131,8 @@ pub trait OrbitalManeuverDetailsBaseType:
 	fn get_delta_velocity_covariance(&self) -> Option<&crate::v5_0::types::CovarianceMatrixType>;
 	fn get_delta_velocity_covariance_mut(&mut self) -> Option<&mut crate::v5_0::types::CovarianceMatrixType>;
 	fn has_duration(&self) -> bool;
-	fn get_duration(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_duration_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_duration(&self) -> Option<&chrono::TimeDelta>;
+	fn get_duration_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_delta_mass(&self) -> bool;
 	fn get_delta_mass(&self) -> Option<&crate::v5_0::common::MassType>;
 	fn get_delta_mass_mut(&mut self) -> Option<&mut crate::v5_0::common::MassType>;
@@ -37141,8 +37141,8 @@ pub trait OrbitalManeuverDetailsBaseType:
 pub trait OrbitalManeuverDetailsType:
 	OrbitalManeuverDetailsBaseType
 {
-	fn get_start_epoch(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_start_epoch_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_start_epoch(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_start_epoch_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn has_maneuver_type(&self) -> bool;
 	fn get_maneuver_type(&self) -> Option<&crate::v5_0::enums::OrbitalManeuverTypeEnum>;
 	fn get_maneuver_type_mut(&mut self) -> Option<&mut crate::v5_0::enums::OrbitalManeuverTypeEnum>;
@@ -37226,26 +37226,26 @@ pub trait OrbitalProximityOperationsEventType:
 	+ serde::Serialize
 {
 	fn has_actor_state_epoch(&self) -> bool;
-	fn get_actor_state_epoch(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_actor_state_epoch_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_actor_state_epoch(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_actor_state_epoch_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_target_state_epoch(&self) -> bool;
-	fn get_target_state_epoch(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_target_state_epoch_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_target_state_epoch(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_target_state_epoch_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_analysis_epoch(&self) -> bool;
-	fn get_analysis_epoch(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_analysis_epoch_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_analysis_epoch(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_analysis_epoch_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_analysis_duration(&self) -> bool;
-	fn get_analysis_duration(&self) -> Option<&chrono::TimeDelta>;
-	fn get_analysis_duration_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
+	fn get_analysis_duration(&self) -> Option<&i64>;
+	fn get_analysis_duration_mut(&mut self) -> Option<&mut i64>;
 	fn has_duration_threshold(&self) -> bool;
-	fn get_duration_threshold(&self) -> Option<&chrono::TimeDelta>;
-	fn get_duration_threshold_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
+	fn get_duration_threshold(&self) -> Option<&i64>;
+	fn get_duration_threshold_mut(&mut self) -> Option<&mut i64>;
 	fn has_range_threshold(&self) -> bool;
 	fn get_range_threshold(&self) -> Option<&crate::v5_0::common::DistanceType>;
 	fn get_range_threshold_mut(&mut self) -> Option<&mut crate::v5_0::common::DistanceType>;
 	fn has_minimum_range_epoch(&self) -> bool;
-	fn get_minimum_range_epoch(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_minimum_range_epoch_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_minimum_range_epoch(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_minimum_range_epoch_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_minimum_range(&self) -> bool;
 	fn get_minimum_range(&self) -> Option<&crate::v5_0::common::DistanceType>;
 	fn get_minimum_range_mut(&mut self) -> Option<&mut crate::v5_0::common::DistanceType>;
@@ -37267,16 +37267,16 @@ pub trait OrbitalRendezvousEventType:
 	+ PartialEq
 	+ serde::Serialize
 {
-	fn get_actor_state_epoch(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_actor_state_epoch_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
-	fn get_target_state_epoch(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_target_state_epoch_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_actor_state_epoch(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_actor_state_epoch_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
+	fn get_target_state_epoch(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_target_state_epoch_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn has_analysis_epoch(&self) -> bool;
-	fn get_analysis_epoch(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_analysis_epoch_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_analysis_epoch(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_analysis_epoch_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_analysis_duration(&self) -> bool;
-	fn get_analysis_duration(&self) -> Option<&chrono::TimeDelta>;
-	fn get_analysis_duration_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
+	fn get_analysis_duration(&self) -> Option<&i64>;
+	fn get_analysis_duration_mut(&mut self) -> Option<&mut i64>;
 	fn get_event_interval_coverage(&self) -> &crate::v5_0::common::PercentType;
 	fn get_event_interval_coverage_mut(&mut self) -> &mut crate::v5_0::common::PercentType;
 	fn get_number_sub_intervals(&self) -> &i32;
@@ -37285,16 +37285,16 @@ pub trait OrbitalRendezvousEventType:
 	fn get_minimum_range(&self) -> Option<&crate::v5_0::common::DistanceType>;
 	fn get_minimum_range_mut(&mut self) -> Option<&mut crate::v5_0::common::DistanceType>;
 	fn has_minimum_range_epoch(&self) -> bool;
-	fn get_minimum_range_epoch(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_minimum_range_epoch_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
-	fn get_minimum_range_analysis_duration(&self) -> &chrono::TimeDelta;
-	fn get_minimum_range_analysis_duration_mut(&mut self) -> &mut chrono::TimeDelta;
+	fn get_minimum_range_epoch(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_minimum_range_epoch_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
+	fn get_minimum_range_analysis_duration(&self) -> &i64;
+	fn get_minimum_range_analysis_duration_mut(&mut self) -> &mut i64;
 	fn has_minimum_in_plane_separation_angle(&self) -> bool;
 	fn get_minimum_in_plane_separation_angle(&self) -> Option<&crate::v5_0::common::AngleHalfPositiveType>;
 	fn get_minimum_in_plane_separation_angle_mut(&mut self) -> Option<&mut crate::v5_0::common::AngleHalfPositiveType>;
 	fn has_minimum_in_plane_separation_epoch(&self) -> bool;
-	fn get_minimum_in_plane_separation_epoch(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_minimum_in_plane_separation_epoch_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_minimum_in_plane_separation_epoch(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_minimum_in_plane_separation_epoch_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_object_comparison_at_event_start(&self) -> bool;
 	fn get_object_comparison_at_event_start(&self) -> Option<&crate::v5_0::types::OrbitalObjectComparisonDeltaType>;
 	fn get_object_comparison_at_event_start_mut(&mut self) -> Option<&mut crate::v5_0::types::OrbitalObjectComparisonDeltaType>;
@@ -37317,8 +37317,8 @@ pub trait OrbitalSeparationEventType:
 	+ PartialEq
 	+ serde::Serialize
 {
-	fn get_separation_time(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_separation_time_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_separation_time(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_separation_time_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 }
 
 pub trait OrbitalSingleVectorParametersType:
@@ -37643,11 +37643,11 @@ pub trait OrbitalSurveillanceSensorTaskBaseType:
 	fn get_reporting_requirements(&self) -> &Vec<crate::v5_0::types::OrbitalSurveillanceSensorReportingCategoriesType>;
 	fn get_reporting_requirements_mut(&mut self) -> &mut Vec<crate::v5_0::types::OrbitalSurveillanceSensorReportingCategoriesType>;
 	fn has_set_up_start_time(&self) -> bool;
-	fn get_set_up_start_time(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_set_up_start_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_set_up_start_time(&self) -> Option<&chrono::TimeDelta>;
+	fn get_set_up_start_time_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_post_collection_wrap_up(&self) -> bool;
-	fn get_post_collection_wrap_up(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_post_collection_wrap_up_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_post_collection_wrap_up(&self) -> Option<&chrono::TimeDelta>;
+	fn get_post_collection_wrap_up_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_sensitivity_constraints(&self) -> bool;
 	fn get_sensitivity_constraints(&self) -> Option<&crate::v5_0::types::OrbitalSurveillanceSensorSensitivityConstraintType>;
 	fn get_sensitivity_constraints_mut(&mut self) -> Option<&mut crate::v5_0::types::OrbitalSurveillanceSensorSensitivityConstraintType>;
@@ -37752,8 +37752,8 @@ pub trait OrbitalUndockingEventType:
 	+ PartialEq
 	+ serde::Serialize
 {
-	fn get_undock_time(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_undock_time_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_undock_time(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_undock_time_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 }
 
 pub trait OrbitalVcmParametersType:
@@ -37763,8 +37763,8 @@ pub trait OrbitalVcmParametersType:
 	+ PartialEq
 	+ serde::Serialize
 {
-	fn get_creation_time(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_creation_time_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_creation_time(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_creation_time_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_vcm_propagator(&self) -> &crate::v5_0::types::VcmPropagatorType;
 	fn get_vcm_propagator_mut(&mut self) -> &mut crate::v5_0::types::VcmPropagatorType;
 }
@@ -37779,8 +37779,8 @@ pub trait OrbitalVcmRequestParametersType:
 	fn get_request_window(&self) -> &crate::v5_0::types::DateTimeRangeType;
 	fn get_request_window_mut(&mut self) -> &mut crate::v5_0::types::DateTimeRangeType;
 	fn has_step_size(&self) -> bool;
-	fn get_step_size(&self) -> Option<&chrono::TimeDelta>;
-	fn get_step_size_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
+	fn get_step_size(&self) -> Option<&i64>;
+	fn get_step_size_mut(&mut self) -> Option<&mut i64>;
 }
 
 pub trait OrbitalVcmType:
@@ -37869,11 +37869,11 @@ pub trait OrderOfBattleMdt:
 	fn get_op_volume_id(&self) -> Option<&crate::v5_0::types::OpVolumeIdType>;
 	fn get_op_volume_id_mut(&mut self) -> Option<&mut crate::v5_0::types::OpVolumeIdType>;
 	fn has_initial_creation_time(&self) -> bool;
-	fn get_initial_creation_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_initial_creation_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_initial_creation_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_initial_creation_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_last_update_time(&self) -> bool;
-	fn get_last_update_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_last_update_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_last_update_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_last_update_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn get_unit(&self) -> &Vec<crate::v5_0::types::UnitType>;
 	fn get_unit_mut(&mut self) -> &mut Vec<crate::v5_0::types::UnitType>;
 }
@@ -37980,8 +37980,8 @@ pub trait OrientationAccelerationType:
 	fn get_roll_accel(&self) -> &crate::v5_0::common::AngleRateType;
 	fn get_roll_accel_mut(&mut self) -> &mut crate::v5_0::common::AngleRateType;
 	fn has_timestamp(&self) -> bool;
-	fn get_timestamp(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_timestamp_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_timestamp(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_timestamp_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait OrientationCovarianceType:
@@ -38019,8 +38019,8 @@ pub trait OrientationRateType:
 	fn get_roll_rate(&self) -> &crate::v5_0::common::AngleRateType;
 	fn get_roll_rate_mut(&mut self) -> &mut crate::v5_0::common::AngleRateType;
 	fn has_timestamp(&self) -> bool;
-	fn get_timestamp(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_timestamp_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_timestamp(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_timestamp_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait OrientationType:
@@ -38037,8 +38037,8 @@ pub trait OrientationType:
 	fn get_roll(&self) -> &crate::v5_0::common::AngleType;
 	fn get_roll_mut(&mut self) -> &mut crate::v5_0::common::AngleType;
 	fn has_timestamp(&self) -> bool;
-	fn get_timestamp(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_timestamp_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_timestamp(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_timestamp_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait OtherSystemConstrainingPlansType:
@@ -38458,8 +38458,8 @@ pub trait PeriodPerformanceFeedbackType:
 	fn get_unusable_granted_time_mut(&mut self) -> Option<&mut crate::v5_0::common::PercentType>;
 	fn get_percent_interruption(&self) -> &crate::v5_0::common::PercentType;
 	fn get_percent_interruption_mut(&mut self) -> &mut crate::v5_0::common::PercentType;
-	fn get_longest_uninterrupted_time(&self) -> &crate::v5_0::common::DurationType;
-	fn get_longest_uninterrupted_time_mut(&mut self) -> &mut crate::v5_0::common::DurationType;
+	fn get_longest_uninterrupted_time(&self) -> &chrono::TimeDelta;
+	fn get_longest_uninterrupted_time_mut(&mut self) -> &mut chrono::TimeDelta;
 }
 
 pub trait PhotometryParamsType:
@@ -38473,8 +38473,8 @@ pub trait PhotometryParamsType:
 	fn get_amplitude_resolution(&self) -> Option<&crate::v5_0::common::DecibelType>;
 	fn get_amplitude_resolution_mut(&mut self) -> Option<&mut crate::v5_0::common::DecibelType>;
 	fn has_product_resolution_time(&self) -> bool;
-	fn get_product_resolution_time(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_product_resolution_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_product_resolution_time(&self) -> Option<&chrono::TimeDelta>;
+	fn get_product_resolution_time_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait PhysicalModelType:
@@ -38940,8 +38940,8 @@ pub trait PlanScoresMdt:
 	fn get_request_id_mut(&mut self) -> Option<&mut crate::v5_0::types::RequestIdType>;
 	fn get_assessed_plans(&self) -> &crate::v5_0::types::PlansReferenceType;
 	fn get_assessed_plans_mut(&mut self) -> &mut crate::v5_0::types::PlansReferenceType;
-	fn get_assessment_time(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_assessment_time_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_assessment_time(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_assessment_time_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_scoring_process_id(&self) -> &crate::v5_0::types::ScoringProcessIdType;
 	fn get_scoring_process_id_mut(&mut self) -> &mut crate::v5_0::types::ScoringProcessIdType;
 	fn get_scored_op_constraint(&self) -> &Vec<crate::v5_0::types::OpConstraintScoreType>;
@@ -39327,8 +39327,8 @@ pub trait PlanningAllowedEscalationType:
 pub trait PlanningAllowedType:
 	AutonomousPlanCommandType
 {
-	fn get_plan_ahead_duration(&self) -> &crate::v5_0::common::DurationType;
-	fn get_plan_ahead_duration_mut(&mut self) -> &mut crate::v5_0::common::DurationType;
+	fn get_plan_ahead_duration(&self) -> &chrono::TimeDelta;
+	fn get_plan_ahead_duration_mut(&mut self) -> &mut chrono::TimeDelta;
 }
 
 pub trait PlanningApplicabilitySystemType:
@@ -39832,11 +39832,11 @@ pub trait PoActivityType:
 	ActivityBaseType
 {
 	fn has_actual_start_time(&self) -> bool;
-	fn get_actual_start_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_actual_start_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_actual_start_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_actual_start_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_actual_completion_time(&self) -> bool;
-	fn get_actual_completion_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_actual_completion_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_actual_completion_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_actual_completion_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_all_products_and_messages_produced(&self) -> bool;
 	fn get_all_products_and_messages_produced(&self) -> Option<&bool>;
 	fn get_all_products_and_messages_produced_mut(&mut self) -> Option<&mut bool>;
@@ -40073,8 +40073,8 @@ pub trait PoCoastSettingValueType:
 	+ PartialEq
 	+ serde::Serialize
 {
-	fn get_coast_time(&self) -> &crate::v5_0::common::DurationType;
-	fn get_coast_time_mut(&mut self) -> &mut crate::v5_0::common::DurationType;
+	fn get_coast_time(&self) -> &chrono::TimeDelta;
+	fn get_coast_time_mut(&mut self) -> &mut chrono::TimeDelta;
 	fn get_environment(&self) -> &crate::v5_0::enums::EnvironmentEnum;
 	fn get_environment_mut(&mut self) -> &mut crate::v5_0::enums::EnvironmentEnum;
 }
@@ -40913,8 +40913,8 @@ pub trait PoComponentStatusFocalPlaneArrayCollectionTimeType:
 	+ PartialEq
 	+ serde::Serialize
 {
-	fn get_collection_time_setting(&self) -> &crate::v5_0::common::DurationType;
-	fn get_collection_time_setting_mut(&mut self) -> &mut crate::v5_0::common::DurationType;
+	fn get_collection_time_setting(&self) -> &chrono::TimeDelta;
+	fn get_collection_time_setting_mut(&mut self) -> &mut chrono::TimeDelta;
 	fn has_auto_collection_time(&self) -> bool;
 	fn get_auto_collection_time(&self) -> Option<&bool>;
 	fn get_auto_collection_time_mut(&mut self) -> Option<&mut bool>;
@@ -41782,8 +41782,8 @@ pub trait PoTrackDetailsType:
 	fn get_offset_track_setting(&self) -> Option<&crate::v5_0::types::LosVariableBType>;
 	fn get_offset_track_setting_mut(&mut self) -> Option<&mut crate::v5_0::types::LosVariableBType>;
 	fn has_observed_entity_threshold(&self) -> bool;
-	fn get_observed_entity_threshold(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_observed_entity_threshold_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_observed_entity_threshold(&self) -> Option<&chrono::TimeDelta>;
+	fn get_observed_entity_threshold_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_tracking_range(&self) -> bool;
 	fn get_tracking_range(&self) -> Option<&crate::v5_0::common::DistanceType>;
 	fn get_tracking_range_mut(&mut self) -> Option<&mut crate::v5_0::common::DistanceType>;
@@ -41819,8 +41819,8 @@ pub trait PoTrackSettingsType:
 	fn get_offset_track_setting(&self) -> Option<&crate::v5_0::types::LosVariableBType>;
 	fn get_offset_track_setting_mut(&mut self) -> Option<&mut crate::v5_0::types::LosVariableBType>;
 	fn has_observed_entity_threshold(&self) -> bool;
-	fn get_observed_entity_threshold(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_observed_entity_threshold_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_observed_entity_threshold(&self) -> Option<&chrono::TimeDelta>;
+	fn get_observed_entity_threshold_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_tracking_range(&self) -> bool;
 	fn get_tracking_range(&self) -> Option<&crate::v5_0::common::DistanceType>;
 	fn get_tracking_range_mut(&mut self) -> Option<&mut crate::v5_0::common::DistanceType>;
@@ -41856,8 +41856,8 @@ pub trait PoTrackStatusType:
 	fn get_offset_track_setting(&self) -> Option<&crate::v5_0::types::LosVariableBType>;
 	fn get_offset_track_setting_mut(&mut self) -> Option<&mut crate::v5_0::types::LosVariableBType>;
 	fn has_observed_entity_threshold(&self) -> bool;
-	fn get_observed_entity_threshold(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_observed_entity_threshold_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_observed_entity_threshold(&self) -> Option<&chrono::TimeDelta>;
+	fn get_observed_entity_threshold_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_tracking_range(&self) -> bool;
 	fn get_tracking_range(&self) -> Option<&crate::v5_0::common::DistanceType>;
 	fn get_tracking_range_mut(&mut self) -> Option<&mut crate::v5_0::common::DistanceType>;
@@ -41949,8 +41949,8 @@ pub trait Point2DType:
 	fn get_altitude_reference(&self) -> Option<&crate::v5_0::enums::AltitudeReferenceEnum>;
 	fn get_altitude_reference_mut(&mut self) -> Option<&mut crate::v5_0::enums::AltitudeReferenceEnum>;
 	fn has_timestamp(&self) -> bool;
-	fn get_timestamp(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_timestamp_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_timestamp(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_timestamp_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait Point3DRelativeType:
@@ -41984,8 +41984,8 @@ pub trait Point3DType:
 	fn get_altitude_reference(&self) -> Option<&crate::v5_0::enums::AltitudeReferenceEnum>;
 	fn get_altitude_reference_mut(&mut self) -> Option<&mut crate::v5_0::enums::AltitudeReferenceEnum>;
 	fn has_timestamp(&self) -> bool;
-	fn get_timestamp(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_timestamp_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_timestamp(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_timestamp_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait Point4DRelativeType:
@@ -41997,8 +41997,8 @@ pub trait Point4DRelativeType:
 {
 	fn get_reference_frame_id(&self) -> &crate::v5_0::types::ReferenceFrameIdType;
 	fn get_reference_frame_id_mut(&mut self) -> &mut crate::v5_0::types::ReferenceFrameIdType;
-	fn get_timestamp(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_timestamp_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_timestamp(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_timestamp_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn has_relative_offset(&self) -> bool;
 	fn get_relative_offset(&self) -> Option<&crate::v5_0::types::RelativeOffset3DType>;
 	fn get_relative_offset_mut(&mut self) -> Option<&mut crate::v5_0::types::RelativeOffset3DType>;
@@ -42020,8 +42020,8 @@ pub trait Point4DType:
 	fn has_altitude_reference(&self) -> bool;
 	fn get_altitude_reference(&self) -> Option<&crate::v5_0::enums::AltitudeReferenceEnum>;
 	fn get_altitude_reference_mut(&mut self) -> Option<&mut crate::v5_0::enums::AltitudeReferenceEnum>;
-	fn get_timestamp(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_timestamp_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_timestamp(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_timestamp_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn has_depth_category(&self) -> bool;
 	fn get_depth_category(&self) -> Option<&crate::v5_0::enums::Link16DepthEnum>;
 	fn get_depth_category_mut(&mut self) -> Option<&mut crate::v5_0::enums::Link16DepthEnum>;
@@ -42107,8 +42107,8 @@ pub trait PolarizationControlType:
 	fn get_port_polarization(&self) -> &crate::v5_0::enums::PolarizationPortEnum;
 	fn get_port_polarization_mut(&mut self) -> &mut crate::v5_0::enums::PolarizationPortEnum;
 	fn has_duration(&self) -> bool;
-	fn get_duration(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_duration_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_duration(&self) -> Option<&chrono::TimeDelta>;
+	fn get_duration_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_polarization_description(&self) -> bool;
 	fn get_polarization_description(&self) -> Option<&crate::v5_0::types::PolarizationType>;
 	fn get_polarization_description_mut(&mut self) -> Option<&mut crate::v5_0::types::PolarizationType>;
@@ -42443,20 +42443,20 @@ pub trait PriDataBaseType:
 	fn get_pri_type(&self) -> Option<&crate::v5_0::enums::PriTypeEnum>;
 	fn get_pri_type_mut(&mut self) -> Option<&mut crate::v5_0::enums::PriTypeEnum>;
 	fn has_pri_average(&self) -> bool;
-	fn get_pri_average(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_pri_average_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_pri_average(&self) -> Option<&chrono::TimeDelta>;
+	fn get_pri_average_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_pri_min(&self) -> bool;
-	fn get_pri_min(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_pri_min_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_pri_min(&self) -> Option<&chrono::TimeDelta>;
+	fn get_pri_min_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_pri_max(&self) -> bool;
-	fn get_pri_max(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_pri_max_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_pri_max(&self) -> Option<&chrono::TimeDelta>;
+	fn get_pri_max_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_pri_last(&self) -> bool;
-	fn get_pri_last(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_pri_last_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_pri_last(&self) -> Option<&chrono::TimeDelta>;
+	fn get_pri_last_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_pri_third(&self) -> bool;
-	fn get_pri_third(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_pri_third_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_pri_third(&self) -> Option<&chrono::TimeDelta>;
+	fn get_pri_third_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait PriDataType:
@@ -42472,8 +42472,8 @@ pub trait PriDataType:
 	fn get_pri_measurement(&self) -> Option<&crate::v5_0::enums::PriMeasurementEnum>;
 	fn get_pri_measurement_mut(&mut self) -> Option<&mut crate::v5_0::enums::PriMeasurementEnum>;
 	fn has_pri_jitter_deviation(&self) -> bool;
-	fn get_pri_jitter_deviation(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_pri_jitter_deviation_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_pri_jitter_deviation(&self) -> Option<&chrono::TimeDelta>;
+	fn get_pri_jitter_deviation_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_pri_pulse_groups_present(&self) -> bool;
 	fn get_pri_pulse_groups_present(&self) -> Option<&bool>;
 	fn get_pri_pulse_groups_present_mut(&mut self) -> Option<&mut bool>;
@@ -42481,8 +42481,8 @@ pub trait PriDataType:
 	fn get_pri_quantized(&self) -> Option<&bool>;
 	fn get_pri_quantized_mut(&mut self) -> Option<&mut bool>;
 	fn has_pri_quantization_period(&self) -> bool;
-	fn get_pri_quantization_period(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_pri_quantization_period_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_pri_quantization_period(&self) -> Option<&chrono::TimeDelta>;
+	fn get_pri_quantization_period_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_pri_squirrelly(&self) -> bool;
 	fn get_pri_squirrelly(&self) -> Option<&bool>;
 	fn get_pri_squirrelly_mut(&mut self) -> Option<&mut bool>;
@@ -42490,13 +42490,13 @@ pub trait PriDataType:
 	fn get_pri_missing_pulse(&self) -> Option<&bool>;
 	fn get_pri_missing_pulse_mut(&mut self) -> Option<&mut bool>;
 	fn has_pri_pattern_period(&self) -> bool;
-	fn get_pri_pattern_period(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_pri_pattern_period_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_pri_pattern_period(&self) -> Option<&chrono::TimeDelta>;
+	fn get_pri_pattern_period_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_pri_pattern_levels(&self) -> bool;
 	fn get_pri_pattern_levels(&self) -> Option<&u32>;
 	fn get_pri_pattern_levels_mut(&mut self) -> Option<&mut u32>;
-	fn get_pri_pattern_interval(&self) -> &Vec<crate::v5_0::common::DurationType>;
-	fn get_pri_pattern_interval_mut(&mut self) -> &mut Vec<crate::v5_0::common::DurationType>;
+	fn get_pri_pattern_interval(&self) -> &Vec<chrono::TimeDelta>;
+	fn get_pri_pattern_interval_mut(&mut self) -> &mut Vec<chrono::TimeDelta>;
 	fn has_pri_jitter_detected(&self) -> bool;
 	fn get_pri_jitter_detected(&self) -> Option<&crate::v5_0::common::EmptyType>;
 	fn get_pri_jitter_detected_mut(&mut self) -> Option<&mut crate::v5_0::common::EmptyType>;
@@ -42809,8 +42809,8 @@ pub trait ProductClassificationStatusType:
 	fn get_status_details(&self) -> Option<&crate::v5_0::common::VisibleString256Type>;
 	fn get_status_details_mut(&mut self) -> Option<&mut crate::v5_0::common::VisibleString256Type>;
 	fn has_estimated_completion_time(&self) -> bool;
-	fn get_estimated_completion_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_estimated_completion_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_estimated_completion_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_estimated_completion_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_estimated_percent_complete(&self) -> bool;
 	fn get_estimated_percent_complete(&self) -> Option<&crate::v5_0::common::PercentType>;
 	fn get_estimated_percent_complete_mut(&mut self) -> Option<&mut crate::v5_0::common::PercentType>;
@@ -43084,8 +43084,8 @@ pub trait ProductDisseminationStatusType:
 	fn get_status_details(&self) -> Option<&crate::v5_0::common::VisibleString256Type>;
 	fn get_status_details_mut(&mut self) -> Option<&mut crate::v5_0::common::VisibleString256Type>;
 	fn has_estimated_completion_time(&self) -> bool;
-	fn get_estimated_completion_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_estimated_completion_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_estimated_completion_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_estimated_completion_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_estimated_percent_complete(&self) -> bool;
 	fn get_estimated_percent_complete(&self) -> Option<&crate::v5_0::common::PercentType>;
 	fn get_estimated_percent_complete_mut(&mut self) -> Option<&mut crate::v5_0::common::PercentType>;
@@ -43252,8 +43252,8 @@ pub trait ProductDownloadStatusType:
 	fn get_status_details(&self) -> Option<&crate::v5_0::types::CannotComplyType>;
 	fn get_status_details_mut(&mut self) -> Option<&mut crate::v5_0::types::CannotComplyType>;
 	fn has_estimated_completion_time(&self) -> bool;
-	fn get_estimated_completion_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_estimated_completion_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_estimated_completion_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_estimated_completion_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_estimated_percent_complete(&self) -> bool;
 	fn get_estimated_percent_complete(&self) -> Option<&crate::v5_0::common::PercentType>;
 	fn get_estimated_percent_complete_mut(&mut self) -> Option<&mut crate::v5_0::common::PercentType>;
@@ -43398,8 +43398,8 @@ pub trait ProductMetadataMdt:
 	fn get_creation_source_mut(&mut self) -> &mut crate::v5_0::enums::CreationSourceEnum;
 	fn get_untrusted_modification(&self) -> &bool;
 	fn get_untrusted_modification_mut(&mut self) -> &mut bool;
-	fn get_timestamp(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_timestamp_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_timestamp(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_timestamp_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_security_information(&self) -> &crate::v5_0::types::SecurityInformationType;
 	fn get_security_information_mut(&mut self) -> &mut crate::v5_0::types::SecurityInformationType;
 	fn has_thumbnail(&self) -> bool;
@@ -43773,8 +43773,8 @@ pub trait ProductProcessingStatusType:
 	fn get_output_product_metadata_id(&self) -> &Vec<crate::v5_0::types::ProductMetadataIdType>;
 	fn get_output_product_metadata_id_mut(&mut self) -> &mut Vec<crate::v5_0::types::ProductMetadataIdType>;
 	fn has_estimated_completion_time(&self) -> bool;
-	fn get_estimated_completion_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_estimated_completion_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_estimated_completion_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_estimated_completion_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_estimated_percent_complete(&self) -> bool;
 	fn get_estimated_percent_complete(&self) -> Option<&crate::v5_0::common::PercentType>;
 	fn get_estimated_percent_complete_mut(&mut self) -> Option<&mut crate::v5_0::common::PercentType>;
@@ -44021,22 +44021,22 @@ pub trait PulseDataCollectCommandType:
 {
 	fn get_collection_frequency(&self) -> &crate::v5_0::types::CollectionFrequencyType;
 	fn get_collection_frequency_mut(&mut self) -> &mut crate::v5_0::types::CollectionFrequencyType;
-	fn get_start_time(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_start_time_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
-	fn get_dwell_duration(&self) -> &crate::v5_0::common::DurationType;
-	fn get_dwell_duration_mut(&mut self) -> &mut crate::v5_0::common::DurationType;
+	fn get_start_time(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_start_time_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
+	fn get_dwell_duration(&self) -> &chrono::TimeDelta;
+	fn get_dwell_duration_mut(&mut self) -> &mut chrono::TimeDelta;
 	fn has_dwells(&self) -> bool;
 	fn get_dwells(&self) -> Option<&u32>;
 	fn get_dwells_mut(&mut self) -> Option<&mut u32>;
 	fn has_repetition_interval(&self) -> bool;
-	fn get_repetition_interval(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_repetition_interval_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_repetition_interval(&self) -> Option<&chrono::TimeDelta>;
+	fn get_repetition_interval_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_pulse_width(&self) -> bool;
-	fn get_pulse_width(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_pulse_width_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_pulse_width(&self) -> Option<&chrono::TimeDelta>;
+	fn get_pulse_width_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_pri(&self) -> bool;
-	fn get_pri(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_pri_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_pri(&self) -> Option<&chrono::TimeDelta>;
+	fn get_pri_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_signal_bandwidth(&self) -> bool;
 	fn get_signal_bandwidth(&self) -> Option<&crate::v5_0::types::FrequencyRangeType>;
 	fn get_signal_bandwidth_mut(&mut self) -> Option<&mut crate::v5_0::types::FrequencyRangeType>;
@@ -44130,11 +44130,11 @@ pub trait PulseType:
 	fn get_relative_amplitude(&self) -> Option<&crate::v5_0::common::DecibelType>;
 	fn get_relative_amplitude_mut(&mut self) -> Option<&mut crate::v5_0::common::DecibelType>;
 	fn has_pulse_width(&self) -> bool;
-	fn get_pulse_width(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_pulse_width_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_pulse_width(&self) -> Option<&chrono::TimeDelta>;
+	fn get_pulse_width_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_pulse_width_deviation(&self) -> bool;
-	fn get_pulse_width_deviation(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_pulse_width_deviation_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_pulse_width_deviation(&self) -> Option<&chrono::TimeDelta>;
+	fn get_pulse_width_deviation_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_pulse_width_chopped(&self) -> bool;
 	fn get_pulse_width_chopped(&self) -> Option<&bool>;
 	fn get_pulse_width_chopped_mut(&mut self) -> Option<&mut bool>;
@@ -44451,8 +44451,8 @@ pub trait RaceTrackOrbitType:
 	+ serde::Serialize
 {
 	fn has_duration(&self) -> bool;
-	fn get_duration(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_duration_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_duration(&self) -> Option<&chrono::TimeDelta>;
+	fn get_duration_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn get_start_longitude(&self) -> &crate::v5_0::common::AngleType;
 	fn get_start_longitude_mut(&mut self) -> &mut crate::v5_0::common::AngleType;
 	fn get_end_longitude(&self) -> &crate::v5_0::common::AngleType;
@@ -44544,14 +44544,14 @@ pub trait RadarAltimeterActivityMetricsType:
 	fn get_attempts(&self) -> Option<&u32>;
 	fn get_attempts_mut(&mut self) -> Option<&mut u32>;
 	fn has_actual_revisit_period(&self) -> bool;
-	fn get_actual_revisit_period(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_actual_revisit_period_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_actual_revisit_period(&self) -> Option<&chrono::TimeDelta>;
+	fn get_actual_revisit_period_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_actual_start_time(&self) -> bool;
-	fn get_actual_start_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_actual_start_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_actual_start_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_actual_start_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_actual_stop_time(&self) -> bool;
-	fn get_actual_stop_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_actual_stop_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_actual_stop_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_actual_stop_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn get_concurrent_activity(&self) -> &Vec<crate::v5_0::types::ConcurrentCollectionDetailsType>;
 	fn get_concurrent_activity_mut(&mut self) -> &mut Vec<crate::v5_0::types::ConcurrentCollectionDetailsType>;
 	fn has_percent_radar_timeline(&self) -> bool;
@@ -44566,14 +44566,14 @@ pub trait RadarAltimeterActivityMetricsType:
 	fn get_estimated_performance(&self) -> &Vec<crate::v5_0::types::RadarAltimeterActivityEstimatedPerformanceType>;
 	fn get_estimated_performance_mut(&mut self) -> &mut Vec<crate::v5_0::types::RadarAltimeterActivityEstimatedPerformanceType>;
 	fn has_time_to_service(&self) -> bool;
-	fn get_time_to_service(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_time_to_service_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_time_to_service(&self) -> Option<&chrono::TimeDelta>;
+	fn get_time_to_service_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_last_time_to_service(&self) -> bool;
-	fn get_last_time_to_service(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_last_time_to_service_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_last_time_to_service(&self) -> Option<&chrono::TimeDelta>;
+	fn get_last_time_to_service_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_average_time_to_service(&self) -> bool;
-	fn get_average_time_to_service(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_average_time_to_service_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_average_time_to_service(&self) -> Option<&chrono::TimeDelta>;
+	fn get_average_time_to_service_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait RadarAltimeterActivityMt:
@@ -44600,17 +44600,17 @@ pub trait RadarAltimeterActivityPredictedActivityDetailType:
 	fn get_activity_reason(&self) -> Option<&crate::v5_0::types::CannotComplyType>;
 	fn get_activity_reason_mut(&mut self) -> Option<&mut crate::v5_0::types::CannotComplyType>;
 	fn has_estimated_revisit_period(&self) -> bool;
-	fn get_estimated_revisit_period(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_estimated_revisit_period_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_estimated_revisit_period(&self) -> Option<&chrono::TimeDelta>;
+	fn get_estimated_revisit_period_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_estimated_percentage_in_fov(&self) -> bool;
 	fn get_estimated_percentage_in_fov(&self) -> Option<&crate::v5_0::common::PercentType>;
 	fn get_estimated_percentage_in_fov_mut(&mut self) -> Option<&mut crate::v5_0::common::PercentType>;
 	fn has_estimated_start_time(&self) -> bool;
-	fn get_estimated_start_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_estimated_start_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_estimated_start_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_estimated_start_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_estimated_stop_time(&self) -> bool;
-	fn get_estimated_stop_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_estimated_stop_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_estimated_stop_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_estimated_stop_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_estimated_erp(&self) -> bool;
 	fn get_estimated_erp(&self) -> Option<&crate::v5_0::common::DecibelType>;
 	fn get_estimated_erp_mut(&mut self) -> Option<&mut crate::v5_0::common::DecibelType>;
@@ -44914,16 +44914,16 @@ pub trait RadarAltimeterReportMeasurementType:
 	+ PartialEq
 	+ serde::Serialize
 {
-	fn get_timestamp(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_timestamp_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_timestamp(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_timestamp_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_height(&self) -> &crate::v5_0::common::DistanceType;
 	fn get_height_mut(&mut self) -> &mut crate::v5_0::common::DistanceType;
 	fn has_vertical_closing_velocity(&self) -> bool;
 	fn get_vertical_closing_velocity(&self) -> Option<&crate::v5_0::common::SpeedType>;
 	fn get_vertical_closing_velocity_mut(&mut self) -> Option<&mut crate::v5_0::common::SpeedType>;
 	fn has_expected_time_to_next_measurement(&self) -> bool;
-	fn get_expected_time_to_next_measurement(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_expected_time_to_next_measurement_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_expected_time_to_next_measurement(&self) -> Option<&chrono::TimeDelta>;
+	fn get_expected_time_to_next_measurement_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_characteristics(&self) -> bool;
 	fn get_characteristics(&self) -> Option<&crate::v5_0::types::RadarAltimeterReportCharacteristicsType>;
 	fn get_characteristics_mut(&mut self) -> Option<&mut crate::v5_0::types::RadarAltimeterReportCharacteristicsType>;
@@ -44974,8 +44974,8 @@ pub trait RadarAltimeterReportUncertaintyType:
 	fn get_vertical_closing_velocity_uncertainty(&self) -> Option<&crate::v5_0::common::SpeedType>;
 	fn get_vertical_closing_velocity_uncertainty_mut(&mut self) -> Option<&mut crate::v5_0::common::SpeedType>;
 	fn has_uncertainty_time_window(&self) -> bool;
-	fn get_uncertainty_time_window(&self) -> Option<&crate::v5_0::common::TimeType>;
-	fn get_uncertainty_time_window_mut(&mut self) -> Option<&mut crate::v5_0::common::TimeType>;
+	fn get_uncertainty_time_window(&self) -> Option<&chrono::NaiveTime>;
+	fn get_uncertainty_time_window_mut(&mut self) -> Option<&mut chrono::NaiveTime>;
 	fn has_uncertainty_calculation(&self) -> bool;
 	fn get_uncertainty_calculation(&self) -> Option<&crate::v5_0::enums::UncertaintyEnum>;
 	fn get_uncertainty_calculation_mut(&mut self) -> Option<&mut crate::v5_0::enums::UncertaintyEnum>;
@@ -45195,8 +45195,8 @@ pub trait RcsParamsType:
 	fn get_amplitude_resolution(&self) -> Option<&crate::v5_0::common::DecibelType>;
 	fn get_amplitude_resolution_mut(&mut self) -> Option<&mut crate::v5_0::common::DecibelType>;
 	fn has_product_resolution_time(&self) -> bool;
-	fn get_product_resolution_time(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_product_resolution_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_product_resolution_time(&self) -> Option<&chrono::TimeDelta>;
+	fn get_product_resolution_time_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait RdmaInitializeIdType:
@@ -46224,8 +46224,8 @@ pub trait RepetitionContinuousType:
 	+ serde::Serialize
 {
 	fn has_maximum_interrupt_duration(&self) -> bool;
-	fn get_maximum_interrupt_duration(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_maximum_interrupt_duration_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_maximum_interrupt_duration(&self) -> Option<&chrono::TimeDelta>;
+	fn get_maximum_interrupt_duration_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait RepetitionEventBasedType:
@@ -46260,8 +46260,8 @@ pub trait RepetitionFiniteType:
 	fn get_repetition_attempts(&self) -> &u32;
 	fn get_repetition_attempts_mut(&mut self) -> &mut u32;
 	fn has_repetition_interval(&self) -> bool;
-	fn get_repetition_interval(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_repetition_interval_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_repetition_interval(&self) -> Option<&chrono::TimeDelta>;
+	fn get_repetition_interval_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait RepetitionPeriodicType:
@@ -46271,8 +46271,8 @@ pub trait RepetitionPeriodicType:
 	+ PartialEq
 	+ serde::Serialize
 {
-	fn get_repetition_interval(&self) -> &crate::v5_0::common::DurationType;
-	fn get_repetition_interval_mut(&mut self) -> &mut crate::v5_0::common::DurationType;
+	fn get_repetition_interval(&self) -> &chrono::TimeDelta;
+	fn get_repetition_interval_mut(&mut self) -> &mut chrono::TimeDelta;
 }
 
 pub trait ReplanReasonType:
@@ -46452,10 +46452,10 @@ pub trait RequirementAllocationWindowType:
 {
 	fn get_window_id(&self) -> &crate::v5_0::types::RequirementAllocationWindowIdType;
 	fn get_window_id_mut(&mut self) -> &mut crate::v5_0::types::RequirementAllocationWindowIdType;
-	fn get_begin(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_begin_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
-	fn get_end(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_end_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_begin(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_begin_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
+	fn get_end(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_end_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn has_duration(&self) -> bool;
 	fn get_duration(&self) -> Option<&crate::v5_0::types::DurationRangeType>;
 	fn get_duration_mut(&mut self) -> Option<&mut crate::v5_0::types::DurationRangeType>;
@@ -46522,11 +46522,11 @@ pub trait RequirementDependencyBaseType:
 	fn get_dependency_extent(&self) -> &crate::v5_0::enums::OpConstraintTypeEnum;
 	fn get_dependency_extent_mut(&mut self) -> &mut crate::v5_0::enums::OpConstraintTypeEnum;
 	fn has_earliest_time(&self) -> bool;
-	fn get_earliest_time(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_earliest_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_earliest_time(&self) -> Option<&chrono::TimeDelta>;
+	fn get_earliest_time_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_latest_time(&self) -> bool;
-	fn get_latest_time(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_latest_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_latest_time(&self) -> Option<&chrono::TimeDelta>;
+	fn get_latest_time_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait RequirementDependencyType:
@@ -47172,8 +47172,8 @@ pub trait RequirementTemplateOptionsType:
 	fn get_collection_objective(&self) -> &Vec<crate::v5_0::enums::CollectionObjectiveEnum>;
 	fn get_collection_objective_mut(&mut self) -> &mut Vec<crate::v5_0::enums::CollectionObjectiveEnum>;
 	fn has_product_staleness(&self) -> bool;
-	fn get_product_staleness(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_product_staleness_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_product_staleness(&self) -> Option<&chrono::TimeDelta>;
+	fn get_product_staleness_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait RequirementTimingType:
@@ -47311,8 +47311,8 @@ pub trait ResourceAllocationPeriodDigitalType:
 	fn get_period_percent_access_expected(&self) -> Option<&crate::v5_0::common::PercentType>;
 	fn get_period_percent_access_expected_mut(&mut self) -> Option<&mut crate::v5_0::common::PercentType>;
 	fn has_period_max_access_duration(&self) -> bool;
-	fn get_period_max_access_duration(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_period_max_access_duration_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_period_max_access_duration(&self) -> Option<&chrono::TimeDelta>;
+	fn get_period_max_access_duration_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait ResourceAllocationPeriodRfType:
@@ -47333,8 +47333,8 @@ pub trait ResourceAllocationPeriodRfType:
 	fn get_period_percent_access_expected(&self) -> Option<&crate::v5_0::common::PercentType>;
 	fn get_period_percent_access_expected_mut(&mut self) -> Option<&mut crate::v5_0::common::PercentType>;
 	fn has_period_max_access_duration(&self) -> bool;
-	fn get_period_max_access_duration(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_period_max_access_duration_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_period_max_access_duration(&self) -> Option<&chrono::TimeDelta>;
+	fn get_period_max_access_duration_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait ResourceAllocatorAllocationType:
@@ -47551,17 +47551,17 @@ pub trait ResourceRequestPeriodType:
 	fn get_period_ranking(&self) -> &crate::v5_0::types::ComparableRankingType;
 	fn get_period_ranking_mut(&mut self) -> &mut crate::v5_0::types::ComparableRankingType;
 	fn has_typical_access_period_duration(&self) -> bool;
-	fn get_typical_access_period_duration(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_typical_access_period_duration_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_typical_access_period_duration(&self) -> Option<&chrono::TimeDelta>;
+	fn get_typical_access_period_duration_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_max_access_width_requested(&self) -> bool;
-	fn get_max_access_width_requested(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_max_access_width_requested_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_max_access_width_requested(&self) -> Option<&chrono::TimeDelta>;
+	fn get_max_access_width_requested_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_typical_access_request_to_release_duration(&self) -> bool;
-	fn get_typical_access_request_to_release_duration(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_typical_access_request_to_release_duration_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_typical_access_request_to_release_duration(&self) -> Option<&chrono::TimeDelta>;
+	fn get_typical_access_request_to_release_duration_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_typical_access_release_to_request_duration(&self) -> bool;
-	fn get_typical_access_release_to_request_duration(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_typical_access_release_to_request_duration_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_typical_access_release_to_request_duration(&self) -> Option<&chrono::TimeDelta>;
+	fn get_typical_access_release_to_request_duration_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn get_percent_access_during_the_period(&self) -> &crate::v5_0::types::PercentRangeType;
 	fn get_percent_access_during_the_period_mut(&mut self) -> &mut crate::v5_0::types::PercentRangeType;
 }
@@ -47646,8 +47646,8 @@ pub trait ResponseActivityMt:
 pub trait ResponseActivityType:
 	ActivityBaseType
 {
-	fn get_instantiation_time(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_instantiation_time_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_instantiation_time(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_instantiation_time_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn has_option_index(&self) -> bool;
 	fn get_option_index(&self) -> Option<&u32>;
 	fn get_option_index_mut(&mut self) -> Option<&mut u32>;
@@ -48403,8 +48403,8 @@ pub trait RfOperationType:
 	fn get_pri(&self) -> Option<&crate::v5_0::types::DurationRangeType>;
 	fn get_pri_mut(&mut self) -> Option<&mut crate::v5_0::types::DurationRangeType>;
 	fn has_pulse_width_max(&self) -> bool;
-	fn get_pulse_width_max(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_pulse_width_max_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_pulse_width_max(&self) -> Option<&chrono::TimeDelta>;
+	fn get_pulse_width_max_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn get_time(&self) -> &crate::v5_0::types::DateTimeRangeBeginType;
 	fn get_time_mut(&mut self) -> &mut crate::v5_0::types::DateTimeRangeBeginType;
 	fn has_duty_cycle(&self) -> bool;
@@ -48477,8 +48477,8 @@ pub trait RfProfileType:
 	fn get_timed_zone(&self) -> Option<&crate::v5_0::types::TimedZoneType>;
 	fn get_timed_zone_mut(&mut self) -> Option<&mut crate::v5_0::types::TimedZoneType>;
 	fn has_expires(&self) -> bool;
-	fn get_expires(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_expires_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_expires(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_expires_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait RfRadiusToFixType:
@@ -48836,8 +48836,8 @@ pub trait RightAscensionDeclinationPointType:
 	+ PartialEq
 	+ serde::Serialize
 {
-	fn get_time(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_time_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_time(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_time_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_right_ascension(&self) -> &crate::v5_0::common::AnglePositiveType;
 	fn get_right_ascension_mut(&mut self) -> &mut crate::v5_0::common::AnglePositiveType;
 	fn get_declination(&self) -> &crate::v5_0::common::AngleType;
@@ -50092,10 +50092,10 @@ pub trait RouteVulnerabilityType:
 	+ PartialEq
 	+ serde::Serialize
 {
-	fn get_composite_exposure_time(&self) -> &crate::v5_0::common::DurationType;
-	fn get_composite_exposure_time_mut(&mut self) -> &mut crate::v5_0::common::DurationType;
-	fn get_cumulative_exposure_time(&self) -> &crate::v5_0::common::DurationType;
-	fn get_cumulative_exposure_time_mut(&mut self) -> &mut crate::v5_0::common::DurationType;
+	fn get_composite_exposure_time(&self) -> &chrono::TimeDelta;
+	fn get_composite_exposure_time_mut(&mut self) -> &mut chrono::TimeDelta;
+	fn get_cumulative_exposure_time(&self) -> &chrono::TimeDelta;
+	fn get_cumulative_exposure_time_mut(&mut self) -> &mut chrono::TimeDelta;
 	fn get_threat_exposure(&self) -> &Vec<crate::v5_0::types::ThreatExposureType>;
 	fn get_threat_exposure_mut(&mut self) -> &mut Vec<crate::v5_0::types::ThreatExposureType>;
 }
@@ -50158,8 +50158,8 @@ pub trait RtnKinematicsType:
 	+ PartialEq
 	+ serde::Serialize
 {
-	fn get_epoch(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_epoch_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_epoch(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_epoch_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_position(&self) -> &crate::v5_0::types::RtnPositionType;
 	fn get_position_mut(&mut self) -> &mut crate::v5_0::types::RtnPositionType;
 	fn get_velocity(&self) -> &crate::v5_0::types::RtnVelocityType;
@@ -50448,11 +50448,11 @@ pub trait SarActivityStatusDetailType:
 	fn get_percentage_in_for(&self) -> Option<&crate::v5_0::common::PercentType>;
 	fn get_percentage_in_for_mut(&mut self) -> Option<&mut crate::v5_0::common::PercentType>;
 	fn has_actual_start_time(&self) -> bool;
-	fn get_actual_start_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_actual_start_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_actual_start_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_actual_start_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_actual_stop_time(&self) -> bool;
-	fn get_actual_stop_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_actual_stop_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_actual_stop_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_actual_stop_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_percent_coverage(&self) -> bool;
 	fn get_percent_coverage(&self) -> Option<&crate::v5_0::common::PercentType>;
 	fn get_percent_coverage_mut(&mut self) -> Option<&mut crate::v5_0::common::PercentType>;
@@ -50480,8 +50480,8 @@ pub trait SarActivityStatusDetailType:
 	fn get_percent_occluded(&self) -> Option<&crate::v5_0::common::PercentType>;
 	fn get_percent_occluded_mut(&mut self) -> Option<&mut crate::v5_0::common::PercentType>;
 	fn has_time_to_service(&self) -> bool;
-	fn get_time_to_service(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_time_to_service_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_time_to_service(&self) -> Option<&chrono::TimeDelta>;
+	fn get_time_to_service_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_percent_radar_timeline(&self) -> bool;
 	fn get_percent_radar_timeline(&self) -> Option<&crate::v5_0::common::PercentType>;
 	fn get_percent_radar_timeline_mut(&mut self) -> Option<&mut crate::v5_0::common::PercentType>;
@@ -50711,8 +50711,8 @@ pub trait SarCollectionConstraintsType:
 	fn get_altitude_constraints(&self) -> Option<&crate::v5_0::types::AltitudeRangeType>;
 	fn get_altitude_constraints_mut(&mut self) -> Option<&mut crate::v5_0::types::AltitudeRangeType>;
 	fn has_maximum_mapping_time(&self) -> bool;
-	fn get_maximum_mapping_time(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_maximum_mapping_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_maximum_mapping_time(&self) -> Option<&chrono::TimeDelta>;
+	fn get_maximum_mapping_time_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_az_subset_fraction(&self) -> bool;
 	fn get_az_subset_fraction(&self) -> Option<&crate::v5_0::common::AngleType>;
 	fn get_az_subset_fraction_mut(&mut self) -> Option<&mut crate::v5_0::common::AngleType>;
@@ -50845,11 +50845,11 @@ pub trait SarPredictedActivityDetailType:
 	fn get_activity_reason(&self) -> Option<&crate::v5_0::types::CannotComplyType>;
 	fn get_activity_reason_mut(&mut self) -> Option<&mut crate::v5_0::types::CannotComplyType>;
 	fn has_estimated_start_time(&self) -> bool;
-	fn get_estimated_start_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_estimated_start_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_estimated_start_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_estimated_start_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_estimated_stop_time(&self) -> bool;
-	fn get_estimated_stop_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_estimated_stop_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_estimated_stop_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_estimated_stop_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_estimated_erp(&self) -> bool;
 	fn get_estimated_erp(&self) -> Option<&crate::v5_0::common::DecibelType>;
 	fn get_estimated_erp_mut(&mut self) -> Option<&mut crate::v5_0::common::DecibelType>;
@@ -51295,21 +51295,21 @@ pub trait ScanDataBaseType:
 	fn get_scan_type(&self) -> &Vec<crate::v5_0::enums::ScanTypeEnum>;
 	fn get_scan_type_mut(&mut self) -> &mut Vec<crate::v5_0::enums::ScanTypeEnum>;
 	fn has_scan_period_min(&self) -> bool;
-	fn get_scan_period_min(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_scan_period_min_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_scan_period_min(&self) -> Option<&chrono::TimeDelta>;
+	fn get_scan_period_min_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_scan_period_max(&self) -> bool;
-	fn get_scan_period_max(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_scan_period_max_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_scan_period_max(&self) -> Option<&chrono::TimeDelta>;
+	fn get_scan_period_max_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_illumination_time(&self) -> bool;
-	fn get_illumination_time(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_illumination_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_illumination_time(&self) -> Option<&chrono::TimeDelta>;
+	fn get_illumination_time_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait ScanDataType:
 	ScanDataBaseType
 {
-	fn get_scan_timestamp(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_scan_timestamp_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_scan_timestamp(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_scan_timestamp_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_scan_measurement_status(&self) -> &crate::v5_0::enums::MeasurementStatusEnum;
 	fn get_scan_measurement_status_mut(&mut self) -> &mut crate::v5_0::enums::MeasurementStatusEnum;
 	fn has_scan_plane(&self) -> bool;
@@ -51324,8 +51324,8 @@ pub trait ScanDataType:
 	fn has_scan_mechanics(&self) -> bool;
 	fn get_scan_mechanics(&self) -> Option<&crate::v5_0::enums::ScanMechanicsEnum>;
 	fn get_scan_mechanics_mut(&mut self) -> Option<&mut crate::v5_0::enums::ScanMechanicsEnum>;
-	fn get_scan_period(&self) -> &Vec<crate::v5_0::common::DurationType>;
-	fn get_scan_period_mut(&mut self) -> &mut Vec<crate::v5_0::common::DurationType>;
+	fn get_scan_period(&self) -> &Vec<chrono::TimeDelta>;
+	fn get_scan_period_mut(&mut self) -> &mut Vec<chrono::TimeDelta>;
 	fn has_ook_present(&self) -> bool;
 	fn get_ook_present(&self) -> Option<&bool>;
 	fn get_ook_present_mut(&mut self) -> Option<&mut bool>;
@@ -51379,23 +51379,23 @@ pub trait SearchTrackActivityDetailsType:
 	fn get_number_of_times_searched(&self) -> Option<&u32>;
 	fn get_number_of_times_searched_mut(&mut self) -> Option<&mut u32>;
 	fn has_time_last_searched(&self) -> bool;
-	fn get_time_last_searched(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_time_last_searched_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_time_last_searched(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_time_last_searched_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_attempts(&self) -> bool;
 	fn get_attempts(&self) -> Option<&u32>;
 	fn get_attempts_mut(&mut self) -> Option<&mut u32>;
 	fn has_actual_revisit_period(&self) -> bool;
-	fn get_actual_revisit_period(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_actual_revisit_period_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_actual_revisit_period(&self) -> Option<&chrono::TimeDelta>;
+	fn get_actual_revisit_period_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_percentage_in_for(&self) -> bool;
 	fn get_percentage_in_for(&self) -> Option<&crate::v5_0::common::PercentType>;
 	fn get_percentage_in_for_mut(&mut self) -> Option<&mut crate::v5_0::common::PercentType>;
 	fn has_actual_start_time(&self) -> bool;
-	fn get_actual_start_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_actual_start_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_actual_start_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_actual_start_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_actual_stop_time(&self) -> bool;
-	fn get_actual_stop_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_actual_stop_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_actual_stop_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_actual_stop_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_percent_searched(&self) -> bool;
 	fn get_percent_searched(&self) -> Option<&crate::v5_0::common::PercentType>;
 	fn get_percent_searched_mut(&mut self) -> Option<&mut crate::v5_0::common::PercentType>;
@@ -51504,8 +51504,8 @@ pub trait SecurityAuditRecordMdt:
 {
 	fn get_security_audit_record_id(&self) -> &crate::v5_0::types::SecurityAuditRecordIdType;
 	fn get_security_audit_record_id_mut(&mut self) -> &mut crate::v5_0::types::SecurityAuditRecordIdType;
-	fn get_event_timestamp(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_event_timestamp_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_event_timestamp(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_event_timestamp_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_service_id(&self) -> &crate::v5_0::types::ServiceIdType;
 	fn get_service_id_mut(&mut self) -> &mut crate::v5_0::types::ServiceIdType;
 	fn has_subsystem_id(&self) -> bool;
@@ -51617,8 +51617,8 @@ pub trait SecurityInformationType:
 	fn get_derived_from(&self) -> Option<&crate::v5_0::common::WhitespaceVisibleString1024Type>;
 	fn get_derived_from_mut(&mut self) -> Option<&mut crate::v5_0::common::WhitespaceVisibleString1024Type>;
 	fn has_declass_date(&self) -> bool;
-	fn get_declass_date(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
-	fn get_declass_date_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
+	fn get_declass_date(&self) -> Option<&i64>;
+	fn get_declass_date_mut(&mut self) -> Option<&mut i64>;
 	fn has_declass_event(&self) -> bool;
 	fn get_declass_event(&self) -> Option<&crate::v5_0::common::WhitespaceVisibleString1024Type>;
 	fn get_declass_event_mut(&mut self) -> Option<&mut crate::v5_0::common::WhitespaceVisibleString1024Type>;
@@ -51729,8 +51729,8 @@ pub trait SegmentCaptureType:
 pub trait SegmentCompletedType:
 	SegmentEstimateType
 {
-	fn get_actual_capture_time(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_actual_capture_time_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_actual_capture_time(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_actual_capture_time_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 }
 
 pub trait SegmentConflictsType:
@@ -51765,8 +51765,8 @@ pub trait SegmentEstimateType:
 	fn get_segment_id(&self) -> &crate::v5_0::types::SegmentIdType;
 	fn get_segment_id_mut(&mut self) -> &mut crate::v5_0::types::SegmentIdType;
 	fn has_estimated_capture_time(&self) -> bool;
-	fn get_estimated_capture_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_estimated_capture_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_estimated_capture_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_estimated_capture_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_estimated_capture_distance(&self) -> bool;
 	fn get_estimated_capture_distance(&self) -> Option<&crate::v5_0::common::DistanceType>;
 	fn get_estimated_capture_distance_mut(&mut self) -> Option<&mut crate::v5_0::common::DistanceType>;
@@ -51839,8 +51839,8 @@ pub trait SegmentRelativeVelocity2DType:
 	fn get_down_speed(&self) -> Option<&crate::v5_0::common::SpeedType>;
 	fn get_down_speed_mut(&mut self) -> Option<&mut crate::v5_0::common::SpeedType>;
 	fn has_timestamp(&self) -> bool;
-	fn get_timestamp(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_timestamp_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_timestamp(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_timestamp_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait SelectAntennaType:
@@ -51995,8 +51995,8 @@ pub trait SensorKinematicsOrbitalType:
 	+ PartialEq
 	+ serde::Serialize
 {
-	fn get_timestamp(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_timestamp_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_timestamp(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_timestamp_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_sensor_kinematics(&self) -> &crate::v5_0::choices::OrbitalKinematicsFrameChoiceType;
 	fn get_sensor_kinematics_mut(&mut self) -> &mut crate::v5_0::choices::OrbitalKinematicsFrameChoiceType;
 	fn has_sensor_relative_attitude(&self) -> bool;
@@ -52382,8 +52382,8 @@ pub trait ServiceStatusMdt:
 {
 	fn get_service_id(&self) -> &crate::v5_0::types::ServiceIdType;
 	fn get_service_id_mut(&mut self) -> &mut crate::v5_0::types::ServiceIdType;
-	fn get_time_up(&self) -> &crate::v5_0::common::DurationType;
-	fn get_time_up_mut(&mut self) -> &mut crate::v5_0::common::DurationType;
+	fn get_time_up(&self) -> &chrono::TimeDelta;
+	fn get_time_up_mut(&mut self) -> &mut chrono::TimeDelta;
 	fn get_service_state(&self) -> &crate::v5_0::enums::ServiceStateEnum;
 	fn get_service_state_mut(&mut self) -> &mut crate::v5_0::enums::ServiceStateEnum;
 	fn has_status_detail(&self) -> bool;
@@ -52599,8 +52599,8 @@ pub trait SignalNavDataType:
 	+ PartialEq
 	+ serde::Serialize
 {
-	fn get_timestamp(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_timestamp_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_timestamp(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_timestamp_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_platform_kinematics(&self) -> &crate::v5_0::types::KinematicsFixedType;
 	fn get_platform_kinematics_mut(&mut self) -> &mut crate::v5_0::types::KinematicsFixedType;
 	fn get_sensor_kinematics(&self) -> &Vec<crate::v5_0::types::SensorKinematicsType>;
@@ -52640,11 +52640,11 @@ pub trait SignalParametricsType:
 	fn get_pulse_repetition_frequency_calculated(&self) -> Option<&bool>;
 	fn get_pulse_repetition_frequency_calculated_mut(&mut self) -> Option<&mut bool>;
 	fn has_pulse_deviation(&self) -> bool;
-	fn get_pulse_deviation(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_pulse_deviation_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_pulse_deviation(&self) -> Option<&chrono::TimeDelta>;
+	fn get_pulse_deviation_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_burst_deviation(&self) -> bool;
-	fn get_burst_deviation(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_burst_deviation_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_burst_deviation(&self) -> Option<&chrono::TimeDelta>;
+	fn get_burst_deviation_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_illumination_rate(&self) -> bool;
 	fn get_illumination_rate(&self) -> Option<&crate::v5_0::common::FrequencyType>;
 	fn get_illumination_rate_mut(&mut self) -> Option<&mut crate::v5_0::common::FrequencyType>;
@@ -52682,8 +52682,8 @@ pub trait SignalParametricsType:
 	fn get_pilot_frequency_average_report_count(&self) -> Option<&u32>;
 	fn get_pilot_frequency_average_report_count_mut(&mut self) -> Option<&mut u32>;
 	fn has_average_basebanded_pulse_repetition_interval(&self) -> bool;
-	fn get_average_basebanded_pulse_repetition_interval(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_average_basebanded_pulse_repetition_interval_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_average_basebanded_pulse_repetition_interval(&self) -> Option<&chrono::TimeDelta>;
+	fn get_average_basebanded_pulse_repetition_interval_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_average_basebanded_pulse_repetition_interval_report_count(&self) -> bool;
 	fn get_average_basebanded_pulse_repetition_interval_report_count(&self) -> Option<&u16>;
 	fn get_average_basebanded_pulse_repetition_interval_report_count_mut(&mut self) -> Option<&mut u16>;
@@ -52703,20 +52703,20 @@ pub trait SignalPulseWidthBaseType:
 	+ serde::Serialize
 {
 	fn has_pulse_width_average(&self) -> bool;
-	fn get_pulse_width_average(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_pulse_width_average_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_pulse_width_average(&self) -> Option<&chrono::TimeDelta>;
+	fn get_pulse_width_average_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_pulse_width_min(&self) -> bool;
-	fn get_pulse_width_min(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_pulse_width_min_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_pulse_width_min(&self) -> Option<&chrono::TimeDelta>;
+	fn get_pulse_width_min_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_pulse_width_max(&self) -> bool;
-	fn get_pulse_width_max(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_pulse_width_max_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_pulse_width_max(&self) -> Option<&chrono::TimeDelta>;
+	fn get_pulse_width_max_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_pulse_width_last(&self) -> bool;
-	fn get_pulse_width_last(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_pulse_width_last_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_pulse_width_last(&self) -> Option<&chrono::TimeDelta>;
+	fn get_pulse_width_last_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_pulse_width_deviation(&self) -> bool;
-	fn get_pulse_width_deviation(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_pulse_width_deviation_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_pulse_width_deviation(&self) -> Option<&chrono::TimeDelta>;
+	fn get_pulse_width_deviation_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait SignalPulseWidthType:
@@ -52860,23 +52860,23 @@ pub trait SignalSummaryType:
 	fn get_pri_type(&self) -> Option<&crate::v5_0::enums::PriTypeEnum>;
 	fn get_pri_type_mut(&mut self) -> Option<&mut crate::v5_0::enums::PriTypeEnum>;
 	fn has_pri_average(&self) -> bool;
-	fn get_pri_average(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_pri_average_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_pri_average(&self) -> Option<&chrono::TimeDelta>;
+	fn get_pri_average_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_pri_min(&self) -> bool;
-	fn get_pri_min(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_pri_min_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_pri_min(&self) -> Option<&chrono::TimeDelta>;
+	fn get_pri_min_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_pri_max(&self) -> bool;
-	fn get_pri_max(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_pri_max_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_pri_max(&self) -> Option<&chrono::TimeDelta>;
+	fn get_pri_max_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_pulse_width_average(&self) -> bool;
-	fn get_pulse_width_average(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_pulse_width_average_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_pulse_width_average(&self) -> Option<&chrono::TimeDelta>;
+	fn get_pulse_width_average_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_pulse_width_min(&self) -> bool;
-	fn get_pulse_width_min(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_pulse_width_min_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_pulse_width_min(&self) -> Option<&chrono::TimeDelta>;
+	fn get_pulse_width_min_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_pulse_width_max(&self) -> bool;
-	fn get_pulse_width_max(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_pulse_width_max_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_pulse_width_max(&self) -> Option<&chrono::TimeDelta>;
+	fn get_pulse_width_max_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_signal_bandwidth(&self) -> bool;
 	fn get_signal_bandwidth(&self) -> Option<&crate::v5_0::types::FrequencyRangeType>;
 	fn get_signal_bandwidth_mut(&mut self) -> Option<&mut crate::v5_0::types::FrequencyRangeType>;
@@ -52925,11 +52925,11 @@ pub trait SignalType:
 	fn get_associated_pulse_data_id(&self) -> &Vec<crate::v5_0::types::PulseDataIdType>;
 	fn get_associated_pulse_data_id_mut(&mut self) -> &mut Vec<crate::v5_0::types::PulseDataIdType>;
 	fn has_initial_detection_timestamp(&self) -> bool;
-	fn get_initial_detection_timestamp(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_initial_detection_timestamp_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_initial_detection_timestamp(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_initial_detection_timestamp_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_latest_detection_timestamp(&self) -> bool;
-	fn get_latest_detection_timestamp(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_latest_detection_timestamp_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_latest_detection_timestamp(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_latest_detection_timestamp_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_timestamp_quality(&self) -> bool;
 	fn get_timestamp_quality(&self) -> Option<&crate::v5_0::enums::MeasurementQualityEnum>;
 	fn get_timestamp_quality_mut(&mut self) -> Option<&mut crate::v5_0::enums::MeasurementQualityEnum>;
@@ -53735,8 +53735,8 @@ pub trait SobCorrelationRecordType:
 	fn get_sob_correlation_record_id_mut(&mut self) -> &mut crate::v5_0::types::SobCorrelationRecordIdType;
 	fn get_correlation_type(&self) -> &crate::v5_0::enums::SobCorrelationTypeEnum;
 	fn get_correlation_type_mut(&mut self) -> &mut crate::v5_0::enums::SobCorrelationTypeEnum;
-	fn get_correlation_timestamp(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_correlation_timestamp_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_correlation_timestamp(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_correlation_timestamp_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn has_correlated_to(&self) -> bool;
 	fn get_correlated_to(&self) -> Option<&crate::v5_0::types::SobCorrelatedToType>;
 	fn get_correlated_to_mut(&mut self) -> Option<&mut crate::v5_0::types::SobCorrelatedToType>;
@@ -53837,8 +53837,8 @@ pub trait SobSatelliteRecordBaseType:
 	fn get_timestamps(&self) -> Option<&crate::v5_0::types::OrderOfBattleTimestampsType>;
 	fn get_timestamps_mut(&mut self) -> Option<&mut crate::v5_0::types::OrderOfBattleTimestampsType>;
 	fn has_decay_date(&self) -> bool;
-	fn get_decay_date(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_decay_date_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_decay_date(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_decay_date_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_related_launch_observation_id(&self) -> bool;
 	fn get_related_launch_observation_id(&self) -> Option<&crate::v5_0::types::LaunchObservationIdType>;
 	fn get_related_launch_observation_id_mut(&mut self) -> Option<&mut crate::v5_0::types::LaunchObservationIdType>;
@@ -53958,10 +53958,10 @@ pub trait SolarWeatherRecordType:
 {
 	fn get_f107_index(&self) -> &crate::v5_0::common::SolarFluxF107IndexType;
 	fn get_f107_index_mut(&mut self) -> &mut crate::v5_0::common::SolarFluxF107IndexType;
-	fn get_time_computed(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_time_computed_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
-	fn get_time_valid(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_time_valid_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_time_computed(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_time_computed_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
+	fn get_time_valid(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_time_valid_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 }
 
 pub trait SolarWindRecordType:
@@ -53971,8 +53971,8 @@ pub trait SolarWindRecordType:
 	+ PartialEq
 	+ serde::Serialize
 {
-	fn get_observation_time(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_observation_time_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_observation_time(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_observation_time_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn has_proton_density(&self) -> bool;
 	fn get_proton_density(&self) -> Option<&crate::v5_0::common::ParticleDensityType>;
 	fn get_proton_density_mut(&mut self) -> Option<&mut crate::v5_0::common::ParticleDensityType>;
@@ -54224,8 +54224,8 @@ pub trait SpaceWeatherMdt:
 {
 	fn get_space_weather_id(&self) -> &crate::v5_0::types::SpaceWeatherIdType;
 	fn get_space_weather_id_mut(&mut self) -> &mut crate::v5_0::types::SpaceWeatherIdType;
-	fn get_creation_time(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_creation_time_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_creation_time(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_creation_time_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_epoch(&self) -> &crate::v5_0::types::DateTimeRangeType;
 	fn get_epoch_mut(&mut self) -> &mut crate::v5_0::types::DateTimeRangeType;
 	fn get_weather(&self) -> &crate::v5_0::types::SpaceWeatherRecordType;
@@ -54417,11 +54417,11 @@ pub trait SpectralDensityReportMdt:
 {
 	fn get_spectral_density_report_id(&self) -> &crate::v5_0::types::SpectralDensityReportIdType;
 	fn get_spectral_density_report_id_mut(&mut self) -> &mut crate::v5_0::types::SpectralDensityReportIdType;
-	fn get_start_timestamp(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_start_timestamp_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_start_timestamp(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_start_timestamp_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn has_end_timestamp(&self) -> bool;
-	fn get_end_timestamp(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_end_timestamp_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_end_timestamp(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_end_timestamp_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn get_spectral_band(&self) -> &Vec<crate::v5_0::types::SpectralBandType>;
 	fn get_spectral_band_mut(&mut self) -> &mut Vec<crate::v5_0::types::SpectralBandType>;
 }
@@ -55161,8 +55161,8 @@ pub trait StrikeActivityType:
 	fn get_munition_in_flight(&self) -> Option<&crate::v5_0::types::MunitionInFlightType>;
 	fn get_munition_in_flight_mut(&mut self) -> Option<&mut crate::v5_0::types::MunitionInFlightType>;
 	fn has_time_to_release(&self) -> bool;
-	fn get_time_to_release(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_time_to_release_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_time_to_release(&self) -> Option<&chrono::TimeDelta>;
+	fn get_time_to_release_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait StrikeCapabilityCommandType:
@@ -55527,8 +55527,8 @@ pub trait SubsystemActiveBitType:
 	fn get_bit_id(&self) -> &crate::v5_0::types::BitIdType;
 	fn get_bit_id_mut(&mut self) -> &mut crate::v5_0::types::BitIdType;
 	fn has_estimated_completion_time(&self) -> bool;
-	fn get_estimated_completion_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_estimated_completion_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_estimated_completion_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_estimated_completion_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_estimated_percent_complete(&self) -> bool;
 	fn get_estimated_percent_complete(&self) -> Option<&crate::v5_0::common::PercentType>;
 	fn get_estimated_percent_complete_mut(&mut self) -> Option<&mut crate::v5_0::common::PercentType>;
@@ -55544,8 +55544,8 @@ pub trait SubsystemActiveCalibrationType:
 	fn get_calibration_id(&self) -> &crate::v5_0::types::CalibrationIdType;
 	fn get_calibration_id_mut(&mut self) -> &mut crate::v5_0::types::CalibrationIdType;
 	fn has_estimated_completion_time(&self) -> bool;
-	fn get_estimated_completion_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_estimated_completion_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_estimated_completion_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_estimated_completion_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_estimated_percent_complete(&self) -> bool;
 	fn get_estimated_percent_complete(&self) -> Option<&crate::v5_0::common::PercentType>;
 	fn get_estimated_percent_complete_mut(&mut self) -> Option<&mut crate::v5_0::common::PercentType>;
@@ -55654,8 +55654,8 @@ pub trait SubsystemBitType:
 	fn get_capability_id(&self) -> &Vec<crate::v5_0::types::CapabilityIdType>;
 	fn get_capability_id_mut(&mut self) -> &mut Vec<crate::v5_0::types::CapabilityIdType>;
 	fn has_expected_test_duration(&self) -> bool;
-	fn get_expected_test_duration(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_expected_test_duration_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_expected_test_duration(&self) -> Option<&chrono::TimeDelta>;
+	fn get_expected_test_duration_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait SubsystemCalibrationCommandMdt:
@@ -55801,8 +55801,8 @@ pub trait SubsystemCompletedBitType:
 {
 	fn get_bit_id(&self) -> &crate::v5_0::types::BitIdType;
 	fn get_bit_id_mut(&mut self) -> &mut crate::v5_0::types::BitIdType;
-	fn get_timetag(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_timetag_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_timetag(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_timetag_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_result(&self) -> &crate::v5_0::enums::SubsystemBitResultEnum;
 	fn get_result_mut(&mut self) -> &mut crate::v5_0::enums::SubsystemBitResultEnum;
 	fn has_fail_reason(&self) -> bool;
@@ -55837,8 +55837,8 @@ pub trait SubsystemCompletedCalibrationType:
 {
 	fn get_calibration_id(&self) -> &crate::v5_0::types::CalibrationIdType;
 	fn get_calibration_id_mut(&mut self) -> &mut crate::v5_0::types::CalibrationIdType;
-	fn get_timetag(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_timetag_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_timetag(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_timetag_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_result(&self) -> &crate::v5_0::enums::SubsystemCalibrationResultEnum;
 	fn get_result_mut(&mut self) -> &mut crate::v5_0::enums::SubsystemCalibrationResultEnum;
 	fn has_fail_reason(&self) -> bool;
@@ -56012,8 +56012,8 @@ pub trait SubsystemFaultType:
 	fn get_fault_data(&self) -> &Vec<crate::v5_0::types::FaultDataType>;
 	fn get_fault_data_mut(&mut self) -> &mut Vec<crate::v5_0::types::FaultDataType>;
 	fn has_detection_time(&self) -> bool;
-	fn get_detection_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_detection_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_detection_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_detection_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn get_fault_code(&self) -> &crate::v5_0::common::VisibleString256Type;
 	fn get_fault_code_mut(&mut self) -> &mut crate::v5_0::common::VisibleString256Type;
 	fn has_fault_code_count(&self) -> bool;
@@ -56822,11 +56822,11 @@ pub trait SystemCommunicationsType:
 	fn get_mission_communications_state(&self) -> &crate::v5_0::enums::MissionCommunicationsStateEnum;
 	fn get_mission_communications_state_mut(&mut self) -> &mut crate::v5_0::enums::MissionCommunicationsStateEnum;
 	fn has_comm_timeout(&self) -> bool;
-	fn get_comm_timeout(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_comm_timeout_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_comm_timeout(&self) -> Option<&chrono::TimeDelta>;
+	fn get_comm_timeout_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_pre_planned_comm_return_time(&self) -> bool;
-	fn get_pre_planned_comm_return_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_pre_planned_comm_return_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_pre_planned_comm_return_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_pre_planned_comm_return_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn get_comm_usage(&self) -> &Vec<crate::v5_0::types::CommSystemUsageType>;
 	fn get_comm_usage_mut(&mut self) -> &mut Vec<crate::v5_0::types::CommSystemUsageType>;
 }
@@ -57016,8 +57016,8 @@ pub trait SystemEstimationRequestMdt:
 	fn get_results_in_native_message(&self) -> &bool;
 	fn get_results_in_native_message_mut(&mut self) -> &mut bool;
 	fn has_time_step(&self) -> bool;
-	fn get_time_step(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_time_step_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_time_step(&self) -> Option<&chrono::TimeDelta>;
+	fn get_time_step_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_estimation_start(&self) -> bool;
 	fn get_estimation_start(&self) -> Option<&crate::v5_0::choices::SystemEstimationStartType>;
 	fn get_estimation_start_mut(&mut self) -> Option<&mut crate::v5_0::choices::SystemEstimationStartType>;
@@ -57636,14 +57636,14 @@ pub trait SystemTimeAtReferenceMdt:
 	+ PartialEq
 	+ serde::Serialize
 {
-	fn get_system_time_at_last_reference(&self) -> &chrono::DateTime<chrono::Utc>;
-	fn get_system_time_at_last_reference_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
+	fn get_system_time_at_last_reference(&self) -> &i64;
+	fn get_system_time_at_last_reference_mut(&mut self) -> &mut i64;
 	fn has_current_system_time(&self) -> bool;
-	fn get_current_system_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
-	fn get_current_system_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
+	fn get_current_system_time(&self) -> Option<&i64>;
+	fn get_current_system_time_mut(&mut self) -> Option<&mut i64>;
 	fn has_current_zulu_time(&self) -> bool;
-	fn get_current_zulu_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_current_zulu_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_current_zulu_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_current_zulu_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait SystemTimeAtReferenceMt:
@@ -57738,8 +57738,8 @@ pub trait TacticalOrderActivityType:
 	ActivityBaseType
 {
 	fn has_actual_completion_time(&self) -> bool;
-	fn get_actual_completion_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_actual_completion_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_actual_completion_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_actual_completion_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait TacticalOrderCapabilityMdt:
@@ -58597,8 +58597,8 @@ pub trait ThreatAssessmentProbabilityType:
 	fn get_effective_probability(&self) -> Option<&crate::v5_0::common::PercentType>;
 	fn get_effective_probability_mut(&mut self) -> Option<&mut crate::v5_0::common::PercentType>;
 	fn has_exposure_time(&self) -> bool;
-	fn get_exposure_time(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_exposure_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_exposure_time(&self) -> Option<&chrono::TimeDelta>;
+	fn get_exposure_time_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait ThreatAssessmentRequestType:
@@ -58615,8 +58615,8 @@ pub trait ThreatAssessmentRequestType:
 	fn get_threat_entity_id(&self) -> &Vec<crate::v5_0::types::EntityIdType>;
 	fn get_threat_entity_id_mut(&mut self) -> &mut Vec<crate::v5_0::types::EntityIdType>;
 	fn has_assessment_interval(&self) -> bool;
-	fn get_assessment_interval(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_assessment_interval_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_assessment_interval(&self) -> Option<&chrono::TimeDelta>;
+	fn get_assessment_interval_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn get_system_to_assess(&self) -> &Vec<crate::v5_0::types::SystemRoutePlanSpecificationType>;
 	fn get_system_to_assess_mut(&mut self) -> &mut Vec<crate::v5_0::types::SystemRoutePlanSpecificationType>;
 	fn get_supporting_system(&self) -> &Vec<crate::v5_0::types::SystemRoutePlanSpecificationType>;
@@ -58647,8 +58647,8 @@ pub trait ThreatExposureProbabilityType:
 	+ PartialEq
 	+ serde::Serialize
 {
-	fn get_time_index(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_time_index_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_time_index(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_time_index_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_probability_of_detection(&self) -> &crate::v5_0::common::PercentType;
 	fn get_probability_of_detection_mut(&mut self) -> &mut crate::v5_0::common::PercentType;
 }
@@ -58662,8 +58662,8 @@ pub trait ThreatExposureType:
 {
 	fn get_entity_id(&self) -> &crate::v5_0::types::EntityIdType;
 	fn get_entity_id_mut(&mut self) -> &mut crate::v5_0::types::EntityIdType;
-	fn get_exposure_time(&self) -> &crate::v5_0::common::DurationType;
-	fn get_exposure_time_mut(&mut self) -> &mut crate::v5_0::common::DurationType;
+	fn get_exposure_time(&self) -> &chrono::TimeDelta;
+	fn get_exposure_time_mut(&mut self) -> &mut chrono::TimeDelta;
 	fn get_exposure_event(&self) -> &Vec<crate::v5_0::types::DateTimeRangeType>;
 	fn get_exposure_event_mut(&mut self) -> &mut Vec<crate::v5_0::types::DateTimeRangeType>;
 	fn get_exposure_event_position(&self) -> &Vec<crate::v5_0::types::Point2DRangeType>;
@@ -58850,8 +58850,8 @@ pub trait TimeAndPolarDataType:
 	fn get_nutation_model_terms(&self) -> &i32;
 	fn get_nutation_model_terms_mut(&mut self) -> &mut i32;
 	fn has_next_leap_second(&self) -> bool;
-	fn get_next_leap_second(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_next_leap_second_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_next_leap_second(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_next_leap_second_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait TimeAndPolarRecordType:
@@ -58883,11 +58883,11 @@ pub trait TimeErrorType:
 	+ serde::Serialize
 {
 	fn has_early(&self) -> bool;
-	fn get_early(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_early_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_early(&self) -> Option<&chrono::TimeDelta>;
+	fn get_early_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_late(&self) -> bool;
-	fn get_late(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_late_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_late(&self) -> Option<&chrono::TimeDelta>;
+	fn get_late_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait TimeFunctionType:
@@ -58899,8 +58899,8 @@ pub trait TimeFunctionType:
 {
 	fn get_function(&self) -> &crate::v5_0::enums::TimeFunctionEnum;
 	fn get_function_mut(&mut self) -> &mut crate::v5_0::enums::TimeFunctionEnum;
-	fn get_value(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_value_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_value(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_value_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 }
 
 pub trait TimeWindowType:
@@ -58914,8 +58914,8 @@ pub trait TimeWindowType:
 	fn get_range(&self) -> Option<&crate::v5_0::types::DateTimeRangeType>;
 	fn get_range_mut(&mut self) -> Option<&mut crate::v5_0::types::DateTimeRangeType>;
 	fn has_duration(&self) -> bool;
-	fn get_duration(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_duration_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_duration(&self) -> Option<&chrono::TimeDelta>;
+	fn get_duration_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait TimedZoneType:
@@ -58928,8 +58928,8 @@ pub trait TimedZoneType:
 pub trait TleBaseType:
 	CoeOrbitBaseType
 {
-	fn get_epoch(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_epoch_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_epoch(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_epoch_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn has_element_set_number(&self) -> bool;
 	fn get_element_set_number(&self) -> Option<&u16>;
 	fn get_element_set_number_mut(&mut self) -> Option<&mut u16>;
@@ -59451,8 +59451,8 @@ pub trait ValidationCommandBaseType:
 	fn get_request_frequency_type(&self) -> &crate::v5_0::enums::RepeatEnum;
 	fn get_request_frequency_type_mut(&mut self) -> &mut crate::v5_0::enums::RepeatEnum;
 	fn has_request_frequency_period(&self) -> bool;
-	fn get_request_frequency_period(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_request_frequency_period_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_request_frequency_period(&self) -> Option<&chrono::TimeDelta>;
+	fn get_request_frequency_period_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait ValidationCommandStatusBaseType:
@@ -59597,8 +59597,8 @@ pub trait VehicleCommandDataType:
 	fn get_survivability_mode(&self) -> Option<&crate::v5_0::enums::VehicleSurvivabilityModeEnum>;
 	fn get_survivability_mode_mut(&mut self) -> Option<&mut crate::v5_0::enums::VehicleSurvivabilityModeEnum>;
 	fn has_lost_comm_timeout(&self) -> bool;
-	fn get_lost_comm_timeout(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_lost_comm_timeout_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_lost_comm_timeout(&self) -> Option<&chrono::TimeDelta>;
+	fn get_lost_comm_timeout_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_los(&self) -> bool;
 	fn get_los(&self) -> Option<&bool>;
 	fn get_los_mut(&mut self) -> Option<&mut bool>;
@@ -59718,8 +59718,8 @@ pub trait Velocity2DType:
 	fn get_down_speed(&self) -> Option<&crate::v5_0::common::SpeedType>;
 	fn get_down_speed_mut(&mut self) -> Option<&mut crate::v5_0::common::SpeedType>;
 	fn has_timestamp(&self) -> bool;
-	fn get_timestamp(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_timestamp_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_timestamp(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_timestamp_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait Velocity2DUncertaintyType:
@@ -59744,8 +59744,8 @@ pub trait Velocity3DType:
 	fn get_down_speed(&self) -> &crate::v5_0::common::SpeedType;
 	fn get_down_speed_mut(&mut self) -> &mut crate::v5_0::common::SpeedType;
 	fn has_timestamp(&self) -> bool;
-	fn get_timestamp(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_timestamp_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_timestamp(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_timestamp_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 }
 
 pub trait VelocityAccelerationCovarianceType:
@@ -59973,8 +59973,8 @@ pub trait VisMagParamsType:
 	fn get_amplitude_resolution(&self) -> Option<&crate::v5_0::common::ResolutionMetersPerPixelType>;
 	fn get_amplitude_resolution_mut(&mut self) -> Option<&mut crate::v5_0::common::ResolutionMetersPerPixelType>;
 	fn has_product_resolution_time(&self) -> bool;
-	fn get_product_resolution_time(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_product_resolution_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_product_resolution_time(&self) -> Option<&chrono::TimeDelta>;
+	fn get_product_resolution_time_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait VisualMagnitudeLimitsType:
@@ -60055,10 +60055,10 @@ pub trait VulnerabilityLevelsType:
 	+ PartialEq
 	+ serde::Serialize
 {
-	fn get_composite_exposure_time(&self) -> &crate::v5_0::common::DurationType;
-	fn get_composite_exposure_time_mut(&mut self) -> &mut crate::v5_0::common::DurationType;
-	fn get_cumulative_exposure_time(&self) -> &crate::v5_0::common::DurationType;
-	fn get_cumulative_exposure_time_mut(&mut self) -> &mut crate::v5_0::common::DurationType;
+	fn get_composite_exposure_time(&self) -> &chrono::TimeDelta;
+	fn get_composite_exposure_time_mut(&mut self) -> &mut chrono::TimeDelta;
+	fn get_cumulative_exposure_time(&self) -> &chrono::TimeDelta;
+	fn get_cumulative_exposure_time_mut(&mut self) -> &mut chrono::TimeDelta;
 }
 
 pub trait VulnerabilityMetricsType:
@@ -60271,8 +60271,8 @@ pub trait WeatherAugmentationParametersType:
 	fn get_applicable_system_id(&self) -> &Vec<crate::v5_0::types::SystemIdType>;
 	fn get_applicable_system_id_mut(&mut self) -> &mut Vec<crate::v5_0::types::SystemIdType>;
 	fn has_periodic_interval(&self) -> bool;
-	fn get_periodic_interval(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_periodic_interval_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_periodic_interval(&self) -> Option<&chrono::TimeDelta>;
+	fn get_periodic_interval_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait WeatherDatasetIdType:
@@ -60285,10 +60285,10 @@ pub trait WeatherDatasetMdt:
 {
 	fn get_weather_dataset_id(&self) -> &crate::v5_0::types::WeatherDatasetIdType;
 	fn get_weather_dataset_id_mut(&mut self) -> &mut crate::v5_0::types::WeatherDatasetIdType;
-	fn get_created(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_created_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
-	fn get_updated(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_updated_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_created(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_created_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
+	fn get_updated(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_updated_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_dataset_area(&self) -> &crate::v5_0::types::ZoneType;
 	fn get_dataset_area_mut(&mut self) -> &mut crate::v5_0::types::ZoneType;
 	fn has_degree_step(&self) -> bool;
@@ -60415,23 +60415,23 @@ pub trait WeatherRadarActivityStatusDetailType:
 	fn get_number_of_times_searched(&self) -> Option<&u32>;
 	fn get_number_of_times_searched_mut(&mut self) -> Option<&mut u32>;
 	fn has_time_last_searched(&self) -> bool;
-	fn get_time_last_searched(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_time_last_searched_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_time_last_searched(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_time_last_searched_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_attempts(&self) -> bool;
 	fn get_attempts(&self) -> Option<&u32>;
 	fn get_attempts_mut(&mut self) -> Option<&mut u32>;
 	fn has_actual_revisit_period(&self) -> bool;
-	fn get_actual_revisit_period(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_actual_revisit_period_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_actual_revisit_period(&self) -> Option<&chrono::TimeDelta>;
+	fn get_actual_revisit_period_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 	fn has_percentage_in_for(&self) -> bool;
 	fn get_percentage_in_for(&self) -> Option<&crate::v5_0::common::PercentType>;
 	fn get_percentage_in_for_mut(&mut self) -> Option<&mut crate::v5_0::common::PercentType>;
 	fn has_actual_start_time(&self) -> bool;
-	fn get_actual_start_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_actual_start_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_actual_start_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_actual_start_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_actual_stop_time(&self) -> bool;
-	fn get_actual_stop_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_actual_stop_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_actual_stop_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_actual_stop_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_percent_searched(&self) -> bool;
 	fn get_percent_searched(&self) -> Option<&crate::v5_0::common::PercentType>;
 	fn get_percent_searched_mut(&mut self) -> Option<&mut crate::v5_0::common::PercentType>;
@@ -60627,8 +60627,8 @@ pub trait WeatherRadarObservationMdt:
 	fn get_observing_system_id_mut(&mut self) -> &mut crate::v5_0::types::SystemIdType;
 	fn get_location(&self) -> &crate::v5_0::types::Point3DType;
 	fn get_location_mut(&mut self) -> &mut crate::v5_0::types::Point3DType;
-	fn get_timestamp(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_timestamp_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_timestamp(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_timestamp_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn has_capability_id(&self) -> bool;
 	fn get_capability_id(&self) -> Option<&crate::v5_0::types::CapabilityIdType>;
 	fn get_capability_id_mut(&mut self) -> Option<&mut crate::v5_0::types::CapabilityIdType>;
@@ -60730,8 +60730,8 @@ pub trait WeatherReportDataType:
 {
 	fn get_weather_report_type(&self) -> &crate::v5_0::enums::WeatherReportTypeEnum;
 	fn get_weather_report_type_mut(&mut self) -> &mut crate::v5_0::enums::WeatherReportTypeEnum;
-	fn get_created(&self) -> &crate::v5_0::common::DateTimeType;
-	fn get_created_mut(&mut self) -> &mut crate::v5_0::common::DateTimeType;
+	fn get_created(&self) -> &chrono::DateTime<chrono::Utc>;
+	fn get_created_mut(&mut self) -> &mut chrono::DateTime<chrono::Utc>;
 	fn get_schedule(&self) -> &Vec<crate::v5_0::types::DateTimeRangeType>;
 	fn get_schedule_mut(&mut self) -> &mut Vec<crate::v5_0::types::DateTimeRangeType>;
 	fn get_weather_area(&self) -> &crate::v5_0::types::ZoneType;
@@ -60782,11 +60782,11 @@ pub trait WeekdayIntervalType:
 	fn get_weekly_interval_period(&self) -> &u32;
 	fn get_weekly_interval_period_mut(&mut self) -> &mut u32;
 	fn has_start_time(&self) -> bool;
-	fn get_start_time(&self) -> Option<&crate::v5_0::common::TimeType>;
-	fn get_start_time_mut(&mut self) -> Option<&mut crate::v5_0::common::TimeType>;
+	fn get_start_time(&self) -> Option<&chrono::NaiveTime>;
+	fn get_start_time_mut(&mut self) -> Option<&mut chrono::NaiveTime>;
 	fn has_duration(&self) -> bool;
-	fn get_duration(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_duration_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_duration(&self) -> Option<&chrono::TimeDelta>;
+	fn get_duration_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait WidebandSoiParamsType:
@@ -60800,8 +60800,8 @@ pub trait WidebandSoiParamsType:
 	fn get_range_resolution(&self) -> Option<&crate::v5_0::types::RangeResolutionType>;
 	fn get_range_resolution_mut(&mut self) -> Option<&mut crate::v5_0::types::RangeResolutionType>;
 	fn has_product_resolution_time(&self) -> bool;
-	fn get_product_resolution_time(&self) -> Option<&crate::v5_0::common::DurationType>;
-	fn get_product_resolution_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DurationType>;
+	fn get_product_resolution_time(&self) -> Option<&chrono::TimeDelta>;
+	fn get_product_resolution_time_mut(&mut self) -> Option<&mut chrono::TimeDelta>;
 }
 
 pub trait WildcardElementType:
@@ -60872,11 +60872,11 @@ pub trait WorkingEobMdt:
 	fn get_op_volume_id(&self) -> Option<&crate::v5_0::types::OpVolumeIdType>;
 	fn get_op_volume_id_mut(&mut self) -> Option<&mut crate::v5_0::types::OpVolumeIdType>;
 	fn has_initial_creation_time(&self) -> bool;
-	fn get_initial_creation_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_initial_creation_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_initial_creation_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_initial_creation_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn has_last_update_time(&self) -> bool;
-	fn get_last_update_time(&self) -> Option<&crate::v5_0::common::DateTimeType>;
-	fn get_last_update_time_mut(&mut self) -> Option<&mut crate::v5_0::common::DateTimeType>;
+	fn get_last_update_time(&self) -> Option<&chrono::DateTime<chrono::Utc>>;
+	fn get_last_update_time_mut(&mut self) -> Option<&mut chrono::DateTime<chrono::Utc>>;
 	fn get_eob_site(&self) -> &Vec<crate::v5_0::types::EobRecordMarkedType>;
 	fn get_eob_site_mut(&mut self) -> &mut Vec<crate::v5_0::types::EobRecordMarkedType>;
 }

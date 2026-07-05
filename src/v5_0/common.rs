@@ -1,9 +1,6 @@
 #![doc = r#"Module with basic types."#]
 
 use serde::{Deserialize, Serialize};
-use std::convert::{AsRef, AsMut};
-use std::convert::{From, Into};
-use std::ops::{Deref, DerefMut};
 
 #[doc = r#"Specifies which AA Codes will be interrogated for the BDS Registers in the next field. If omitted, implies all targets.
 
@@ -384,7 +381,7 @@ pub type DataRateType = u32;
 
 # Restrictions
 * Pattern: `.+Z`"#]
-pub type DateTimeType = chrono::DateTime<chrono::Utc>;
+pub type DateTimeType = i64;
 
 #[doc = r#"Indicates non-negative values in Decibels (dB).
 
@@ -414,43 +411,7 @@ pub type DoubleNonNegativeType = f64;
 pub type DoublePositiveType = f64;
 
 #[doc = r#"UCI uses the W3C (www.w3.org) definition of time duration exactly as given in the specification for xs:duration.  xs:duration is based on Coordinated Universal Time (UTC) and allows seconds to be specified with decimal digits to arbitrary precision.  See the W3C specification of xs:duration for further details."#]
-#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
-pub struct DurationType(
-	#[serde(with = "crate::v5_0::serde_utils::time_delta")]
-	pub chrono::TimeDelta,
-);
-impl Deref for DurationType {
-	type Target = chrono::TimeDelta;
-	fn deref(&self) -> &Self::Target {
-		&self.0
-	}
-}
-impl DerefMut for DurationType {
-	fn deref_mut(&mut self) -> &mut Self::Target {
-		&mut self.0
-	}
-}
-impl AsRef<chrono::TimeDelta> for DurationType {
-	fn as_ref(&self) -> &chrono::TimeDelta {
-		&self.0
-	}
-}
-impl AsMut<chrono::TimeDelta> for DurationType {
-	fn as_mut(&mut self) -> &mut chrono::TimeDelta {
-		&mut self.0
-	}
-}
-impl From<chrono::TimeDelta> for DurationType {
-	fn from(p: chrono::TimeDelta) -> Self {
-		Self(p)
-	}
-}
-impl Into<chrono::TimeDelta> for DurationType {
-	fn into(self) -> chrono::TimeDelta {
-		self.0
-	}
-}
-
+pub type DurationType = i64;
 
 #[doc = r#"Indicates the terrain level relative to Mean Sea Level (MSL) in meters (m)."#]
 pub type ElevationType = f64;
@@ -1317,43 +1278,7 @@ pub type TgtUtcstringType = String;
 
 # Restrictions
 * Pattern: `.+Z`"#]
-#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
-pub struct TimeType(
-	#[serde(with = "crate::v5_0::serde_utils::naive_time")]
-	pub chrono::NaiveTime,
-);
-impl Deref for TimeType {
-	type Target = chrono::NaiveTime;
-	fn deref(&self) -> &Self::Target {
-		&self.0
-	}
-}
-impl DerefMut for TimeType {
-	fn deref_mut(&mut self) -> &mut Self::Target {
-		&mut self.0
-	}
-}
-impl AsRef<chrono::NaiveTime> for TimeType {
-	fn as_ref(&self) -> &chrono::NaiveTime {
-		&self.0
-	}
-}
-impl AsMut<chrono::NaiveTime> for TimeType {
-	fn as_mut(&mut self) -> &mut chrono::NaiveTime {
-		&mut self.0
-	}
-}
-impl From<chrono::NaiveTime> for TimeType {
-	fn from(p: chrono::NaiveTime) -> Self {
-		Self(p)
-	}
-}
-impl Into<chrono::NaiveTime> for TimeType {
-	fn into(self) -> chrono::NaiveTime {
-		self.0
-	}
-}
-
+pub type TimeType = i64;
 
 #[doc = r#"String representing the UCI version.
 
