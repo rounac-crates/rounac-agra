@@ -1,46 +1,35 @@
 #![doc = r#"Module for all choice types."#]
 
-mod serde_helpers;
-
-use serde::{Deserialize, Serialize};
-use serde_helpers::*;
-
 #[doc = r#"Specifies the Subject and the associated objects of the AccessAssessment."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "AccessAssessmentResultTypeSerde")]
-#[serde(try_from = "AccessAssessmentResultTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum AccessAssessmentResultType {
 	#[doc = r#"This element references the results of the assessment in a separate AccessAssessment message.  It is optional based on whether the assessment request specified that the response should result in native message."#]
 	AccessAssessmentId(Vec<crate::v5_0::types::AccessAssessmentIdType>),
 	#[doc = r#"This element indicates the results of the assessment.  It is optional based on whether the assessment request specified that the response should result in native message."#]
 	Assessment(Vec<crate::v5_0::types::AccessAssessmentType>),
 }
-choice_convert_impls! {
-	AccessAssessmentResultType - AccessAssessmentResultTypeSerde
-	AccessAssessmentId,
-	Assessment,
+struct_like_serde! {
+	AccessAssessmentResultType
+	AccessAssessmentId -> "AccessAssessmentID",
+	Assessment -> "Assessment",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ActionCommandTypeSerde")]
-#[serde(try_from = "ActionCommandTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ActionCommandType {
 	#[doc = r#"Indicates a new invocation of an Action Capability.  Generally, if accepted, the command will result in one or more new Action Activities being created and reported via the ActionActivity message.  The request/response interaction terminates as soon as the command is accepted or rejected; this element is not used to interact with an "active" command.  Updates and/or additional interaction with the resulting Activity (after the command is accepted) is accomplished via the sibling Activity element."#]
 	Capability(crate::v5_0::types::ActionCapabilityCommandType),
 	#[doc = r#"Indicates a command to modify an existing Action Activity (which was previously reported via the ActionActivity message and was marked as "interactive").  The request/response interaction terminates as soon as the modification is accepted or rejected.  The modifications are reflected in subsequent ActionActivity messages."#]
 	Activity(crate::v5_0::types::ActivityCommandBaseType),
 }
-choice_convert_impls! {
-	ActionCommandType - ActionCommandTypeSerde
-	Capability,
-	Activity,
+struct_like_serde! {
+	ActionCommandType
+	Capability -> "Capability",
+	Activity -> "Activity",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ActionPlanCommandIdChoiceTypeSerde")]
-#[serde(try_from = "ActionPlanCommandIdChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ActionPlanCommandIdChoiceType {
 	#[doc = r#"Indicates the unique ID of the ActionPlanCommand associated with the ActionPlan."#]
 	ActionPlanCommandId(crate::v5_0::types::ActionPlanCommandIdType),
@@ -51,18 +40,16 @@ pub enum ActionPlanCommandIdChoiceType {
 	#[doc = r#"Indicates the unique ID of the MissionPlanValidationCommand associated with the ActionPlan."#]
 	MissionPlanValidationCommandId(crate::v5_0::types::CommandIdType),
 }
-choice_convert_impls! {
-	ActionPlanCommandIdChoiceType - ActionPlanCommandIdChoiceTypeSerde
-	ActionPlanCommandId,
-	ActionPlanValidationCommandId,
-	MissionPlanCommandId,
-	MissionPlanValidationCommandId,
+struct_like_serde! {
+	ActionPlanCommandIdChoiceType
+	ActionPlanCommandId -> "ActionPlanCommandID",
+	ActionPlanValidationCommandId -> "ActionPlanValidationCommandID",
+	MissionPlanCommandId -> "MissionPlanCommandID",
+	MissionPlanValidationCommandId -> "MissionPlanValidationCommandID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ActivityActorIdChoiceTypeSerde")]
-#[serde(try_from = "ActivityActorIdChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ActivityActorIdChoiceType {
 	#[doc = r#"Indicates the unique ID of the System performing the action."#]
 	SystemId(crate::v5_0::types::SystemIdType),
@@ -71,17 +58,15 @@ pub enum ActivityActorIdChoiceType {
 	#[doc = r#"Indicates the unique ID of the Entity performing the action."#]
 	EntityId(crate::v5_0::types::EntityIdType),
 }
-choice_convert_impls! {
-	ActivityActorIdChoiceType - ActivityActorIdChoiceTypeSerde
-	SystemId,
-	CapabilityId,
-	EntityId,
+struct_like_serde! {
+	ActivityActorIdChoiceType
+	SystemId -> "SystemID",
+	CapabilityId -> "CapabilityID",
+	EntityId -> "EntityID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ActivityChoiceTypeSerde")]
-#[serde(try_from = "ActivityChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ActivityChoiceType {
 	#[doc = r#"Indicates the unique ID of the Effect associated with the Planned Activity."#]
 	EffectId(crate::v5_0::types::EffectIdType),
@@ -102,39 +87,35 @@ pub enum ActivityChoiceType {
 	#[doc = r#"Indicates the unique ID of a Product management Task (ProductDisseminationTask, ProductProcessingTask, etc.) associated with the Planned Activity."#]
 	ProductTaskId(crate::v5_0::types::TaskIdType),
 }
-choice_convert_impls! {
-	ActivityChoiceType - ActivityChoiceTypeSerde
-	EffectId,
-	ActionId,
-	TaskId,
-	ResponseId,
-	CapabilityCommand,
-	SupportingCapabilityCommand,
-	VehicleSettings,
-	CommAction,
-	ProductTaskId,
+struct_like_serde! {
+	ActivityChoiceType
+	EffectId -> "EffectID",
+	ActionId -> "ActionID",
+	TaskId -> "TaskID",
+	ResponseId -> "ResponseID",
+	CapabilityCommand -> "CapabilityCommand",
+	SupportingCapabilityCommand -> "SupportingCapabilityCommand",
+	VehicleSettings -> "VehicleSettings",
+	CommAction -> "CommAction",
+	ProductTaskId -> "ProductTaskID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ActivityPlanCommandIdChoiceTypeSerde")]
-#[serde(try_from = "ActivityPlanCommandIdChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ActivityPlanCommandIdChoiceType {
 	#[doc = r#"Indicates the unique ID of the ActivityPlanCommand that the parent originated from."#]
 	ActivityPlanCommandId(crate::v5_0::types::ActivityPlanCommandIdType),
 	#[doc = r#"Indicates the unique ID of the MissionPlanCommand that the parent originated from."#]
 	MissionPlanCommandId(crate::v5_0::types::MissionPlanCommandIdType),
 }
-choice_convert_impls! {
-	ActivityPlanCommandIdChoiceType - ActivityPlanCommandIdChoiceTypeSerde
-	ActivityPlanCommandId,
-	MissionPlanCommandId,
+struct_like_serde! {
+	ActivityPlanCommandIdChoiceType
+	ActivityPlanCommandId -> "ActivityPlanCommandID",
+	MissionPlanCommandId -> "MissionPlanCommandID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ActivityPlansIdChoiceTypeSerde")]
-#[serde(try_from = "ActivityPlansIdChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ActivityPlansIdChoiceType {
 	#[doc = r#"Indicates the unique ID of the RouteActivityPlan that is the source of the Activity."#]
 	RouteActivityPlanId(crate::v5_0::types::RouteActivityPlanIdType),
@@ -143,17 +124,15 @@ pub enum ActivityPlansIdChoiceType {
 	#[doc = r#"Indicates the unique ID of the ActivityPlan that is the source of the Activity."#]
 	ActivityPlanId(crate::v5_0::types::ActivityPlanIdType),
 }
-choice_convert_impls! {
-	ActivityPlansIdChoiceType - ActivityPlansIdChoiceTypeSerde
-	RouteActivityPlanId,
-	OrbitActivityPlanId,
-	ActivityPlanId,
+struct_like_serde! {
+	ActivityPlansIdChoiceType
+	RouteActivityPlanId -> "RouteActivityPlanID",
+	OrbitActivityPlanId -> "OrbitActivityPlanID",
+	ActivityPlanId -> "ActivityPlanID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ActivitySourceTypeSerde")]
-#[serde(try_from = "ActivitySourceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ActivitySourceType {
 	#[doc = r#"Indicates a Requirement that is the source or cause of the Activity.  For example, a Task could be the direct source of an Activity when the Subsystem which implements the associated Capability monitors Tasks to determine when to initiate Activities."#]
 	Requirement(RequirementInstanceIdChoiceType),
@@ -164,114 +143,100 @@ pub enum ActivitySourceType {
 	#[doc = r#"Indicates an associated message that is the source or cause of the Activity.  For example, a SettingsCommand could be the direct source of an Activity when the Subsystem utilizes Settings to determine when to initiate Activities."#]
 	AssociatedMessage(AssociatedMessageSourceType),
 }
-choice_convert_impls! {
-	ActivitySourceType - ActivitySourceTypeSerde
-	Requirement,
-	Mdf,
-	ActivityPlan,
-	AssociatedMessage,
+struct_like_serde! {
+	ActivitySourceType
+	Requirement -> "Requirement",
+	Mdf -> "MDF",
+	ActivityPlan -> "ActivityPlan",
+	AssociatedMessage -> "AssociatedMessage",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ActivityTriggerTypeSerde")]
-#[serde(try_from = "ActivityTriggerTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ActivityTriggerType {
 	#[doc = r#"The time or time window when the planned Activity transition should occur."#]
 	TransitionTime(crate::v5_0::types::DateTimeRangeType),
 	#[doc = r#"The inbound distance to the endpoint of the associated kinematic sequence/segment/path where the planned Activity transition should occur."#]
 	DistanceToEndPoint(crate::v5_0::common::DistanceType),
 }
-choice_convert_impls! {
-	ActivityTriggerType - ActivityTriggerTypeSerde
-	TransitionTime,
-	DistanceToEndPoint,
+struct_like_serde! {
+	ActivityTriggerType
+	TransitionTime -> "TransitionTime",
+	DistanceToEndPoint -> "DistanceToEndPoint",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "AirSampleCommandTypeSerde")]
-#[serde(try_from = "AirSampleCommandTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum AirSampleCommandType {
 	#[doc = r#"Indicates a new invocation of an AirSample Capability.  Generally, if accepted, the command will result in one or more new AirSample Activities being created and reported via the AirSampleActivity message.  The request/response interaction terminates as soon as the command is accepted or rejected; this element is not used to interact with an "active" command.  Updates and/or additional interaction with the resulting Activity (after the command is accepted) is accomplished via the sibling Activity element."#]
 	Capability(crate::v5_0::types::AirSampleCapabilityCommandType),
 	#[doc = r#"Indicates a command to modify an existing AirSample Activity (which was previously reported via the AirSampleActivity message and was marked as "interactive").  The request/response interaction terminates as soon as the modification is accepted or rejected.  The modifications are reflected in subsequent AirSampleActivity messages."#]
 	Activity(crate::v5_0::types::ActivityCommandBaseType),
 }
-choice_convert_impls! {
-	AirSampleCommandType - AirSampleCommandTypeSerde
-	Capability,
-	Activity,
+struct_like_serde! {
+	AirSampleCommandType
+	Capability -> "Capability",
+	Activity -> "Activity",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "AirTargetVolumeCommandTypeSerde")]
-#[serde(try_from = "AirTargetVolumeCommandTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum AirTargetVolumeCommandType {
 	#[doc = r#"Indicates the commanded air volume extents."#]
 	AirVolume(crate::v5_0::types::AirVolumeCueType),
 	#[doc = r#"Indicates the unique ID of an Entity that is the target of a cued AMTI search.  This element can be used as the full specification of the target volume for the cued search.  It can also be used in combination with the sibling AirVolume element to define extents of the cue volume around the Entity."#]
 	EntityId(crate::v5_0::types::EntityIdType),
 }
-choice_convert_impls! {
-	AirTargetVolumeCommandType - AirTargetVolumeCommandTypeSerde
-	AirVolume,
-	EntityId,
+struct_like_serde! {
+	AirTargetVolumeCommandType
+	AirVolume -> "AirVolume",
+	EntityId -> "EntityID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "AirTargetVolumeTypeSerde")]
-#[serde(try_from = "AirTargetVolumeTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum AirTargetVolumeType {
 	#[doc = r#"Indicates a 3D sensor referenced volume that an air volume capability is directed against.  This will define the volume in terms of azimuth and elevation angles."#]
 	AirVolumeSensorReferenced(crate::v5_0::types::AirVolumeSensorReferencedType),
 	#[doc = r#"Indicates a 3D area that an air volume capability is directed against.  This should define the latitude/longitude extents of the volume along with any guidance regarding the height of the volume."#]
 	AirVolumeLocation(crate::v5_0::types::ZoneType),
 }
-choice_convert_impls! {
-	AirTargetVolumeType - AirTargetVolumeTypeSerde
-	AirVolumeSensorReferenced,
-	AirVolumeLocation,
+struct_like_serde! {
+	AirTargetVolumeType
+	AirVolumeSensorReferenced -> "AirVolumeSensorReferenced",
+	AirVolumeLocation -> "AirVolumeLocation",
 }
 
 #[doc = r#"See the annotation in the associated message airfield status data."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "AirfieldReferenceIdChoiceTypeSerde")]
-#[serde(try_from = "AirfieldReferenceIdChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum AirfieldReferenceIdChoiceType {
 	#[doc = r#"Indicates the unique ID of the airfield System for a self-report."#]
 	SystemId(crate::v5_0::types::SystemIdType),
 	#[doc = r#"Indicates the unique Entity ID of the airfield when reported by a third party."#]
 	EntityId(crate::v5_0::types::EntityIdType),
 }
-choice_convert_impls! {
-	AirfieldReferenceIdChoiceType - AirfieldReferenceIdChoiceTypeSerde
-	SystemId,
-	EntityId,
+struct_like_serde! {
+	AirfieldReferenceIdChoiceType
+	SystemId -> "SystemID",
+	EntityId -> "EntityID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "AmtiCommandTypeSerde")]
-#[serde(try_from = "AmtiCommandTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum AmtiCommandType {
 	#[doc = r#"Indicates a new invocation of an AMTI Capability.  Generally, if accepted, the command will result in one or more new AMTI Activities being created and reported via the AMTI_Activity message.  The request/response interaction terminates as soon as the command is accepted or rejected; this element is not used to interact with an "active" command.  Updates and/or additional interaction with the resulting Activity (after the command is accepted) is accomplished via the sibling Activity element."#]
 	Capability(crate::v5_0::types::AmtiCapabilityCommandType),
 	#[doc = r#"Indicates a command to modify an existing AMTI Activity (which was previously reported via the AMTI_Activity message and was marked as "interactive").  The request/response interaction terminates as soon as the modification is accepted or rejected.  The modifications are reflected in subsequent AMTI_Activity messages."#]
 	Activity(crate::v5_0::types::AmtiActivityCommandType),
 }
-choice_convert_impls! {
-	AmtiCommandType - AmtiCommandTypeSerde
-	Capability,
-	Activity,
+struct_like_serde! {
+	AmtiCommandType
+	Capability -> "Capability",
+	Activity -> "Activity",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "AmtiTargetTypeSerde")]
-#[serde(try_from = "AmtiTargetTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum AmtiTargetType {
 	#[doc = r#"Indicates a 3D sensor referenced volume that an air volume capability is directed against.  This will define the volume in terms of azimuth and elevation angles."#]
 	AirVolumeSensorReferenced(crate::v5_0::types::AirVolumeSensorReferencedType),
@@ -280,49 +245,43 @@ pub enum AmtiTargetType {
 	#[doc = r#"Indicates the unique ID of an Entity that is the target of a cued AMTI search.  This element can be used as the full specification of the target volume for the cued search.  It can also be used in combination with the sibling AirVolume element to define extents of the cue volume around the Entity."#]
 	EntityId(crate::v5_0::types::EntityIdType),
 }
-choice_convert_impls! {
-	AmtiTargetType - AmtiTargetTypeSerde
-	AirVolumeSensorReferenced,
-	AirVolumeLocation,
-	EntityId,
+struct_like_serde! {
+	AmtiTargetType
+	AirVolumeSensorReferenced -> "AirVolumeSensorReferenced",
+	AirVolumeLocation -> "AirVolumeLocation",
+	EntityId -> "EntityID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "AntennaResourceChoiceTypeSerde")]
-#[serde(try_from = "AntennaResourceChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum AntennaResourceChoiceType {
 	#[doc = r#"Indicates the unique ID of a Resource Type (such a "Transmit, Quarter Sub-Array ") on a Shared Antenna. Defined in Shared Aperture Information Files."#]
 	AntennaResourceTypeId(crate::v5_0::types::AntennaResourceIdType),
 	#[doc = r#"Indicates the unique ID of a specific resource (such a "Transmit, Quarter Sub-Array Number Three") on a Shared Antenna. Defined in Shared Aperture Information Files."#]
 	AntennaResourceInstanceId(crate::v5_0::types::AntennaResourceIdType),
 }
-choice_convert_impls! {
-	AntennaResourceChoiceType - AntennaResourceChoiceTypeSerde
-	AntennaResourceTypeId,
-	AntennaResourceInstanceId,
+struct_like_serde! {
+	AntennaResourceChoiceType
+	AntennaResourceTypeId -> "AntennaResourceTypeID",
+	AntennaResourceInstanceId -> "AntennaResourceInstanceID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "AoCommandTypeSerde")]
-#[serde(try_from = "AoCommandTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum AoCommandType {
 	#[doc = r#"Indicates a new invocation of an AO Capability.  Generally, if accepted, the command will result in one or more new AO Activities being created and reported via the AO_Activity message.  The request/response interaction terminates as soon as the command is accepted or rejected; this element is not used to interact with an "active" command.  Updates and/or additional interaction with the resulting Activity (after the command is accepted) is accomplished via the sibling Activity element."#]
 	Capability(crate::v5_0::types::AoCapabilityCommandType),
 	#[doc = r#"Indicates a command to modify an existing AO Activity (which was previously reported via the AO_Activity message and was marked as "interactive").  The request/response interaction terminates as soon as the modification is accepted or rejected.  The modifications are reflected in subsequent AO_Activity messages."#]
 	Activity(crate::v5_0::types::AoActivityCommandType),
 }
-choice_convert_impls! {
-	AoCommandType - AoCommandTypeSerde
-	Capability,
-	Activity,
+struct_like_serde! {
+	AoCommandType
+	Capability -> "Capability",
+	Activity -> "Activity",
 }
 
 #[doc = r#"Utilized by RF_ResourceAllocation and RF_ResourceAllocationRequest to indicate the spatial coverage needed for the Activity requesting resources."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "AperturePointingOptionsTypeSerde")]
-#[serde(try_from = "AperturePointingOptionsTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum AperturePointingOptionsType {
 	#[doc = r#"The expected footprint of transmissions from the comm equipment being pointed, for this service/bandwidth type."#]
 	FieldOfRegard(crate::v5_0::types::FieldOfRegardType),
@@ -333,34 +292,30 @@ pub enum AperturePointingOptionsType {
 	#[doc = r#"If included, represents the entity ID of the target to be considered as reference for beam pointing function."#]
 	RequestEntityReferenceId(crate::v5_0::types::EntityIdType),
 }
-choice_convert_impls! {
-	AperturePointingOptionsType - AperturePointingOptionsTypeSerde
-	FieldOfRegard,
-	InstallationIndex,
-	RequestBeamPointingReference,
-	RequestEntityReferenceId,
+struct_like_serde! {
+	AperturePointingOptionsType
+	FieldOfRegard -> "FieldOfRegard",
+	InstallationIndex -> "InstallationIndex",
+	RequestBeamPointingReference -> "RequestBeamPointingReference",
+	RequestEntityReferenceId -> "RequestEntityReferenceID",
 }
 
 #[doc = r#"Indicates the Approach Angle either in Azimuth / Elevation or a unit vector relative to the body coordinate system of the target."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ApproachAngleTypeSerde")]
-#[serde(try_from = "ApproachAngleTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ApproachAngleType {
 	#[doc = r#"Indicates the Azimuth and Elevation of the approach angle."#]
 	AzEl(crate::v5_0::types::AzElReferenceType),
 	#[doc = r#"Indicates a unit vector relative to the coordinate system of the target."#]
 	Relative(crate::v5_0::types::UnitVectorType),
 }
-choice_convert_impls! {
-	ApproachAngleType - ApproachAngleTypeSerde
-	AzEl,
-	Relative,
+struct_like_serde! {
+	ApproachAngleType
+	AzEl -> "AzEl",
+	Relative -> "Relative",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ApprovalRequestItemReferenceTypeSerde")]
-#[serde(try_from = "ApprovalRequestItemReferenceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ApprovalRequestItemReferenceType {
 	#[doc = r#"Indicates the unique ID of the *Plan that is under review for approval."#]
 	PlanApproval(PlanReferenceIdChoiceType),
@@ -369,17 +324,15 @@ pub enum ApprovalRequestItemReferenceType {
 	#[doc = r#"Indicates the MissionPlanActivationCommand details that are under review for approval. If more than one instance of this element is given, each should correspond to a different MissionPlanID.  For example, if the intent is to transition from one MissionPlan to another, the new MissionPlan can be activated in one instance and the old MissionPlan can be deactivated in another instance.  This transition would be subject to approval."#]
 	MissionPlanActivationApproval(Vec<crate::v5_0::types::MissionPlanActivationCommandType>),
 }
-choice_convert_impls! {
-	ApprovalRequestItemReferenceType - ApprovalRequestItemReferenceTypeSerde
-	PlanApproval,
-	RequirementExecutionApproval,
-	MissionPlanActivationApproval,
+struct_like_serde! {
+	ApprovalRequestItemReferenceType
+	PlanApproval -> "PlanApproval",
+	RequirementExecutionApproval -> "RequirementExecutionApproval",
+	MissionPlanActivationApproval -> "MissionPlanActivationApproval",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ArchiveRequestTypeSerde")]
-#[serde(try_from = "ArchiveRequestTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ArchiveRequestType {
 	#[doc = r#"The item or items should be kept until the Time given by this element."#]
 	Time(chrono::DateTime<chrono::Utc>),
@@ -392,19 +345,17 @@ pub enum ArchiveRequestType {
 	#[doc = r#"The item or items should be kept until the specified number of missions has been exceeded."#]
 	NumberOfMissions(u32),
 }
-choice_convert_impls! {
-	ArchiveRequestType - ArchiveRequestTypeSerde
-	Time,
-	NumberOfDays,
-	SpaceNeeded,
-	ManuallyDeleted,
-	NumberOfMissions,
+struct_like_serde! {
+	ArchiveRequestType
+	Time -> "Time",
+	NumberOfDays -> "NumberOfDays",
+	SpaceNeeded -> "SpaceNeeded",
+	ManuallyDeleted -> "ManuallyDeleted",
+	NumberOfMissions -> "NumberOfMissions",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "AreaChoiceTypeSerde")]
-#[serde(try_from = "AreaChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum AreaChoiceType {
 	#[doc = r#"Specifies the vertices of a polygon; three or more points and sides.   These can be absolute geospatial points or they can be geospatial points relative to a specific reference frame."#]
 	Polygon(crate::v5_0::types::PolygonType),
@@ -415,18 +366,16 @@ pub enum AreaChoiceType {
 	#[doc = r#"An area defined by two ranges and two angles relative to a geospatial point. The geospatial point can be stationary or it can be relative to a moving object/location so its definition is an offset to a location defined in ReferenceFrame.This allows for defining an area around a location/object that is moving, i.e. the area moves along with a system or entity."#]
 	SlantRangeArea(crate::v5_0::types::SlantRangeAreaType),
 }
-choice_convert_impls! {
-	AreaChoiceType - AreaChoiceTypeSerde
-	Polygon,
-	Ellipse,
-	Rectangle,
-	SlantRangeArea,
+struct_like_serde! {
+	AreaChoiceType
+	Polygon -> "Polygon",
+	Ellipse -> "Ellipse",
+	Rectangle -> "Rectangle",
+	SlantRangeArea -> "SlantRangeArea",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "AssessmentRequestTypeSerde")]
-#[serde(try_from = "AssessmentRequestTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum AssessmentRequestType {
 	#[doc = r#"This element is used to specify that communication requests should be assessed, and a Pointing Plan should be generated based on the requests.  The native message is CommPointingPlan."#]
 	CommPointingPlan(crate::v5_0::types::CommPointingPlanRequestType),
@@ -447,23 +396,21 @@ pub enum AssessmentRequestType {
 	#[doc = r#"This element is used to specify that achievability assessment is being requested for the given type of AchievabilityRequest."#]
 	AchievabilityAssessment(crate::v5_0::types::AchievabilityAssessmentRequestPet),
 }
-choice_convert_impls! {
-	AssessmentRequestType - AssessmentRequestTypeSerde
-	CommPointingPlan,
-	CapabilityUtilization,
-	RouteDeconfliction,
-	RouteVulnerabilityMetrics,
-	RouteThreatAssessment,
-	TargetMobility,
-	VehicleThreatAssessment,
-	ThreatNominationAssessment,
-	AchievabilityAssessment,
+struct_like_serde! {
+	AssessmentRequestType
+	CommPointingPlan -> "CommPointingPlan",
+	CapabilityUtilization -> "CapabilityUtilization",
+	RouteDeconfliction -> "RouteDeconfliction",
+	RouteVulnerabilityMetrics -> "RouteVulnerabilityMetrics",
+	RouteThreatAssessment -> "RouteThreatAssessment",
+	TargetMobility -> "TargetMobility",
+	VehicleThreatAssessment -> "VehicleThreatAssessment",
+	ThreatNominationAssessment -> "ThreatNominationAssessment",
+	AchievabilityAssessment -> "AchievabilityAssessment",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "AssessmentTypeSerde")]
-#[serde(try_from = "AssessmentTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum AssessmentType {
 	#[doc = r#"This element defines the response to a communications pointing plan assessment request."#]
 	CommPointingPlan(crate::v5_0::types::CommPointingPlanAssessmentType),
@@ -484,39 +431,35 @@ pub enum AssessmentType {
 	#[doc = r#"This element defines the response to an achievability assessment."#]
 	AchievabilityAssessment(crate::v5_0::types::AchievabilityAssessmentPet),
 }
-choice_convert_impls! {
-	AssessmentType - AssessmentTypeSerde
-	CommPointingPlan,
-	CapabilityUtilization,
-	RouteDeconfliction,
-	RouteVulnerabilityMetrics,
-	RouteThreatAssessment,
-	TargetMobility,
-	VehicleThreatAssessment,
-	ThreatNominationAssessment,
-	AchievabilityAssessment,
+struct_like_serde! {
+	AssessmentType
+	CommPointingPlan -> "CommPointingPlan",
+	CapabilityUtilization -> "CapabilityUtilization",
+	RouteDeconfliction -> "RouteDeconfliction",
+	RouteVulnerabilityMetrics -> "RouteVulnerabilityMetrics",
+	RouteThreatAssessment -> "RouteThreatAssessment",
+	TargetMobility -> "TargetMobility",
+	VehicleThreatAssessment -> "VehicleThreatAssessment",
+	ThreatNominationAssessment -> "ThreatNominationAssessment",
+	AchievabilityAssessment -> "AchievabilityAssessment",
 }
 
 #[doc = r#"Provides a choice between a System and an Entity."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "AssetTypeSerde")]
-#[serde(try_from = "AssetTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum AssetType {
 	#[doc = r#"This element contains the ID of a UCI compliant vehicle which is "discoverable" via published of PositionReports and/or SystemStatus messages."#]
 	SystemId(crate::v5_0::types::SystemIdType),
 	#[doc = r#"This element contains the ID of a protected asset which is not reporting PositionReports and/or SystemStatus messages.  The asset is being tracked and reported as a friendly Entity."#]
 	EntityId(crate::v5_0::types::EntityIdType),
 }
-choice_convert_impls! {
-	AssetType - AssetTypeSerde
-	SystemId,
-	EntityId,
+struct_like_serde! {
+	AssetType
+	SystemId -> "SystemID",
+	EntityId -> "EntityID",
 }
 
 #[doc = r#"Used to reference an associated message or message element which has generated an Activity.."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "AssociatedMessageSourceTypeSerde")]
-#[serde(try_from = "AssociatedMessageSourceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum AssociatedMessageSourceType {
 	#[doc = r#"ID for Settings Command command that defined Bin contents."#]
 	SettingsCommandId(crate::v5_0::types::CommandIdType),
@@ -527,12 +470,12 @@ pub enum AssociatedMessageSourceType {
 	#[doc = r#"Identifies the association between access period and emitter bin."#]
 	EmitterPriorityBinDetail(Vec<crate::v5_0::types::SharedSourceEmitterPriorityBinDetailType>),
 }
-choice_convert_impls! {
-	AssociatedMessageSourceType - AssociatedMessageSourceTypeSerde
-	SettingsCommandId,
-	RfResouceRequestIdandOption,
-	ActiveScanScheduleProfileIndex,
-	EmitterPriorityBinDetail,
+struct_like_serde! {
+	AssociatedMessageSourceType
+	SettingsCommandId -> "SettingsCommandID",
+	RfResouceRequestIdandOption -> "RF_ResouceRequestIDandOption",
+	ActiveScanScheduleProfileIndex -> "ActiveScanScheduleProfileIndex",
+	EmitterPriorityBinDetail -> "EmitterPriorityBinDetail",
 }
 
 #[doc = r#"Encoding types for CVEnumISMatomicEnergyMarkings Version 1 controlled vocabulary enumerations.  Derived from the CVEnumISMatomicEnergyMarkings.xml CVE.(U) All currently valid Atomic Energy information markings from the published register
@@ -541,25 +484,21 @@ choice_convert_impls! {
 						   The permissible values for this simple type are defined in the Controlled Value Enumeration:
 
 						   CVEnumISMatomicEnergyMarkings.xml"#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "AtomicEnergyMarkingsChoiceTypeSerde")]
-#[serde(try_from = "AtomicEnergyMarkingsChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum AtomicEnergyMarkingsChoiceType {
 	#[doc = r#"CVEnumISMatomicEnergyMarkings Values"#]
 	Markings(crate::v5_0::enums::AtomicEnergyMarkingsEnum),
 	#[doc = r#"CVEnumISMatomicEnergyMarkings Patterns"#]
 	SigmaMarkings(crate::v5_0::enums::AtomicEnergySigmaMarkingsEnum),
 }
-choice_convert_impls! {
-	AtomicEnergyMarkingsChoiceType - AtomicEnergyMarkingsChoiceTypeSerde
-	Markings,
-	SigmaMarkings,
+struct_like_serde! {
+	AtomicEnergyMarkingsChoiceType
+	Markings -> "Markings",
+	SigmaMarkings -> "SigmaMarkings",
 }
 
 #[doc = r#"An atomic primitive value."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "AtomicValueTypeSerde")]
-#[serde(try_from = "AtomicValueTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum AtomicValueType {
 	#[doc = r#"A boolean value."#]
 	BooleanValue(bool),
@@ -598,64 +537,58 @@ pub enum AtomicValueType {
 	#[doc = r#"A UUID value."#]
 	UuidValue(uuid::Uuid),
 }
-choice_convert_impls! {
-	AtomicValueType - AtomicValueTypeSerde
-	BooleanValue,
-	ByteValue,
-	UnsignedByteValue,
-	ShortValue,
-	UnsignedShortValue,
-	IntValue,
-	UnsignedIntValue,
-	LongValue,
-	FloatValue,
-	DoubleValue,
-	DateTimeValue,
-	DurationValue,
-	TimeValue,
-	StringValueCaseSensitive,
-	StringValueCaseInsensitive,
-	EnumValue,
-	HexBinaryValue,
-	UuidValue,
+struct_like_serde! {
+	AtomicValueType
+	BooleanValue -> "BooleanValue",
+	ByteValue -> "ByteValue",
+	UnsignedByteValue -> "UnsignedByteValue",
+	ShortValue -> "ShortValue",
+	UnsignedShortValue -> "UnsignedShortValue",
+	IntValue -> "IntValue",
+	UnsignedIntValue -> "UnsignedIntValue",
+	LongValue -> "LongValue",
+	FloatValue -> "FloatValue",
+	DoubleValue -> "DoubleValue",
+	DateTimeValue -> "DateTimeValue",
+	DurationValue -> "DurationValue",
+	TimeValue -> "TimeValue",
+	StringValueCaseSensitive -> "StringValueCaseSensitive",
+	StringValueCaseInsensitive -> "StringValueCaseInsensitive",
+	EnumValue -> "EnumValue",
+	HexBinaryValue -> "HexBinaryValue",
+	UuidValue -> "UUID_Value",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "AutonomousActionStatusChoiceTypeSerde")]
-#[serde(try_from = "AutonomousActionStatusChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum AutonomousActionStatusChoiceType {
 	#[doc = r#"Indicates the status of the autonomous planning action or actions addressing the conflict."#]
 	AutonomousPlanningActionStatus(Vec<crate::v5_0::types::AutonomousPlanningActionStatusType>),
 	#[doc = r#"Indicates the triggering condition for an autonomous action has occurred but no action will be initiated because the PlanningFunction* indicates "Alert Only"."#]
 	AlertOnly(crate::v5_0::common::EmptyType),
 }
-choice_convert_impls! {
-	AutonomousActionStatusChoiceType - AutonomousActionStatusChoiceTypeSerde
-	AutonomousPlanningActionStatus,
-	AlertOnly,
+struct_like_serde! {
+	AutonomousActionStatusChoiceType
+	AutonomousPlanningActionStatus -> "AutonomousPlanningActionStatus",
+	AlertOnly -> "AlertOnly",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "AvailableFuelTypeSerde")]
-#[serde(try_from = "AvailableFuelTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum AvailableFuelType {
 	#[doc = r#"Indicates the actual weight of the fuel remaining."#]
 	Fuel(crate::v5_0::common::MassType),
 	#[doc = r#"Indicates the amount of fuel remaining as a percentage of capacity."#]
 	Percent(crate::v5_0::common::PercentType),
 }
-choice_convert_impls! {
-	AvailableFuelType - AvailableFuelTypeSerde
-	Fuel,
-	Percent,
+struct_like_serde! {
+	AvailableFuelType
+	Fuel -> "Fuel",
+	Percent -> "Percent",
 }
 
 #[doc = r#"Beam pointing reference types which includes Antenna, Body, Inertial, or Geodetic."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "BeamPointingReferenceTypeSerde")]
-#[serde(try_from = "BeamPointingReferenceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum BeamPointingReferenceType {
 	#[doc = r#"Beam pointing in reference to antenna boresight. It is likely that some antenna may be steerable only in azimuth and some may only be steerable in elevation, thus both are optional."#]
 	Antenna(crate::v5_0::types::AzElBeamPointingType),
@@ -666,82 +599,72 @@ pub enum BeamPointingReferenceType {
 	#[doc = r#"Beam pointing in reference to a geodetic point."#]
 	Geodetic(crate::v5_0::types::Point2DType),
 }
-choice_convert_impls! {
-	BeamPointingReferenceType - BeamPointingReferenceTypeSerde
-	Antenna,
-	Body,
-	Inertial,
-	Geodetic,
+struct_like_serde! {
+	BeamPointingReferenceType
+	Antenna -> "Antenna",
+	Body -> "Body",
+	Inertial -> "Inertial",
+	Geodetic -> "Geodetic",
 }
 
 #[doc = r#"This type defines limited Beam Shaping Direction to the Antenna."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "BeamShapingTypeSerde")]
-#[serde(try_from = "BeamShapingTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum BeamShapingType {
 	#[doc = r#"Select the Weighting Function and sidelobe levels."#]
 	BeamWeighting(crate::v5_0::types::BeamWeightingType),
 	#[doc = r#"Set the desired Beam 3 dB Beam Width."#]
 	BeamWidth(crate::v5_0::types::BeamWidthType),
 }
-choice_convert_impls! {
-	BeamShapingType - BeamShapingTypeSerde
-	BeamWeighting,
-	BeamWidth,
+struct_like_serde! {
+	BeamShapingType
+	BeamWeighting -> "BeamWeighting",
+	BeamWidth -> "BeamWidth",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "BlankingSourceTypeSerde")]
-#[serde(try_from = "BlankingSourceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum BlankingSourceType {
 	#[doc = r#"Maximum amount of time blanking is permitted by the sibling SubsystemID.  Set to 0 if blanking of the Activity will not be permitted.  The Tx Subsystem shall not set the TxPercentBlankingLimit for each Subsystem ID to any less than the RF_ResourceAllocation's TxPercentBlankLimit for those Subsystems."#]
 	SubsystemId(crate::v5_0::types::SubsystemIdType),
 	#[doc = r#"In a digital system, the MFA can issue blanking (when a local mode makes an interruption), or the DigitalPayloads can blank one another."#]
 	DigitalPayload(DigitalFunctionType),
 }
-choice_convert_impls! {
-	BlankingSourceType - BlankingSourceTypeSerde
-	SubsystemId,
-	DigitalPayload,
+struct_like_serde! {
+	BlankingSourceType
+	SubsystemId -> "SubsystemID",
+	DigitalPayload -> "DigitalPayload",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "BlueVehicleTypeSerde")]
-#[serde(try_from = "BlueVehicleTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum BlueVehicleType {
 	#[doc = r#"Defines the type of vehicle that the separation parameters apply to."#]
 	EntityIdentity(crate::v5_0::types::IdentityType),
 	#[doc = r#"Defines the type of vehicle that the separation parameters apply to. This field should match the Model defined in SystemStatus."#]
 	Model(crate::v5_0::common::VisibleString32Type),
 }
-choice_convert_impls! {
-	BlueVehicleType - BlueVehicleTypeSerde
-	EntityIdentity,
-	Model,
+struct_like_serde! {
+	BlueVehicleType
+	EntityIdentity -> "EntityIdentity",
+	Model -> "Model",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "BoundaryTypeSerde")]
-#[serde(try_from = "BoundaryTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum BoundaryType {
 	#[doc = r#"Indicates the footprint boundary as a ground/surface polygon, any part of which can be reached given the remaining endurance."#]
 	Polygon(crate::v5_0::types::PolygonType),
 	#[doc = r#"Indicates the footprint boundary as a ground/surface polygon, any part of which can be reached given the remaining endurance."#]
 	Ellipse(crate::v5_0::types::LocatedEllipseType),
 }
-choice_convert_impls! {
-	BoundaryType - BoundaryTypeSerde
-	Polygon,
-	Ellipse,
+struct_like_serde! {
+	BoundaryType
+	Polygon -> "Polygon",
+	Ellipse -> "Ellipse",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "CapabilityAssessmentActionTypeSerde")]
-#[serde(try_from = "CapabilityAssessmentActionTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum CapabilityAssessmentActionType {
 	#[doc = r#"Estimated Capability usage (in terms of Tasks) at the specified assessment position."#]
 	PlannedTaskId(crate::v5_0::types::TaskIdType),
@@ -750,97 +673,85 @@ pub enum CapabilityAssessmentActionType {
 	#[doc = r#"Indicates estimated Supporting Capability usage (in terms of Supporting Capability commands) at the specified assessment position.  This element is of an abstract polymorphic extension type; the SupportCapabilityCommandBaseType PET (PolymorphicExtensionType) used here is an abstract base type that is the parent type for Supporting Capability category specific child types.  This abstract element must be replaced by a Supporting Capability category-specific type to be valid."#]
 	EstimatedSupportingCapabilityCommand(crate::v5_0::types::SupportCapabilityCommandBaseType),
 }
-choice_convert_impls! {
-	CapabilityAssessmentActionType - CapabilityAssessmentActionTypeSerde
-	PlannedTaskId,
-	EstimatedCapabilityCommand,
-	EstimatedSupportingCapabilityCommand,
+struct_like_serde! {
+	CapabilityAssessmentActionType
+	PlannedTaskId -> "PlannedTaskID",
+	EstimatedCapabilityCommand -> "EstimatedCapabilityCommand",
+	EstimatedSupportingCapabilityCommand -> "EstimatedSupportingCapabilityCommand",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "CapabilityAssessmentActivityTypeSerde")]
-#[serde(try_from = "CapabilityAssessmentActivityTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum CapabilityAssessmentActivityType {
 	#[doc = r#"Indicates estimated Capability usage (in terms of Capability Activity report) at the specified assessment position. The ActivityBaseType used for this element should be replaced by a Capability category-specific type to be valid."#]
 	EstimatedCapabilityActivity(crate::v5_0::types::ActivityBaseType),
 	#[doc = r#"Indicates estimated Supporting Capability usage (in terms of Supporting Capability status) at the specified assessment position. The SupportCapabilityStatusBaseType used for this element should be replaced by a Supporting Capability category-specific type to be valid."#]
 	EstimatedSupportingCapabilityReport(crate::v5_0::types::SupportCapabilityStatusBaseType),
 }
-choice_convert_impls! {
-	CapabilityAssessmentActivityType - CapabilityAssessmentActivityTypeSerde
-	EstimatedCapabilityActivity,
-	EstimatedSupportingCapabilityReport,
+struct_like_serde! {
+	CapabilityAssessmentActivityType
+	EstimatedCapabilityActivity -> "EstimatedCapabilityActivity",
+	EstimatedSupportingCapabilityReport -> "EstimatedSupportingCapabilityReport",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "CapabilityCrossReferenceTypeSerde")]
-#[serde(try_from = "CapabilityCrossReferenceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum CapabilityCrossReferenceType {
 	#[doc = r#"Indicates a Capability associated with this Component."#]
 	CapabilityId(crate::v5_0::types::CapabilityIdType),
 	#[doc = r#"Indicates the unique ID of the Support Capability corresponding to this message."#]
 	SupportCapabilityId(crate::v5_0::types::SupportCapabilityIdType),
 }
-choice_convert_impls! {
-	CapabilityCrossReferenceType - CapabilityCrossReferenceTypeSerde
-	CapabilityId,
-	SupportCapabilityId,
+struct_like_serde! {
+	CapabilityCrossReferenceType
+	CapabilityId -> "CapabilityID",
+	SupportCapabilityId -> "SupportCapabilityID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "CargoDeliveryTaskTypeSerde")]
-#[serde(try_from = "CargoDeliveryTaskTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum CargoDeliveryTaskType {
 	#[doc = r#"Indicates the details for cargo pickup."#]
 	Pickup(crate::v5_0::types::CargoTransitionType),
 	#[doc = r#"Indicates the details for cargo dropoff/delivery.  If multiple Dropoff elements are specified, the first element is the primary dropoff point and secondary points follow in priority order, highest to lowest."#]
 	Dropoff(Vec<crate::v5_0::types::CargoTransitionType>),
 }
-choice_convert_impls! {
-	CargoDeliveryTaskType - CargoDeliveryTaskTypeSerde
-	Pickup,
-	Dropoff,
+struct_like_serde! {
+	CargoDeliveryTaskType
+	Pickup -> "Pickup",
+	Dropoff -> "Dropoff",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "CargoLocationTypeSerde")]
-#[serde(try_from = "CargoLocationTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum CargoLocationType {
 	#[doc = r#"When a cargo item is co-located with or being transported by a System, this element, which indicates the unique ID of the System, can be used to infer the cargo location via PositionReport, MissionPlan or other messages."#]
 	SystemId(crate::v5_0::types::SystemIdType),
 	#[doc = r#"Indicates the geospatial position of the cargo item.   Generally, services are encouraged to provide altitude and/or time data whenever it is known."#]
 	Point(crate::v5_0::types::Point2DType),
 }
-choice_convert_impls! {
-	CargoLocationType - CargoLocationTypeSerde
-	SystemId,
-	Point,
+struct_like_serde! {
+	CargoLocationType
+	SystemId -> "SystemID",
+	Point -> "Point",
 }
 
 #[doc = r#"See the annotation in the associated message carrier status data."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "CarrierReferenceIdChoiceTypeSerde")]
-#[serde(try_from = "CarrierReferenceIdChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum CarrierReferenceIdChoiceType {
 	#[doc = r#"Indicates the unique ID of the carrier System for a self-report."#]
 	SystemId(crate::v5_0::types::SystemIdType),
 	#[doc = r#"Indicates the unique Entity ID of the carrier when reported by a third party."#]
 	EntityId(crate::v5_0::types::EntityIdType),
 }
-choice_convert_impls! {
-	CarrierReferenceIdChoiceType - CarrierReferenceIdChoiceTypeSerde
-	SystemId,
-	EntityId,
+struct_like_serde! {
+	CarrierReferenceIdChoiceType
+	SystemId -> "SystemID",
+	EntityId -> "EntityID",
 }
 
 #[doc = r#"The CharacterizationChoiceType is a choice type that allows the user to select a specific type of characterization of the object."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "CharacterizationChoiceTypeSerde")]
-#[serde(try_from = "CharacterizationChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum CharacterizationChoiceType {
 	#[doc = r#"The Frequency parameters are in regards to the RF Frequencies to measure. The min signal strength indicates the lowest threshold of collection. The RF Frequency resolution indicates the granularity of the collection. The frequency range indicates the specific RF band to collect. The optional product resolution time parameter is the minimum amount of time needed to get the desired level of resolution for the product."#]
 	Frequency(crate::v5_0::types::FrequencyParamsType),
@@ -863,24 +774,22 @@ pub enum CharacterizationChoiceType {
 	#[doc = r#"The Color Photometry parameters consist of the desired sensor spectrum to use for the collection. The optional product resolution time parameter is the minimum amount of time needed to get the desired level of resolution for the product."#]
 	ColorPhotometry(crate::v5_0::types::ColorPhotometryParamsType),
 }
-choice_convert_impls! {
-	CharacterizationChoiceType - CharacterizationChoiceTypeSerde
-	Frequency,
-	IrImage,
-	MetricObservations,
-	NarrowbandSoi,
-	OpticalImage,
-	Rcs,
-	VisMag,
-	WidebandSoi,
-	Photometry,
-	ColorPhotometry,
+struct_like_serde! {
+	CharacterizationChoiceType
+	Frequency -> "Frequency",
+	IrImage -> "IR_Image",
+	MetricObservations -> "MetricObservations",
+	NarrowbandSoi -> "Narrowband_SOI",
+	OpticalImage -> "OpticalImage",
+	Rcs -> "RCS",
+	VisMag -> "VisMag",
+	WidebandSoi -> "Wideband_SOI",
+	Photometry -> "Photometry",
+	ColorPhotometry -> "ColorPhotometry",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "CharacterizationObjectiveTypeSerde")]
-#[serde(try_from = "CharacterizationObjectiveTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum CharacterizationObjectiveType {
 	#[doc = r#"Indicates a task to characterize an object using one or more specified phenomenologies."#]
 	PhenomenologyCollection(crate::v5_0::types::CharacterizationOptionsType),
@@ -893,19 +802,17 @@ pub enum CharacterizationObjectiveType {
 	#[doc = r#"Indicates a task to perform collections to detect operations changes of the target object."#]
 	OperationsChanges(crate::v5_0::types::SatelliteOperationsChangesCharacterizationType),
 }
-choice_convert_impls! {
-	CharacterizationObjectiveType - CharacterizationObjectiveTypeSerde
-	PhenomenologyCollection,
-	StabilityAndOrientationAssessment,
-	StructureAssessment,
-	IdentificationVerification,
-	OperationsChanges,
+struct_like_serde! {
+	CharacterizationObjectiveType
+	PhenomenologyCollection -> "PhenomenologyCollection",
+	StabilityAndOrientationAssessment -> "StabilityAndOrientationAssessment",
+	StructureAssessment -> "StructureAssessment",
+	IdentificationVerification -> "IdentificationVerification",
+	OperationsChanges -> "OperationsChanges",
 }
 
 #[doc = r#"Used to specify the choice Civil Path Terminator Type associated with the End Point, to include its specific parameters needed."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "CivilPathTerminatorTypeSerde")]
-#[serde(try_from = "CivilPathTerminatorTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum CivilPathTerminatorType {
 	#[doc = r#"Arc to Fix Civil Path Terminator Type. This element's children elements are subject to change over the course of development."#]
 	AfArcToFix(crate::v5_0::common::EmptyType),
@@ -954,53 +861,49 @@ pub enum CivilPathTerminatorType {
 	#[doc = r#"Heading to Radial Termination Civil Path Terminator Type. This element's children elements are subject to change over the course of development."#]
 	VrHeadingToRadialTermination(crate::v5_0::common::EmptyType),
 }
-choice_convert_impls! {
-	CivilPathTerminatorType - CivilPathTerminatorTypeSerde
-	AfArcToFix,
-	CaCourseToAltitude,
-	CdCourseToDmedistance,
-	CfCourseToFix,
-	CiCourseToIntercept,
-	CrCourseToRadial,
-	DfDirectToFix,
-	FaTrackToAltitude,
-	FcTrackFromFixToDistanceAlongTrack,
-	FdTrackFromFixToDmedistance,
-	FmFixToManualTermination,
-	HaHoldingWithAltitudeTermination,
-	HfHoldingWithFixTermination,
-	HmHoldingWithManualTermination,
-	IfInitialFix,
-	PiProcedureTurnToIntercept,
-	RfRadiusToFix,
-	TfTrackToFix,
-	VaHeadingToAltitude,
-	VdHeadingToDmedistanceTermination,
-	ViHeadingToIntercept,
-	VmHeadingToManual,
-	VrHeadingToRadialTermination,
+struct_like_serde! {
+	CivilPathTerminatorType
+	AfArcToFix -> "AF_ArcToFix",
+	CaCourseToAltitude -> "CA_CourseToAltitude",
+	CdCourseToDmedistance -> "CD_CourseToDMEDistance",
+	CfCourseToFix -> "CF_CourseToFix",
+	CiCourseToIntercept -> "CI_CourseToIntercept",
+	CrCourseToRadial -> "CR_CourseToRadial",
+	DfDirectToFix -> "DF_DirectToFix",
+	FaTrackToAltitude -> "FA_TrackToAltitude",
+	FcTrackFromFixToDistanceAlongTrack -> "FC_TrackFromFixToDistanceAlongTrack",
+	FdTrackFromFixToDmedistance -> "FD_TrackFromFixToDMEDistance",
+	FmFixToManualTermination -> "FM_FixToManualTermination",
+	HaHoldingWithAltitudeTermination -> "HA_HoldingWithAltitudeTermination",
+	HfHoldingWithFixTermination -> "HF_HoldingWithFixTermination",
+	HmHoldingWithManualTermination -> "HM_HoldingWithManualTermination",
+	IfInitialFix -> "IF_InitialFix",
+	PiProcedureTurnToIntercept -> "PI_ProcedureTurnToIntercept",
+	RfRadiusToFix -> "RF_RadiusToFix",
+	TfTrackToFix -> "TF_TrackToFix",
+	VaHeadingToAltitude -> "VA_HeadingToAltitude",
+	VdHeadingToDmedistanceTermination -> "VD_HeadingToDMEDistanceTermination",
+	ViHeadingToIntercept -> "VI_HeadingToIntercept",
+	VmHeadingToManual -> "VM_HeadingToManual",
+	VrHeadingToRadialTermination -> "VR_HeadingToRadialTermination",
 }
 
 #[doc = r#"Indicates the orientation of the orbital plane in space and of the orbit within its plane."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "CoeOrientationTypeSerde")]
-#[serde(try_from = "CoeOrientationTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum CoeOrientationType {
 	#[doc = r#"Indicates that the orbit is non-equatorial. A non-equatorial orbit is an orbit with a non-zero inclination."#]
 	NonEquatorialOrbit(crate::v5_0::types::CoeNonEquatorialOrientationType),
 	#[doc = r#"Indicates the angle measured from the principal direction to perigee in the direction of the spacecraft's motion.  Used for equatorial orbit where RAAN and argument of perigee are undefined.  Units in radians.  Valid values range from zero to 2*PI."#]
 	EquatorialOrbit(crate::v5_0::types::CoeEquatorialOrientationType),
 }
-choice_convert_impls! {
-	CoeOrientationType - CoeOrientationTypeSerde
-	NonEquatorialOrbit,
-	EquatorialOrbit,
+struct_like_serde! {
+	CoeOrientationType
+	NonEquatorialOrbit -> "NonEquatorialOrbit",
+	EquatorialOrbit -> "EquatorialOrbit",
 }
 
 #[doc = r#"Indicates the set of classic orbital elements (COE) describing a spacecraft's position in an orbit.  Elements describing the size, shape and other characteristics of the orbit are in other types."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "CoePositionTypeSerde")]
-#[serde(try_from = "CoePositionTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum CoePositionType {
 	#[doc = r#"Indicates position of the spacecraft expressed as the angular distance from the pericenter which a fictitious body would have if it moved in a circular orbit, with constant speed, in the same orbital period as the actual body in its elliptical orbit. This means of expressing position is used for non-circular orbits.  Units in radians. Valid values range from zero to 2*PI()."#]
 	MeanAnomaly(crate::v5_0::common::AnglePositiveType),
@@ -1009,33 +912,29 @@ pub enum CoePositionType {
 	#[doc = r#"Indicates the position expressed as the angle from the principal direction (vernal equinox direction) to the spacecraft's position vector in the direction of the spacecraft's motion.  This means of expressing position is used for circular equatorial orbits where mean anomaly and argument of perigee are undefined.  Units in radians. Valid values range from zero to 2*PI()."#]
 	TrueLongitude(crate::v5_0::common::AnglePositiveType),
 }
-choice_convert_impls! {
-	CoePositionType - CoePositionTypeSerde
-	MeanAnomaly,
-	ArgumentOfLatitude,
-	TrueLongitude,
+struct_like_serde! {
+	CoePositionType
+	MeanAnomaly -> "MeanAnomaly",
+	ArgumentOfLatitude -> "ArgumentOfLatitude",
+	TrueLongitude -> "TrueLongitude",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ComintCommandTypeSerde")]
-#[serde(try_from = "ComintCommandTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ComintCommandType {
 	#[doc = r#"Indicates a new invocation of a COMINT Capability.  Generally, if accepted, the command will result in one or more new Activities being created and reported via the COMINT_Activity message.  The request/response interaction terminates as soon as the command is accepted or rejected; this element is not used to interact with an "active" command.  Updates and/or additional interaction with the resulting Activity (after the command is accepted) is accomplished via the sibling Activity element."#]
 	Capability(crate::v5_0::types::ComintCapabilityCommandType),
 	#[doc = r#"Indicates a command to modify an existing Activity (which was previously reported via the Activity message and was marked as "interactive").  The request/response interaction terminates as soon as the modification is accepted or rejected.  The modifications are reflected in subsequent Activity messages."#]
 	Activity(crate::v5_0::types::ComintActivityCommandType),
 }
-choice_convert_impls! {
-	ComintCommandType - ComintCommandTypeSerde
-	Capability,
-	Activity,
+struct_like_serde! {
+	ComintCommandType
+	Capability -> "Capability",
+	Activity -> "Activity",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ComintSubCapabilityDetailsTypeSerde")]
-#[serde(try_from = "ComintSubCapabilityDetailsTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ComintSubCapabilityDetailsType {
 	#[doc = r#"Indicates a target the Activity is attempting to acquire."#]
 	Acquisition(crate::v5_0::types::ComintAcquisitionTargetType),
@@ -1048,19 +947,17 @@ pub enum ComintSubCapabilityDetailsType {
 	#[doc = r#"Indicates a target the Activity is attempting to determine a finer measurement of the target."#]
 	Measurement(crate::v5_0::types::ComintMeasurementType),
 }
-choice_convert_impls! {
-	ComintSubCapabilityDetailsType - ComintSubCapabilityDetailsTypeSerde
-	Acquisition,
-	DirectionFinding,
-	Identification,
-	Geolocation,
-	Measurement,
+struct_like_serde! {
+	ComintSubCapabilityDetailsType
+	Acquisition -> "Acquisition",
+	DirectionFinding -> "DirectionFinding",
+	Identification -> "Identification",
+	Geolocation -> "Geolocation",
+	Measurement -> "Measurement",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ComintSubcapabilityChoiceTypeSerde")]
-#[serde(try_from = "ComintSubcapabilityChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ComintSubcapabilityChoiceType {
 	#[doc = r#"Indicates details for a Command or Task that invokes an acquisition related Subcapability of the associated Capability.  This element is required when an acquisition related Subcapability is being invoked."#]
 	Acquisition(crate::v5_0::types::ComintSubcapabilityAcquisitionType),
@@ -1073,19 +970,17 @@ pub enum ComintSubcapabilityChoiceType {
 	#[doc = r#"Indicates details for a Command or Task that invokes a pulse data collection related Subcapability of the associated Capability.  This element is required when a pulse data collection related Subcapability is being invoked."#]
 	DataCollect(crate::v5_0::types::ComintSubcapabilityDataCollectType),
 }
-choice_convert_impls! {
-	ComintSubcapabilityChoiceType - ComintSubcapabilityChoiceTypeSerde
-	Acquisition,
-	Identification,
-	Geolocation,
-	Measurement,
-	DataCollect,
+struct_like_serde! {
+	ComintSubcapabilityChoiceType
+	Acquisition -> "Acquisition",
+	Identification -> "Identification",
+	Geolocation -> "Geolocation",
+	Measurement -> "Measurement",
+	DataCollect -> "Data_Collect",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ComintSubcapabilityTargetLocationDataTypeSerde")]
-#[serde(try_from = "ComintSubcapabilityTargetLocationDataTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ComintSubcapabilityTargetLocationDataType {
 	#[doc = r#"Indicates the EntityID associated with the pulse data collection."#]
 	EntityId(crate::v5_0::types::EntityIdType),
@@ -1094,17 +989,15 @@ pub enum ComintSubcapabilityTargetLocationDataType {
 	#[doc = r#"Indicates the Point Target details associated with the pulse data collection."#]
 	PointTarget(crate::v5_0::types::PointTargetType),
 }
-choice_convert_impls! {
-	ComintSubcapabilityTargetLocationDataType - ComintSubcapabilityTargetLocationDataTypeSerde
-	EntityId,
-	DwellFov,
-	PointTarget,
+struct_like_serde! {
+	ComintSubcapabilityTargetLocationDataType
+	EntityId -> "EntityID",
+	DwellFov -> "DwellFOV",
+	PointTarget -> "PointTarget",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ComintTargetTypeSerde")]
-#[serde(try_from = "ComintTargetTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ComintTargetType {
 	#[doc = r#"Indicates the unique ID of a specific Entity that is a target of the acquisition."#]
 	EntityId(crate::v5_0::types::EntityIdType),
@@ -1119,20 +1012,18 @@ pub enum ComintTargetType {
 	#[doc = r#"Supplements the DwellTarget identification with more general classes of signals to be looked for, such as "CW"."#]
 	TargetClass(crate::v5_0::types::ForeignKeyType),
 }
-choice_convert_impls! {
-	ComintTargetType - ComintTargetTypeSerde
-	EntityId,
-	EmitterType,
-	SpecificEmitter,
-	SignalDescription,
-	SignalId,
-	TargetClass,
+struct_like_serde! {
+	ComintTargetType
+	EntityId -> "EntityID",
+	EmitterType -> "EmitterType",
+	SpecificEmitter -> "SpecificEmitter",
+	SignalDescription -> "SignalDescription",
+	SignalId -> "SignalID",
+	TargetClass -> "TargetClass",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "CommLinkDetailsTypeSerde")]
-#[serde(try_from = "CommLinkDetailsTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum CommLinkDetailsType {
 	#[doc = r#"Indicates the uplink and downlink data rate in bits per second when the network is configured to use a Full Duplex communication system."#]
 	FullDuplex(crate::v5_0::types::LinkRatesType),
@@ -1143,66 +1034,58 @@ pub enum CommLinkDetailsType {
 	#[doc = r#"Indicates the data rate in bits per second when the network is configured to use a communication system that can only receive data, and is not able to transmit."#]
 	RxSimplex(crate::v5_0::common::DataRateType),
 }
-choice_convert_impls! {
-	CommLinkDetailsType - CommLinkDetailsTypeSerde
-	FullDuplex,
-	TxSimplex,
-	HalfDuplex,
-	RxSimplex,
+struct_like_serde! {
+	CommLinkDetailsType
+	FullDuplex -> "FullDuplex",
+	TxSimplex -> "TxSimplex",
+	HalfDuplex -> "HalfDuplex",
+	RxSimplex -> "RxSimplex",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "CommRangeDelayChoiceTypeSerde")]
-#[serde(try_from = "CommRangeDelayChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum CommRangeDelayChoiceType {
 	#[doc = r#"When Range Mode is Active, no time delay is specified (EmptyType) between sending a signal from the terminal to the satellite and from the satellite back to the terminal."#]
 	Active(crate::v5_0::common::EmptyType),
 	#[doc = r#"When Range Mode is Passive, the time delay is specified in seconds (DurationType) between sending a signal from the terminal to the satellite and from the satellite back to the terminal."#]
 	Passive(chrono::TimeDelta),
 }
-choice_convert_impls! {
-	CommRangeDelayChoiceType - CommRangeDelayChoiceTypeSerde
-	Active,
-	Passive,
+struct_like_serde! {
+	CommRangeDelayChoiceType
+	Active -> "Active",
+	Passive -> "Passive",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "CommRelayCommandTypeSerde")]
-#[serde(try_from = "CommRelayCommandTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum CommRelayCommandType {
 	#[doc = r#"Indicates a new invocation of a CommRelay Capability.  Generally, if accepted, the command will result in one or more new CommRelay Activities being created and reported via the CommRelayActivity message.  The request/response interaction terminates as soon as the command is accepted or rejected; this element is not used to interact with an "active" command.  Updates and/or additional interaction with the resulting Activity (after the command is accepted) is accomplished via the sibling Activity element."#]
 	Capability(crate::v5_0::types::CommRelayCapabilityCommandType),
 	#[doc = r#"Indicates a command to modify an existing CommRelay Activity (which was previously reported via the CommRelayActivity message and was marked as "interactive").  The request/response interaction terminates as soon as the modification is accepted or rejected.  The modifications are reflected in subsequent CommRelayActivity messages."#]
 	Activity(crate::v5_0::types::ActivityCommandBaseType),
 }
-choice_convert_impls! {
-	CommRelayCommandType - CommRelayCommandTypeSerde
-	Capability,
-	Activity,
+struct_like_serde! {
+	CommRelayCommandType
+	Capability -> "Capability",
+	Activity -> "Activity",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "CommTerminalCommandTypeSerde")]
-#[serde(try_from = "CommTerminalCommandTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum CommTerminalCommandType {
 	#[doc = r#"Indicates a new invocation of a Waveform Capability.  Generally, if accepted, the command will result in one or more new Waveform Activities being created and reported via the Waveform Activity message.  The request/response interaction terminates as soon as the command is accepted or rejected; this element is not used to interact with an "active" command.  Updates and/or additional interaction with the resulting Activity (after the command is accepted) is accomplished via the sibling Activity element."#]
 	Capability(crate::v5_0::types::CommTerminalCapabilityCommandType),
 	#[doc = r#"Indicates a command to modify an existing Waveform Activity (which was previously reported via the Waveform Activity message and was marked as "interactive").  The request/response interaction terminates as soon as the modification is accepted or rejected.  The modifications are reflected in subsequent CommActivity messages."#]
 	Activity(crate::v5_0::types::CommTerminalActivityCommandType),
 }
-choice_convert_impls! {
-	CommTerminalCommandType - CommTerminalCommandTypeSerde
-	Capability,
-	Activity,
+struct_like_serde! {
+	CommTerminalCommandType
+	Capability -> "Capability",
+	Activity -> "Activity",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "CommandResponseTypeSerde")]
-#[serde(try_from = "CommandResponseTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum CommandResponseType {
 	#[doc = r#"Indicates an AirSampleCommand response is required."#]
 	AirSample(crate::v5_0::types::AirSampleCommandResponseType),
@@ -1229,26 +1112,24 @@ pub enum CommandResponseType {
 	#[doc = r#"Selection indicates a Weather Radar capability command response is required."#]
 	WeatherRadar(crate::v5_0::common::EmptyType),
 }
-choice_convert_impls! {
-	CommandResponseType - CommandResponseTypeSerde
-	AirSample,
-	Amti,
-	Ao,
-	Comint,
-	CommRelay,
-	Ea,
-	Esm,
-	Po,
-	Sar,
-	Smti,
-	Strike,
-	WeatherRadar,
+struct_like_serde! {
+	CommandResponseType
+	AirSample -> "AirSample",
+	Amti -> "AMTI",
+	Ao -> "AO",
+	Comint -> "COMINT",
+	CommRelay -> "CommRelay",
+	Ea -> "EA",
+	Esm -> "ESM",
+	Po -> "PO",
+	Sar -> "SAR",
+	Smti -> "SMTI",
+	Strike -> "Strike",
+	WeatherRadar -> "WeatherRadar",
 }
 
 #[doc = r#"A comparable atomic primitive value."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ComparableAtomicValueTypeSerde")]
-#[serde(try_from = "ComparableAtomicValueTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ComparableAtomicValueType {
 	#[doc = r#"A byte value."#]
 	ByteValue(i8),
@@ -1277,91 +1158,81 @@ pub enum ComparableAtomicValueType {
 	#[doc = r#"A string value. String values are compared by the Unicode Collation Algorithm."#]
 	StringValue(crate::v5_0::common::QueryString4096Type),
 }
-choice_convert_impls! {
-	ComparableAtomicValueType - ComparableAtomicValueTypeSerde
-	ByteValue,
-	UnsignedByteValue,
-	ShortValue,
-	UnsignedShortValue,
-	IntValue,
-	UnsignedIntValue,
-	LongValue,
-	FloatValue,
-	DoubleValue,
-	DateTimeValue,
-	DurationValue,
-	TimeValue,
-	StringValue,
+struct_like_serde! {
+	ComparableAtomicValueType
+	ByteValue -> "ByteValue",
+	UnsignedByteValue -> "UnsignedByteValue",
+	ShortValue -> "ShortValue",
+	UnsignedShortValue -> "UnsignedShortValue",
+	IntValue -> "IntValue",
+	UnsignedIntValue -> "UnsignedIntValue",
+	LongValue -> "LongValue",
+	FloatValue -> "FloatValue",
+	DoubleValue -> "DoubleValue",
+	DateTimeValue -> "DateTimeValue",
+	DurationValue -> "DurationValue",
+	TimeValue -> "TimeValue",
+	StringValue -> "StringValue",
 }
 
 #[doc = r#"The choice type for component configuration type.  Used within the component configuration type to allow representing a recursive tree structure of components/units/parts within a component."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ComponentConfigurationChoiceTypeSerde")]
-#[serde(try_from = "ComponentConfigurationChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ComponentConfigurationChoiceType {
 	#[doc = r#"List of component configurations.  This can be used to specify a recursive tree structure."#]
 	ComponentConfigurationList(Vec<crate::v5_0::types::ComponentConfigurationPet>),
 	#[doc = r#"A uci:EmptyType used to signal the end of recursion."#]
 	Terminator(crate::v5_0::common::EmptyType),
 }
-choice_convert_impls! {
-	ComponentConfigurationChoiceType - ComponentConfigurationChoiceTypeSerde
-	ComponentConfigurationList,
-	Terminator,
+struct_like_serde! {
+	ComponentConfigurationChoiceType
+	ComponentConfigurationList -> "ComponentConfigurationList",
+	Terminator -> "Terminator",
 }
 
 #[doc = r#"Indicates an externally defined identifier for a type of component element that is specific to a system, subsystem, component, or service."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ComponentElementIdentifierChoiceTypeSerde")]
-#[serde(try_from = "ComponentElementIdentifierChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ComponentElementIdentifierChoiceType {
 	#[doc = r#"Indicates an externally defined numeric identifier for a type of component element that is specific to a system, subsystem, component, or service."#]
 	ComponentElementNumericIdentifier(u32),
 	#[doc = r#"Indicates an externally defined text identifier for a type of component element that is specific to a system, subsystem, component, or service."#]
 	ComponentElementKey(crate::v5_0::types::ForeignKeyType),
 }
-choice_convert_impls! {
-	ComponentElementIdentifierChoiceType - ComponentElementIdentifierChoiceTypeSerde
-	ComponentElementNumericIdentifier,
-	ComponentElementKey,
+struct_like_serde! {
+	ComponentElementIdentifierChoiceType
+	ComponentElementNumericIdentifier -> "ComponentElementNumericIdentifier",
+	ComponentElementKey -> "ComponentElementKey",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ComponentResourceTypeSerde")]
-#[serde(try_from = "ComponentResourceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ComponentResourceType {
 	#[doc = r#"Allows the requester to identify RF aperture and payload resources, connected through an RF Distribution matrix and controlled by an RF Distribution and Control Subsystem. If AntennaResourceAndBeamConfigurations or SelectPayloadResource are not present, they are controlled by the DependentActivity."#]
 	SelectRfComponents(crate::v5_0::types::SelectRfComponentResourceType),
 	#[doc = r#"Allows the requester to identify digital MFA and digital MFP resources, along with sample rates and network rates, connected on a digital backbone. If MFA_Address or MFP_Address are not populated, they are controlled by the DependentActivity."#]
 	SelectDigitalComponents(crate::v5_0::types::SelectDigitalComponentResourceType),
 }
-choice_convert_impls! {
-	ComponentResourceType - ComponentResourceTypeSerde
-	SelectRfComponents,
-	SelectDigitalComponents,
+struct_like_serde! {
+	ComponentResourceType
+	SelectRfComponents -> "SelectRF_Components",
+	SelectDigitalComponents -> "SelectDigitalComponents",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ConfigurationParameterValueRestrictionsTypeSerde")]
-#[serde(try_from = "ConfigurationParameterValueRestrictionsTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ConfigurationParameterValueRestrictionsType {
 	#[doc = r#"Specifies the list of supported enumerate values.  This value should be populated if and only if the Type element has been set to ENUM."#]
 	Enumeration(Vec<crate::v5_0::common::VisibleString32Type>),
 	#[doc = r#"Specifies the range of the parameter.  This value only applies to a parameter type of FLOAT and INT."#]
 	Range(crate::v5_0::types::ConfigurationParameterRangeType),
 }
-choice_convert_impls! {
-	ConfigurationParameterValueRestrictionsType - ConfigurationParameterValueRestrictionsTypeSerde
-	Enumeration,
-	Range,
+struct_like_serde! {
+	ConfigurationParameterValueRestrictionsType
+	Enumeration -> "Enumeration",
+	Range -> "Range",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ContingencyPathSpacingTypeSerde")]
-#[serde(try_from = "ContingencyPathSpacingTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ContingencyPathSpacingType {
 	#[doc = r#"Time along the primary path between contingency path start points."#]
 	Duration(chrono::TimeDelta),
@@ -1370,81 +1241,71 @@ pub enum ContingencyPathSpacingType {
 	#[doc = r#"Specifies that contingency paths should be generated starting at previously existing segment endpoints that are contained in the system's primary path."#]
 	Endpoints(crate::v5_0::common::EmptyType),
 }
-choice_convert_impls! {
-	ContingencyPathSpacingType - ContingencyPathSpacingTypeSerde
-	Duration,
-	Distance,
-	Endpoints,
+struct_like_serde! {
+	ContingencyPathSpacingType
+	Duration -> "Duration",
+	Distance -> "Distance",
+	Endpoints -> "Endpoints",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ControlInterfacesControlTypeSerde")]
-#[serde(try_from = "ControlInterfacesControlTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ControlInterfacesControlType {
 	#[doc = r#"Indicates commanded settings for mission control."#]
 	MissionControl(crate::v5_0::types::MissionControlInterfacesCommandType),
 	#[doc = r#"Indicates commanded settings for capability control.  Includes associated Capability ID and optional capability control interfaces and optional capability manager that is allowed to control this capability."#]
 	CapabilityControl(Vec<crate::v5_0::types::ControlInterfacesCapabilityControlType>),
 }
-choice_convert_impls! {
-	ControlInterfacesControlType - ControlInterfacesControlTypeSerde
-	MissionControl,
-	CapabilityControl,
+struct_like_serde! {
+	ControlInterfacesControlType
+	MissionControl -> "MissionControl",
+	CapabilityControl -> "CapabilityControl",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ControlSourcesControlTypeSerde")]
-#[serde(try_from = "ControlSourcesControlTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ControlSourcesControlType {
 	#[doc = r#"Indicates the unique ID of the System that has mission control."#]
 	ControllerSystemId(crate::v5_0::types::SystemIdType),
 	#[doc = r#"Indicates the controllers that have Capability control."#]
 	CapabilityControl(Vec<crate::v5_0::types::ControlSourcesCapabilityControlType>),
 }
-choice_convert_impls! {
-	ControlSourcesControlType - ControlSourcesControlTypeSerde
-	ControllerSystemId,
-	CapabilityControl,
+struct_like_serde! {
+	ControlSourcesControlType
+	ControllerSystemId -> "ControllerSystemID",
+	CapabilityControl -> "CapabilityControl",
 }
 
 #[doc = r#"Choice indicating transfer of control, or the details of the new control status."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ControlTransferChoiceTypeSerde")]
-#[serde(try_from = "ControlTransferChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ControlTransferChoiceType {
 	#[doc = r#"The mission control status that will be replacing the current control."#]
 	InProgress(crate::v5_0::common::EmptyType),
 	#[doc = r#"The mission control status that will be replacing the current control."#]
 	NewMissionControl(crate::v5_0::types::ControlStatusMissionControlType),
 }
-choice_convert_impls! {
-	ControlTransferChoiceType - ControlTransferChoiceTypeSerde
-	InProgress,
-	NewMissionControl,
+struct_like_serde! {
+	ControlTransferChoiceType
+	InProgress -> "InProgress",
+	NewMissionControl -> "NewMissionControl",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "CountryCodeTypeSerde")]
-#[serde(try_from = "CountryCodeTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum CountryCodeType {
 	#[doc = r#"Indicates the actual Country name from the GENC Standard.  It is important to note that FIPS PUB 10-4 and GEC are not explicitly supported; there will be no Country names that conform to either FIPS PUB 10-4 or GEC legacy standards."#]
 	CountryName(crate::v5_0::enums::GencCountryNameEnum),
 	#[doc = r#"Indicates a name for an affiliated asset reported by the Operator(s) that is outside the scope of the GENC Standard."#]
 	OperatorUniqueAssetName(crate::v5_0::enums::OperatorUniqueNameEnum),
 }
-choice_convert_impls! {
-	CountryCodeType - CountryCodeTypeSerde
-	CountryName,
-	OperatorUniqueAssetName,
+struct_like_serde! {
+	CountryCodeType
+	CountryName -> "CountryName",
+	OperatorUniqueAssetName -> "OperatorUniqueAssetName",
 }
 
 #[doc = r#"This type represents the source of a key."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "CryptoKeySourceTypeSerde")]
-#[serde(try_from = "CryptoKeySourceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum CryptoKeySourceType {
 	#[doc = r#"Indicates a file to read the key from.  Would support either a red or black key file (usually black) depending on system design."#]
 	KeyFileId(crate::v5_0::types::FileLocationIdType),
@@ -1453,17 +1314,15 @@ pub enum CryptoKeySourceType {
 	#[doc = r#"Indicates to initiate an over the air management action associated with the identified key.  Valid for those crypto capable capabilities that have receive / transmit capability."#]
 	Otam(crate::v5_0::enums::CryptoOtamEnum),
 }
-choice_convert_impls! {
-	CryptoKeySourceType - CryptoKeySourceTypeSerde
-	KeyFileId,
-	Ds101,
-	Otam,
+struct_like_serde! {
+	CryptoKeySourceType
+	KeyFileId -> "KeyFileID",
+	Ds101 -> "DS101",
+	Otam -> "OTAM",
 }
 
 #[doc = r#"This type indicates the particular kind of CSO and provides additional details about the characteristics of the event."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "CsoDetailsTypeSerde")]
-#[serde(try_from = "CsoDetailsTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum CsoDetailsType {
 	#[doc = r#"Indicates CSO consistent with spacecraft docking. Involves the joining and mating of two separate vehicles or satellites. This also includes berthing of two separate spacecraft, where an interface (e.g. robotic arm)  is used to connect an inactive module/vehicle to an active module/vehicle."#]
 	DockingEvent(crate::v5_0::types::OrbitalDockingEventType),
@@ -1476,35 +1335,31 @@ pub enum CsoDetailsType {
 	#[doc = r#"Indicates CSO consistent with spacecraft proximity operations. This is a phase of a rendezvous maneuver in which a satellite approaches another satellite more closely."#]
 	ProximityOperationsEvent(crate::v5_0::types::OrbitalProximityOperationsEventType),
 }
-choice_convert_impls! {
-	CsoDetailsType - CsoDetailsTypeSerde
-	DockingEvent,
-	UndockingEvent,
-	SeparationEvent,
-	RendezvousEvent,
-	ProximityOperationsEvent,
+struct_like_serde! {
+	CsoDetailsType
+	DockingEvent -> "DockingEvent",
+	UndockingEvent -> "UndockingEvent",
+	SeparationEvent -> "SeparationEvent",
+	RendezvousEvent -> "RendezvousEvent",
+	ProximityOperationsEvent -> "ProximityOperationsEvent",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "DamageEstimateTargetTypeSerde")]
-#[serde(try_from = "DamageEstimateTargetTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum DamageEstimateTargetType {
 	#[doc = r#"Indicates the weaponeering to use for the estimate should come from an existing Task and existing DMPI associated with the Task."#]
 	TaskId(crate::v5_0::types::TaskIdType),
 	#[doc = r#"Indicates the weaponeering to use for the estimate should come from that matched to an existing target and existing DMPI associated with the target."#]
 	Target(TargetType),
 }
-choice_convert_impls! {
-	DamageEstimateTargetType - DamageEstimateTargetTypeSerde
-	TaskId,
-	Target,
+struct_like_serde! {
+	DamageEstimateTargetType
+	TaskId -> "TaskID",
+	Target -> "Target",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "DamageObjectClassTypeSerde")]
-#[serde(try_from = "DamageObjectClassTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum DamageObjectClassType {
 	#[doc = r#"Indicates the object is a general platform or category."#]
 	PlatformType(crate::v5_0::types::PlatformIdentityType),
@@ -1513,17 +1368,15 @@ pub enum DamageObjectClassType {
 	#[doc = r#"Indicates the object is a human."#]
 	Human(crate::v5_0::common::EmptyType),
 }
-choice_convert_impls! {
-	DamageObjectClassType - DamageObjectClassTypeSerde
-	PlatformType,
-	SpecificType,
-	Human,
+struct_like_serde! {
+	DamageObjectClassType
+	PlatformType -> "PlatformType",
+	SpecificType -> "SpecificType",
+	Human -> "Human",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "DamageSubjectTypeSerde")]
-#[serde(try_from = "DamageSubjectTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum DamageSubjectType {
 	#[doc = r#"Indicates unique ID of a Task associated with the damage."#]
 	TaskId(Vec<crate::v5_0::types::TaskIdType>),
@@ -1532,17 +1385,15 @@ pub enum DamageSubjectType {
 	#[doc = r#"Indicates the location associated with the damage."#]
 	Point(crate::v5_0::types::Point2DType),
 }
-choice_convert_impls! {
-	DamageSubjectType - DamageSubjectTypeSerde
-	TaskId,
-	Target,
-	Point,
+struct_like_serde! {
+	DamageSubjectType
+	TaskId -> "TaskID",
+	Target -> "Target",
+	Point -> "Point",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "DamageTypeSerde")]
-#[serde(try_from = "DamageTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum DamageType {
 	#[doc = r#"Details on that damage estimated for the ObjectType."#]
 	FunctionalDamage(crate::v5_0::types::DamagedFunctionType),
@@ -1551,49 +1402,43 @@ pub enum DamageType {
 	#[doc = r#"Information relating to people injured."#]
 	HumanInjury(crate::v5_0::common::EmptyType),
 }
-choice_convert_impls! {
-	DamageType - DamageTypeSerde
-	FunctionalDamage,
-	HumanCasualty,
-	HumanInjury,
+struct_like_serde! {
+	DamageType
+	FunctionalDamage -> "FunctionalDamage",
+	HumanCasualty -> "HumanCasualty",
+	HumanInjury -> "HumanInjury",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "DamagedObjectIdentityTypeSerde")]
-#[serde(try_from = "DamagedObjectIdentityTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum DamagedObjectIdentityType {
 	#[doc = r#"Indicates a possible "platform identity" of the Entity."#]
 	PlatformType(crate::v5_0::types::PlatformIdentityType),
 	#[doc = r#"Indicates a possible "specific identity" of the Entity."#]
 	SpecificType(crate::v5_0::types::SpecificIdentityType),
 }
-choice_convert_impls! {
-	DamagedObjectIdentityType - DamagedObjectIdentityTypeSerde
-	PlatformType,
-	SpecificType,
+struct_like_serde! {
+	DamagedObjectIdentityType
+	PlatformType -> "PlatformType",
+	SpecificType -> "SpecificType",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "DamagedObjectTypeSerde")]
-#[serde(try_from = "DamagedObjectTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum DamagedObjectType {
 	#[doc = r#"The ID of the Entity damaged."#]
 	EntityId(crate::v5_0::types::EntityIdType),
 	#[doc = r#"Indicates the type of damaged object (non-entity) and its location."#]
 	NonEntity(crate::v5_0::types::DamagedObjectNonEntityType),
 }
-choice_convert_impls! {
-	DamagedObjectType - DamagedObjectTypeSerde
-	EntityId,
-	NonEntity,
+struct_like_serde! {
+	DamagedObjectType
+	EntityId -> "EntityID",
+	NonEntity -> "NonEntity",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "DataDeleteChoiceTypeSerde")]
-#[serde(try_from = "DataDeleteChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum DataDeleteChoiceType {
 	#[doc = r#"This element represents the unique identifier of the ProductMetadata associated with the product to be deleted.  All applicable instances of the product file, all applicable instances of the ProductMetadata message/object and associated instances of the ProductLocation message/object should be deleted."#]
 	ProductMetadataId(crate::v5_0::types::ProductMetadataIdType),
@@ -1608,20 +1453,18 @@ pub enum DataDeleteChoiceType {
 	#[doc = r#"Indicates a specific Component whose associated data is to be deleted."#]
 	ComponentId(Vec<crate::v5_0::types::ComponentIdType>),
 }
-choice_convert_impls! {
-	DataDeleteChoiceType - DataDeleteChoiceTypeSerde
-	ProductMetadataId,
-	ProductLocationId,
-	FileMetadataId,
-	FileLocationId,
-	CapabilityId,
-	ComponentId,
+struct_like_serde! {
+	DataDeleteChoiceType
+	ProductMetadataId -> "ProductMetadataID",
+	ProductLocationId -> "ProductLocationID",
+	FileMetadataId -> "FileMetadataID",
+	FileLocationId -> "FileLocationID",
+	CapabilityId -> "CapabilityID",
+	ComponentId -> "ComponentID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "DataManagementCategoryTypeSerde")]
-#[serde(try_from = "DataManagementCategoryTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum DataManagementCategoryType {
 	#[doc = r#"Indicates a request to save a mission.  This command tells the data persistence services within a system to persist all data associated with the specified mission session."#]
 	SaveMissionId(crate::v5_0::types::MissionIdType),
@@ -1634,19 +1477,17 @@ pub enum DataManagementCategoryType {
 	#[doc = r#"This command tells the data persistence services within a system to export data from a specified URI into the specified mission session.  For example, if data was being written to removable media.  This could be used to transfer data from pre-mission planning to operations."#]
 	ExportData(crate::v5_0::types::DataManagementImportExportType),
 }
-choice_convert_impls! {
-	DataManagementCategoryType - DataManagementCategoryTypeSerde
-	SaveMissionId,
-	SaveAs,
-	DeleteMissionId,
-	ImportData,
-	ExportData,
+struct_like_serde! {
+	DataManagementCategoryType
+	SaveMissionId -> "SaveMissionID",
+	SaveAs -> "SaveAs",
+	DeleteMissionId -> "DeleteMissionID",
+	ImportData -> "ImportData",
+	ExportData -> "ExportData",
 }
 
 #[doc = r#"Identifies the destination data port through which this message will be transmitted. This specifies the specific location the data shall transition through."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "DataPortTypeSerde")]
-#[serde(try_from = "DataPortTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum DataPortType {
 	#[doc = r#"Identifies an input/output port used to inject or withdraw data to/from an I/O component.  Where the subsystem provides RED/BLACK separation, UserIO components exist on the RED side of the communication subsystem."#]
 	UserIoId(crate::v5_0::types::CommUserIoIdType),
@@ -1655,81 +1496,71 @@ pub enum DataPortType {
 	#[doc = r#"Identifies input or output port of a crypto component.  Where the subsystem provides RED/BLACK separation, crypto components straddle the boundary between RED and BLACK sides of the communication subsystem."#]
 	CryptoId(crate::v5_0::types::SupportCapabilityIdType),
 }
-choice_convert_impls! {
-	DataPortType - DataPortTypeSerde
-	UserIoId,
-	RfUserLinkId,
-	CryptoId,
+struct_like_serde! {
+	DataPortType
+	UserIoId -> "UserIO_ID",
+	RfUserLinkId -> "RF_UserLinkID",
+	CryptoId -> "CryptoID",
 }
 
 #[doc = r#"Description of the data producer or producers that are expected to respond to a data update request."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "DataUpdateOriginatorTypeSerde")]
-#[serde(try_from = "DataUpdateOriginatorTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum DataUpdateOriginatorType {
 	#[doc = r#"Request data from all producers of the requested data."#]
 	AllProducers(crate::v5_0::common::EmptyType),
 	#[doc = r#"Request data from the last producer of the requested object."#]
 	Source(crate::v5_0::types::DataUpdateSourceType),
 }
-choice_convert_impls! {
-	DataUpdateOriginatorType - DataUpdateOriginatorTypeSerde
-	AllProducers,
-	Source,
+struct_like_serde! {
+	DataUpdateOriginatorType
+	AllProducers -> "All_Producers",
+	Source -> "Source",
 }
 
 #[doc = r#"Parameters describing the specific kind of data that is being requested."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "DataUpdateRequestTypeSerde")]
-#[serde(try_from = "DataUpdateRequestTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum DataUpdateRequestType {
 	#[doc = r#"Indicates the type of message data being requested and filter parameters applicable.  The QueryMessageType here consists of an optional list of MessageTypes to limit the query and an abstract polymorphic extension point/element; the QueryPET (PolymorphicExtensionType) used here is an abstract base type as a polymorphic extension point consisting of number of extended types."#]
 	Query(crate::v5_0::types::QueryMessageType),
 	#[doc = r#"Extension point to allow for application specific queries that cannot be specified using QueryPETs."#]
 	QuerySpecificData(crate::v5_0::types::QuerySpecificDataPet),
 }
-choice_convert_impls! {
-	DataUpdateRequestType - DataUpdateRequestTypeSerde
-	Query,
-	QuerySpecificData,
+struct_like_serde! {
+	DataUpdateRequestType
+	Query -> "Query",
+	QuerySpecificData -> "QuerySpecificData",
 }
 
 #[doc = r#"Identifier of a Digital Payload or a MutiFunctionArray (MFA)."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "DigitalFunctionTypeSerde")]
-#[serde(try_from = "DigitalFunctionTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum DigitalFunctionType {
 	#[doc = r#"The CapabilityID of a Digital Payload function operating within a Multi-Function Payload."#]
 	DigitalPayloadCapabilityId(crate::v5_0::types::CapabilityIdType),
 	#[doc = r#"The SupportCapabilityID of a MultiFunctionArray (MFA); effectively, the "AntennaID" of the MFA."#]
 	MfaSupportCapabilityId(crate::v5_0::types::SupportCapabilityIdType),
 }
-choice_convert_impls! {
-	DigitalFunctionType - DigitalFunctionTypeSerde
-	DigitalPayloadCapabilityId,
-	MfaSupportCapabilityId,
+struct_like_serde! {
+	DigitalFunctionType
+	DigitalPayloadCapabilityId -> "DigitalPayloadCapabilityID",
+	MfaSupportCapabilityId -> "MFA_SupportCapabilityID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "DisseminationProductTypeSerde")]
-#[serde(try_from = "DisseminationProductTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum DisseminationProductType {
 	#[doc = r#"Identifies a specific product instance."#]
 	ByReference(ProductReferenceType),
 	#[doc = r#"Specifies a product type.  This applies more to streaming products which stream continuously and are therefore classified continuously.  For example, EOIR streaming video."#]
 	ByType(crate::v5_0::types::DisseminationByType),
 }
-choice_convert_impls! {
-	DisseminationProductType - DisseminationProductTypeSerde
-	ByReference,
-	ByType,
+struct_like_serde! {
+	DisseminationProductType
+	ByReference -> "ByReference",
+	ByType -> "ByType",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "DmpiPatternChoiceTypeSerde")]
-#[serde(try_from = "DmpiPatternChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum DmpiPatternChoiceType {
 	#[doc = r#"Indicates a rectangular X by Y DMPI pattern; a pattern of rows and columns with a regular grid spacing.  The columns are oriented parallel to the PatternOrientation.  The DMPI IDs listed correspond to the pattern beginning at the top of the leftmost column, proceeding right across the first row and then on to the leftmost column of the second row and so forth."#]
 	XbyYPattern(crate::v5_0::types::DmpiXbyYPatternType),
@@ -1738,33 +1569,29 @@ pub enum DmpiPatternChoiceType {
 	#[doc = r#"Indicates a free pattern used to group DMPIs that can't be defined as an X by Y or radial pattern."#]
 	FreePatternDmpiId(Vec<crate::v5_0::types::DmpiIdType>),
 }
-choice_convert_impls! {
-	DmpiPatternChoiceType - DmpiPatternChoiceTypeSerde
-	XbyYPattern,
-	RadialPattern,
-	FreePatternDmpiId,
+struct_like_serde! {
+	DmpiPatternChoiceType
+	XbyYPattern -> "XbyY_Pattern",
+	RadialPattern -> "RadialPattern",
+	FreePatternDmpiId -> "FreePatternDMPI_ID",
 }
 
 #[doc = r#"Indicates the target of the DMPI. The target can be specified by location or by identity. This allows DMPI targets to be specified based on target types."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "DmpiTargetTypeSerde")]
-#[serde(try_from = "DmpiTargetTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum DmpiTargetType {
 	#[doc = r#"Indicates the geographic location and location error for the DMPI."#]
 	ByLocation(crate::v5_0::types::DmpiLocationType),
 	#[doc = r#"Indicates the target of the DMPI in the form of an Identity."#]
 	ByIdentity(crate::v5_0::types::IdentityType),
 }
-choice_convert_impls! {
-	DmpiTargetType - DmpiTargetTypeSerde
-	ByLocation,
-	ByIdentity,
+struct_like_serde! {
+	DmpiTargetType
+	ByLocation -> "ByLocation",
+	ByIdentity -> "ByIdentity",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "DmpiViolationChoiceTypeSerde")]
-#[serde(try_from = "DmpiViolationChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum DmpiViolationChoiceType {
 	#[doc = r#"The air corridor violated by a line between the release point and the indicated DMPI."#]
 	OpLineId(crate::v5_0::types::OpLineIdType),
@@ -1773,81 +1600,71 @@ pub enum DmpiViolationChoiceType {
 	#[doc = r#"The NoFire OpVolume violated by the minimum safe distance (blast radius) around the indicated DMPI."#]
 	OpVolumeId(crate::v5_0::types::OpVolumeIdType),
 }
-choice_convert_impls! {
-	DmpiViolationChoiceType - DmpiViolationChoiceTypeSerde
-	OpLineId,
-	OpZoneId,
-	OpVolumeId,
+struct_like_serde! {
+	DmpiViolationChoiceType
+	OpLineId -> "OpLineID",
+	OpZoneId -> "OpZoneID",
+	OpVolumeId -> "OpVolumeID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "DoorCommandChoiceTypeSerde")]
-#[serde(try_from = "DoorCommandChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum DoorCommandChoiceType {
 	#[doc = r#"Command the door to open or close.  In some systems this may not be required and the stores management system will automatically open the door when a release is commanded."#]
 	DoorState(crate::v5_0::enums::DoorCommandEnum),
 	#[doc = r#"This setting is used with systems that automatically open and close the bay door as part of a store release command.  When a release fails and there is a hung store, this setting dictates whether the door should be left open or forced closed."#]
 	CloseOnHungStore(bool),
 }
-choice_convert_impls! {
-	DoorCommandChoiceType - DoorCommandChoiceTypeSerde
-	DoorState,
-	CloseOnHungStore,
+struct_like_serde! {
+	DoorCommandChoiceType
+	DoorState -> "DoorState",
+	CloseOnHungStore -> "CloseOnHungStore",
 }
 
 #[doc = r#"A choice of drag coefficient to use. It is a choice between a simple drag coefficient and VCM drag parameters."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "DragCoefficientChoiceTypeSerde")]
-#[serde(try_from = "DragCoefficientChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum DragCoefficientChoiceType {
 	#[doc = r#"A set of drag parameters used for VCM propagation."#]
 	VcmDragParameters(crate::v5_0::types::VcmDragParametersType),
 	#[doc = r#"A dimensionless value based on the shape of the RSO that is used to help quantify the drag force on the RSO."#]
 	DragCoefficientValue(f64),
 }
-choice_convert_impls! {
-	DragCoefficientChoiceType - DragCoefficientChoiceTypeSerde
-	VcmDragParameters,
-	DragCoefficientValue,
+struct_like_serde! {
+	DragCoefficientChoiceType
+	VcmDragParameters -> "VCM_DragParameters",
+	DragCoefficientValue -> "DragCoefficientValue",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "EaCommandTypeSerde")]
-#[serde(try_from = "EaCommandTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum EaCommandType {
 	#[doc = r#"Indicates a new invocation of an EA Capability.  Generally, if accepted, the command will result in one or more new EA Activities being created and reported via the EA_Activity message.  The request/response interaction terminates as soon as the command is accepted or rejected; this element is not used to interact with an "active" command.  Updates and/or additional interaction with the resulting Activity (after the command is accepted) is accomplished via the sibling Activity element."#]
 	Capability(crate::v5_0::types::EaCapabilityCommandType),
 	#[doc = r#"Indicates a command to modify an existing EA Activity (which was previously reported via the EA_Activity message and was marked as "interactive").  The request/response interaction terminates as soon as the modification is accepted or rejected.  The modifications are reflected in subsequent EA_Activity messages."#]
 	Activity(crate::v5_0::types::EaActivityCommandType),
 }
-choice_convert_impls! {
-	EaCommandType - EaCommandTypeSerde
-	Capability,
-	Activity,
+struct_like_serde! {
+	EaCommandType
+	Capability -> "Capability",
+	Activity -> "Activity",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "EaDetailsTypeSerde")]
-#[serde(try_from = "EaDetailsTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum EaDetailsType {
 	#[doc = r#"Indicates current jamming being performed by a specific EA Component."#]
 	Assigned(crate::v5_0::types::EaDetailsAssignedType),
 	#[doc = r#"Indicates jamming Activity that hasn't been assigned to a Component."#]
 	Unassigned(crate::v5_0::types::EaDetailsUnassignedType),
 }
-choice_convert_impls! {
-	EaDetailsType - EaDetailsTypeSerde
-	Assigned,
-	Unassigned,
+struct_like_serde! {
+	EaDetailsType
+	Assigned -> "Assigned",
+	Unassigned -> "Unassigned",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "EaEmitterDataTypeSerde")]
-#[serde(try_from = "EaEmitterDataTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum EaEmitterDataType {
 	#[doc = r#"Indicates the target is being attacked according to Signal/emitter data from a corresponding Entity."#]
 	EntityId(crate::v5_0::types::EntityIdType),
@@ -1858,18 +1675,16 @@ pub enum EaEmitterDataType {
 	#[doc = r#"Indicates the target is being attacked according to a previously detected Signal."#]
 	SignalId(crate::v5_0::types::SignalIdType),
 }
-choice_convert_impls! {
-	EaEmitterDataType - EaEmitterDataTypeSerde
-	EntityId,
-	EmitterType,
-	SignalDescription,
-	SignalId,
+struct_like_serde! {
+	EaEmitterDataType
+	EntityId -> "EntityID",
+	EmitterType -> "EmitterType",
+	SignalDescription -> "SignalDescription",
+	SignalId -> "SignalID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "EaPowerTypeSerde")]
-#[serde(try_from = "EaPowerTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum EaPowerType {
 	#[doc = r#"Power at target In dBW. This will use the center point for calculation if an area or line is selected."#]
 	PowerAtTarget(crate::v5_0::common::DecibelType),
@@ -1878,49 +1693,43 @@ pub enum EaPowerType {
 	#[doc = r#"Jam to Signal ratio In dB. The ratio of the signal strength of the jamming signal (J) to the signal strength of the target return signal (S)."#]
 	JtoS(crate::v5_0::common::DecibelType),
 }
-choice_convert_impls! {
-	EaPowerType - EaPowerTypeSerde
-	PowerAtTarget,
-	Erp,
-	JtoS,
+struct_like_serde! {
+	EaPowerType
+	PowerAtTarget -> "PowerAtTarget",
+	Erp -> "ERP",
+	JtoS -> "JtoS",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "EaProposedTypeSerde")]
-#[serde(try_from = "EaProposedTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum EaProposedType {
 	#[doc = r#"Indicates the ActivityID of the EA_Activity which describes the proposed EA."#]
 	ActivityId(crate::v5_0::types::ActivityIdType),
 	#[doc = r#"Indicates the EntityID and characteristics of the proposed EA activity."#]
 	Entity(crate::v5_0::types::EaEntityType),
 }
-choice_convert_impls! {
-	EaProposedType - EaProposedTypeSerde
-	ActivityId,
-	Entity,
+struct_like_serde! {
+	EaProposedType
+	ActivityId -> "ActivityID",
+	Entity -> "Entity",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "EaTargetPointingTypeSerde")]
-#[serde(try_from = "EaTargetPointingTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum EaTargetPointingType {
 	#[doc = r#"Indicates the source of or explicit values for geospatial characteristics of the EA target."#]
 	LocationData(TargetType),
 	#[doc = r#"Indicates the pointing volume for the EA transmission."#]
 	AirVolume(crate::v5_0::types::AirVolumeSensorReferencedType),
 }
-choice_convert_impls! {
-	EaTargetPointingType - EaTargetPointingTypeSerde
-	LocationData,
-	AirVolume,
+struct_like_serde! {
+	EaTargetPointingType
+	LocationData -> "LocationData",
+	AirVolume -> "AirVolume",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "EaTaskRouteRequirementsTypeSerde")]
-#[serde(try_from = "EaTaskRouteRequirementsTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum EaTaskRouteRequirementsType {
 	#[doc = r#"This element specifies specific waypoints that the vehicle being tasked should fly."#]
 	Path(crate::v5_0::types::PathType),
@@ -1933,67 +1742,59 @@ pub enum EaTaskRouteRequirementsType {
 	#[doc = r#"This specifies the geospatial location volume for the vehicle to execute the EA Task."#]
 	VolumeConstraints(VolumeChoiceType),
 }
-choice_convert_impls! {
-	EaTaskRouteRequirementsType - EaTaskRouteRequirementsTypeSerde
-	Path,
-	Loiter,
-	Escort,
-	ZoneConstraints,
-	VolumeConstraints,
+struct_like_serde! {
+	EaTaskRouteRequirementsType
+	Path -> "Path",
+	Loiter -> "Loiter",
+	Escort -> "Escort",
+	ZoneConstraints -> "ZoneConstraints",
+	VolumeConstraints -> "VolumeConstraints",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "EaTaskThreatsTypeSerde")]
-#[serde(try_from = "EaTaskThreatsTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum EaTaskThreatsType {
 	#[doc = r#"If true this element implies that all known threats should be jammed to the extent resources are available."#]
 	SuppressAll(bool),
 	#[doc = r#"This element defines specific constraints on the entities or frequencies to suppress."#]
 	SuppressionConstraints(Vec<crate::v5_0::types::EaTaskSuppressionConstraintsType>),
 }
-choice_convert_impls! {
-	EaTaskThreatsType - EaTaskThreatsTypeSerde
-	SuppressAll,
-	SuppressionConstraints,
+struct_like_serde! {
+	EaTaskThreatsType
+	SuppressAll -> "SuppressAll",
+	SuppressionConstraints -> "SuppressionConstraints",
 }
 
 #[doc = r#"Defines the type that allows a choice of Earth Orientation Parameters data type: EarthOrientatonParameters message or static values."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "EarthOrientationParametersDataChoiceTypeSerde")]
-#[serde(try_from = "EarthOrientationParametersDataChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum EarthOrientationParametersDataChoiceType {
 	#[doc = r#"Indicates the ID of the set of EarthOrientatonParameters to use."#]
 	EarthOrientationParametersId(crate::v5_0::types::EarthOrientationParametersIdType),
 	#[doc = r#"The static (non-changing) time and polar motion data to use."#]
 	StaticValues(crate::v5_0::types::TimeAndPolarDataType),
 }
-choice_convert_impls! {
-	EarthOrientationParametersDataChoiceType - EarthOrientationParametersDataChoiceTypeSerde
-	EarthOrientationParametersId,
-	StaticValues,
+struct_like_serde! {
+	EarthOrientationParametersDataChoiceType
+	EarthOrientationParametersId -> "EarthOrientationParametersID",
+	StaticValues -> "StaticValues",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "EffectCommandTypeSerde")]
-#[serde(try_from = "EffectCommandTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum EffectCommandType {
 	#[doc = r#"Indicates a new invocation of an Effect Capability.  Generally, if accepted, the command will result in one or more new Effect Activities being created and reported via the EffectActivity message.  The request/response interaction terminates as soon as the command is accepted or rejected; this element is not used to interact with an "active" command.  Updates and/or additional interaction with the resulting Activity (after the command is accepted) is accomplished via the sibling Activity element."#]
 	Capability(crate::v5_0::types::EffectCapabilityCommandType),
 	#[doc = r#"Indicates a command to modify an existing Effect Activity (which was previously reported via the EffectActivity message and was marked as "interactive").  The request/response interaction terminates as soon as the modification is accepted or rejected.  The modifications are reflected in subsequent EffectActivity messages."#]
 	Activity(crate::v5_0::types::ActivityCommandBaseType),
 }
-choice_convert_impls! {
-	EffectCommandType - EffectCommandTypeSerde
-	Capability,
-	Activity,
+struct_like_serde! {
+	EffectCommandType
+	Capability -> "Capability",
+	Activity -> "Activity",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "EffectPlanCommandIdChoiceTypeSerde")]
-#[serde(try_from = "EffectPlanCommandIdChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum EffectPlanCommandIdChoiceType {
 	#[doc = r#"Indicates the unique ID of the EffectPlanCommand associated with the EffectPlan."#]
 	EffectPlanCommandId(crate::v5_0::types::EffectPlanCommandIdType),
@@ -2004,66 +1805,58 @@ pub enum EffectPlanCommandIdChoiceType {
 	#[doc = r#"Indicates the unique ID of the MissionPlanValidationCommand associated with the EffectPlan."#]
 	MissionPlanValidationCommandId(crate::v5_0::types::CommandIdType),
 }
-choice_convert_impls! {
-	EffectPlanCommandIdChoiceType - EffectPlanCommandIdChoiceTypeSerde
-	EffectPlanCommandId,
-	EffectPlanValidationCommandId,
-	MissionPlanCommandId,
-	MissionPlanValidationCommandId,
+struct_like_serde! {
+	EffectPlanCommandIdChoiceType
+	EffectPlanCommandId -> "EffectPlanCommandID",
+	EffectPlanValidationCommandId -> "EffectPlanValidationCommandID",
+	MissionPlanCommandId -> "MissionPlanCommandID",
+	MissionPlanValidationCommandId -> "MissionPlanValidationCommandID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "EmconErpTypeSerde")]
-#[serde(try_from = "EmconErpTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum EmconErpType {
 	#[doc = r#"This value determines the maximum absolute radiated effective radiated power (ERP) at the face of the array to be used for this command. This field can be used to limit output during testing to comply with RF Licensing requirements."#]
 	MaximumRadiatedErp(crate::v5_0::common::MilliwattPowerRatioType),
 	#[doc = r#"Specifies that the command should radiate at full power. Use of this flag may cause degraded performance due to saturation of the receiver."#]
 	RadiateFullPower(bool),
 }
-choice_convert_impls! {
-	EmconErpType - EmconErpTypeSerde
-	MaximumRadiatedErp,
-	RadiateFullPower,
+struct_like_serde! {
+	EmconErpType
+	MaximumRadiatedErp -> "MaximumRadiatedERP",
+	RadiateFullPower -> "RadiateFullPower",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "EmconOverrideTypeSerde")]
-#[serde(try_from = "EmconOverrideTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum EmconOverrideType {
 	#[doc = r#"Specifies the emission control level to be used for this command."#]
 	EmconLevel(crate::v5_0::enums::EmconLevelEnum),
 	#[doc = r#"If a service does not use a normative EmconLevel, foreign keys may be used to specify the level."#]
 	ForeignLevel(crate::v5_0::types::ForeignKeyType),
 }
-choice_convert_impls! {
-	EmconOverrideType - EmconOverrideTypeSerde
-	EmconLevel,
-	ForeignLevel,
+struct_like_serde! {
+	EmconOverrideType
+	EmconLevel -> "EmconLevel",
+	ForeignLevel -> "ForeignLevel",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "EmconSettingTypeSerde")]
-#[serde(try_from = "EmconSettingTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum EmconSettingType {
 	#[doc = r#"Specifies the emission control level to be used for this capability."#]
 	EmconLevel(crate::v5_0::enums::EmconLevelEnum),
 	#[doc = r#"If a service does not use a normative EmconLevel, foreign keys may be used to specify the level."#]
 	ForeignLevel(crate::v5_0::types::ForeignKeyType),
 }
-choice_convert_impls! {
-	EmconSettingType - EmconSettingTypeSerde
-	EmconLevel,
-	ForeignLevel,
+struct_like_serde! {
+	EmconSettingType
+	EmconLevel -> "EmconLevel",
+	ForeignLevel -> "ForeignLevel",
 }
 
 #[doc = r#"Container object for the different types of OpPoint*Enums, excluding Emergency.  A separate enum applies to each of the choice types."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "EmergencyReferenceOpPointCategoriesTypeSerde")]
-#[serde(try_from = "EmergencyReferenceOpPointCategoriesTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum EmergencyReferenceOpPointCategoriesType {
 	#[doc = r#"A set of commonly used point types."#]
 	General(crate::v5_0::enums::OpPointGeneralEnum),
@@ -2074,34 +1867,30 @@ pub enum EmergencyReferenceOpPointCategoriesType {
 	#[doc = r#"A set of navigation station point types."#]
 	Station(crate::v5_0::enums::OpPointStationEnum),
 }
-choice_convert_impls! {
-	EmergencyReferenceOpPointCategoriesType - EmergencyReferenceOpPointCategoriesTypeSerde
-	General,
-	Hazard,
-	Reference,
-	Station,
+struct_like_serde! {
+	EmergencyReferenceOpPointCategoriesType
+	General -> "General",
+	Hazard -> "Hazard",
+	Reference -> "Reference",
+	Station -> "Station",
 }
 
 #[doc = r#"Specify an emitter by ID or by MDF_Entry number."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "EmitterEntryTypeSerde")]
-#[serde(try_from = "EmitterEntryTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum EmitterEntryType {
 	#[doc = r#"One or more emitters, defined by emitter IDs, may be the subject of the message."#]
 	Emitter(crate::v5_0::types::EmitterIdentityType),
 	#[doc = r#"One or more emitters, defined by an MDF_Entry key, may be the subject of the message."#]
 	MdfEntry(crate::v5_0::types::ForeignKeyType),
 }
-choice_convert_impls! {
-	EmitterEntryType - EmitterEntryTypeSerde
-	Emitter,
-	MdfEntry,
+struct_like_serde! {
+	EmitterEntryType
+	Emitter -> "Emitter",
+	MdfEntry -> "MDF_Entry",
 }
 
 #[doc = r#"Indicates the emitter identification based on its category."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "EmitterIdentityCategoryTypeSerde")]
-#[serde(try_from = "EmitterIdentityCategoryTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum EmitterIdentityCategoryType {
 	#[doc = r#"Used for emitters identified as a Radar subsystem."#]
 	Radar(crate::v5_0::types::RadarEmitterIdentityType),
@@ -2112,18 +1901,16 @@ pub enum EmitterIdentityCategoryType {
 	#[doc = r#"Used for emitters identified as a Missile subsystem."#]
 	Missile(crate::v5_0::types::MissileEmitterIdentityType),
 }
-choice_convert_impls! {
-	EmitterIdentityCategoryType - EmitterIdentityCategoryTypeSerde
-	Radar,
-	Communications,
-	Jammer,
-	Missile,
+struct_like_serde! {
+	EmitterIdentityCategoryType
+	Radar -> "Radar",
+	Communications -> "Communications",
+	Jammer -> "Jammer",
+	Missile -> "Missile",
 }
 
 #[doc = r#"Entity ID or Local Track ID of the emitter used to detect targets passively."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "EmitterSourceIdChoiceTypeSerde")]
-#[serde(try_from = "EmitterSourceIdChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum EmitterSourceIdChoiceType {
 	#[doc = r#"Indicates the Entity ID of the emitter used to detect targets passively."#]
 	EntityId(crate::v5_0::types::EntityIdType),
@@ -2134,18 +1921,16 @@ pub enum EmitterSourceIdChoiceType {
 	#[doc = r#"Indicates the unique ID of the corresponding Signal for the emitter instance."#]
 	SignalId(crate::v5_0::types::SignalIdType),
 }
-choice_convert_impls! {
-	EmitterSourceIdChoiceType - EmitterSourceIdChoiceTypeSerde
-	EntityId,
-	OmrIndividualMeasurementId,
-	EobEmitterId,
-	SignalId,
+struct_like_serde! {
+	EmitterSourceIdChoiceType
+	EntityId -> "EntityID",
+	OmrIndividualMeasurementId -> "OMR_IndividualMeasurementID",
+	EobEmitterId -> "EOB_EmitterID",
+	SignalId -> "SignalID",
 }
 
 #[doc = r#"Source emitter location. Used if Waveform does not contain location."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "EmitterTargetLocationDataTypeSerde")]
-#[serde(try_from = "EmitterTargetLocationDataTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum EmitterTargetLocationDataType {
 	#[doc = r#"Indicates the Source ID of the emitter used to detect targets passively. Location can be referenced through these."#]
 	EmitterSourceId(EmitterSourceIdChoiceType),
@@ -2154,33 +1939,29 @@ pub enum EmitterTargetLocationDataType {
 	#[doc = r#"Indicates the Point Target details associated with the source emitter."#]
 	PointTarget(crate::v5_0::types::PointTargetType),
 }
-choice_convert_impls! {
-	EmitterTargetLocationDataType - EmitterTargetLocationDataTypeSerde
-	EmitterSourceId,
-	Fov,
-	PointTarget,
+struct_like_serde! {
+	EmitterTargetLocationDataType
+	EmitterSourceId -> "EmitterSourceID",
+	Fov -> "FOV",
+	PointTarget -> "PointTarget",
 }
 
 #[doc = r#"An ellipse or rectangle shape describing 1-sigma position uncertainty."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "EmitterUncertaintyChoiceTypeSerde")]
-#[serde(try_from = "EmitterUncertaintyChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum EmitterUncertaintyChoiceType {
 	#[doc = r#"This element represents an ellipse describing the 1-sigma position uncertainty.  The ellipse is defined by the length of its semi-major and semi-minor axes.  The orientation of the ellipse defines the angle between the semi-major axis and true north."#]
 	UncertaintyEllipse(crate::v5_0::types::EllipseType),
 	#[doc = r#"This element represents a rectangle describing the 1-sigma position uncertainty.  The rectangle is defined by the height parallel to the orientation axis and width of the rectangle perpendicular to the orientation angle."#]
 	UncertaintyRectangle(crate::v5_0::types::RectangleType),
 }
-choice_convert_impls! {
-	EmitterUncertaintyChoiceType - EmitterUncertaintyChoiceTypeSerde
-	UncertaintyEllipse,
-	UncertaintyRectangle,
+struct_like_serde! {
+	EmitterUncertaintyChoiceType
+	UncertaintyEllipse -> "UncertaintyEllipse",
+	UncertaintyRectangle -> "UncertaintyRectangle",
 }
 
 #[doc = r#"Indicates the source of or explicit values for emitter characteristics of the emitter used as a source for passive detection."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "EmitterWaveformDataTypeSerde")]
-#[serde(try_from = "EmitterWaveformDataTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum EmitterWaveformDataType {
 	#[doc = r#"EntityID of the emitter used to detect targets passively."#]
 	EntityId(crate::v5_0::types::EntityIdType),
@@ -2195,20 +1976,18 @@ pub enum EmitterWaveformDataType {
 	#[doc = r#"EOB_EmitterModeID of the emitter used to detect targets passively."#]
 	EobEmitterModeId(crate::v5_0::types::EobEmitterModeIdType),
 }
-choice_convert_impls! {
-	EmitterWaveformDataType - EmitterWaveformDataTypeSerde
-	EntityId,
-	EmitterType,
-	SpecificEmitter,
-	SignalDescription,
-	SignalId,
-	EobEmitterModeId,
+struct_like_serde! {
+	EmitterWaveformDataType
+	EntityId -> "EntityID",
+	EmitterType -> "EmitterType",
+	SpecificEmitter -> "SpecificEmitter",
+	SignalDescription -> "SignalDescription",
+	SignalId -> "SignalID",
+	EobEmitterModeId -> "EOB_EmitterModeID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "EndPointTypeSerde")]
-#[serde(try_from = "EndPointTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum EndPointType {
 	#[doc = r#"This element is used to specify a point in the route where no turning occurs.  It is generally used for points associated with Actions such as task "transitions", changes in acceleration, changes in speed, changes in altitude, etc."#]
 	WayPoint(crate::v5_0::types::WayPointType),
@@ -2217,33 +1996,29 @@ pub enum EndPointType {
 	#[doc = r#"This element specifies a Loiter.  Currently specifying a task/action associated with a LoiterPoint when the task/action occurs only during a portion of the Loiter is not supported."#]
 	LoiterPoint(crate::v5_0::types::LoiterPointType),
 }
-choice_convert_impls! {
-	EndPointType - EndPointTypeSerde
-	WayPoint,
-	TurnPoint,
-	LoiterPoint,
+struct_like_serde! {
+	EndPointType
+	WayPoint -> "WayPoint",
+	TurnPoint -> "TurnPoint",
+	LoiterPoint -> "LoiterPoint",
 }
 
 #[doc = r#"Indicates endurance in terms of the domain specific choice."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "EnduranceMultiStandardTypeSerde")]
-#[serde(try_from = "EnduranceMultiStandardTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum EnduranceMultiStandardType {
 	#[doc = r#"Indicates endurance in terms of maximum ground/surface distance that can be reached given the current system state."#]
 	EnduranceFootprint(crate::v5_0::types::EnduranceType),
 	#[doc = r#"Logical comparator to use when comparing the current endurance remaining to the sibling EnduranceRemaining element.  The logical expression is (current endurance remaining) (LogicalOperator) (sibling EnduranceRemaining).  When the logical expression is TRUE then the parent Endurance Condition is TRUE."#]
 	SatelliteEndurance(crate::v5_0::types::SatelliteEnduranceType),
 }
-choice_convert_impls! {
-	EnduranceMultiStandardType - EnduranceMultiStandardTypeSerde
-	EnduranceFootprint,
-	SatelliteEndurance,
+struct_like_serde! {
+	EnduranceMultiStandardType
+	EnduranceFootprint -> "EnduranceFootprint",
+	SatelliteEndurance -> "SatelliteEndurance",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "EntityCharacteristicTypeSerde")]
-#[serde(try_from = "EntityCharacteristicTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum EntityCharacteristicType {
 	#[doc = r#"Indicates the identity to be compared to the identity in the Entity message."#]
 	Identity(crate::v5_0::types::IdentityComparisonType),
@@ -2258,20 +2033,18 @@ pub enum EntityCharacteristicType {
 	#[doc = r#"Indicates behaviors, activities, use of capabilities, etc. to be compared to those of the battlespace object associated with the Entity."#]
 	Behavior(crate::v5_0::types::BehaviorType),
 }
-choice_convert_impls! {
-	EntityCharacteristicType - EntityCharacteristicTypeSerde
-	Identity,
-	IdentityStaleness,
-	PositionUncertainty,
-	PositionStaleness,
-	PrioritizationList,
-	Behavior,
+struct_like_serde! {
+	EntityCharacteristicType
+	Identity -> "Identity",
+	IdentityStaleness -> "IdentityStaleness",
+	PositionUncertainty -> "PositionUncertainty",
+	PositionStaleness -> "PositionStaleness",
+	PrioritizationList -> "PrioritizationList",
+	Behavior -> "Behavior",
 }
 
 #[doc = r#"Indicates the contributors to the fused entity.  This type allows specifying non-Entity contributors if a fusion service supports this functionality."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "EntityContributorIdChoiceTypeSerde")]
-#[serde(try_from = "EntityContributorIdChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum EntityContributorIdChoiceType {
 	#[doc = r#"Indicates the ID of a fusion input Entity that is a contributor to this fusion output Entity."#]
 	EntityId(crate::v5_0::types::EntityIdType),
@@ -2288,21 +2061,19 @@ pub enum EntityContributorIdChoiceType {
 	#[doc = r#"Indicates the ID of a fusion input Measurement that is a contributor to this fusion output Entity."#]
 	MeasurementId(crate::v5_0::types::MeasurementIdType),
 }
-choice_convert_impls! {
-	EntityContributorIdChoiceType - EntityContributorIdChoiceTypeSerde
-	EntityId,
-	EobEmitterId,
-	SystemId,
-	SignalId,
-	SobC2RecordId,
-	SobSatelliteRecordId,
-	MeasurementId,
+struct_like_serde! {
+	EntityContributorIdChoiceType
+	EntityId -> "EntityID",
+	EobEmitterId -> "EOB_EmitterID",
+	SystemId -> "SystemID",
+	SignalId -> "SignalID",
+	SobC2RecordId -> "SOB_C2_RecordID",
+	SobSatelliteRecordId -> "SOB_SatelliteRecordID",
+	MeasurementId -> "MeasurementID",
 }
 
 #[doc = r#"A choice type that determines whether the ElementSet, EntityElementSetID, or KinematicVector will be used to determine the ephemeris for the Entity or Entities."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "EntityEphemerisBasisChoiceTypeSerde")]
-#[serde(try_from = "EntityEphemerisBasisChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum EntityEphemerisBasisChoiceType {
 	#[doc = r#"Indicates the default or "catalog" orbital element set (also known as two line element or TLE) for the satellite."#]
 	ElementSet(crate::v5_0::types::TleBaseType),
@@ -2313,18 +2084,16 @@ pub enum EntityEphemerisBasisChoiceType {
 	#[doc = r#"Propagate using a complete VCM (vector covariance message) which includes a kinematic vector, along with other special perturbation parameters."#]
 	EntityVcmId(crate::v5_0::types::EntityOrbitalVcmIdType),
 }
-choice_convert_impls! {
-	EntityEphemerisBasisChoiceType - EntityEphemerisBasisChoiceTypeSerde
-	ElementSet,
-	EntityElementSetId,
-	KinematicVector,
-	EntityVcmId,
+struct_like_serde! {
+	EntityEphemerisBasisChoiceType
+	ElementSet -> "ElementSet",
+	EntityElementSetId -> "EntityElementSetID",
+	KinematicVector -> "KinematicVector",
+	EntityVcmId -> "EntityVCM_ID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "EntityIdentityChoiceTypeSerde")]
-#[serde(try_from = "EntityIdentityChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum EntityIdentityChoiceType {
 	#[doc = r#"Indicates the "standard identity" of the target."#]
 	Standard(crate::v5_0::types::StandardIdentityType),
@@ -2347,40 +2116,36 @@ pub enum EntityIdentityChoiceType {
 	#[doc = r#"Indicates a type of weapon available. This element represents the MIL-STD-6016 specific type of the store. See MIL-STD-6016 for details; this schema will not redefine the enumerations. It is left to applications using this schema to enforce compatibility with MIL-STD-6016."#]
 	Weapon(crate::v5_0::types::StoreType),
 }
-choice_convert_impls! {
-	EntityIdentityChoiceType - EntityIdentityChoiceTypeSerde
-	Standard,
-	Environment,
-	Platform,
-	Specific,
-	Emitter,
-	SpecificEmitter,
-	SpecificVehicle,
-	SpecificFacility,
-	Eob,
-	Weapon,
+struct_like_serde! {
+	EntityIdentityChoiceType
+	Standard -> "Standard",
+	Environment -> "Environment",
+	Platform -> "Platform",
+	Specific -> "Specific",
+	Emitter -> "Emitter",
+	SpecificEmitter -> "SpecificEmitter",
+	SpecificVehicle -> "SpecificVehicle",
+	SpecificFacility -> "SpecificFacility",
+	Eob -> "EOB",
+	Weapon -> "Weapon",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "EntityManagementDropTypeSerde")]
-#[serde(try_from = "EntityManagementDropTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum EntityManagementDropType {
 	#[doc = r#"Specifies a specific Entity to be dropped/removed."#]
 	EntityId(Vec<crate::v5_0::types::EntityIdType>),
 	#[doc = r#"Specifies a policy to be used to drop multiple Entities."#]
 	DropPolicy(crate::v5_0::enums::EntityDropPolicyEnum),
 }
-choice_convert_impls! {
-	EntityManagementDropType - EntityManagementDropTypeSerde
-	EntityId,
-	DropPolicy,
+struct_like_serde! {
+	EntityManagementDropType
+	EntityId -> "EntityID",
+	DropPolicy -> "DropPolicy",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "EntityManagementRequestTypeSerde")]
-#[serde(try_from = "EntityManagementRequestTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum EntityManagementRequestType {
 	#[doc = r#"Indicates a request to split one or more Entities from a multi-contributor Entity."#]
 	Split(crate::v5_0::types::EntityManagementSplitType),
@@ -2425,35 +2190,33 @@ pub enum EntityManagementRequestType {
 	#[doc = r#"Set the signalSummary of an entity."#]
 	SetSignalSummary(crate::v5_0::types::EntityManagementSetSignalSummaryType),
 }
-choice_convert_impls! {
-	EntityManagementRequestType - EntityManagementRequestTypeSerde
-	Split,
-	Merge,
-	Drop,
-	SetDropRestriction,
-	ClearDropRestriction,
-	Swap,
-	SetFusionEligibility,
-	SetIdentity,
-	ClearIff,
-	SetDownLocation,
-	SetKinematics,
-	SetMode,
-	SetActivityBy,
-	SetStrength,
-	SetPlatformStatus,
-	SetEndurance,
-	SetLink16Metadata,
-	ProposeCorrelation,
-	SetVoiceControl,
-	SetCapability,
-	SetSignalSummary,
+struct_like_serde! {
+	EntityManagementRequestType
+	Split -> "Split",
+	Merge -> "Merge",
+	Drop -> "Drop",
+	SetDropRestriction -> "SetDropRestriction",
+	ClearDropRestriction -> "ClearDropRestriction",
+	Swap -> "Swap",
+	SetFusionEligibility -> "SetFusionEligibility",
+	SetIdentity -> "SetIdentity",
+	ClearIff -> "ClearIFF",
+	SetDownLocation -> "SetDownLocation",
+	SetKinematics -> "SetKinematics",
+	SetMode -> "SetMode",
+	SetActivityBy -> "SetActivityBy",
+	SetStrength -> "SetStrength",
+	SetPlatformStatus -> "SetPlatformStatus",
+	SetEndurance -> "SetEndurance",
+	SetLink16Metadata -> "SetLink16Metadata",
+	ProposeCorrelation -> "ProposeCorrelation",
+	SetVoiceControl -> "SetVoiceControl",
+	SetCapability -> "SetCapability",
+	SetSignalSummary -> "SetSignalSummary",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "EntitySourceIdentifierTypeSerde")]
-#[serde(try_from = "EntitySourceIdentifierTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum EntitySourceIdentifierType {
 	#[doc = r#"Indicates an EOB record from which this Entity originated."#]
 	EobRecordId(crate::v5_0::types::EobRecordIdType),
@@ -2474,55 +2237,49 @@ pub enum EntitySourceIdentifierType {
 	#[doc = r#"Indicates the ID of the SOB C2 record from which this Entity was derived."#]
 	SobC2RecordId(crate::v5_0::types::SobC2RecordIdType),
 }
-choice_convert_impls! {
-	EntitySourceIdentifierType - EntitySourceIdentifierTypeSerde
-	EobRecordId,
-	ExternalIdentifier,
-	Fusion,
-	InternallyDerivedId,
-	Capability,
-	ProductMetadataId,
-	OperatorId,
-	SobSatelliteRecordId,
-	SobC2RecordId,
+struct_like_serde! {
+	EntitySourceIdentifierType
+	EobRecordId -> "EOB_RecordID",
+	ExternalIdentifier -> "ExternalIdentifier",
+	Fusion -> "Fusion",
+	InternallyDerivedId -> "InternallyDerivedID",
+	Capability -> "Capability",
+	ProductMetadataId -> "ProductMetadataID",
+	OperatorId -> "OperatorID",
+	SobSatelliteRecordId -> "SOB_SatelliteRecordID",
+	SobC2RecordId -> "SOB_C2_RecordID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "EobIdentityTypeSerde")]
-#[serde(try_from = "EobIdentityTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum EobIdentityType {
 	#[doc = r#"Indicates the uniquely identifying information of an EOB Site."#]
 	Site(crate::v5_0::types::EobSiteIdentityType),
 	#[doc = r#"Indicates the uniquely identifying information of EOB Equipment."#]
 	Equipment(crate::v5_0::types::EobEquipmentIdentityType),
 }
-choice_convert_impls! {
-	EobIdentityType - EobIdentityTypeSerde
-	Site,
-	Equipment,
+struct_like_serde! {
+	EobIdentityType
+	Site -> "Site",
+	Equipment -> "Equipment",
 }
 
 #[doc = r#"Indicates a choice between propagation parameters. Allows either the selection of USSF Astrodynamic Standards orbital model parameters or more general propagator settings."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "EphemerisPropagatorChoiceTypeSerde")]
-#[serde(try_from = "EphemerisPropagatorChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum EphemerisPropagatorChoiceType {
 	#[doc = r#"The USSF Astrodynamic Standards orbital model parameters."#]
 	OrbitalModelPropagator(crate::v5_0::types::EphemerisOrbitalModelType),
 	#[doc = r#"A set of propagator settings given either explicitly or by ID."#]
 	PropagatorSettings(PropagatorSettingsChoiceType),
 }
-choice_convert_impls! {
-	EphemerisPropagatorChoiceType - EphemerisPropagatorChoiceTypeSerde
-	OrbitalModelPropagator,
-	PropagatorSettings,
+struct_like_serde! {
+	EphemerisPropagatorChoiceType
+	OrbitalModelPropagator -> "OrbitalModelPropagator",
+	PropagatorSettings -> "PropagatorSettings",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "EsmAcquisitionTargetTypeSerde")]
-#[serde(try_from = "EsmAcquisitionTargetTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum EsmAcquisitionTargetType {
 	#[doc = r#"Indicates the unique ID of a specific Entity that is a target of ESM acquisition."#]
 	EntityId(crate::v5_0::types::EntityIdType),
@@ -2535,51 +2292,45 @@ pub enum EsmAcquisitionTargetType {
 	#[doc = r#"Indicates the unique ID of a specific Signal that is a target of ESM acquisition."#]
 	SignalId(crate::v5_0::types::SignalIdType),
 }
-choice_convert_impls! {
-	EsmAcquisitionTargetType - EsmAcquisitionTargetTypeSerde
-	EntityId,
-	EmitterType,
-	SpecificEmitter,
-	SignalDescription,
-	SignalId,
+struct_like_serde! {
+	EsmAcquisitionTargetType
+	EntityId -> "EntityID",
+	EmitterType -> "EmitterType",
+	SpecificEmitter -> "SpecificEmitter",
+	SignalDescription -> "SignalDescription",
+	SignalId -> "SignalID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "EsmCommandTypeSerde")]
-#[serde(try_from = "EsmCommandTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum EsmCommandType {
 	#[doc = r#"Indicates a new invocation of an ESM Capability.  Generally, if accepted, the command will result in one or more new ESM Activities being created and reported via the ESM_Activity message.  The request/response interaction terminates as soon as the command is accepted or rejected; this element is not used to interact with an "active" command.  Updates and/or additional interaction with the resulting Activity (after the command is accepted) is accomplished via the sibling Activity element."#]
 	Capability(crate::v5_0::types::EsmCapabilityCommandType),
 	#[doc = r#"Indicates a command to modify an existing ESM Activity (which was previously reported via the ESM_Activity message and was marked as "interactive").  The request/response interaction terminates as soon as the modification is accepted or rejected.  The modifications are reflected in subsequent ESM_Activity messages."#]
 	Activity(crate::v5_0::types::EsmActivityCommandType),
 }
-choice_convert_impls! {
-	EsmCommandType - EsmCommandTypeSerde
-	Capability,
-	Activity,
+struct_like_serde! {
+	EsmCommandType
+	Capability -> "Capability",
+	Activity -> "Activity",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "EsmLocationTypeSerde")]
-#[serde(try_from = "EsmLocationTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum EsmLocationType {
 	#[doc = r#"Indicates the source of or explicit values for the kinematic location of the target."#]
 	TargetLocationData(EsmSubcapabilityTargetLocationDataType),
 	#[doc = r#"Indicates the volume to search within."#]
 	EsmAirVolume(crate::v5_0::types::AirVolumeSensorReferencedType),
 }
-choice_convert_impls! {
-	EsmLocationType - EsmLocationTypeSerde
-	TargetLocationData,
-	EsmAirVolume,
+struct_like_serde! {
+	EsmLocationType
+	TargetLocationData -> "TargetLocationData",
+	EsmAirVolume -> "ESM_AirVolume",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "EsmSubcapabilityTargetLocationDataTypeSerde")]
-#[serde(try_from = "EsmSubcapabilityTargetLocationDataTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum EsmSubcapabilityTargetLocationDataType {
 	#[doc = r#"Indicates the EntityID associated with the pulse data collection."#]
 	EntityId(crate::v5_0::types::EntityIdType),
@@ -2588,17 +2339,15 @@ pub enum EsmSubcapabilityTargetLocationDataType {
 	#[doc = r#"Indicates the Point Target details associated with the pulse data collection."#]
 	PointTarget(crate::v5_0::types::PointTargetType),
 }
-choice_convert_impls! {
-	EsmSubcapabilityTargetLocationDataType - EsmSubcapabilityTargetLocationDataTypeSerde
-	EntityId,
-	DwellFov,
-	PointTarget,
+struct_like_serde! {
+	EsmSubcapabilityTargetLocationDataType
+	EntityId -> "EntityID",
+	DwellFov -> "DwellFOV",
+	PointTarget -> "PointTarget",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "EsmTargetTypeSerde")]
-#[serde(try_from = "EsmTargetTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum EsmTargetType {
 	#[doc = r#"Indicates the unique ID of a specific Entity that is a target of ESM acquisition."#]
 	EntityId(crate::v5_0::types::EntityIdType),
@@ -2613,36 +2362,32 @@ pub enum EsmTargetType {
 	#[doc = r#"Indicates the Emitter Priority Bin for grouping ESM emitters in the ESM profile (to set Activation and ResourceAccessPriority). These bins are used to set ResourceAccessPriority for a "binned" set of emitters without identifying them individually every time their ResourceAccessPriority needs to change."#]
 	EmitterPriorityBin(u32),
 }
-choice_convert_impls! {
-	EsmTargetType - EsmTargetTypeSerde
-	EntityId,
-	EmitterType,
-	SpecificEmitter,
-	SignalDescription,
-	SignalId,
-	EmitterPriorityBin,
+struct_like_serde! {
+	EsmTargetType
+	EntityId -> "EntityID",
+	EmitterType -> "EmitterType",
+	SpecificEmitter -> "SpecificEmitter",
+	SignalDescription -> "SignalDescription",
+	SignalId -> "SignalID",
+	EmitterPriorityBin -> "EmitterPriorityBin",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "EthernetSettingsTypeSerde")]
-#[serde(try_from = "EthernetSettingsTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum EthernetSettingsType {
 	#[doc = r#"Internet Protocol version 4 (IPv4) type consisting of a Static IP Address, Preferred DNS Server and Port Number settings."#]
 	Ipv4(crate::v5_0::types::Ipv4SettingsType),
 	#[doc = r#"Internet Protocol version 6 (IPv6) type  consisting of a Static IP Address, Preferred DNS Server and Port Number settings."#]
 	Ipv6(crate::v5_0::types::Ipv6SettingsType),
 }
-choice_convert_impls! {
-	EthernetSettingsType - EthernetSettingsTypeSerde
-	Ipv4,
-	Ipv6,
+struct_like_serde! {
+	EthernetSettingsType
+	Ipv4 -> "IPv4",
+	Ipv6 -> "IPv6",
 }
 
 #[doc = r#"Provides a choice of event offset types."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "EventOffsetChoiceTypeSerde")]
-#[serde(try_from = "EventOffsetChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum EventOffsetChoiceType {
 	#[doc = r#"The offset time from the associated OrbitalEvent."#]
 	OffsetTime(chrono::TimeDelta),
@@ -2651,17 +2396,15 @@ pub enum EventOffsetChoiceType {
 	#[doc = r#"The Azimuth, Elevation, and Range of the Offset from the Event."#]
 	AzEl(crate::v5_0::types::LosInertialBType),
 }
-choice_convert_impls! {
-	EventOffsetChoiceType - EventOffsetChoiceTypeSerde
-	OffsetTime,
-	OffsetAngle,
-	AzEl,
+struct_like_serde! {
+	EventOffsetChoiceType
+	OffsetTime -> "OffsetTime",
+	OffsetAngle -> "OffsetAngle",
+	AzEl -> "AzEl",
 }
 
 #[doc = r#"Provides a choice of event window size definitions."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "EventWindowChoiceTypeSerde")]
-#[serde(try_from = "EventWindowChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum EventWindowChoiceType {
 	#[doc = r#"Indicates a boundary for an Event described as an angle."#]
 	WindowAngle(crate::v5_0::common::AnglePositiveType),
@@ -2670,49 +2413,43 @@ pub enum EventWindowChoiceType {
 	#[doc = r#"Indicates a boundary for an Event described as a radius."#]
 	WindowRadius(crate::v5_0::common::DistanceType),
 }
-choice_convert_impls! {
-	EventWindowChoiceType - EventWindowChoiceTypeSerde
-	WindowAngle,
-	WindowDuration,
-	WindowRadius,
+struct_like_serde! {
+	EventWindowChoiceType
+	WindowAngle -> "WindowAngle",
+	WindowDuration -> "WindowDuration",
+	WindowRadius -> "WindowRadius",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ExecutionSequenceInsertionTypeChoiceTypeSerde")]
-#[serde(try_from = "ExecutionSequenceInsertionTypeChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ExecutionSequenceInsertionTypeChoiceType {
 	#[doc = r#"Indicates an insertion at the start of the existing execution plan set."#]
 	InsertAtStart(crate::v5_0::common::EmptyType),
 	#[doc = r#"Indicates the execution plan set after which to insert the additional execution plan sets."#]
 	InsertAfterExecutionPlanSetId(crate::v5_0::types::ExecutionPlanSetIdType),
 }
-choice_convert_impls! {
-	ExecutionSequenceInsertionTypeChoiceType - ExecutionSequenceInsertionTypeChoiceTypeSerde
-	InsertAtStart,
-	InsertAfterExecutionPlanSetId,
+struct_like_serde! {
+	ExecutionSequenceInsertionTypeChoiceType
+	InsertAtStart -> "InsertAtStart",
+	InsertAfterExecutionPlanSetId -> "InsertAfterExecutionPlanSetID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ExecutionSequenceReplaceOrModifyChoiceTypeSerde")]
-#[serde(try_from = "ExecutionSequenceReplaceOrModifyChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ExecutionSequenceReplaceOrModifyChoiceType {
 	#[doc = r#"Indicates a complete replacement of a Mission Plan's execution sequence."#]
 	ReplaceExecutionSequence(crate::v5_0::types::ExecutionSequenceType),
 	#[doc = r#"Indicates a modification of a Mission Plan's execution sequence."#]
 	ModifyExecutionSequence(crate::v5_0::types::ExecutionSequenceModificationDetailsType),
 }
-choice_convert_impls! {
-	ExecutionSequenceReplaceOrModifyChoiceType - ExecutionSequenceReplaceOrModifyChoiceTypeSerde
-	ReplaceExecutionSequence,
-	ModifyExecutionSequence,
+struct_like_serde! {
+	ExecutionSequenceReplaceOrModifyChoiceType
+	ReplaceExecutionSequence -> "ReplaceExecutionSequence",
+	ModifyExecutionSequence -> "ModifyExecutionSequence",
 }
 
 #[doc = r#"Provides identification of an object associated with the Air Force Space Command."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "FacilityIdentificationTypeSerde")]
-#[serde(try_from = "FacilityIdentificationTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum FacilityIdentificationType {
 	#[doc = r#"Indicates the site ID."#]
 	SiteIdentifier(u16),
@@ -2721,11 +2458,11 @@ pub enum FacilityIdentificationType {
 	#[doc = r#"The ID for this facility is associated with a key that exists in another system, protocol, or network."#]
 	ForeignFacilityKey(crate::v5_0::types::ForeignKeyType),
 }
-choice_convert_impls! {
-	FacilityIdentificationType - FacilityIdentificationTypeSerde
-	SiteIdentifier,
-	SensorIdentifier,
-	ForeignFacilityKey,
+struct_like_serde! {
+	FacilityIdentificationType
+	SiteIdentifier -> "SiteIdentifier",
+	SensorIdentifier -> "SensorIdentifier",
+	ForeignFacilityKey -> "ForeignFacilityKey",
 }
 
 #[doc = r#"Encoding types for CVEnumISMCATFGIOpen Version 2 controlled vocabulary enumerations.  Derived from the CVEnumISMCATFGIOpen.xml CVE.(U) 
@@ -2737,41 +2474,35 @@ choice_convert_impls! {
 						   The permissible values for this simple type are defined in the Controlled Value Enumeration:
 
 						   CVEnumISMCATFGIOpen.xml"#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "FgiSourceOpenChoiceTypeSerde")]
-#[serde(try_from = "FgiSourceOpenChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum FgiSourceOpenChoiceType {
 	#[doc = r#"CVEnumISMCATFGIOpen Values"#]
 	ForeignGovernmentIdentifier(crate::v5_0::enums::FgiSourceOpenEnum),
 	#[doc = r#"North Atlantic Treaty Organization Special Words"#]
 	NatoSpecialWord(crate::v5_0::common::NatoSpecialWordsType),
 }
-choice_convert_impls! {
-	FgiSourceOpenChoiceType - FgiSourceOpenChoiceTypeSerde
-	ForeignGovernmentIdentifier,
-	NatoSpecialWord,
+struct_like_serde! {
+	FgiSourceOpenChoiceType
+	ForeignGovernmentIdentifier -> "ForeignGovernmentIdentifier",
+	NatoSpecialWord -> "NATO_SpecialWord",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "FileFormatTypeSerde")]
-#[serde(try_from = "FileFormatTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum FileFormatType {
 	#[doc = r#"Describes the digital format of a file."#]
 	Mime(crate::v5_0::common::MimeType),
 	#[doc = r#"Indicates a file format that is not registered as a MIME type."#]
 	NonMime(crate::v5_0::types::ForeignKeyType),
 }
-choice_convert_impls! {
-	FileFormatType - FileFormatTypeSerde
-	Mime,
-	NonMime,
+struct_like_serde! {
+	FileFormatType
+	Mime -> "MIME",
+	NonMime -> "NonMIME",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "FusionSettingsRequestTypeSerde")]
-#[serde(try_from = "FusionSettingsRequestTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum FusionSettingsRequestType {
 	#[doc = r#"Defines thresholds for determining the staleness of data."#]
 	SetStalenessThresholds(crate::v5_0::types::EntityStalenessThresholdsType),
@@ -2780,49 +2511,43 @@ pub enum FusionSettingsRequestType {
 	#[doc = r#"Indicates a request that configures the contributing sources to fusion and details of how they are allowed to contribute."#]
 	SetInputSources(crate::v5_0::types::FusionSourcesType),
 }
-choice_convert_impls! {
-	FusionSettingsRequestType - FusionSettingsRequestTypeSerde
-	SetStalenessThresholds,
-	SetMergeAndDropSettings,
-	SetInputSources,
+struct_like_serde! {
+	FusionSettingsRequestType
+	SetStalenessThresholds -> "SetStalenessThresholds",
+	SetMergeAndDropSettings -> "SetMergeAndDropSettings",
+	SetInputSources -> "SetInputSources",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "FuzeTriggerTypeSerde")]
-#[serde(try_from = "FuzeTriggerTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum FuzeTriggerType {
 	#[doc = r#"Weapon fuze distance setting applies to proximity and hydrostatic fuze modes.  Hydrostatic values will be negative to denote subsurface.  Proximity values will be positive to denote height of burst above ground or distance to the target depending on the fuze's sensing."#]
 	FuzeDistance(crate::v5_0::common::DistanceType),
 	#[doc = r#"Weapon fuze delay time setting; applies to impact and time fuze modes."#]
 	FuzeDelayTime(chrono::TimeDelta),
 }
-choice_convert_impls! {
-	FuzeTriggerType - FuzeTriggerTypeSerde
-	FuzeDistance,
-	FuzeDelayTime,
+struct_like_serde! {
+	FuzeTriggerType
+	FuzeDistance -> "FuzeDistance",
+	FuzeDelayTime -> "FuzeDelayTime",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "GatewayCommandTypeSerde")]
-#[serde(try_from = "GatewayCommandTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum GatewayCommandType {
 	#[doc = r#"Indicates a new invocation of a Gateway Capability.  Generally, if accepted, the command will result in one or more new Gateway Activities being created and reported via the Gateway Activity message.  The request/response interaction terminates as soon as the command is accepted or rejected; this element is not used to interact with an "active" command.  Updates and/or additional interaction with the resulting Activity (after the command is accepted) is accomplished via the sibling Activity element."#]
 	Capability(crate::v5_0::types::GatewayCapabilityCommandType),
 	#[doc = r#"Indicates a command to modify an existing Gateway Activity (which was previously reported via the Gateway Activity message and was marked as "interactive").  The request/response interaction terminates as soon as the modification is accepted or rejected.  The modifications are reflected in subsequent GatewayActivity messages."#]
 	Activity(crate::v5_0::types::GatewayActivityCommandType),
 }
-choice_convert_impls! {
-	GatewayCommandType - GatewayCommandTypeSerde
-	Capability,
-	Activity,
+struct_like_serde! {
+	GatewayCommandType
+	Capability -> "Capability",
+	Activity -> "Activity",
 }
 
 #[doc = r#"Contains methods for describing geographic area characteristics of a Link 16 filter."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "GatewayLink16ConfigurationAreaTypeSerde")]
-#[serde(try_from = "GatewayLink16ConfigurationAreaTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum GatewayLink16ConfigurationAreaType {
 	#[doc = r#"Circular filter area."#]
 	Circle(crate::v5_0::types::GatewayLink16ConfigurationCircleType),
@@ -2835,35 +2560,31 @@ pub enum GatewayLink16ConfigurationAreaType {
 	#[doc = r#"Line-based filter area."#]
 	Line(crate::v5_0::types::GatewayLink16ConfigurationLineType),
 }
-choice_convert_impls! {
-	GatewayLink16ConfigurationAreaType - GatewayLink16ConfigurationAreaTypeSerde
-	Circle,
-	Annulus,
-	CircularSector,
-	Rectangle,
-	Line,
+struct_like_serde! {
+	GatewayLink16ConfigurationAreaType
+	Circle -> "Circle",
+	Annulus -> "Annulus",
+	CircularSector -> "CircularSector",
+	Rectangle -> "Rectangle",
+	Line -> "Line",
 }
 
 #[doc = r#"Contains methods for describing movement characteristics of a Link 16 filter."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "GatewayLink16ConfigurationMotionTypeSerde")]
-#[serde(try_from = "GatewayLink16ConfigurationMotionTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum GatewayLink16ConfigurationMotionType {
 	#[doc = r#"Filter is moving with independent course and speed."#]
 	Moving(crate::v5_0::types::GatewayLink16ConfigurationMovementVectorType),
 	#[doc = r#"Filter is moving relative to the location of the identified item."#]
 	Slaved(GatewayLink16ConfigurationSlaveType),
 }
-choice_convert_impls! {
-	GatewayLink16ConfigurationMotionType - GatewayLink16ConfigurationMotionTypeSerde
-	Moving,
-	Slaved,
+struct_like_serde! {
+	GatewayLink16ConfigurationMotionType
+	Moving -> "Moving",
+	Slaved -> "Slaved",
 }
 
 #[doc = r#"Identifies a geographically-located item to which a Link 16 filter is slaved, meaning that the filter's current location should be considered to always be relative to the location of the identified item."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "GatewayLink16ConfigurationSlaveTypeSerde")]
-#[serde(try_from = "GatewayLink16ConfigurationSlaveTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum GatewayLink16ConfigurationSlaveType {
 	#[doc = r#"Filter is slaved to the designated Entity."#]
 	EntityId(crate::v5_0::types::EntityIdType),
@@ -2874,18 +2595,16 @@ pub enum GatewayLink16ConfigurationSlaveType {
 	#[doc = r#"Filter is slaved to the designated System."#]
 	SystemId(crate::v5_0::types::SystemIdType),
 }
-choice_convert_impls! {
-	GatewayLink16ConfigurationSlaveType - GatewayLink16ConfigurationSlaveTypeSerde
-	EntityId,
-	OperatorLocationOfInterestId,
-	OpPointId,
-	SystemId,
+struct_like_serde! {
+	GatewayLink16ConfigurationSlaveType
+	EntityId -> "EntityID",
+	OperatorLocationOfInterestId -> "OperatorLocationOfInterestID",
+	OpPointId -> "OpPointID",
+	SystemId -> "SystemID",
 }
 
 #[doc = r#"Container to reference the appropriate geo-located object."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "GeoLocatedObjectTypeSerde")]
-#[serde(try_from = "GeoLocatedObjectTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum GeoLocatedObjectType {
 	#[doc = r#"An Entity to use as the object reference."#]
 	EntityId(crate::v5_0::types::EntityIdType),
@@ -2904,22 +2623,20 @@ pub enum GeoLocatedObjectType {
 	#[doc = r#"A SignalReport to use as the object reference."#]
 	SignalReportId(crate::v5_0::types::SignalReportIdType),
 }
-choice_convert_impls! {
-	GeoLocatedObjectType - GeoLocatedObjectTypeSerde
-	EntityId,
-	SystemId,
-	OpPointId,
-	OpLineId,
-	OpZoneId,
-	OpVolumeId,
-	DmpiId,
-	SignalReportId,
+struct_like_serde! {
+	GeoLocatedObjectType
+	EntityId -> "EntityID",
+	SystemId -> "SystemID",
+	OpPointId -> "OpPointID",
+	OpLineId -> "OpLineID",
+	OpZoneId -> "OpZoneID",
+	OpVolumeId -> "OpVolumeID",
+	DmpiId -> "DMPI_ID",
+	SignalReportId -> "SignalReportID",
 }
 
 #[doc = r#"A choice between archived objects with a defined location."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "GeoLocatedStoredObjectTypeSerde")]
-#[serde(try_from = "GeoLocatedStoredObjectTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum GeoLocatedStoredObjectType {
 	#[doc = r#"The last Entity value reported before the emergency point was created."#]
 	Entity(crate::v5_0::types::EntityDataType),
@@ -2934,20 +2651,18 @@ pub enum GeoLocatedStoredObjectType {
 	#[doc = r#"The last OpVolume value reported before the emergency point was created."#]
 	OpVolume(crate::v5_0::types::OpVolumeMdt),
 }
-choice_convert_impls! {
-	GeoLocatedStoredObjectType - GeoLocatedStoredObjectTypeSerde
-	Entity,
-	System,
-	OpPoint,
-	OpLine,
-	OpZone,
-	OpVolume,
+struct_like_serde! {
+	GeoLocatedStoredObjectType
+	Entity -> "Entity",
+	System -> "System",
+	OpPoint -> "OpPoint",
+	OpLine -> "OpLine",
+	OpZone -> "OpZone",
+	OpVolume -> "OpVolume",
 }
 
 #[doc = r#"Provides the container that allows for specifying ways to identify the battlespace object."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "IdentityKindAssetTypeSerde")]
-#[serde(try_from = "IdentityKindAssetTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum IdentityKindAssetType {
 	#[doc = r#"Indicates a System or Entity asset."#]
 	ByInstance(AssetType),
@@ -2956,113 +2671,99 @@ pub enum IdentityKindAssetType {
 	#[doc = r#"Indicates an instance of System expressed as a planning candidate.  A System given here is assessed for access based on existing *Plans in addition to the more general types of Capabilities included in the assessment.  A System is a "candidate" because it may or may not be suitable for performing a Requirement."#]
 	ByPlan(crate::v5_0::types::RequirementPlanningCandidateType),
 }
-choice_convert_impls! {
-	IdentityKindAssetType - IdentityKindAssetTypeSerde
-	ByInstance,
-	ByIdentity,
-	ByPlan,
+struct_like_serde! {
+	IdentityKindAssetType
+	ByInstance -> "ByInstance",
+	ByIdentity -> "ByIdentity",
+	ByPlan -> "ByPlan",
 }
 
 #[doc = r#"Provides the container that allows for specifying ways to identify the battlespace object."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "IdentityKindInstanceTypeSerde")]
-#[serde(try_from = "IdentityKindInstanceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum IdentityKindInstanceType {
 	#[doc = r#"Indicates the specific identity of the battlespace object.  This could be the specific Entity given by its ID, an Operator-generated location or some other specific target."#]
 	ByInstance(TargetType),
 	#[doc = r#"Indicates the "platform identity" of the asset."#]
 	ByIdentity(crate::v5_0::types::IdentityType),
 }
-choice_convert_impls! {
-	IdentityKindInstanceType - IdentityKindInstanceTypeSerde
-	ByInstance,
-	ByIdentity,
+struct_like_serde! {
+	IdentityKindInstanceType
+	ByInstance -> "ByInstance",
+	ByIdentity -> "ByIdentity",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "IffActiveModesTypeSerde")]
-#[serde(try_from = "IffActiveModesTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum IffActiveModesType {
 	#[doc = r#"Indicates the IFF modes enabled for response."#]
 	IffTransponderModes(crate::v5_0::types::IffActivityTransponderType),
 	#[doc = r#"Indicates Interrogation modes currently active."#]
 	IffInterrogationModes(crate::v5_0::types::IffModeSelectionType),
 }
-choice_convert_impls! {
-	IffActiveModesType - IffActiveModesTypeSerde
-	IffTransponderModes,
-	IffInterrogationModes,
+struct_like_serde! {
+	IffActiveModesType
+	IffTransponderModes -> "IFF_TransponderModes",
+	IffInterrogationModes -> "IFF_InterrogationModes",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "IffCommandTypeSerde")]
-#[serde(try_from = "IffCommandTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum IffCommandType {
 	#[doc = r#"Indicates a new invocation of an IFF Capability.  Generally, if accepted, the command will result in one or more new IFF_Activities being created and reported via the IFF_Activity message.  The request/response interaction terminates as soon as the command is accepted or rejected; this element is not used to interact with an "active" command.  Updates and/or additional interaction with the resulting Activity (after the command is accepted) is accomplished via the sibling Activity element."#]
 	Capability(crate::v5_0::types::IffCapabilityCommandType),
 	#[doc = r#"Indicates a command to modify an existing IFF Activity (which was previously reported via the IFF_Activity message and was marked as "interactive").  The request/response interaction terminates as soon as the modification is accepted or rejected.  The modifications are reflected in subsequent IFF_Activity messages."#]
 	Activity(crate::v5_0::types::IffActivityCommandType),
 }
-choice_convert_impls! {
-	IffCommandType - IffCommandTypeSerde
-	Capability,
-	Activity,
+struct_like_serde! {
+	IffCommandType
+	Capability -> "Capability",
+	Activity -> "Activity",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "IffInterrogatorTransponderModesTypeSerde")]
-#[serde(try_from = "IffInterrogatorTransponderModesTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum IffInterrogatorTransponderModesType {
 	#[doc = r#"This sets up the transponder modes to be enabled by this command."#]
 	TransponderModesControl(crate::v5_0::types::IffTransponderModeControlType),
 	#[doc = r#"Indicates that the command is selcting the Interrogator mode of operation."#]
 	InterrogatorModesEnable(crate::v5_0::types::IffInterrogatorModesEnableType),
 }
-choice_convert_impls! {
-	IffInterrogatorTransponderModesType - IffInterrogatorTransponderModesTypeSerde
-	TransponderModesControl,
-	InterrogatorModesEnable,
+struct_like_serde! {
+	IffInterrogatorTransponderModesType
+	TransponderModesControl -> "TransponderModesControl",
+	InterrogatorModesEnable -> "InterrogatorModesEnable",
 }
 
 #[doc = r#"NITF ImageSubheader Image Identifier 2, defined herein for either non-IPON-compliant NTIF producers or IPON-compliant NITF producers, mutually exclusively."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "Iid2ChoiceTypeSerde")]
-#[serde(try_from = "Iid2ChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum Iid2ChoiceType {
 	#[doc = r#"NITF ImageSubheader Image Identifier 2 for non-IPON-compliant NTIF product producers. Mutually exclusive from the IPON_IID2 element. This field can contain the identification of additional information about the image. Type is ECS-A, default is all spaces."#]
 	NonIponIid2(crate::v5_0::common::NonIponIid2Type),
 	#[doc = r#"NITF ImageSubheader Image Identifier 2 aka Tactical Image ID for IPON-compliant NTIF product producers. Mutually exclusive from the NonIPON_IID2 element. This field contains the identification of additional information about the image, all mandatory for IPON-compliant NITF producers. 80-character field with first 40 chars mandated by the IPON and the last 40 set to all spaces (by the platform). Base types are BCS-A, but only the few fields below are defined by the tasking agency, therefore extant in UCI; the rest must be generated by the platform itself. Ref STDI-0005 (IPON)."#]
 	IponIid2(crate::v5_0::types::IponIid2Type),
 }
-choice_convert_impls! {
-	Iid2ChoiceType - Iid2ChoiceTypeSerde
-	NonIponIid2,
-	IponIid2,
+struct_like_serde! {
+	Iid2ChoiceType
+	NonIponIid2 -> "NonIPON_IID2",
+	IponIid2 -> "IPON_IID2",
 }
 
 #[doc = r#"Indicates the point of impact."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ImpactPointTypeSerde")]
-#[serde(try_from = "ImpactPointTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ImpactPointType {
 	#[doc = r#"Indicates a body location as an X,Y,Z offset relative to the body coordinate system."#]
 	BodyLocation(crate::v5_0::types::OffsetLocationErrorType),
 	#[doc = r#"Indicates a body face and radial offset."#]
 	BodyFace(crate::v5_0::types::BodyFaceType),
 }
-choice_convert_impls! {
-	ImpactPointType - ImpactPointTypeSerde
-	BodyLocation,
-	BodyFace,
+struct_like_serde! {
+	ImpactPointType
+	BodyLocation -> "BodyLocation",
+	BodyFace -> "BodyFace",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "InputProductTypeSerde")]
-#[serde(try_from = "InputProductTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum InputProductType {
 	#[doc = r#"Identifies a specific product instance."#]
 	ProductReference(ProductReferenceType),
@@ -3075,64 +2776,56 @@ This element can be used in 2 ways:
 2.)  Discrete products:  For discrete products, this element can be used to make reference to all discrete products of a specified type.  This use is typically used to reference products that have already been created and is not intended to override a product management plan (download, dissemination, classification, etc.) over some indefinite time period in the future."#]
 	ProductTypeReference(Vec<ProductFilterType>),
 }
-choice_convert_impls! {
-	InputProductType - InputProductTypeSerde
-	ProductReference,
-	ProductTypeReference,
+struct_like_serde! {
+	InputProductType
+	ProductReference -> "ProductReference",
+	ProductTypeReference -> "ProductTypeReference",
 }
 
 #[doc = r#"The type used to specify a distance or duration type for an interval."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "IntervalChoiceTypeSerde")]
-#[serde(try_from = "IntervalChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum IntervalChoiceType {
 	#[doc = r#"Indicates the interval amount is a distance."#]
 	Distance(crate::v5_0::common::DistanceType),
 	#[doc = r#"Indicates the interval amount is a duration."#]
 	Duration(chrono::TimeDelta),
 }
-choice_convert_impls! {
-	IntervalChoiceType - IntervalChoiceTypeSerde
-	Distance,
-	Duration,
+struct_like_serde! {
+	IntervalChoiceType
+	Distance -> "Distance",
+	Duration -> "Duration",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "IoPortConfigurationStatusTypeSerde")]
-#[serde(try_from = "IoPortConfigurationStatusTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum IoPortConfigurationStatusType {
 	#[doc = r#"Ethernet settings for internet protocols such as IPv4 or IPv6."#]
 	EthernetSettings(EthernetSettingsType),
 	#[doc = r#"Communication serial port settings that may consist of port ID, current state, bit rate, character width, parity and stop bit condition."#]
 	SerialPortSettings(crate::v5_0::types::CommPortSettingsType),
 }
-choice_convert_impls! {
-	IoPortConfigurationStatusType - IoPortConfigurationStatusTypeSerde
-	EthernetSettings,
-	SerialPortSettings,
+struct_like_serde! {
+	IoPortConfigurationStatusType
+	EthernetSettings -> "EthernetSettings",
+	SerialPortSettings -> "SerialPortSettings",
 }
 
 #[doc = r#"Specifies an IPv4 or IPv6 connection."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "IpConnectionChoiceTypeSerde")]
-#[serde(try_from = "IpConnectionChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum IpConnectionChoiceType {
 	#[doc = r#"IPv4 connection information."#]
 	Ipv4(crate::v5_0::types::Ipv4ConnectionType),
 	#[doc = r#"IPv6 connection information."#]
 	Ipv6(crate::v5_0::types::Ipv6ConnectionType),
 }
-choice_convert_impls! {
-	IpConnectionChoiceType - IpConnectionChoiceTypeSerde
-	Ipv4,
-	Ipv6,
+struct_like_serde! {
+	IpConnectionChoiceType
+	Ipv4 -> "IPv4",
+	Ipv6 -> "IPv6",
 }
 
 #[doc = r#"Specifies a server, client, or multicast IP connection."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "IpConnectionTypeSerde")]
-#[serde(try_from = "IpConnectionTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum IpConnectionType {
 	#[doc = r#"Configure a Server IP connection."#]
 	Server(IpConnectionChoiceType),
@@ -3141,33 +2834,29 @@ pub enum IpConnectionType {
 	#[doc = r#"Configure a Multicast or Broadcast IP connection."#]
 	Multicast(IpConnectionChoiceType),
 }
-choice_convert_impls! {
-	IpConnectionType - IpConnectionTypeSerde
-	Server,
-	Client,
-	Multicast,
+struct_like_serde! {
+	IpConnectionType
+	Server -> "Server",
+	Client -> "Client",
+	Multicast -> "Multicast",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "IsarTargetTypeSerde")]
-#[serde(try_from = "IsarTargetTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum IsarTargetType {
 	#[doc = r#"Entity to be used to cue the activity/activities generated from this command."#]
 	EntityId(crate::v5_0::types::EntityIdType),
 	#[doc = r#"Raw target location and velocity information used in lieu of an entity cue to direct activity/activities generated from this command."#]
 	RawTarget(crate::v5_0::types::PointTargetType),
 }
-choice_convert_impls! {
-	IsarTargetType - IsarTargetTypeSerde
-	EntityId,
-	RawTarget,
+struct_like_serde! {
+	IsarTargetType
+	EntityId -> "EntityID",
+	RawTarget -> "RawTarget",
 }
 
 #[doc = r#"Indicates the kinematics expressed in one of several different kinematics standards."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "KinematicsChoiceTypeSerde")]
-#[serde(try_from = "KinematicsChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum KinematicsChoiceType {
 	#[doc = r#"Indicates kinematics expressed in one of several kinematics frames/standards."#]
 	VolumeKinematics(crate::v5_0::types::OpVolumeKinematicsType),
@@ -3176,17 +2865,15 @@ pub enum KinematicsChoiceType {
 	#[doc = r#"Describes the kinematics position and orientation in the Radial-Transverse-Normal reference frame with respect to an asset. For example the position and attitude of a sensor relative to a host satellite's body frame."#]
 	LocalBodyPosition(crate::v5_0::types::RtnLocalPositionType),
 }
-choice_convert_impls! {
-	KinematicsChoiceType - KinematicsChoiceTypeSerde
-	VolumeKinematics,
-	OrbitalKinematics,
-	LocalBodyPosition,
+struct_like_serde! {
+	KinematicsChoiceType
+	VolumeKinematics -> "VolumeKinematics",
+	OrbitalKinematics -> "OrbitalKinematics",
+	LocalBodyPosition -> "LocalBodyPosition",
 }
 
 #[doc = r#"Provides a choice of ways to express kinematics in one of several orbital kinematics frames/standards."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "KinematicsMultiStandardTypeSerde")]
-#[serde(try_from = "KinematicsMultiStandardTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum KinematicsMultiStandardType {
 	#[doc = r#"Indicates kinematics expressed in one of several orbital kinematics frames/standards."#]
 	Orbital(OrbitalKinematicsChoiceType),
@@ -3195,83 +2882,73 @@ pub enum KinematicsMultiStandardType {
 	#[doc = r#"Indicates the orbital solution to achieve the task must be within the defined relative plane angles min and max."#]
 	DeltaOrbitalPlaneTolerance(crate::v5_0::types::AngleHalfPairType),
 }
-choice_convert_impls! {
-	KinematicsMultiStandardType - KinematicsMultiStandardTypeSerde
-	Orbital,
-	Wgs,
-	DeltaOrbitalPlaneTolerance,
+struct_like_serde! {
+	KinematicsMultiStandardType
+	Orbital -> "Orbital",
+	Wgs -> "WGS",
+	DeltaOrbitalPlaneTolerance -> "DeltaOrbitalPlaneTolerance",
 }
 
 #[doc = r#"Option to implicitly or explicitly provide the kinematics of an Entity or System.
 
 This allows the option to override kinematics information for a known system/entity when there is no known kinematics information or the information is not appropriate (e.g. outdated) by the time of use."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "KinematicsOptionsTypeSerde")]
-#[serde(try_from = "KinematicsOptionsTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum KinematicsOptionsType {
 	#[doc = r#"Indicates the ID of the object for which the reference frame of the sibling elements are referenced."#]
 	ReferenceAsset(AssetType),
 	#[doc = r#"Indicates the kinematics of the object for which the reference frame of the sibling elements are referenced."#]
 	KinematicsOverride(KinematicsMultiStandardType),
 }
-choice_convert_impls! {
-	KinematicsOptionsType - KinematicsOptionsTypeSerde
-	ReferenceAsset,
-	KinematicsOverride,
+struct_like_serde! {
+	KinematicsOptionsType
+	ReferenceAsset -> "ReferenceAsset",
+	KinematicsOverride -> "KinematicsOverride",
 }
 
 #[doc = r#"Provides a choice of line of sight vector definitions."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "LineOfSightChoiceTypeSerde")]
-#[serde(try_from = "LineOfSightChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum LineOfSightChoiceType {
 	#[doc = r#"LOS data provided in alternate spaces to preserve relevant data in order to propagate the track. All data should be provided in the NED reference frame."#]
 	LosAzEl(crate::v5_0::types::LosMeasurementAndUncertaintyType),
 	#[doc = r#"Indicates the line of sight vector and associated uncertainty relative to a reference point in terms of slant range and a unit vector."#]
 	Los3dKinematics(crate::v5_0::types::Los3dKinematicsType),
 }
-choice_convert_impls! {
-	LineOfSightChoiceType - LineOfSightChoiceTypeSerde
-	LosAzEl,
-	Los3dKinematics,
+struct_like_serde! {
+	LineOfSightChoiceType
+	LosAzEl -> "LOS_AzEl",
+	Los3dKinematics -> "LOS3D_Kinematics",
 }
 
 #[doc = r#"Choice of either relative or geospatial point representing the vertex of a line."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "LinePointChoiceTypeSerde")]
-#[serde(try_from = "LinePointChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum LinePointChoiceType {
 	#[doc = r#"Indicates a vertex of the line target.  Generally, services are encouraged to provide altitude and/or time data whenever it is known."#]
 	Point(Vec<crate::v5_0::types::LinePoint2DType>),
 	#[doc = r#"Indicates a relative vertex of the line target."#]
 	RelativePoint(crate::v5_0::types::LineRelativeType),
 }
-choice_convert_impls! {
-	LinePointChoiceType - LinePointChoiceTypeSerde
-	Point,
-	RelativePoint,
+struct_like_serde! {
+	LinePointChoiceType
+	Point -> "Point",
+	RelativePoint -> "RelativePoint",
 }
 
 #[doc = r#"Stores the ID of an EW."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "Link16EwDataStoreIdChoiceTypeSerde")]
-#[serde(try_from = "Link16EwDataStoreIdChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum Link16EwDataStoreIdChoiceType {
 	#[doc = r#"UCI IDs that correspond to entities."#]
 	EntityId(Vec<crate::v5_0::types::EntityIdType>),
 	#[doc = r#"UCI IDs that correspond to Signal Reports."#]
 	SignalReportId(Vec<crate::v5_0::types::SignalReportIdType>),
 }
-choice_convert_impls! {
-	Link16EwDataStoreIdChoiceType - Link16EwDataStoreIdChoiceTypeSerde
-	EntityId,
-	SignalReportId,
+struct_like_serde! {
+	Link16EwDataStoreIdChoiceType
+	EntityId -> "EntityID",
+	SignalReportId -> "SignalReportID",
 }
 
 #[doc = r#"Stores the ID of a Friendly Target of Interest in a Link16 setting."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "Link16FriendlyTargetofInterestDataStoreIdChoiceTypeSerde")]
-#[serde(try_from = "Link16FriendlyTargetofInterestDataStoreIdChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum Link16FriendlyTargetofInterestDataStoreIdChoiceType {
 	#[doc = r#"Stores the UCI IDs of entities."#]
 	EntityId(Vec<crate::v5_0::types::EntityIdType>),
@@ -3286,20 +2963,18 @@ pub enum Link16FriendlyTargetofInterestDataStoreIdChoiceType {
 	#[doc = r#"Stores the UCI IDs of subsystems."#]
 	SystemId(Vec<crate::v5_0::types::SystemIdType>),
 }
-choice_convert_impls! {
-	Link16FriendlyTargetofInterestDataStoreIdChoiceType - Link16FriendlyTargetofInterestDataStoreIdChoiceTypeSerde
-	EntityId,
-	OpLineId,
-	OpPointId,
-	OpZoneId,
-	OpVolumeId,
-	SystemId,
+struct_like_serde! {
+	Link16FriendlyTargetofInterestDataStoreIdChoiceType
+	EntityId -> "EntityID",
+	OpLineId -> "OpLineID",
+	OpPointId -> "OpPointID",
+	OpZoneId -> "OpZoneID",
+	OpVolumeId -> "OpVolumeID",
+	SystemId -> "SystemID",
 }
 
 #[doc = r#"Provides information about the OpZone, OpVolume, OpLine, and OpPoint ID."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "Link16ReferencePointDataStoreIdChoiceTypeSerde")]
-#[serde(try_from = "Link16ReferencePointDataStoreIdChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum Link16ReferencePointDataStoreIdChoiceType {
 	#[doc = r#"UCI IDs that correspond to OpLines."#]
 	OpLineId(Vec<crate::v5_0::types::OpLineIdType>),
@@ -3310,34 +2985,30 @@ pub enum Link16ReferencePointDataStoreIdChoiceType {
 	#[doc = r#"UCI IDs that correspond to OpVolumes."#]
 	OpVolumeId(Vec<crate::v5_0::types::OpVolumeIdType>),
 }
-choice_convert_impls! {
-	Link16ReferencePointDataStoreIdChoiceType - Link16ReferencePointDataStoreIdChoiceTypeSerde
-	OpLineId,
-	OpPointId,
-	OpZoneId,
-	OpVolumeId,
+struct_like_serde! {
+	Link16ReferencePointDataStoreIdChoiceType
+	OpLineId -> "OpLineID",
+	OpPointId -> "OpPointID",
+	OpZoneId -> "OpZoneID",
+	OpVolumeId -> "OpVolumeID",
 }
 
 #[doc = r#"Specifies that the content being filtered must be in the specified zone if the zone is marked inclusionary or outside of the zone if the zone is marked exclusionary."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "LocationFilterTypeSerde")]
-#[serde(try_from = "LocationFilterTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum LocationFilterType {
 	#[doc = r#"The geospatial zone to be used in the filter."#]
 	Zone(crate::v5_0::types::ZoneInclusionType),
 	#[doc = r#"A specific point location (2D or 3D) to be used in the filter."#]
 	Location(crate::v5_0::types::Point2DType),
 }
-choice_convert_impls! {
-	LocationFilterType - LocationFilterTypeSerde
-	Zone,
-	Location,
+struct_like_serde! {
+	LocationFilterType
+	Zone -> "Zone",
+	Location -> "Location",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "LocationTypeSerde")]
-#[serde(try_from = "LocationTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum LocationType {
 	#[doc = r#"This element specifies specific waypoints that the vehicle being tasked should fly."#]
 	Path(crate::v5_0::types::PathType),
@@ -3346,129 +3017,113 @@ pub enum LocationType {
 	#[doc = r#"Indicates a 3D area that an A2A capability is directed against.  This should define the latitude/longitude extents of the volume along with any guidance regarding the height of the volume."#]
 	Zone(crate::v5_0::types::ZoneType),
 }
-choice_convert_impls! {
-	LocationType - LocationTypeSerde
-	Path,
-	Loiter,
-	Zone,
+struct_like_serde! {
+	LocationType
+	Path -> "Path",
+	Loiter -> "Loiter",
+	Zone -> "Zone",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "LoiterProgressTypeSerde")]
-#[serde(try_from = "LoiterProgressTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum LoiterProgressType {
 	#[doc = r#"Indicates the time at which the loiter will end."#]
 	LoiterEndTime(chrono::DateTime<chrono::Utc>),
 	#[doc = r#"Indicates the number of completed orbits of the loiter.  This is the required progress choice when the corresponding MissionPlan indicates a number of orbits."#]
 	CompletedOrbits(u32),
 }
-choice_convert_impls! {
-	LoiterProgressType - LoiterProgressTypeSerde
-	LoiterEndTime,
-	CompletedOrbits,
+struct_like_serde! {
+	LoiterProgressType
+	LoiterEndTime -> "LoiterEndTime",
+	CompletedOrbits -> "CompletedOrbits",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "LoiterTypeSerde")]
-#[serde(try_from = "LoiterTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum LoiterType {
 	#[doc = r#"The details of an orbit loiter."#]
 	Orbit(crate::v5_0::types::OrbitType),
 	#[doc = r#"The details of a hover loiter."#]
 	Hover(crate::v5_0::types::HoverType),
 }
-choice_convert_impls! {
-	LoiterType - LoiterTypeSerde
-	Orbit,
-	Hover,
+struct_like_serde! {
+	LoiterType
+	Orbit -> "Orbit",
+	Hover -> "Hover",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "LosDTypeSerde")]
-#[serde(try_from = "LosDTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum LosDType {
 	#[doc = r#"Defines a line of sight ray in a world inertial or body frame of reference."#]
 	Los(crate::v5_0::types::LosVariableBType),
 	#[doc = r#"Indicates the rates at which the LOS should move."#]
 	LosRates(crate::v5_0::types::LosRatesType),
 }
-choice_convert_impls! {
-	LosDType - LosDTypeSerde
-	Los,
-	LosRates,
+struct_like_serde! {
+	LosDType
+	Los -> "LOS",
+	LosRates -> "LOS_Rates",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "LostLinkSourceIdChoiceTypeSerde")]
-#[serde(try_from = "LostLinkSourceIdChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum LostLinkSourceIdChoiceType {
 	#[doc = r#"Indicates the unique ID of the System whose link failed."#]
 	SystemId(crate::v5_0::types::SystemIdType),
 	#[doc = r#"This identifies the Capability ID of the communication device whose link failed."#]
 	CapabilityId(crate::v5_0::types::CapabilityIdType),
 }
-choice_convert_impls! {
-	LostLinkSourceIdChoiceType - LostLinkSourceIdChoiceTypeSerde
-	SystemId,
-	CapabilityId,
+struct_like_serde! {
+	LostLinkSourceIdChoiceType
+	SystemId -> "SystemID",
+	CapabilityId -> "CapabilityID",
 }
 
 #[doc = r#"Provides a choice between body reference orientation rates and unitless Mach value for the specification of a paired value to an aircraft acceleration limit."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaAccelerationLimitPairTypeSerde")]
-#[serde(try_from = "MaAccelerationLimitPairTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaAccelerationLimitPairType {
 	#[doc = r#"Body reference orientation rates to be paired with the specified acceleration limit."#]
 	BodyReferenceOrientationRate(crate::v5_0::types::MaBodyReferenceOrientationRateType),
 	#[doc = r#"Unitless Mach value to be paired with the specified acceleration limit."#]
 	MachValue(crate::v5_0::common::MachType),
 }
-choice_convert_impls! {
-	MaAccelerationLimitPairType - MaAccelerationLimitPairTypeSerde
-	BodyReferenceOrientationRate,
-	MachValue,
+struct_like_serde! {
+	MaAccelerationLimitPairType
+	BodyReferenceOrientationRate -> "BodyReferenceOrientationRate",
+	MachValue -> "MachValue",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaActionCommandTypeSerde")]
-#[serde(try_from = "MaActionCommandTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaActionCommandType {
 	#[doc = r#"Indicates a new invocation of an Action Capability.  Generally, if accepted, the command will result in one or more new Action Activities being created and reported via the ActionActivity message.  The request/response interaction terminates as soon as the command is accepted or rejected; this element is not used to interact with an "active" command.  Updates and/or additional interaction with the resulting Activity (after the command is accepted) is accomplished via the sibling Activity element."#]
 	Capability(crate::v5_0::types::MaActionCapabilityCommandType),
 	#[doc = r#"Indicates a command to modify an existing Action Activity (which was previously reported via the ActionActivity message and was marked as "interactive").  The request/response interaction terminates as soon as the modification is accepted or rejected.  The modifications are reflected in subsequent ActionActivity messages."#]
 	Activity(crate::v5_0::types::ActivityCommandBaseType),
 }
-choice_convert_impls! {
-	MaActionCommandType - MaActionCommandTypeSerde
-	Capability,
-	Activity,
+struct_like_serde! {
+	MaActionCommandType
+	Capability -> "Capability",
+	Activity -> "Activity",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaAllocationChoiceTypeSerde")]
-#[serde(try_from = "MaAllocationChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaAllocationChoiceType {
 	#[doc = r#"Indicates the SystemID(s) of the System that is the target of the allocation constraint."#]
 	SystemId(Vec<crate::v5_0::types::SystemIdType>),
 	#[doc = r#"Indicates the unique ID of the package for delegation of Systems."#]
 	PackageId(crate::v5_0::types::PackageIdType),
 }
-choice_convert_impls! {
-	MaAllocationChoiceType - MaAllocationChoiceTypeSerde
-	SystemId,
-	PackageId,
+struct_like_serde! {
+	MaAllocationChoiceType
+	SystemId -> "SystemID",
+	PackageId -> "PackageID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaApprovalRequestItemReferenceTypeSerde")]
-#[serde(try_from = "MaApprovalRequestItemReferenceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaApprovalRequestItemReferenceType {
 	#[doc = r#"Indicates the unique ID of the *Plan that is under review for approval."#]
 	PlanApproval(PlanReferenceIdChoiceType),
@@ -3477,17 +3132,15 @@ pub enum MaApprovalRequestItemReferenceType {
 	#[doc = r#"Indicates the MissionPlanActivationCommand details that are under review for approval. If more than one instance of this element is given, each should correspond to a different MissionPlanID.  For example, if the intent is to transition from one MissionPlan to another, the new MissionPlan can be activated in one instance and the old MissionPlan can be deactivated in another instance.  This transition would be subject to approval."#]
 	MissionPlanActivationApproval(Vec<crate::v5_0::types::MaMissionPlanActivationCommandType>),
 }
-choice_convert_impls! {
-	MaApprovalRequestItemReferenceType - MaApprovalRequestItemReferenceTypeSerde
-	PlanApproval,
-	RequirementExecutionApproval,
-	MissionPlanActivationApproval,
+struct_like_serde! {
+	MaApprovalRequestItemReferenceType
+	PlanApproval -> "PlanApproval",
+	RequirementExecutionApproval -> "RequirementExecutionApproval",
+	MissionPlanActivationApproval -> "MissionPlanActivationApproval",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaAssessmentRequestTypeSerde")]
-#[serde(try_from = "MaAssessmentRequestTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaAssessmentRequestType {
 	#[doc = r#"This element is used to specify that communication requests should be assessed, and a Pointing Plan should be generated based on the requests. The native message is CommPointingPlan."#]
 	CommPointingPlan(crate::v5_0::types::CommPointingPlanRequestType),
@@ -3510,24 +3163,22 @@ pub enum MaAssessmentRequestType {
 	#[doc = r#"This element is used to specify that assessment is being requested for sensor coverage."#]
 	CoverageAssessment(crate::v5_0::types::MaCoverageAssessmentRequestType),
 }
-choice_convert_impls! {
-	MaAssessmentRequestType - MaAssessmentRequestTypeSerde
-	CommPointingPlan,
-	CapabilityUtilization,
-	RouteDeconfliction,
-	RouteVulnerabilityMetrics,
-	RouteThreatAssessment,
-	TargetMobility,
-	VehicleThreatAssessment,
-	ThreatNominationAssessment,
-	AchievabilityAssessment,
-	CoverageAssessment,
+struct_like_serde! {
+	MaAssessmentRequestType
+	CommPointingPlan -> "CommPointingPlan",
+	CapabilityUtilization -> "CapabilityUtilization",
+	RouteDeconfliction -> "RouteDeconfliction",
+	RouteVulnerabilityMetrics -> "RouteVulnerabilityMetrics",
+	RouteThreatAssessment -> "RouteThreatAssessment",
+	TargetMobility -> "TargetMobility",
+	VehicleThreatAssessment -> "VehicleThreatAssessment",
+	ThreatNominationAssessment -> "ThreatNominationAssessment",
+	AchievabilityAssessment -> "AchievabilityAssessment",
+	CoverageAssessment -> "CoverageAssessment",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaAssessmentTypeSerde")]
-#[serde(try_from = "MaAssessmentTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaAssessmentType {
 	#[doc = r#"This element defines the response to a communications pointing plan assessment request."#]
 	CommPointingPlan(crate::v5_0::types::CommPointingPlanAssessmentType),
@@ -3550,40 +3201,36 @@ pub enum MaAssessmentType {
 	#[doc = r#"This element defines the response to a coverage assessment."#]
 	CoverageAssessment(crate::v5_0::types::MaCoverageAssessmentType),
 }
-choice_convert_impls! {
-	MaAssessmentType - MaAssessmentTypeSerde
-	CommPointingPlan,
-	CapabilityUtilization,
-	RouteDeconfliction,
-	RouteVulnerabilityMetrics,
-	RouteThreatAssessment,
-	TargetMobility,
-	VehicleThreatAssessment,
-	ThreatNominationAssessment,
-	AchievabilityAssessment,
-	CoverageAssessment,
+struct_like_serde! {
+	MaAssessmentType
+	CommPointingPlan -> "CommPointingPlan",
+	CapabilityUtilization -> "CapabilityUtilization",
+	RouteDeconfliction -> "RouteDeconfliction",
+	RouteVulnerabilityMetrics -> "RouteVulnerabilityMetrics",
+	RouteThreatAssessment -> "RouteThreatAssessment",
+	TargetMobility -> "TargetMobility",
+	VehicleThreatAssessment -> "VehicleThreatAssessment",
+	ThreatNominationAssessment -> "ThreatNominationAssessment",
+	AchievabilityAssessment -> "AchievabilityAssessment",
+	CoverageAssessment -> "CoverageAssessment",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaAuthorizedZoneChoiceTypeSerde")]
-#[serde(try_from = "MaAuthorizedZoneChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaAuthorizedZoneChoiceType {
 	#[doc = r#"This element indicates the area over which the authorization applies.  More specifically, this is the geospatial zone in which the target of Tasks created by the User must fall in order for them to be allocated to the specified System.  If omitted, the Authorization is applicable to all areas."#]
 	AuthorizedZone(crate::v5_0::types::ZoneType),
 	#[doc = r#"This element indicates the area defined by an existing OpZone over which the authorization applies.  More specifically, this is the geospatial zone in which the target of Tasks created by the User must fall in order for them to be allocated to the specified System.  If omitted, the Authorization is applicable to all areas."#]
 	AuthorizedOpZoneId(crate::v5_0::types::OpZoneIdType),
 }
-choice_convert_impls! {
-	MaAuthorizedZoneChoiceType - MaAuthorizedZoneChoiceTypeSerde
-	AuthorizedZone,
-	AuthorizedOpZoneId,
+struct_like_serde! {
+	MaAuthorizedZoneChoiceType
+	AuthorizedZone -> "AuthorizedZone",
+	AuthorizedOpZoneId -> "AuthorizedOpZoneID",
 }
 
 #[doc = r#"Defines the type and value of the offset (delay relative to the reference system) used for CAP synchronization."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaCapoffsetTypeSerde")]
-#[serde(try_from = "MaCapoffsetTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaCapoffsetType {
 	#[doc = r#"Offset is TOA based."#]
 	Time(crate::v5_0::types::DurationRangeType),
@@ -3592,49 +3239,43 @@ pub enum MaCapoffsetType {
 	#[doc = r#"Offset is a percentage of the CAP pattern."#]
 	PercentofPattern(crate::v5_0::common::PercentType),
 }
-choice_convert_impls! {
-	MaCapoffsetType - MaCapoffsetTypeSerde
-	Time,
-	Distance,
-	PercentofPattern,
+struct_like_serde! {
+	MaCapoffsetType
+	Time -> "Time",
+	Distance -> "Distance",
+	PercentofPattern -> "PercentofPattern",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaCarrierRecoveryChoiceTypeSerde")]
-#[serde(try_from = "MaCarrierRecoveryChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaCarrierRecoveryChoiceType {
 	#[doc = r#"This element defines the parameters for a carrier recovery task."#]
 	Recovery(crate::v5_0::types::MaCarrierRecoveryType),
 	#[doc = r#"This element defines the parameters for a "Delta" command that will command recovering aircraft to hold a certain amount of time if feasible"#]
 	Delta(crate::v5_0::types::MaDeltaType),
 }
-choice_convert_impls! {
-	MaCarrierRecoveryChoiceType - MaCarrierRecoveryChoiceTypeSerde
-	Recovery,
-	Delta,
+struct_like_serde! {
+	MaCarrierRecoveryChoiceType
+	Recovery -> "Recovery",
+	Delta -> "Delta",
 }
 
 #[doc = r#"The Command to be applied to a node or a system. The command can be either a String or hexBinary."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaCommandValueTypeSerde")]
-#[serde(try_from = "MaCommandValueTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaCommandValueType {
 	#[doc = r#"A hexBinary value that can be used to represent arbitrary data types."#]
 	HexBinaryValue(String),
 	#[doc = r#"A string value. A string value can be used to represent all non-primitive data types."#]
 	StringValue(crate::v5_0::common::VisibleString256Type),
 }
-choice_convert_impls! {
-	MaCommandValueType - MaCommandValueTypeSerde
-	HexBinaryValue,
-	StringValue,
+struct_like_serde! {
+	MaCommandValueType
+	HexBinaryValue -> "HexBinaryValue",
+	StringValue -> "StringValue",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaConstraintPriorityTypeChoiceTypeSerde")]
-#[serde(try_from = "MaConstraintPriorityTypeChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaConstraintPriorityTypeChoiceType {
 	#[doc = r#"Designates the type of OpZone."#]
 	ZoneCategory(crate::v5_0::enums::MaOpZoneCategoryEnum),
@@ -3643,145 +3284,127 @@ pub enum MaConstraintPriorityTypeChoiceType {
 	#[doc = r#"Designates the type of OpLine."#]
 	LineCategory(crate::v5_0::enums::OpLineCategoryEnum),
 }
-choice_convert_impls! {
-	MaConstraintPriorityTypeChoiceType - MaConstraintPriorityTypeChoiceTypeSerde
-	ZoneCategory,
-	VolumeCategory,
-	LineCategory,
+struct_like_serde! {
+	MaConstraintPriorityTypeChoiceType
+	ZoneCategory -> "ZoneCategory",
+	VolumeCategory -> "VolumeCategory",
+	LineCategory -> "LineCategory",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaControlChoiceTypeSerde")]
-#[serde(try_from = "MaControlChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaControlChoiceType {
 	#[doc = r#"Indicates the type of granted control.  See enumeration annotations for a description of control types."#]
 	GrantedControlType(crate::v5_0::enums::MaControlTypeEnum),
 	#[doc = r#"Indicates the type of permitted control.  See enumeration annotations for a description of control types."#]
 	PermittedControlType(crate::v5_0::enums::MaPermittedControlTypeEnum),
 }
-choice_convert_impls! {
-	MaControlChoiceType - MaControlChoiceTypeSerde
-	GrantedControlType,
-	PermittedControlType,
+struct_like_serde! {
+	MaControlChoiceType
+	GrantedControlType -> "GrantedControlType",
+	PermittedControlType -> "PermittedControlType",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaCopConfigurationParticipantTypeSerde")]
-#[serde(try_from = "MaCopConfigurationParticipantTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaCopConfigurationParticipantType {
 	#[doc = r#"Specifies the COP role(s) that are participating. List size for this element is based on "Select All That Apply" condition."#]
 	CopRole(Vec<crate::v5_0::enums::MaCopConfigurationRoleEnum>),
 	#[doc = r#"Specifies the System ID(s) that are participating."#]
 	SystemId(Vec<crate::v5_0::types::SystemIdType>),
 }
-choice_convert_impls! {
-	MaCopConfigurationParticipantType - MaCopConfigurationParticipantTypeSerde
-	CopRole,
-	SystemId,
+struct_like_serde! {
+	MaCopConfigurationParticipantType
+	CopRole -> "COP_Role",
+	SystemId -> "SystemID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaCopConfigurationTimingTypeSerde")]
-#[serde(try_from = "MaCopConfigurationTimingTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaCopConfigurationTimingType {
 	#[doc = r#"Indicates the updates are sent periodically."#]
 	Periodic(crate::v5_0::types::MaPeriodRangeType),
 	#[doc = r#"Indicates updates will be sent if the value has changed more than the threshold since it was last sent. Set to 0 to always send on change"#]
 	ChangeThreshold(crate::v5_0::common::PercentType),
 }
-choice_convert_impls! {
-	MaCopConfigurationTimingType - MaCopConfigurationTimingTypeSerde
-	Periodic,
-	ChangeThreshold,
+struct_like_serde! {
+	MaCopConfigurationTimingType
+	Periodic -> "Periodic",
+	ChangeThreshold -> "ChangeThreshold",
 }
 
 #[doc = r#"Contains speed or time contraints to applied for a curve following command"#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaCurveTraversingTypeSerde")]
-#[serde(try_from = "MaCurveTraversingTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaCurveTraversingType {
 	#[doc = r#"Speed constraint to be applied to commanded curve traversal"#]
 	SpeedRange(crate::v5_0::types::SpeedRangeType),
 	#[doc = r#"Time contraint to inform intended duration of the commanded curve traversal"#]
 	Duration(i64),
 }
-choice_convert_impls! {
-	MaCurveTraversingType - MaCurveTraversingTypeSerde
-	SpeedRange,
-	Duration,
+struct_like_serde! {
+	MaCurveTraversingType
+	SpeedRange -> "SpeedRange",
+	Duration -> "Duration",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaDataActivationAuthorizationTypeSerde")]
-#[serde(try_from = "MaDataActivationAuthorizationTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaDataActivationAuthorizationType {
 	#[doc = r#"This element indicates that all data types are authorized to be activated with the exeception of the enumeration values listed in the permissionType."#]
 	AuthorizedExceptFor(crate::v5_0::types::MaDataActivationPermissionsType),
 	#[doc = r#"This element indicates that all data types are NOT authorized to be activated with the exeception of the enumeration values listed in the permissionType."#]
 	UnauthorizedExceptFor(crate::v5_0::types::MaDataActivationPermissionsType),
 }
-choice_convert_impls! {
-	MaDataActivationAuthorizationType - MaDataActivationAuthorizationTypeSerde
-	AuthorizedExceptFor,
-	UnauthorizedExceptFor,
+struct_like_serde! {
+	MaDataActivationAuthorizationType
+	AuthorizedExceptFor -> "AuthorizedExceptFor",
+	UnauthorizedExceptFor -> "UnauthorizedExceptFor",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaDataModificationAuthorizationTypeSerde")]
-#[serde(try_from = "MaDataModificationAuthorizationTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaDataModificationAuthorizationType {
 	#[doc = r#"This element indicates that all data types are authorized to be created, modified or deleted with the exeception of the enumeration values listed in the permissionType."#]
 	AuthorizedExceptFor(crate::v5_0::types::MaDataModificationPermissionsType),
 	#[doc = r#"This element indicates that all data types are NOT authorized to be created, modified or deleted with the exeception of the enumeration values listed in the permissionType"#]
 	UnauthorizedExceptFor(crate::v5_0::types::MaDataModificationPermissionsType),
 }
-choice_convert_impls! {
-	MaDataModificationAuthorizationType - MaDataModificationAuthorizationTypeSerde
-	AuthorizedExceptFor,
-	UnauthorizedExceptFor,
+struct_like_serde! {
+	MaDataModificationAuthorizationType
+	AuthorizedExceptFor -> "AuthorizedExceptFor",
+	UnauthorizedExceptFor -> "UnauthorizedExceptFor",
 }
 
 #[doc = r#"Enables the specification of a heading or course type with an associated reference."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaDirectionChoiceTypeSerde")]
-#[serde(try_from = "MaDirectionChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaDirectionChoiceType {
 	#[doc = r#"Defines heading type and reference to hold."#]
 	Heading(crate::v5_0::types::MaDirectionReferenceType),
 	#[doc = r#"Defines course type and reference to hold."#]
 	Course(crate::v5_0::types::MaDirectionReferenceType),
 }
-choice_convert_impls! {
-	MaDirectionChoiceType - MaDirectionChoiceTypeSerde
-	Heading,
-	Course,
+struct_like_serde! {
+	MaDirectionChoiceType
+	Heading -> "Heading",
+	Course -> "Course",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaDynamicFitnessScoreChoiceTypeSerde")]
-#[serde(try_from = "MaDynamicFitnessScoreChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaDynamicFitnessScoreChoiceType {
 	#[doc = r#"This specifies the determination method as “C2 Comms-Binary”, where 0 indicates poor/no connection with C2 and 1 means comms with C2 is established/healthy."#]
 	C2CommsBinary(crate::v5_0::common::EmptyType),
 	#[doc = r#"This specifies the determination method as “P2P Comms-Count”, based on the number of peers with established/healthy connection to the reporting ACP."#]
 	P2pCommsCount(crate::v5_0::common::EmptyType),
 }
-choice_convert_impls! {
-	MaDynamicFitnessScoreChoiceType - MaDynamicFitnessScoreChoiceTypeSerde
-	C2CommsBinary,
-	P2pCommsCount,
+struct_like_serde! {
+	MaDynamicFitnessScoreChoiceType
+	C2CommsBinary -> "C2_CommsBinary",
+	P2pCommsCount -> "P2P_CommsCount",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaElectromagneticIndicationChoiceTypeSerde")]
-#[serde(try_from = "MaElectromagneticIndicationChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaElectromagneticIndicationChoiceType {
 	#[doc = r#"Indicates Identify Friend or Foe (IFF) modes and settings for the asset."#]
 	Iff(crate::v5_0::types::IffType),
@@ -3792,18 +3415,16 @@ pub enum MaElectromagneticIndicationChoiceType {
 	#[doc = r#"This element represents Electronic Intelligence (ELINT) Notation (ELNOT) for non-communications electronic emissions.  Used to preserve original signal identification in case of modification by subsequent processing."#]
 	ElnotIdentifier(crate::v5_0::common::NotationType),
 }
-choice_convert_impls! {
-	MaElectromagneticIndicationChoiceType - MaElectromagneticIndicationChoiceTypeSerde
-	Iff,
-	SpecificEmitterKey,
-	CenotIdentifier,
-	ElnotIdentifier,
+struct_like_serde! {
+	MaElectromagneticIndicationChoiceType
+	Iff -> "IFF",
+	SpecificEmitterKey -> "SpecificEmitterKey",
+	CenotIdentifier -> "CENOT_Identifier",
+	ElnotIdentifier -> "ELNOT_Identifier",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaEndPointTypeSerde")]
-#[serde(try_from = "MaEndPointTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaEndPointType {
 	#[doc = r#"This element is used to specify a point in the route where no turning occurs.  It is generally used for points associated with Actions such as task "transitions", changes in acceleration, changes in speed, changes in altitude, etc."#]
 	WayPoint(crate::v5_0::types::WayPointType),
@@ -3812,17 +3433,15 @@ pub enum MaEndPointType {
 	#[doc = r#"This element specifies a Loiter.  Currently specifying a task/action associated with a LoiterPoint when the task/action occurs only during a portion of the Loiter is not supported."#]
 	LoiterPoint(crate::v5_0::types::MaLoiterPointType),
 }
-choice_convert_impls! {
-	MaEndPointType - MaEndPointTypeSerde
-	WayPoint,
-	TurnPoint,
-	LoiterPoint,
+struct_like_serde! {
+	MaEndPointType
+	WayPoint -> "WayPoint",
+	TurnPoint -> "TurnPoint",
+	LoiterPoint -> "LoiterPoint",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaEntityCharacteristicTypeSerde")]
-#[serde(try_from = "MaEntityCharacteristicTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaEntityCharacteristicType {
 	#[doc = r#"Indicates the identity to be compared to the identity in the Entity message."#]
 	Identity(crate::v5_0::types::IdentityComparisonType),
@@ -3837,52 +3456,46 @@ pub enum MaEntityCharacteristicType {
 	#[doc = r#"Indicates behaviors, activities, use of capabilities, etc. to be compared to those of the battlespace object associated with the Entity."#]
 	Behavior(crate::v5_0::types::BehaviorType),
 }
-choice_convert_impls! {
-	MaEntityCharacteristicType - MaEntityCharacteristicTypeSerde
-	Identity,
-	IdentityStaleness,
-	PositionUncertainty,
-	PositionStaleness,
-	PrioritizationList,
-	Behavior,
+struct_like_serde! {
+	MaEntityCharacteristicType
+	Identity -> "Identity",
+	IdentityStaleness -> "IdentityStaleness",
+	PositionUncertainty -> "PositionUncertainty",
+	PositionStaleness -> "PositionStaleness",
+	PrioritizationList -> "PrioritizationList",
+	Behavior -> "Behavior",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaEscortAssetTypeSerde")]
-#[serde(try_from = "MaEscortAssetTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaEscortAssetType {
 	#[doc = r#"The unique ID of an Entity to be escorted."#]
 	EntityId(crate::v5_0::types::EntityIdType),
 	#[doc = r#"The unique ID of a System to be escorted."#]
 	SystemId(crate::v5_0::types::SystemIdType),
 }
-choice_convert_impls! {
-	MaEscortAssetType - MaEscortAssetTypeSerde
-	EntityId,
-	SystemId,
+struct_like_serde! {
+	MaEscortAssetType
+	EntityId -> "EntityID",
+	SystemId -> "SystemID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaEscortCommandTypeSerde")]
-#[serde(try_from = "MaEscortCommandTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaEscortCommandType {
 	#[doc = r#"Indicates a new invocation of an Escort Capability.  Generally, if accepted, the command will result in one or more new Escort Activities being created and reported via the EscortActivity message.  The request/response interaction terminates as soon as the command is accepted or rejected; this element is not used to interact with an "active" command.  Updates and/or additional interaction with the resulting Activity (after the command is accepted) is accomplished via the sibling Activity element."#]
 	Capability(crate::v5_0::types::MaEscortCapabilityCommandType),
 	#[doc = r#"Indicates a command to modify an existing Escort Activity (which was previously reported via the EscortActivity message and was marked as "interactive").  The request/response interaction terminates as soon as the modification is accepted or rejected.  The modifications are reflected in subsequent EscortActivity messages."#]
 	Activity(crate::v5_0::types::MaEscortActivityCommandType),
 }
-choice_convert_impls! {
-	MaEscortCommandType - MaEscortCommandTypeSerde
-	Capability,
-	Activity,
+struct_like_serde! {
+	MaEscortCommandType
+	Capability -> "Capability",
+	Activity -> "Activity",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaEscortReferenceTypeSerde")]
-#[serde(try_from = "MaEscortReferenceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaEscortReferenceType {
 	#[doc = r#"Indicates that the escorting entity should follow the path of the escorted entity."#]
 	FollowPath(crate::v5_0::types::MaEscortFollowPathType),
@@ -3891,49 +3504,43 @@ pub enum MaEscortReferenceType {
 	#[doc = r#"Indicates the position of the escorting entity in reference to the escorted entity. A bearing of 0 would indicate that the escorting entity should always remain in front of the escorted entity."#]
 	BodyReference(crate::v5_0::types::LosType),
 }
-choice_convert_impls! {
-	MaEscortReferenceType - MaEscortReferenceTypeSerde
-	FollowPath,
-	GeographicReference,
-	BodyReference,
+struct_like_serde! {
+	MaEscortReferenceType
+	FollowPath -> "FollowPath",
+	GeographicReference -> "GeographicReference",
+	BodyReference -> "BodyReference",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaExecutionPriorityTypeChoiceTypeSerde")]
-#[serde(try_from = "MaExecutionPriorityTypeChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaExecutionPriorityTypeChoiceType {
 	#[doc = r#"Indicates the task type."#]
 	TaskType(crate::v5_0::enums::MaTaskTypeEnum),
 	#[doc = r#"Indicates the taxonomy of the Action form of C2 Requirement.  The taxonomy is a combination of abstract commands, verbs, tasks, etc. described in various Joint Publications, training documents for operational planning, etc."#]
 	ActionType(crate::v5_0::enums::ActionTypeEnum),
 }
-choice_convert_impls! {
-	MaExecutionPriorityTypeChoiceType - MaExecutionPriorityTypeChoiceTypeSerde
-	TaskType,
-	ActionType,
+struct_like_serde! {
+	MaExecutionPriorityTypeChoiceType
+	TaskType -> "TaskType",
+	ActionType -> "ActionType",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaFlightCommandTypeSerde")]
-#[serde(try_from = "MaFlightCommandTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaFlightCommandType {
 	#[doc = r#"Indicates a new invocation of a Flight Capability.  Generally, if accepted, the command will result in one or more new Flight Activities being created and reported via the Flight Activity message.  The request/response interaction terminates as soon as the command is accepted or rejected; this element is not used to interact with an "active" command.  Updates and/or additional interaction with the resulting Activity (after the command is accepted) is accomplished via the sibling Activity element."#]
 	Capability(crate::v5_0::types::MaFlightCapabilityCommandType),
 	#[doc = r#"Indicates a command to modify an existing Flight Activity (which was previously reported via the Flight Activity message and was marked as "interactive").  The request/response interaction terminates as soon as the modification is accepted or rejected.  The modifications are reflected in subsequent Flight Activity messages."#]
 	Activity(crate::v5_0::types::MaFlightActivityCommandType),
 }
-choice_convert_impls! {
-	MaFlightCommandType - MaFlightCommandTypeSerde
-	Capability,
-	Activity,
+struct_like_serde! {
+	MaFlightCommandType
+	Capability -> "Capability",
+	Activity -> "Activity",
 }
 
 #[doc = r#"Provides a choice among available flight control mode types."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaFlightControlModesChoiceTypeSerde")]
-#[serde(try_from = "MaFlightControlModesChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaFlightControlModesChoiceType {
 	#[doc = r#"This message shall be used to provide the ability to command a new flight vector to the Platform."#]
 	HsaCsa(crate::v5_0::types::MaHsaCsaType),
@@ -3942,33 +3549,29 @@ pub enum MaFlightControlModesChoiceType {
 	#[doc = r#"Indicates the parameters for curve following control."#]
 	CurveFollowing(crate::v5_0::types::MaCurveControlType),
 }
-choice_convert_impls! {
-	MaFlightControlModesChoiceType - MaFlightControlModesChoiceTypeSerde
-	HsaCsa,
-	WaypointFollowing,
-	CurveFollowing,
+struct_like_serde! {
+	MaFlightControlModesChoiceType
+	HsaCsa -> "HSA_CSA",
+	WaypointFollowing -> "WaypointFollowing",
+	CurveFollowing -> "CurveFollowing",
 }
 
 #[doc = r#"Defines details of orbit loiter"#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaHoldLegSpecificationTypeSerde")]
-#[serde(try_from = "MaHoldLegSpecificationTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaHoldLegSpecificationType {
 	#[doc = r#"Duration to fly the inbound leg in seconds."#]
 	LegTime(chrono::TimeDelta),
 	#[doc = r#"Length to fly the inbound leg in meters."#]
 	LegLength(crate::v5_0::common::DistanceType),
 }
-choice_convert_impls! {
-	MaHoldLegSpecificationType - MaHoldLegSpecificationTypeSerde
-	LegTime,
-	LegLength,
+struct_like_serde! {
+	MaHoldLegSpecificationType
+	LegTime -> "LegTime",
+	LegLength -> "LegLength",
 }
 
 #[doc = r#"Specifies the turns of the hold."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaHoldTurnSpecificationTypeSerde")]
-#[serde(try_from = "MaHoldTurnSpecificationTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaHoldTurnSpecificationType {
 	#[doc = r#"Radius of the hold turns in meters."#]
 	TurnRadius(crate::v5_0::common::DistanceType),
@@ -3977,65 +3580,57 @@ pub enum MaHoldTurnSpecificationType {
 	#[doc = r#"Specification of the type of turn to be executed during the hold."#]
 	TurnType(crate::v5_0::enums::MaHoldTurnTypeEnum),
 }
-choice_convert_impls! {
-	MaHoldTurnSpecificationType - MaHoldTurnSpecificationTypeSerde
-	TurnRadius,
-	TurnRate,
-	TurnType,
+struct_like_serde! {
+	MaHoldTurnSpecificationType
+	TurnRadius -> "TurnRadius",
+	TurnRate -> "TurnRate",
+	TurnType -> "TurnType",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaInterceptTacticTypeSerde")]
-#[serde(try_from = "MaInterceptTacticTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaInterceptTacticType {
 	#[doc = r#"Field to specify the skate tactic type and supporting data."#]
 	SkateType(crate::v5_0::types::MaSkateType),
 	#[doc = r#"Field to specify the Banzai tactic type and supporting data."#]
 	BanzaiType(crate::v5_0::types::MaBanzaiType),
 }
-choice_convert_impls! {
-	MaInterceptTacticType - MaInterceptTacticTypeSerde
-	SkateType,
-	BanzaiType,
+struct_like_serde! {
+	MaInterceptTacticType
+	SkateType -> "SkateType",
+	BanzaiType -> "BanzaiType",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaJettisonStoreSelectionTypeSerde")]
-#[serde(try_from = "MaJettisonStoreSelectionTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaJettisonStoreSelectionType {
 	#[doc = r#"Jettison all weapon capabilities that are capable of being jettisoned."#]
 	JettisonAllCapableWeapons(crate::v5_0::common::EmptyType),
 	#[doc = r#"Indicates weapon stores selected for jettison by CapabilityID. CapabilityID should be in reference to the Strike Capability."#]
 	CapabilityId(Vec<crate::v5_0::types::CapabilityIdType>),
 }
-choice_convert_impls! {
-	MaJettisonStoreSelectionType - MaJettisonStoreSelectionTypeSerde
-	JettisonAllCapableWeapons,
-	CapabilityId,
+struct_like_serde! {
+	MaJettisonStoreSelectionType
+	JettisonAllCapableWeapons -> "JettisonAllCapableWeapons",
+	CapabilityId -> "CapabilityID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaLaunchTypeSerde")]
-#[serde(try_from = "MaLaunchTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaLaunchType {
 	#[doc = r#"This element defines the parameters for a carrier launch task."#]
 	CarrierLaunch(crate::v5_0::types::MaCarrierLaunchType),
 	#[doc = r#"This element defines the parameters for an airfield takeoff task."#]
 	AirfieldTakeoff(crate::v5_0::types::MaAirfieldTakeoffType),
 }
-choice_convert_impls! {
-	MaLaunchType - MaLaunchTypeSerde
-	CarrierLaunch,
-	AirfieldTakeoff,
+struct_like_serde! {
+	MaLaunchType
+	CarrierLaunch -> "CarrierLaunch",
+	AirfieldTakeoff -> "AirfieldTakeoff",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaLeadershipFitnessScoreDeterminationMethodChoiceTypeSerde")]
-#[serde(try_from = "MaLeadershipFitnessScoreDeterminationMethodChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaLeadershipFitnessScoreDeterminationMethodChoiceType {
 	#[doc = r#"This specifies the determination method as “Static”."#]
 	StaticFitnessScore(crate::v5_0::common::EmptyType),
@@ -4044,17 +3639,15 @@ pub enum MaLeadershipFitnessScoreDeterminationMethodChoiceType {
 	#[doc = r#"This nested choice type specifies the determination method as “Dynamic”."#]
 	DynamicFitnessScore(MaDynamicFitnessScoreChoiceType),
 }
-choice_convert_impls! {
-	MaLeadershipFitnessScoreDeterminationMethodChoiceType - MaLeadershipFitnessScoreDeterminationMethodChoiceTypeSerde
-	StaticFitnessScore,
-	UserDefined,
-	DynamicFitnessScore,
+struct_like_serde! {
+	MaLeadershipFitnessScoreDeterminationMethodChoiceType
+	StaticFitnessScore -> "StaticFitnessScore",
+	UserDefined -> "UserDefined",
+	DynamicFitnessScore -> "DynamicFitnessScore",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaLoiterTypeSerde")]
-#[serde(try_from = "MaLoiterTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaLoiterType {
 	#[doc = r#"The details of an orbit loiter."#]
 	Orbit(crate::v5_0::types::MaOrbitType),
@@ -4063,17 +3656,15 @@ pub enum MaLoiterType {
 	#[doc = r#"The details of a hold loiter."#]
 	Hold(crate::v5_0::types::MaHoldType),
 }
-choice_convert_impls! {
-	MaLoiterType - MaLoiterTypeSerde
-	Orbit,
-	Hover,
-	Hold,
+struct_like_serde! {
+	MaLoiterType
+	Orbit -> "Orbit",
+	Hover -> "Hover",
+	Hold -> "Hold",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaMissionEnvironmentConstraintTypeSerde")]
-#[serde(try_from = "MaMissionEnvironmentConstraintTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaMissionEnvironmentConstraintType {
 	#[doc = r#"Constraint Override on an Entity."#]
 	ConstrainedEntity(crate::v5_0::types::ConstrainedEntityType),
@@ -4092,22 +3683,20 @@ pub enum MaMissionEnvironmentConstraintType {
 	#[doc = r#"Parameter Override for this mission plan.  See associated ServiceConfigurationParams message for appropriate values."#]
 	Parameter(crate::v5_0::types::ParameterAssertType),
 }
-choice_convert_impls! {
-	MaMissionEnvironmentConstraintType - MaMissionEnvironmentConstraintTypeSerde
-	ConstrainedEntity,
-	ConstrainedOpPoint,
-	ConstrainedOpLine,
-	ConstrainedOpZone,
-	ConstrainedOpVolume,
-	System,
-	RiskAdjustment,
-	Parameter,
+struct_like_serde! {
+	MaMissionEnvironmentConstraintType
+	ConstrainedEntity -> "ConstrainedEntity",
+	ConstrainedOpPoint -> "ConstrainedOpPoint",
+	ConstrainedOpLine -> "ConstrainedOpLine",
+	ConstrainedOpZone -> "ConstrainedOpZone",
+	ConstrainedOpVolume -> "ConstrainedOpVolume",
+	System -> "System",
+	RiskAdjustment -> "RiskAdjustment",
+	Parameter -> "Parameter",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaMissionPlanActivationDetailsTypeSerde")]
-#[serde(try_from = "MaMissionPlanActivationDetailsTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaMissionPlanActivationDetailsType {
 	#[doc = r#"Indicates simultaneous activation of all sub-*Plans (RoutePlan, RouteActivityPlan for example) of a MissionPlan into the same activation state."#]
 	ByMissionPlan(crate::v5_0::types::MissionPlanActivationType),
@@ -4116,97 +3705,85 @@ pub enum MaMissionPlanActivationDetailsType {
 	#[doc = r#"Indicates simultaneous activation of all sub-*Plans (ActivityPlan, RoutePlan for example) of an *ExecutionPlanSet into the same activation state."#]
 	ByExecutionPlanSet(crate::v5_0::types::MaExecutionPlanSetActivationType),
 }
-choice_convert_impls! {
-	MaMissionPlanActivationDetailsType - MaMissionPlanActivationDetailsTypeSerde
-	ByMissionPlan,
-	BySubPlan,
-	ByExecutionPlanSet,
+struct_like_serde! {
+	MaMissionPlanActivationDetailsType
+	ByMissionPlan -> "ByMissionPlan",
+	BySubPlan -> "BySubPlan",
+	ByExecutionPlanSet -> "ByExecutionPlanSet",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaMissionPlanningAutonomyResponseChoiceTypeSerde")]
-#[serde(try_from = "MaMissionPlanningAutonomyResponseChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaMissionPlanningAutonomyResponseChoiceType {
 	#[doc = r#"This element indicates the allowed autonomous mission planning for the ancestor Trigger.  It also indicates the expected MissionContingencyAlert for the ancestor Trigger; whenever autonomous mission planning is allowed and triggered, a MissionContingencyAlert is expected."#]
 	AutonomousPlanningAction(Vec<crate::v5_0::types::MaPlanningAllowedEscalationType>),
 	#[doc = r#"This element indicates that autonomous mission planning isn't allowed for the ancestor Trigger but a MissionContingencyAlert is expected."#]
 	AlertOnly(crate::v5_0::common::EmptyType),
 }
-choice_convert_impls! {
-	MaMissionPlanningAutonomyResponseChoiceType - MaMissionPlanningAutonomyResponseChoiceTypeSerde
-	AutonomousPlanningAction,
-	AlertOnly,
+struct_like_serde! {
+	MaMissionPlanningAutonomyResponseChoiceType
+	AutonomousPlanningAction -> "AutonomousPlanningAction",
+	AlertOnly -> "AlertOnly",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaMissionPlanningByResultAutonomousActionTypeSerde")]
-#[serde(try_from = "MaMissionPlanningByResultAutonomousActionTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaMissionPlanningByResultAutonomousActionType {
 	#[doc = r#"This element defines the mission planning type to be triggered.  If multiple instances are given, each should be of a different planning type as indicated by the child element."#]
 	PlanningAllowed(Vec<crate::v5_0::types::MaPlanningAllowedType>),
 	#[doc = r#"This element indicates that autonomous mission planning isn't allowed for the ancestor Trigger but a MissionContingencyAlert is expected."#]
 	AlertOnly(crate::v5_0::common::EmptyType),
 }
-choice_convert_impls! {
-	MaMissionPlanningByResultAutonomousActionType - MaMissionPlanningByResultAutonomousActionTypeSerde
-	PlanningAllowed,
-	AlertOnly,
+struct_like_serde! {
+	MaMissionPlanningByResultAutonomousActionType
+	PlanningAllowed -> "PlanningAllowed",
+	AlertOnly -> "AlertOnly",
 }
 
 #[doc = r#"The choice of a package or task to describe the leader update message."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaNominationChoiceTypeSerde")]
-#[serde(try_from = "MaNominationChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaNominationChoiceType {
 	#[doc = r#"The unique ID of the task that this request applies to."#]
 	ApplicableTaskId(crate::v5_0::types::TaskIdType),
 	#[doc = r#"The unique ID of the package that this request applies to."#]
 	ApplicablePackageId(crate::v5_0::types::PackageIdType),
 }
-choice_convert_impls! {
-	MaNominationChoiceType - MaNominationChoiceTypeSerde
-	ApplicableTaskId,
-	ApplicablePackageId,
+struct_like_serde! {
+	MaNominationChoiceType
+	ApplicableTaskId -> "ApplicableTaskID",
+	ApplicablePackageId -> "ApplicablePackageID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaOpPlanCommandIdChoiceTypeSerde")]
-#[serde(try_from = "MaOpPlanCommandIdChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaOpPlanCommandIdChoiceType {
 	#[doc = r#"Indicates the unique ID of the MissionPlanCommand associated with the OpPlan."#]
 	MissionPlanCommandId(crate::v5_0::types::MissionPlanCommandIdType),
 	#[doc = r#"Indicates the unique ID of the MissionPlanValidationCommand associated with the OpPlan."#]
 	MissionPlanValidationCommandId(crate::v5_0::types::CommandIdType),
 }
-choice_convert_impls! {
-	MaOpPlanCommandIdChoiceType - MaOpPlanCommandIdChoiceTypeSerde
-	MissionPlanCommandId,
-	MissionPlanValidationCommandId,
+struct_like_serde! {
+	MaOpPlanCommandIdChoiceType
+	MissionPlanCommandId -> "MissionPlanCommandID",
+	MissionPlanValidationCommandId -> "MissionPlanValidationCommandID",
 }
 
 #[doc = r#"Contains volume location and geometry information."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaOpVolumeChoiceTypeSerde")]
-#[serde(try_from = "MaOpVolumeChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaOpVolumeChoiceType {
 	#[doc = r#"Defines an OpVolume geometry"#]
 	GeometrySpecification(OpVolumeType),
 	#[doc = r#"Defines an OpVolume geometry via reference to other filtered objects"#]
 	GeometryReference(crate::v5_0::types::MaReferentialOpVolumeType),
 }
-choice_convert_impls! {
-	MaOpVolumeChoiceType - MaOpVolumeChoiceTypeSerde
-	GeometrySpecification,
-	GeometryReference,
+struct_like_serde! {
+	MaOpVolumeChoiceType
+	GeometrySpecification -> "GeometrySpecification",
+	GeometryReference -> "GeometryReference",
 }
 
 #[doc = r#"Container for parameters that are unique to a specific enumeration in OpZoneCategoryEnum.  For example, KeepIn enumeration can have amplifying information such as entry and exit restrictions of the zone."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaOpZoneCategoryTypeSerde")]
-#[serde(try_from = "MaOpZoneCategoryTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaOpZoneCategoryType {
 	#[doc = r#"Defines boundaries which applicable Systems can only enter and exit through defined edges."#]
 	ConstrainedEntryExit(crate::v5_0::types::ConstrainedEntryExitType),
@@ -4231,57 +3808,51 @@ pub enum MaOpZoneCategoryType {
 	#[doc = r#"Defines area of weather conditions with potential of mission impact."#]
 	WeatherConditions(crate::v5_0::types::OpZoneWeatherType),
 }
-choice_convert_impls! {
-	MaOpZoneCategoryType - MaOpZoneCategoryTypeSerde
-	ConstrainedEntryExit,
-	FilterArea,
-	Jamming,
-	KeepIn,
-	MissileLaunchPoint,
-	NoFire,
-	NoFly,
-	SpeedLimits,
-	VehicleConfiguration,
-	WeaponRestriction,
-	WeatherConditions,
+struct_like_serde! {
+	MaOpZoneCategoryType
+	ConstrainedEntryExit -> "ConstrainedEntryExit",
+	FilterArea -> "FilterArea",
+	Jamming -> "Jamming",
+	KeepIn -> "KeepIn",
+	MissileLaunchPoint -> "MissileLaunchPoint",
+	NoFire -> "NoFire",
+	NoFly -> "NoFly",
+	SpeedLimits -> "SpeedLimits",
+	VehicleConfiguration -> "VehicleConfiguration",
+	WeaponRestriction -> "WeaponRestriction",
+	WeatherConditions -> "WeatherConditions",
 }
 
 #[doc = r#"Contains zone location and geometry information."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaOpZoneChoiceTypeSerde")]
-#[serde(try_from = "MaOpZoneChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaOpZoneChoiceType {
 	#[doc = r#"Defines an OpZone geometry"#]
 	GeometrySpecification(crate::v5_0::types::OpZoneType),
 	#[doc = r#"Defines an OpZone geometry via reference to other filtered objects"#]
 	GeometryReference(crate::v5_0::types::MaReferentialOpZoneType),
 }
-choice_convert_impls! {
-	MaOpZoneChoiceType - MaOpZoneChoiceTypeSerde
-	GeometrySpecification,
-	GeometryReference,
+struct_like_serde! {
+	MaOpZoneChoiceType
+	GeometrySpecification -> "GeometrySpecification",
+	GeometryReference -> "GeometryReference",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaOperatorRequestAuthorizationTypeSerde")]
-#[serde(try_from = "MaOperatorRequestAuthorizationTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaOperatorRequestAuthorizationType {
 	#[doc = r#"This element indicates that all request types are authorized to be sent with the exeception of the enumeration values listed in the permissionType."#]
 	AuthorizedExceptFor(crate::v5_0::types::MaOperatorRequestPermissionsType),
 	#[doc = r#"This element indicates that all request types are NOT authorized to be sent with the exeception of the enumeration values listed in the permissionType."#]
 	UnauthorizedExceptFor(crate::v5_0::types::MaOperatorRequestPermissionsType),
 }
-choice_convert_impls! {
-	MaOperatorRequestAuthorizationType - MaOperatorRequestAuthorizationTypeSerde
-	AuthorizedExceptFor,
-	UnauthorizedExceptFor,
+struct_like_serde! {
+	MaOperatorRequestAuthorizationType
+	AuthorizedExceptFor -> "AuthorizedExceptFor",
+	UnauthorizedExceptFor -> "UnauthorizedExceptFor",
 }
 
 #[doc = r#"Specifies the turns of the hold."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaOrbitDurationTypeSerde")]
-#[serde(try_from = "MaOrbitDurationTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaOrbitDurationType {
 	#[doc = r#"Radius of the hold turns in meters."#]
 	Time(chrono::TimeDelta),
@@ -4290,33 +3861,29 @@ pub enum MaOrbitDurationType {
 	#[doc = r#"Required time(s) to enter and/or exit the hold."#]
 	EntryExitTime(crate::v5_0::types::DateTimeRangeType),
 }
-choice_convert_impls! {
-	MaOrbitDurationType - MaOrbitDurationTypeSerde
-	Time,
-	NumberOfOrbits,
-	EntryExitTime,
+struct_like_serde! {
+	MaOrbitDurationType
+	Time -> "Time",
+	NumberOfOrbits -> "NumberOfOrbits",
+	EntryExitTime -> "EntryExitTime",
 }
 
 #[doc = r#"Defines shape of orbit"#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaOrbitShapeTypeSerde")]
-#[serde(try_from = "MaOrbitShapeTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaOrbitShapeType {
 	#[doc = r#"Defines an orbit by its fix point and inbound course."#]
 	FixPoint(crate::v5_0::types::MaFixOrbitType),
 	#[doc = r#"A single point will be provided if and only if OrbitType is Circle. See annotations of each OrbitType (OrbitEnum) value for further details."#]
 	Circle(crate::v5_0::types::MaCircleOrbitType),
 }
-choice_convert_impls! {
-	MaOrbitShapeType - MaOrbitShapeTypeSerde
-	FixPoint,
-	Circle,
+struct_like_serde! {
+	MaOrbitShapeType
+	FixPoint -> "FixPoint",
+	Circle -> "Circle",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaPackageSystemTypeSerde")]
-#[serde(try_from = "MaPackageSystemTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaPackageSystemType {
 	#[doc = r#"indicates applies to ALL entities."#]
 	All(crate::v5_0::common::EmptyType),
@@ -4327,34 +3894,30 @@ pub enum MaPackageSystemType {
 	#[doc = r#"The ID of an ACP or C2 Operator."#]
 	SystemId(crate::v5_0::types::SystemIdType),
 }
-choice_convert_impls! {
-	MaPackageSystemType - MaPackageSystemTypeSerde
-	All,
-	Non,
-	PackageId,
-	SystemId,
+struct_like_serde! {
+	MaPackageSystemType
+	All -> "ALL",
+	Non -> "NON",
+	PackageId -> "PackageID",
+	SystemId -> "SystemID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaPlanAuthorizationTypeSerde")]
-#[serde(try_from = "MaPlanAuthorizationTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaPlanAuthorizationType {
 	#[doc = r#"This element indicates that all plan types are authorized to be activated with the exception of the enumeration values listed in the permissionsType."#]
 	AuthorizedExceptFor(crate::v5_0::types::MaPlanActivationPermissionsType),
 	#[doc = r#"This element indicates that all plan types are NOT authorized to be activated with the exception of the enumeration values listed in the permissionsType."#]
 	UnauthorizedExceptFor(crate::v5_0::types::MaPlanActivationPermissionsType),
 }
-choice_convert_impls! {
-	MaPlanAuthorizationType - MaPlanAuthorizationTypeSerde
-	AuthorizedExceptFor,
-	UnauthorizedExceptFor,
+struct_like_serde! {
+	MaPlanAuthorizationType
+	AuthorizedExceptFor -> "AuthorizedExceptFor",
+	UnauthorizedExceptFor -> "UnauthorizedExceptFor",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaPlanningByCaseTriggerTypeSerde")]
-#[serde(try_from = "MaPlanningByCaseTriggerTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaPlanningByCaseTriggerType {
 	#[doc = r#"This trigger refers to a new Capability or SubCapability which becomes available or a previously failed Capability which has been restored."#]
 	CapabilityAdded(crate::v5_0::types::CapabilityTaxonomyType),
@@ -4405,38 +3968,36 @@ pub enum MaPlanningByCaseTriggerType {
 	#[doc = r#"This trigger indicates planning triggered by a Response and/or ResponsePlan."#]
 	ResponseId(crate::v5_0::types::ResponseIdType),
 }
-choice_convert_impls! {
-	MaPlanningByCaseTriggerType - MaPlanningByCaseTriggerTypeSerde
-	CapabilityAdded,
-	CapabilityFailure,
-	CommsLost,
-	DmpiOverDesignation,
-	DmpiUnderDesignation,
-	EnduranceLow,
-	OffRoute,
-	ProximityConflict,
-	ReleasePointOutsideLar,
-	RouteConflict,
-	RouteVulnerability,
-	SystemStateChange,
-	RequirementAdded,
-	RequirementDependencyFailed,
-	RequirementDropped,
-	RequirementFailed,
-	RequirementChange,
-	RequirementTiming,
-	ZoneViolation,
-	OrbitConflict,
-	OffPlannedOrbit,
-	SpacecraftEnduranceLow,
-	SpacecraftProximityConflict,
-	ResponseId,
+struct_like_serde! {
+	MaPlanningByCaseTriggerType
+	CapabilityAdded -> "CapabilityAdded",
+	CapabilityFailure -> "CapabilityFailure",
+	CommsLost -> "CommsLost",
+	DmpiOverDesignation -> "DMPI_OverDesignation",
+	DmpiUnderDesignation -> "DMPI_UnderDesignation",
+	EnduranceLow -> "EnduranceLow",
+	OffRoute -> "OffRoute",
+	ProximityConflict -> "ProximityConflict",
+	ReleasePointOutsideLar -> "ReleasePointOutsideLAR",
+	RouteConflict -> "RouteConflict",
+	RouteVulnerability -> "RouteVulnerability",
+	SystemStateChange -> "SystemStateChange",
+	RequirementAdded -> "RequirementAdded",
+	RequirementDependencyFailed -> "RequirementDependencyFailed",
+	RequirementDropped -> "RequirementDropped",
+	RequirementFailed -> "RequirementFailed",
+	RequirementChange -> "RequirementChange",
+	RequirementTiming -> "RequirementTiming",
+	ZoneViolation -> "ZoneViolation",
+	OrbitConflict -> "OrbitConflict",
+	OffPlannedOrbit -> "OffPlannedOrbit",
+	SpacecraftEnduranceLow -> "SpacecraftEnduranceLow",
+	SpacecraftProximityConflict -> "SpacecraftProximityConflict",
+	ResponseId -> "ResponseID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaPlanningByResultTriggerTypeSerde")]
-#[serde(try_from = "MaPlanningByResultTriggerTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaPlanningByResultTriggerType {
 	#[doc = r#"Indicates a replan of one *Plan resulting in the need to replan an existing Plan of the type given by this element. List size for this element is based on "Select All That Apply" condition."#]
 	ReplanRequired(Vec<crate::v5_0::enums::PlanTypeEnum>),
@@ -4445,33 +4006,29 @@ pub enum MaPlanningByResultTriggerType {
 	#[doc = r#"This result refers to a case where Requirements have been unallocated as a result of triggered replanning."#]
 	RequirementUnallocated(crate::v5_0::types::MaRequirementTriggerType),
 }
-choice_convert_impls! {
-	MaPlanningByResultTriggerType - MaPlanningByResultTriggerTypeSerde
-	ReplanRequired,
-	VulnerabilityChanged,
-	RequirementUnallocated,
+struct_like_serde! {
+	MaPlanningByResultTriggerType
+	ReplanRequired -> "ReplanRequired",
+	VulnerabilityChanged -> "VulnerabilityChanged",
+	RequirementUnallocated -> "RequirementUnallocated",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaRecoveryTypeSerde")]
-#[serde(try_from = "MaRecoveryTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaRecoveryType {
 	#[doc = r#"This element defines the tasks used in carrier recoveries."#]
 	CarrierRecovery(MaCarrierRecoveryChoiceType),
 	#[doc = r#"This element defines the parameters for an airfield land task."#]
 	AirfieldLand(crate::v5_0::types::MaAirfieldLandType),
 }
-choice_convert_impls! {
-	MaRecoveryType - MaRecoveryTypeSerde
-	CarrierRecovery,
-	AirfieldLand,
+struct_like_serde! {
+	MaRecoveryType
+	CarrierRecovery -> "CarrierRecovery",
+	AirfieldLand -> "AirfieldLand",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaRegionChoiceTypeSerde")]
-#[serde(try_from = "MaRegionChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaRegionChoiceType {
 	#[doc = r#"The ID of an OpZone."#]
 	OpZoneId(crate::v5_0::types::OpZoneIdType),
@@ -4480,49 +4037,43 @@ pub enum MaRegionChoiceType {
 	#[doc = r#"Manual entry of zone location and geometry information."#]
 	Zone(crate::v5_0::types::ZoneType),
 }
-choice_convert_impls! {
-	MaRegionChoiceType - MaRegionChoiceTypeSerde
-	OpZoneId,
-	OpVolumeId,
-	Zone,
+struct_like_serde! {
+	MaRegionChoiceType
+	OpZoneId -> "OpZoneID",
+	OpVolumeId -> "OpVolumeID",
+	Zone -> "Zone",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaRequirementAuthorizationTypeSerde")]
-#[serde(try_from = "MaRequirementAuthorizationTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaRequirementAuthorizationType {
 	#[doc = r#"This element inidcates that all requirement types are authorized to be executed with the exception of the enumeration values listed in the permissionsType"#]
 	AuthorizedExceptFor(crate::v5_0::types::MaRequirementAuthorizationPermissionsType),
 	#[doc = r#"This element inidcates that all requirement types are NOT authorized to be executed with the exception of the enumeration values listed in the permissionsType"#]
 	UnauthorizedExceptFor(crate::v5_0::types::MaRequirementAuthorizationPermissionsType),
 }
-choice_convert_impls! {
-	MaRequirementAuthorizationType - MaRequirementAuthorizationTypeSerde
-	AuthorizedExceptFor,
-	UnauthorizedExceptFor,
+struct_like_serde! {
+	MaRequirementAuthorizationType
+	AuthorizedExceptFor -> "AuthorizedExceptFor",
+	UnauthorizedExceptFor -> "UnauthorizedExceptFor",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaRequirementChoiceTypeSerde")]
-#[serde(try_from = "MaRequirementChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaRequirementChoiceType {
 	#[doc = r#"Indicates a kind or type of Requirement."#]
 	ByType(MaRequirementTaxonomyChoiceType),
 	#[doc = r#"Indicates a specific instance of a Requirement."#]
 	ByInstance(RequirementInstanceIdChoiceType),
 }
-choice_convert_impls! {
-	MaRequirementChoiceType - MaRequirementChoiceTypeSerde
-	ByType,
-	ByInstance,
+struct_like_serde! {
+	MaRequirementChoiceType
+	ByType -> "ByType",
+	ByInstance -> "ByInstance",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaRequirementTaxonomyChoiceTypeSerde")]
-#[serde(try_from = "MaRequirementTaxonomyChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaRequirementTaxonomyChoiceType {
 	#[doc = r#"Indicates a kind of Effect Requirement."#]
 	Effect(crate::v5_0::enums::EffectTypeEnum),
@@ -4535,19 +4086,17 @@ pub enum MaRequirementTaxonomyChoiceType {
 	#[doc = r#"Indicates a kind of Response Requirement."#]
 	Response(crate::v5_0::enums::ResponseTypeEnum),
 }
-choice_convert_impls! {
-	MaRequirementTaxonomyChoiceType - MaRequirementTaxonomyChoiceTypeSerde
-	Effect,
-	Action,
-	Task,
-	CapabilityCommand,
-	Response,
+struct_like_serde! {
+	MaRequirementTaxonomyChoiceType
+	Effect -> "Effect",
+	Action -> "Action",
+	Task -> "Task",
+	CapabilityCommand -> "CapabilityCommand",
+	Response -> "Response",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaRuleResponseTypeSerde")]
-#[serde(try_from = "MaRuleResponseTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaRuleResponseType {
 	#[doc = r#"Indicates a Response of processing a Requirements template."#]
 	RequirementsTemplate(crate::v5_0::types::ResponseTemplateType),
@@ -4558,79 +4107,69 @@ pub enum MaRuleResponseType {
 	#[doc = r#"Indicates an explicit desire for no response when Option Rule is triggered."#]
 	DoNothing(crate::v5_0::common::EmptyType),
 }
-choice_convert_impls! {
-	MaRuleResponseType - MaRuleResponseTypeSerde
-	RequirementsTemplate,
-	ActivatePlan,
-	GenerateAlert,
-	DoNothing,
+struct_like_serde! {
+	MaRuleResponseType
+	RequirementsTemplate -> "RequirementsTemplate",
+	ActivatePlan -> "ActivatePlan",
+	GenerateAlert -> "GenerateAlert",
+	DoNothing -> "DoNothing",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaSettingsModficationAuthorizationTypeSerde")]
-#[serde(try_from = "MaSettingsModficationAuthorizationTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaSettingsModficationAuthorizationType {
 	#[doc = r#"This element indicates that all vehicle setting types are authorized to be modified with the exeception of the enumeration values listed in the permissionType."#]
 	AuthorizedExceptFor(crate::v5_0::types::MaPlatformSettingsPermissionsType),
 	#[doc = r#"This element indicates that all vehicle setting types are unauthorized to be modified with the exeception of the enumeration values listed in the permissionType."#]
 	UnauthorizedExceptFor(crate::v5_0::types::MaPlatformSettingsPermissionsType),
 }
-choice_convert_impls! {
-	MaSettingsModficationAuthorizationType - MaSettingsModficationAuthorizationTypeSerde
-	AuthorizedExceptFor,
-	UnauthorizedExceptFor,
+struct_like_serde! {
+	MaSettingsModficationAuthorizationType
+	AuthorizedExceptFor -> "AuthorizedExceptFor",
+	UnauthorizedExceptFor -> "UnauthorizedExceptFor",
 }
 
 #[doc = r#"Represents the type of subscription and optional filters for the subscription."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaSubscriptionFilterTypeSerde")]
-#[serde(try_from = "MaSubscriptionFilterTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaSubscriptionFilterType {
 	#[doc = r#"Indicates a subscription aligned with specific UCI messages with optional filtering of the message."#]
 	UciMessage(crate::v5_0::types::QueryMessageType),
 }
-choice_convert_impls! {
-	MaSubscriptionFilterType - MaSubscriptionFilterTypeSerde
-	UciMessage,
+struct_like_serde! {
+	MaSubscriptionFilterType
+	UciMessage -> "UCI_Message",
 }
 
 #[doc = r#"Defines the CAP synchronization method to be utilized."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaSynchronizationChoiceTypeSerde")]
-#[serde(try_from = "MaSynchronizationChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaSynchronizationChoiceType {
 	#[doc = r#"Desired orbit synchronization across the package as a specified high level tactic."#]
 	Strategy(crate::v5_0::enums::MaCapsynchronizationTypeEnum),
 	#[doc = r#"Relative offset assignments at point(s) on the CAP path that can be used by assets performing a decentralized synchronization method."#]
 	RelativePositioning(Vec<crate::v5_0::types::MaCaprelativePositionType>),
 }
-choice_convert_impls! {
-	MaSynchronizationChoiceType - MaSynchronizationChoiceTypeSerde
-	Strategy,
-	RelativePositioning,
+struct_like_serde! {
+	MaSynchronizationChoiceType
+	Strategy -> "Strategy",
+	RelativePositioning -> "RelativePositioning",
 }
 
 #[doc = r#"Provides choice to provide a known System ID or a description of a set of capabilities."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaSystemCandidateChoiceTypeSerde")]
-#[serde(try_from = "MaSystemCandidateChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaSystemCandidateChoiceType {
 	#[doc = r#"Possible systems that could be used to solve the RequiredTasks."#]
 	SystemCandidate(Vec<crate::v5_0::types::SystemCandidateType>),
 	#[doc = r#"A collection of Capability Types required to be on a system needed to solve the RequiredTasks. Used for when a specific SystemID is not known yet."#]
 	SystemCapabilityDescription(crate::v5_0::types::MaCapabilityTaxonomyType),
 }
-choice_convert_impls! {
-	MaSystemCandidateChoiceType - MaSystemCandidateChoiceTypeSerde
-	SystemCandidate,
-	SystemCapabilityDescription,
+struct_like_serde! {
+	MaSystemCandidateChoiceType
+	SystemCandidate -> "SystemCandidate",
+	SystemCapabilityDescription -> "SystemCapabilityDescription",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaSystemCharacteristicTypeSerde")]
-#[serde(try_from = "MaSystemCharacteristicTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaSystemCharacteristicType {
 	#[doc = r#"Indicates an identity to be compared to the identity of the System."#]
 	Identity(EntityIdentityChoiceType),
@@ -4643,19 +4182,17 @@ pub enum MaSystemCharacteristicType {
 	#[doc = r#"Indicates behaviors, activities, use of capabilities, etc. to be compared to those of the battlespace object associated with the System."#]
 	Behavior(crate::v5_0::types::BehaviorType),
 }
-choice_convert_impls! {
-	MaSystemCharacteristicType - MaSystemCharacteristicTypeSerde
-	Identity,
-	PositionUncertainty,
-	PositionStaleness,
-	PrioritizationList,
-	Behavior,
+struct_like_serde! {
+	MaSystemCharacteristicType
+	Identity -> "Identity",
+	PositionUncertainty -> "PositionUncertainty",
+	PositionStaleness -> "PositionStaleness",
+	PrioritizationList -> "PrioritizationList",
+	Behavior -> "Behavior",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaSystemManagementRequestTypeSerde")]
-#[serde(try_from = "MaSystemManagementRequestTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaSystemManagementRequestType {
 	#[doc = r#"Indicates a request to modify the mode of a system."#]
 	SetMode(crate::v5_0::enums::MessageModeEnum),
@@ -4670,20 +4207,18 @@ pub enum MaSystemManagementRequestType {
 	#[doc = r#"Indicates a request to modify vehicle settings."#]
 	VehicleSettings(crate::v5_0::types::MaVehicleCommandDataType),
 }
-choice_convert_impls! {
-	MaSystemManagementRequestType - MaSystemManagementRequestTypeSerde
-	SetMode,
-	SetIdentity,
-	SetLink16Metadata,
-	SetVoiceControl,
-	SetSensorEntityReporting,
-	VehicleSettings,
+struct_like_serde! {
+	MaSystemManagementRequestType
+	SetMode -> "SetMode",
+	SetIdentity -> "SetIdentity",
+	SetLink16Metadata -> "SetLink16Metadata",
+	SetVoiceControl -> "SetVoiceControl",
+	SetSensorEntityReporting -> "SetSensorEntityReporting",
+	VehicleSettings -> "VehicleSettings",
 }
 
 #[doc = r#"Identifies the type of this Task instance. Note: When modifying this complexType (whether adding or removing choices), there are equivalent complexTypes that require the same modifications. Changes to this type may necessitate a modification to CapabilityTaxonomyType."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaTaskTypeSerde")]
-#[serde(try_from = "MaTaskTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaTaskType {
 	#[doc = r#"Air sample includes direct sampling of the air (SAMPLE) and remote sensing with spectral analysis (SPECTROMETER) with the intent of detecting NBC events."#]
 	AirSample(crate::v5_0::types::AirSampleTaskType),
@@ -4734,38 +4269,36 @@ pub enum MaTaskType {
 	#[doc = r#"Indicates a task to collect weather radar data."#]
 	WeatherRadar(crate::v5_0::types::WeatherRadarTaskType),
 }
-choice_convert_impls! {
-	MaTaskType - MaTaskTypeSerde
-	AirSample,
-	Amti,
-	Ao,
-	Cap,
-	CargoDelivery,
-	Comint,
-	CommRelay,
-	CounterSpace,
-	Escort,
-	Ea,
-	Esm,
-	Flight,
-	Jettison,
-	OrbitChange,
-	OrbitalSurveillance,
-	OrbitalSurveillanceSensor,
-	Po,
-	Refuel,
-	Sar,
-	Smti,
-	Strike,
-	SystemDeployment,
-	TacticalOrder,
-	WeatherRadar,
+struct_like_serde! {
+	MaTaskType
+	AirSample -> "AirSample",
+	Amti -> "AMTI",
+	Ao -> "AO",
+	Cap -> "CAP",
+	CargoDelivery -> "CargoDelivery",
+	Comint -> "COMINT",
+	CommRelay -> "CommRelay",
+	CounterSpace -> "CounterSpace",
+	Escort -> "Escort",
+	Ea -> "EA",
+	Esm -> "ESM",
+	Flight -> "Flight",
+	Jettison -> "Jettison",
+	OrbitChange -> "OrbitChange",
+	OrbitalSurveillance -> "OrbitalSurveillance",
+	OrbitalSurveillanceSensor -> "OrbitalSurveillanceSensor",
+	Po -> "PO",
+	Refuel -> "Refuel",
+	Sar -> "SAR",
+	Smti -> "SMTI",
+	Strike -> "Strike",
+	SystemDeployment -> "SystemDeployment",
+	TacticalOrder -> "TacticalOrder",
+	WeatherRadar -> "WeatherRadar",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaUserTypeSerde")]
-#[serde(try_from = "MaUserTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaUserType {
 	#[doc = r#"This choice type is used in the context of RBAC to specify an operator role to tie a set of authorized permissions to."#]
 	OperatorRoleId(crate::v5_0::types::OperatorRoleIdType),
@@ -4774,33 +4307,29 @@ pub enum MaUserType {
 	#[doc = r#"This choice type is used to specify a User Identifier to tie a set of authorized permissions to."#]
 	UserIdentifier(crate::v5_0::common::UserIdentifierType),
 }
-choice_convert_impls! {
-	MaUserType - MaUserTypeSerde
-	OperatorRoleId,
-	SystemId,
-	UserIdentifier,
+struct_like_serde! {
+	MaUserType
+	OperatorRoleId -> "OperatorRoleID",
+	SystemId -> "SystemID",
+	UserIdentifier -> "UserIdentifier",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaVisualIdentificationChoiceTypeSerde")]
-#[serde(try_from = "MaVisualIdentificationChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaVisualIdentificationChoiceType {
 	#[doc = r#"Indicates a possible "platform identity" of the Entity."#]
 	PlatformIdentity(crate::v5_0::types::PlatformIdentityType),
 	#[doc = r#"The specific Radar Cross Section identification for a system.  This will typically be a system-specific and service-specific identifier for pre-configured Radar Cross Sectional data.  Services should have coordinated this data ahead of time."#]
 	RadarCrossSection(crate::v5_0::types::ForeignKeyType),
 }
-choice_convert_impls! {
-	MaVisualIdentificationChoiceType - MaVisualIdentificationChoiceTypeSerde
-	PlatformIdentity,
-	RadarCrossSection,
+struct_like_serde! {
+	MaVisualIdentificationChoiceType
+	PlatformIdentity -> "PlatformIdentity",
+	RadarCrossSection -> "RadarCrossSection",
 }
 
 #[doc = r#"Specifies how dynamic the returned Weapon Engagement Zone (WEZ) will be."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MaWezChoiceTypeSerde")]
-#[serde(try_from = "MaWezChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MaWezChoiceType {
 	#[doc = r#"Indicates a target has a heading pointed at the ownship, and the same altitude and velocity as the ownship in its current state, as reported by the vehicle interface. The service will subscribe to position data as reported by the vehicle interface for ownship state data."#]
 	StaticWez(crate::v5_0::types::MaWezStaticType),
@@ -4811,34 +4340,30 @@ pub enum MaWezChoiceType {
 	#[doc = r#"Indicates a target has the heading, altitude and velocity as described by the "PredictedTargetStateData" field. The service will use the "PlannedReleaseConditions" field for the ownship state data."#]
 	PlannedPredictedWez(crate::v5_0::types::MaWezPlannedPredictedType),
 }
-choice_convert_impls! {
-	MaWezChoiceType - MaWezChoiceTypeSerde
-	StaticWez,
-	PlannedStaticWez,
-	PredictedWez,
-	PlannedPredictedWez,
+struct_like_serde! {
+	MaWezChoiceType
+	StaticWez -> "StaticWEZ",
+	PlannedStaticWez -> "PlannedStaticWEZ",
+	PredictedWez -> "PredictedWEZ",
+	PlannedPredictedWez -> "PlannedPredictedWEZ",
 }
 
 #[doc = r#"Indicates choices for sensor collection maneuver constraints."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ManeuverConstraintsChoiceTypeSerde")]
-#[serde(try_from = "ManeuverConstraintsChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ManeuverConstraintsChoiceType {
 	#[doc = r#"BasicManeuverConstraints are used for situations when looking for a maneuver, but there is nothing to drive expectations on maneuver size or direction.  Max delta-V is required to bound search space and Min to bound the sensor and processing resolution for maneuver detection."#]
 	BasicManeuverConstraints(crate::v5_0::types::BasicManeuverConstraintsType),
 	#[doc = r#"PredictedManeuverConstraints is used when there is information on the nominal parameters of an expected maneuver (such as a vector of delta-V values, maneuver duration, and maneuver start time). Since the maneuver has not happened, these are nominal and the actual maneuver may vary in start time, duration, and velocity parameters."#]
 	PredictedManeuverConstraints(crate::v5_0::types::OrbitalManeuverDetailsType),
 }
-choice_convert_impls! {
-	ManeuverConstraintsChoiceType - ManeuverConstraintsChoiceTypeSerde
-	BasicManeuverConstraints,
-	PredictedManeuverConstraints,
+struct_like_serde! {
+	ManeuverConstraintsChoiceType
+	BasicManeuverConstraints -> "BasicManeuverConstraints",
+	PredictedManeuverConstraints -> "PredictedManeuverConstraints",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MeasurementKinematicsChoiceTypeSerde")]
-#[serde(try_from = "MeasurementKinematicsChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MeasurementKinematicsChoiceType {
 	#[doc = r#"Measurements provided in sensor relative line of sight frame (body or inertial) expressed in Azimuth/Elevation/Slant Range.  Reference kinematics are found in the Source element."#]
 	LosAzEl(crate::v5_0::types::LosMeasurementWithUncertaintyType),
@@ -4851,19 +4376,17 @@ pub enum MeasurementKinematicsChoiceType {
 	#[doc = r#"Indicates kinematics expressed according to the Earth-Centered, Earth-Fixed frame/standard."#]
 	EcefKinematics(crate::v5_0::types::EcefKinematicsType),
 }
-choice_convert_impls! {
-	MeasurementKinematicsChoiceType - MeasurementKinematicsChoiceTypeSerde
-	LosAzEl,
-	LosEquatorial,
-	Orbital,
-	Wgs,
-	EcefKinematics,
+struct_like_serde! {
+	MeasurementKinematicsChoiceType
+	LosAzEl -> "LOS_AzEl",
+	LosEquatorial -> "LOS_Equatorial",
+	Orbital -> "Orbital",
+	Wgs -> "WGS",
+	EcefKinematics -> "ECEF_Kinematics",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MissionEnvironmentConstraintTypeSerde")]
-#[serde(try_from = "MissionEnvironmentConstraintTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MissionEnvironmentConstraintType {
 	#[doc = r#"Constraint Override on an Entity."#]
 	ConstrainedEntity(crate::v5_0::types::ConstrainedEntityType),
@@ -4882,22 +4405,20 @@ pub enum MissionEnvironmentConstraintType {
 	#[doc = r#"Parameter Override for this mission plan.  See associated ServiceConfigurationParams message for appropriate values."#]
 	Parameter(crate::v5_0::types::ParameterAssertType),
 }
-choice_convert_impls! {
-	MissionEnvironmentConstraintType - MissionEnvironmentConstraintTypeSerde
-	ConstrainedEntity,
-	ConstrainedOpPoint,
-	ConstrainedOpLine,
-	ConstrainedOpZone,
-	ConstrainedOpVolume,
-	System,
-	RiskAdjustment,
-	Parameter,
+struct_like_serde! {
+	MissionEnvironmentConstraintType
+	ConstrainedEntity -> "ConstrainedEntity",
+	ConstrainedOpPoint -> "ConstrainedOpPoint",
+	ConstrainedOpLine -> "ConstrainedOpLine",
+	ConstrainedOpZone -> "ConstrainedOpZone",
+	ConstrainedOpVolume -> "ConstrainedOpVolume",
+	System -> "System",
+	RiskAdjustment -> "RiskAdjustment",
+	Parameter -> "Parameter",
 }
 
 #[doc = r#"Defines the class of object for which Mission Environment Object parameters support individual settings on specific instances."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MissionEnvironmentObjectClassTypeSerde")]
-#[serde(try_from = "MissionEnvironmentObjectClassTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MissionEnvironmentObjectClassType {
 	#[doc = r#"The Mission Environment Object Values associated with an Entity Class of object."#]
 	Entity(crate::v5_0::types::MissionEnvironmentObjectValueEntityType),
@@ -4920,120 +4441,106 @@ pub enum MissionEnvironmentObjectClassType {
 	#[doc = r#"The Mission Environment Object Values associated with a Response Class of object."#]
 	Response(crate::v5_0::types::MissionEnvironmentObjectValueResponseType),
 }
-choice_convert_impls! {
-	MissionEnvironmentObjectClassType - MissionEnvironmentObjectClassTypeSerde
-	Entity,
-	System,
-	OpPoint,
-	OpLine,
-	OpZone,
-	OpVolume,
-	Task,
-	Effect,
-	Action,
-	Response,
+struct_like_serde! {
+	MissionEnvironmentObjectClassType
+	Entity -> "Entity",
+	System -> "System",
+	OpPoint -> "OpPoint",
+	OpLine -> "OpLine",
+	OpZone -> "OpZone",
+	OpVolume -> "OpVolume",
+	Task -> "Task",
+	Effect -> "Effect",
+	Action -> "Action",
+	Response -> "Response",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MissionPlanActivationDetailsTypeSerde")]
-#[serde(try_from = "MissionPlanActivationDetailsTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MissionPlanActivationDetailsType {
 	#[doc = r#"Indicates simultaneous activation of all sub-*Plans (RoutePlan, RouteActivityPlan for example) of a MissionPlan into the same activation state."#]
 	ByMissionPlan(crate::v5_0::types::MissionPlanActivationType),
 	#[doc = r#"Indicates activation by sub-*Plan (RoutePlan or OrbitPlan for example) of the MissionPlan, with potentially different states for each."#]
 	BySubPlan(crate::v5_0::types::MissionPlanSubplanActivationType),
 }
-choice_convert_impls! {
-	MissionPlanActivationDetailsType - MissionPlanActivationDetailsTypeSerde
-	ByMissionPlan,
-	BySubPlan,
+struct_like_serde! {
+	MissionPlanActivationDetailsType
+	ByMissionPlan -> "ByMissionPlan",
+	BySubPlan -> "BySubPlan",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MissionPlanCommandIdChoiceTypeSerde")]
-#[serde(try_from = "MissionPlanCommandIdChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MissionPlanCommandIdChoiceType {
 	#[doc = r#"Indicates the unique ID of the MissionPlanCommand associated with the MissionPlan."#]
 	MissionPlanCommandId(crate::v5_0::types::MissionPlanCommandIdType),
 	#[doc = r#"Indicates the unique ID of the MissionPlanValidationCommand associated with the MissionPlan."#]
 	MissionPlanValidationCommandId(crate::v5_0::types::CommandIdType),
 }
-choice_convert_impls! {
-	MissionPlanCommandIdChoiceType - MissionPlanCommandIdChoiceTypeSerde
-	MissionPlanCommandId,
-	MissionPlanValidationCommandId,
+struct_like_serde! {
+	MissionPlanCommandIdChoiceType
+	MissionPlanCommandId -> "MissionPlanCommandID",
+	MissionPlanValidationCommandId -> "MissionPlanValidationCommandID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MissionPlanningAutonomyResponseChoiceTypeSerde")]
-#[serde(try_from = "MissionPlanningAutonomyResponseChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MissionPlanningAutonomyResponseChoiceType {
 	#[doc = r#"This element indicates the allowed autonomous mission planning for the ancestor Trigger.  It also indicates the expected MissionContingencyAlert for the ancestor Trigger; whenever autonomous mission planning is allowed and triggered, a MissionContingencyAlert is expected."#]
 	AutonomousPlanningAction(Vec<crate::v5_0::types::PlanningAllowedEscalationType>),
 	#[doc = r#"This element indicates that autonomous mission planning isn't allowed for the ancestor Trigger but a MissionContingencyAlert is expected."#]
 	AlertOnly(crate::v5_0::common::EmptyType),
 }
-choice_convert_impls! {
-	MissionPlanningAutonomyResponseChoiceType - MissionPlanningAutonomyResponseChoiceTypeSerde
-	AutonomousPlanningAction,
-	AlertOnly,
+struct_like_serde! {
+	MissionPlanningAutonomyResponseChoiceType
+	AutonomousPlanningAction -> "AutonomousPlanningAction",
+	AlertOnly -> "AlertOnly",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MissionPlanningByResultAutonomousActionTypeSerde")]
-#[serde(try_from = "MissionPlanningByResultAutonomousActionTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MissionPlanningByResultAutonomousActionType {
 	#[doc = r#"This element defines the mission planning type to be triggered.  If multiple instances are given, each should be of a different planning type as indicated by the child element."#]
 	PlanningAllowed(Vec<crate::v5_0::types::PlanningAllowedType>),
 	#[doc = r#"This element indicates that autonomous mission planning isn't allowed for the ancestor Trigger but a MissionContingencyAlert is expected."#]
 	AlertOnly(crate::v5_0::common::EmptyType),
 }
-choice_convert_impls! {
-	MissionPlanningByResultAutonomousActionType - MissionPlanningByResultAutonomousActionTypeSerde
-	PlanningAllowed,
-	AlertOnly,
+struct_like_serde! {
+	MissionPlanningByResultAutonomousActionType
+	PlanningAllowed -> "PlanningAllowed",
+	AlertOnly -> "AlertOnly",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ModeSInterrogatorAddressTypeSerde")]
-#[serde(try_from = "ModeSInterrogatorAddressTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ModeSInterrogatorAddressType {
 	#[doc = r#"Interrogator ID (legacy address type): used for transponder lockout interactions"#]
 	InterrogatorIdentifier(crate::v5_0::common::InterrogatorIdentifierType),
 	#[doc = r#"Surveillance Identifier (modern address type): lockout interactions"#]
 	SurveillanceIdentifier(crate::v5_0::common::SurveillanceIdentifierType),
 }
-choice_convert_impls! {
-	ModeSInterrogatorAddressType - ModeSInterrogatorAddressTypeSerde
-	InterrogatorIdentifier,
-	SurveillanceIdentifier,
+struct_like_serde! {
+	ModeSInterrogatorAddressType
+	InterrogatorIdentifier -> "InterrogatorIdentifier",
+	SurveillanceIdentifier -> "SurveillanceIdentifier",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MtiTargetClassTypeSerde")]
-#[serde(try_from = "MtiTargetClassTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MtiTargetClassType {
 	#[doc = r#"Indicates the class of the Moving Target Indicator (MTI) cross-section. Specific quantitative cross section values associated with these target classes are defined outside of this schema."#]
 	MtiTargetClass(crate::v5_0::enums::MtiTargetClassEnum),
 	#[doc = r#"Indicates the foreign class of the target for which the estimate applies."#]
 	ForeignClass(crate::v5_0::types::ForeignKeyType),
 }
-choice_convert_impls! {
-	MtiTargetClassType - MtiTargetClassTypeSerde
-	MtiTargetClass,
-	ForeignClass,
+struct_like_serde! {
+	MtiTargetClassType
+	MtiTargetClass -> "MTI_TargetClass",
+	ForeignClass -> "ForeignClass",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "MustFlyLocationTypeSerde")]
-#[serde(try_from = "MustFlyLocationTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum MustFlyLocationType {
 	#[doc = r#"Indicates the must-fly location is an Entity,  This is typically an overflight location with the desired altitude determined by the service design."#]
 	EntityId(crate::v5_0::types::EntityIdType),
@@ -5054,23 +4561,21 @@ pub enum MustFlyLocationType {
 	#[doc = r#"Use of the Volume Target implies that a vehicle must enter the volume."#]
 	VolumeTarget(OpVolumeType),
 }
-choice_convert_impls! {
-	MustFlyLocationType - MustFlyLocationTypeSerde
-	EntityId,
-	OpPointId,
-	OpLineId,
-	OpZoneId,
-	OpVolumeId,
-	Point,
-	ZoneTarget,
-	LineTarget,
-	VolumeTarget,
+struct_like_serde! {
+	MustFlyLocationType
+	EntityId -> "EntityID",
+	OpPointId -> "OpPointID",
+	OpLineId -> "OpLineID",
+	OpZoneId -> "OpZoneID",
+	OpVolumeId -> "OpVolumeID",
+	Point -> "Point",
+	ZoneTarget -> "ZoneTarget",
+	LineTarget -> "LineTarget",
+	VolumeTarget -> "VolumeTarget",
 }
 
 #[doc = r#"The NameValuePairValue is used to report the value of a single status attribute.  This type is used to provide status for unique attributes that cannot be reported with other types or structures."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "NameValuePairValueTypeSerde")]
-#[serde(try_from = "NameValuePairValueTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum NameValuePairValueType {
 	#[doc = r#"A boolean value."#]
 	BooleanValue(bool),
@@ -5095,25 +4600,23 @@ pub enum NameValuePairValueType {
 	#[doc = r#"A string value. A string value can be used to represent all non-primitive data types."#]
 	StringValue(crate::v5_0::common::VisibleString256Type),
 }
-choice_convert_impls! {
-	NameValuePairValueType - NameValuePairValueTypeSerde
-	BooleanValue,
-	ByteValue,
-	UnsignedByteValue,
-	ShortValue,
-	UnsignedShortValue,
-	IntValue,
-	UnsignedIntValue,
-	LongValue,
-	FloatValue,
-	DoubleValue,
-	StringValue,
+struct_like_serde! {
+	NameValuePairValueType
+	BooleanValue -> "BooleanValue",
+	ByteValue -> "ByteValue",
+	UnsignedByteValue -> "UnsignedByteValue",
+	ShortValue -> "ShortValue",
+	UnsignedShortValue -> "UnsignedShortValue",
+	IntValue -> "IntValue",
+	UnsignedIntValue -> "UnsignedIntValue",
+	LongValue -> "LongValue",
+	FloatValue -> "FloatValue",
+	DoubleValue -> "DoubleValue",
+	StringValue -> "StringValue",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "NavigationSourceTypeSerde")]
-#[serde(try_from = "NavigationSourceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum NavigationSourceType {
 	#[doc = r#"Navigation mode where the System's route is following the route defined in a previously published MissionPlan and the current navigation state is given in MissionPlanStatus."#]
 	MissionPlanNavigation(crate::v5_0::types::MissionPlanNavigationType),
@@ -5128,30 +4631,28 @@ pub enum NavigationSourceType {
 	#[doc = r#"Navigation mode where flight path is directed, via non-UCI interfaces, by slaving System navigation to operation of a sensor Capability or other real-time automated control algorithm/service other than a pilot/operator."#]
 	SlavedNavigation(crate::v5_0::types::SlavedNavigationType),
 }
-choice_convert_impls! {
-	NavigationSourceType - NavigationSourceTypeSerde
-	MissionPlanNavigation,
-	FixedNavigation,
-	ManualNavigation,
-	AutoPilotNavigation,
-	RelativeNavigation,
-	SlavedNavigation,
+struct_like_serde! {
+	NavigationSourceType
+	MissionPlanNavigation -> "MissionPlanNavigation",
+	FixedNavigation -> "FixedNavigation",
+	ManualNavigation -> "ManualNavigation",
+	AutoPilotNavigation -> "AutoPilotNavigation",
+	RelativeNavigation -> "RelativeNavigation",
+	SlavedNavigation -> "SlavedNavigation",
 }
 
 #[doc = r#"Indicates the network endpoint (IP address) and its related network information."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "NetworkEndpointTypeSerde")]
-#[serde(try_from = "NetworkEndpointTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum NetworkEndpointType {
 	#[doc = r#"Indicates an IPv4 network endpoint and its related network information."#]
 	Ipv4Endpoint(crate::v5_0::types::Ipv4EndpointType),
 	#[doc = r#"Indicates an IPv6 network endpoint and its related network information."#]
 	Ipv6Endpoint(crate::v5_0::types::Ipv6EndpointType),
 }
-choice_convert_impls! {
-	NetworkEndpointType - NetworkEndpointTypeSerde
-	Ipv4Endpoint,
-	Ipv6Endpoint,
+struct_like_serde! {
+	NetworkEndpointType
+	Ipv4Endpoint -> "IPv4_Endpoint",
+	Ipv6Endpoint -> "IPv6_Endpoint",
 }
 
 #[doc = r#"Encoding types for CVEnumISMNonIC Version 1 controlled vocabulary enumerations.  Derived from the CVEnumISMNonIC.xml CVE.(U) All currently valid Non-IC markings from the published register
@@ -5160,41 +4661,35 @@ choice_convert_impls! {
 						   The permissible values for this simple type are defined in the Controlled Value Enumeration:
 	
 						   CVEnumISMNonIC.xml"#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "NonIcMarkingsChoiceTypeSerde")]
-#[serde(try_from = "NonIcMarkingsChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum NonIcMarkingsChoiceType {
 	#[doc = r#"CVEnumISMNonIC Values"#]
 	StandardMarking(crate::v5_0::enums::NonIcMarkingsEnum),
 	#[doc = r#"CVEnumISMNonIC Patterns"#]
 	AlternateMarking(crate::v5_0::common::NonIcMarkingsType),
 }
-choice_convert_impls! {
-	NonIcMarkingsChoiceType - NonIcMarkingsChoiceTypeSerde
-	StandardMarking,
-	AlternateMarking,
+struct_like_serde! {
+	NonIcMarkingsChoiceType
+	StandardMarking -> "StandardMarking",
+	AlternateMarking -> "AlternateMarking",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ObjectKinematicsChoiceTypeSerde")]
-#[serde(try_from = "ObjectKinematicsChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ObjectKinematicsChoiceType {
 	#[doc = r#"Indicates the inertial state of the object."#]
 	InertialState(Vec<crate::v5_0::types::InertialStateType>),
 	#[doc = r#"Indicates one of the four types of kinematics options to describe the object's motion."#]
 	OrbitKinematics(crate::v5_0::types::OrbitKinematicsType),
 }
-choice_convert_impls! {
-	ObjectKinematicsChoiceType - ObjectKinematicsChoiceTypeSerde
-	InertialState,
-	OrbitKinematics,
+struct_like_serde! {
+	ObjectKinematicsChoiceType
+	InertialState -> "InertialState",
+	OrbitKinematics -> "OrbitKinematics",
 }
 
 #[doc = r#"Allows for a sibling operational constraint to be weighted by a discrete value or range threshold."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "OpConstraintWeightingValueTypeSerde")]
-#[serde(try_from = "OpConstraintWeightingValueTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum OpConstraintWeightingValueType {
 	#[doc = r#"Defines a specific percentage to which the operational constraint should be taken into account."#]
 	Discrete(crate::v5_0::common::PercentType),
@@ -5203,17 +4698,15 @@ pub enum OpConstraintWeightingValueType {
 	#[doc = r#"Defines high, medium, low values to which the operational constraint should be taken into account."#]
 	Likelihood(crate::v5_0::enums::LikelihoodEnum),
 }
-choice_convert_impls! {
-	OpConstraintWeightingValueType - OpConstraintWeightingValueTypeSerde
-	Discrete,
-	Range,
-	Likelihood,
+struct_like_serde! {
+	OpConstraintWeightingValueType
+	Discrete -> "Discrete",
+	Range -> "Range",
+	Likelihood -> "Likelihood",
 }
 
 #[doc = r#"A list of unique ID indicating the op type."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "OpIdChoiceTypeSerde")]
-#[serde(try_from = "OpIdChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum OpIdChoiceType {
 	#[doc = r#"Indicates the unique identifier of the OpLine."#]
 	OpLineId(crate::v5_0::types::OpLineIdType),
@@ -5226,19 +4719,17 @@ pub enum OpIdChoiceType {
 	#[doc = r#"Indicates the unique identifier of the OpRouting."#]
 	OpRoutingId(crate::v5_0::types::OpRoutingIdType),
 }
-choice_convert_impls! {
-	OpIdChoiceType - OpIdChoiceTypeSerde
-	OpLineId,
-	OpPointId,
-	OpZoneId,
-	OpVolumeId,
-	OpRoutingId,
+struct_like_serde! {
+	OpIdChoiceType
+	OpLineId -> "OpLineID",
+	OpPointId -> "OpPointID",
+	OpZoneId -> "OpZoneID",
+	OpVolumeId -> "OpVolumeID",
+	OpRoutingId -> "OpRoutingID",
 }
 
 #[doc = r#"Container object for the different types of OpPoint*Enums.  A separate enum applies to each of the choice types."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "OpPointCategoriesTypeSerde")]
-#[serde(try_from = "OpPointCategoriesTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum OpPointCategoriesType {
 	#[doc = r#"A set of commonly used point types."#]
 	General(crate::v5_0::enums::OpPointGeneralEnum),
@@ -5251,51 +4742,45 @@ pub enum OpPointCategoriesType {
 	#[doc = r#"Emergency Point and associated reference types."#]
 	Emergency(crate::v5_0::enums::OpPointEmergencyEnum),
 }
-choice_convert_impls! {
-	OpPointCategoriesType - OpPointCategoriesTypeSerde
-	General,
-	Hazard,
-	Reference,
-	Station,
-	Emergency,
+struct_like_serde! {
+	OpPointCategoriesType
+	General -> "General",
+	Hazard -> "Hazard",
+	Reference -> "Reference",
+	Station -> "Station",
+	Emergency -> "Emergency",
 }
 
 #[doc = r#"Container object for the different types of OpPoint*Enums.  A separate enum applies to each of the choice types."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "OpPointCategoriesUniqueDataTypeSerde")]
-#[serde(try_from = "OpPointCategoriesUniqueDataTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum OpPointCategoriesUniqueDataType {
 	#[doc = r#"Emergency Point and associated reference types."#]
 	Emergency(crate::v5_0::types::EmergencyReferencePointType),
 	#[doc = r#"Hazard Point and associated reference types."#]
 	Hazard(crate::v5_0::types::Link16HazardType),
 }
-choice_convert_impls! {
-	OpPointCategoriesUniqueDataType - OpPointCategoriesUniqueDataTypeSerde
-	Emergency,
-	Hazard,
+struct_like_serde! {
+	OpPointCategoriesUniqueDataType
+	Emergency -> "Emergency",
+	Hazard -> "Hazard",
 }
 
 #[doc = r#"Choice of either relative or geospatial position of the OpPoint."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "OpPointChoiceTypeSerde")]
-#[serde(try_from = "OpPointChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum OpPointChoiceType {
 	#[doc = r#"This element indicates the geospatial position of the OpPoint.  Time data is understood to be time of last position observation/measurement."#]
 	Point(crate::v5_0::types::OpPointPositionType),
 	#[doc = r#"The Relative position of the OpPoint.  The reference frame this is relative to is specified in a ReferenceFrames message."#]
 	RelativePoint(crate::v5_0::types::Point2DRelativeType),
 }
-choice_convert_impls! {
-	OpPointChoiceType - OpPointChoiceTypeSerde
-	Point,
-	RelativePoint,
+struct_like_serde! {
+	OpPointChoiceType
+	Point -> "Point",
+	RelativePoint -> "RelativePoint",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "OpPointReferenceTypeSerde")]
-#[serde(try_from = "OpPointReferenceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum OpPointReferenceType {
 	#[doc = r#"The state of an object when an emergency is reported. This data is stored  to keep data about an object with an emergency after the object is dropped in the event that the lifetime of the emergency extends past the lifetime of the object."#]
 	StoredObject(GeoLocatedStoredObjectType),
@@ -5304,17 +4789,15 @@ pub enum OpPointReferenceType {
 	#[doc = r#"Object used when not known in UCI."#]
 	DataLinkObject(crate::v5_0::types::DataLinkIdentifierPet),
 }
-choice_convert_impls! {
-	OpPointReferenceType - OpPointReferenceTypeSerde
-	StoredObject,
-	StoredObjectRef,
-	DataLinkObject,
+struct_like_serde! {
+	OpPointReferenceType
+	StoredObject -> "StoredObject",
+	StoredObjectRef -> "StoredObjectRef",
+	DataLinkObject -> "DataLinkObject",
 }
 
 #[doc = r#"An operational volume comprises a three dimensional region of space."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "OpVolumeTypeSerde")]
-#[serde(try_from = "OpVolumeTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum OpVolumeType {
 	#[doc = r#"This element describes a 3-dimensional geometric volume (e.g. sphere, cone, etc.) using kinematics to describe the zone's position in space."#]
 	GeometricVolume(crate::v5_0::types::GeometricVolumeType),
@@ -5327,19 +4810,17 @@ pub enum OpVolumeType {
 	#[doc = r#"This element includes other qualitative types of regions in space such as space weather related zones."#]
 	Qualitative(crate::v5_0::enums::OrbitQualitativeEnum),
 }
-choice_convert_impls! {
-	OpVolumeType - OpVolumeTypeSerde
-	GeometricVolume,
-	GeocentricVolume,
-	OrbitRegime,
-	OrbitAltitude,
-	Qualitative,
+struct_like_serde! {
+	OpVolumeType
+	GeometricVolume -> "GeometricVolume",
+	GeocentricVolume -> "GeocentricVolume",
+	OrbitRegime -> "OrbitRegime",
+	OrbitAltitude -> "OrbitAltitude",
+	Qualitative -> "Qualitative",
 }
 
 #[doc = r#"Container for parameters that are unique to a specific enumeration in OpZoneCategoryEnum.  For example, KeepIn enumeration can have amplifying information such as entry and exit restrictions of the zone."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "OpZoneCategoryTypeSerde")]
-#[serde(try_from = "OpZoneCategoryTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum OpZoneCategoryType {
 	#[doc = r#"Defines boundaries which applicable Systems can only enter and exit through defined edges."#]
 	ConstrainedEntryExit(crate::v5_0::types::ConstrainedEntryExitType),
@@ -5362,56 +4843,50 @@ pub enum OpZoneCategoryType {
 	#[doc = r#"Defines area of weather conditions with potential of mission impact."#]
 	WeatherConditions(crate::v5_0::types::OpZoneWeatherType),
 }
-choice_convert_impls! {
-	OpZoneCategoryType - OpZoneCategoryTypeSerde
-	ConstrainedEntryExit,
-	FilterArea,
-	Jamming,
-	KeepIn,
-	MissileLaunchPoint,
-	NoFire,
-	NoFly,
-	VehicleConfiguration,
-	WeaponRestriction,
-	WeatherConditions,
+struct_like_serde! {
+	OpZoneCategoryType
+	ConstrainedEntryExit -> "ConstrainedEntryExit",
+	FilterArea -> "FilterArea",
+	Jamming -> "Jamming",
+	KeepIn -> "KeepIn",
+	MissileLaunchPoint -> "MissileLaunchPoint",
+	NoFire -> "NoFire",
+	NoFly -> "NoFly",
+	VehicleConfiguration -> "VehicleConfiguration",
+	WeaponRestriction -> "WeaponRestriction",
+	WeatherConditions -> "WeatherConditions",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "OperatorNotificationActionTypeSerde")]
-#[serde(try_from = "OperatorNotificationActionTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum OperatorNotificationActionType {
 	#[doc = r#"List of actions the originator of the alert is going to execute. No operator response is expected."#]
 	AutonomousActions(Vec<crate::v5_0::types::OperatorActionAutonomousType>),
 	#[doc = r#"List of actions the originator of the alert can take. The originator expects to receive one of these actions in a subsequent OperatorActionCommand."#]
 	ControlledActions(crate::v5_0::types::OperatorActionControlledType),
 }
-choice_convert_impls! {
-	OperatorNotificationActionType - OperatorNotificationActionTypeSerde
-	AutonomousActions,
-	ControlledActions,
+struct_like_serde! {
+	OperatorNotificationActionType
+	AutonomousActions -> "AutonomousActions",
+	ControlledActions -> "ControlledActions",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "OperatorRoleTypeSerde")]
-#[serde(try_from = "OperatorRoleTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum OperatorRoleType {
 	#[doc = r#"An Operator console role identifier."#]
 	OperatorRoleId(crate::v5_0::types::OperatorRoleIdType),
 	#[doc = r#"A non-Operator identifier that consists of a System and possibly a Service."#]
 	NonOperatorIdentifier(crate::v5_0::types::SystemServiceType),
 }
-choice_convert_impls! {
-	OperatorRoleType - OperatorRoleTypeSerde
-	OperatorRoleId,
-	NonOperatorIdentifier,
+struct_like_serde! {
+	OperatorRoleType
+	OperatorRoleId -> "OperatorRoleID",
+	NonOperatorIdentifier -> "NonOperatorIdentifier",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "OrbitActivityPlanCommandIdChoiceTypeSerde")]
-#[serde(try_from = "OrbitActivityPlanCommandIdChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum OrbitActivityPlanCommandIdChoiceType {
 	#[doc = r#"Indicates the unique ID of the OrbitActivityPlanCommand associated with the OrbitActivityPlan."#]
 	OrbitActivityPlanCommandId(crate::v5_0::types::OrbitActivityPlanCommandIdType),
@@ -5422,18 +4897,16 @@ pub enum OrbitActivityPlanCommandIdChoiceType {
 	#[doc = r#"Indicates the unique ID of the MissionPlanValidationCommand associated with the OrbitActivityPlan."#]
 	MissionPlanValidationCommandId(crate::v5_0::types::CommandIdType),
 }
-choice_convert_impls! {
-	OrbitActivityPlanCommandIdChoiceType - OrbitActivityPlanCommandIdChoiceTypeSerde
-	OrbitActivityPlanCommandId,
-	OrbitActivityPlanValidationCommandId,
-	MissionPlanCommandId,
-	MissionPlanValidationCommandId,
+struct_like_serde! {
+	OrbitActivityPlanCommandIdChoiceType
+	OrbitActivityPlanCommandId -> "OrbitActivityPlanCommandID",
+	OrbitActivityPlanValidationCommandId -> "OrbitActivityPlanValidationCommandID",
+	MissionPlanCommandId -> "MissionPlanCommandID",
+	MissionPlanValidationCommandId -> "MissionPlanValidationCommandID",
 }
 
 #[doc = r#"This type provides the details of an on-orbit event which results in physical damage, whether in whole or in part, of an object or multiple objects."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "OrbitBreakupEventDetailsTypeSerde")]
-#[serde(try_from = "OrbitBreakupEventDetailsTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum OrbitBreakupEventDetailsType {
 	#[doc = r#"Indicates the unique ID of a previously identified orbital conjunction that is the basis for this debris estimate request."#]
 	OrbitalConjunctionId(crate::v5_0::types::OrbitalConjunctionIdType),
@@ -5442,17 +4915,15 @@ pub enum OrbitBreakupEventDetailsType {
 	#[doc = r#"Characterizes a space based object breaking into pieces as a result of an internal explosion due to unvented fuel, overheated batteries or other causes."#]
 	SingleObjectBreakup(crate::v5_0::types::OrbitObjectBreakupType),
 }
-choice_convert_impls! {
-	OrbitBreakupEventDetailsType - OrbitBreakupEventDetailsTypeSerde
-	OrbitalConjunctionId,
-	Collision,
-	SingleObjectBreakup,
+struct_like_serde! {
+	OrbitBreakupEventDetailsType
+	OrbitalConjunctionId -> "OrbitalConjunctionID",
+	Collision -> "Collision",
+	SingleObjectBreakup -> "SingleObjectBreakup",
 }
 
 #[doc = r#"Indicates a number of specific maneuvers to reach a new orbit."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "OrbitChangeChoiceTypeSerde")]
-#[serde(try_from = "OrbitChangeChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum OrbitChangeChoiceType {
 	#[doc = r#"Indicates a specific new orbit, described in classic orbital elements (COE), to change to.  The maneuver to reach the new orbit isn't specified; the orbit specified here is the steady-state post maneuver orbit."#]
 	SpecificOrbit(crate::v5_0::types::CoeOrbitType),
@@ -5475,55 +4946,49 @@ Proximity operations means that two "neighboring" vehicles maneuver to affect th
 	#[doc = r#"Indicates a specific new orbit, described in racetrack parameters, to change to. This choice is only applicable for geo-stationary and some geo-synchronous orbits. The manuerver to reach the racetrack orbit isn't specified."#]
 	RaceTrack(crate::v5_0::types::RaceTrackOrbitType),
 }
-choice_convert_impls! {
-	OrbitChangeChoiceType - OrbitChangeChoiceTypeSerde
-	SpecificOrbit,
-	SpecificPosition,
-	Rendezvous,
-	ProximityOperations,
-	Longitude,
-	SemimajorAxis,
-	Inclination,
-	Eccentricity,
-	RaceTrack,
+struct_like_serde! {
+	OrbitChangeChoiceType
+	SpecificOrbit -> "SpecificOrbit",
+	SpecificPosition -> "SpecificPosition",
+	Rendezvous -> "Rendezvous",
+	ProximityOperations -> "ProximityOperations",
+	Longitude -> "Longitude",
+	SemimajorAxis -> "SemimajorAxis",
+	Inclination -> "Inclination",
+	Eccentricity -> "Eccentricity",
+	RaceTrack -> "RaceTrack",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "OrbitDurationTypeSerde")]
-#[serde(try_from = "OrbitDurationTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum OrbitDurationType {
 	#[doc = r#"Required amount of time to be spent in the loiter pattern."#]
 	Time(chrono::TimeDelta),
 	#[doc = r#"Required number of laps to be spent in the loiter patter."#]
 	NumberOfOrbits(u32),
 }
-choice_convert_impls! {
-	OrbitDurationType - OrbitDurationTypeSerde
-	Time,
-	NumberOfOrbits,
+struct_like_serde! {
+	OrbitDurationType
+	Time -> "Time",
+	NumberOfOrbits -> "NumberOfOrbits",
 }
 
 #[doc = r#"Defines choice for replacement or modification of an orbit kinematics sequence."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "OrbitKinematicsSequenceReplaceOrModifyChoiceTypeSerde")]
-#[serde(try_from = "OrbitKinematicsSequenceReplaceOrModifyChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum OrbitKinematicsSequenceReplaceOrModifyChoiceType {
 	#[doc = r#"Indicates a complete replacement of an orbit kinematics sequence."#]
 	ReplaceOrbitKinematicsSequence(crate::v5_0::types::OrbitKinematicsSequenceType),
 	#[doc = r#"Indicates a modification of an orbit kinematics sequence."#]
 	ModifyOrbitKinematicsSequence(crate::v5_0::types::OrbitKinematicsSequenceModificationDetailsType),
 }
-choice_convert_impls! {
-	OrbitKinematicsSequenceReplaceOrModifyChoiceType - OrbitKinematicsSequenceReplaceOrModifyChoiceTypeSerde
-	ReplaceOrbitKinematicsSequence,
-	ModifyOrbitKinematicsSequence,
+struct_like_serde! {
+	OrbitKinematicsSequenceReplaceOrModifyChoiceType
+	ReplaceOrbitKinematicsSequence -> "ReplaceOrbitKinematicsSequence",
+	ModifyOrbitKinematicsSequence -> "ModifyOrbitKinematicsSequence",
 }
 
 #[doc = r#"Defines the source from which to get Orbit Kinematics."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "OrbitKinematicsSourceTypeSerde")]
-#[serde(try_from = "OrbitKinematicsSourceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum OrbitKinematicsSourceType {
 	#[doc = r#"Via the OrbitPlanID of a particular OrbitPlan."#]
 	ByPlanId(crate::v5_0::types::OrbitPlanIdType),
@@ -5532,17 +4997,15 @@ pub enum OrbitKinematicsSourceType {
 	#[doc = r#"Via a specific Ephemeris Source."#]
 	ByEphemeris(OrbitalEphemerisSourceType),
 }
-choice_convert_impls! {
-	OrbitKinematicsSourceType - OrbitKinematicsSourceTypeSerde
-	ByPlanId,
-	ByElementSet,
-	ByEphemeris,
+struct_like_serde! {
+	OrbitKinematicsSourceType
+	ByPlanId -> "ByPlanID",
+	ByElementSet -> "ByElementSet",
+	ByEphemeris -> "ByEphemeris",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "OrbitPlanCommandIdChoiceTypeSerde")]
-#[serde(try_from = "OrbitPlanCommandIdChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum OrbitPlanCommandIdChoiceType {
 	#[doc = r#"Indicates the unique ID of the OrbitPlanCommand which the OrbitPlan originated from."#]
 	OrbitPlanCommandId(crate::v5_0::types::OrbitPlanCommandIdType),
@@ -5553,34 +5016,30 @@ pub enum OrbitPlanCommandIdChoiceType {
 	#[doc = r#"Indicates the unique ID of the MissionPlanValidationCommand which the MissionPlan originated from."#]
 	MissionPlanValidationCommandId(crate::v5_0::types::CommandIdType),
 }
-choice_convert_impls! {
-	OrbitPlanCommandIdChoiceType - OrbitPlanCommandIdChoiceTypeSerde
-	OrbitPlanCommandId,
-	OrbitPlanValidationCommandId,
-	MissionPlanCommandId,
-	MissionPlanValidationCommandId,
+struct_like_serde! {
+	OrbitPlanCommandIdChoiceType
+	OrbitPlanCommandId -> "OrbitPlanCommandID",
+	OrbitPlanValidationCommandId -> "OrbitPlanValidationCommandID",
+	MissionPlanCommandId -> "MissionPlanCommandID",
+	MissionPlanValidationCommandId -> "MissionPlanValidationCommandID",
 }
 
 #[doc = r#"Defines choice for location to insert orbit kinematics sequence."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "OrbitSequenceInsertionPositionChoiceTypeSerde")]
-#[serde(try_from = "OrbitSequenceInsertionPositionChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum OrbitSequenceInsertionPositionChoiceType {
 	#[doc = r#"Indicates an insertion at the start of the orbit kinematics sequences."#]
 	InsertAtStart(crate::v5_0::common::EmptyType),
 	#[doc = r#"Indicates the orbit kinematics sequence after which to insert the additional orbit kinematics sequences."#]
 	InsertAfterOrbitKinematicsSequenceId(crate::v5_0::types::OrbitKinematicsSequenceIdType),
 }
-choice_convert_impls! {
-	OrbitSequenceInsertionPositionChoiceType - OrbitSequenceInsertionPositionChoiceTypeSerde
-	InsertAtStart,
-	InsertAfterOrbitKinematicsSequenceId,
+struct_like_serde! {
+	OrbitSequenceInsertionPositionChoiceType
+	InsertAtStart -> "InsertAtStart",
+	InsertAfterOrbitKinematicsSequenceId -> "InsertAfterOrbitKinematicsSequenceID",
 }
 
 #[doc = r#"Indicates the specific details of the object that is to be analyzed for close approaches."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "OrbitalAnalysisObjectTypeSerde")]
-#[serde(try_from = "OrbitalAnalysisObjectTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum OrbitalAnalysisObjectType {
 	#[doc = r#"Indicates the orbital object that is the subject of the analysis."#]
 	SpecificObject(crate::v5_0::types::OrbitalObjectKinematicsSourceType),
@@ -5589,33 +5048,29 @@ pub enum OrbitalAnalysisObjectType {
 	#[doc = r#"Indicates the unique ID of an orbital debris cloud that is the subject of the analysis."#]
 	DebrisCloudId(crate::v5_0::types::OrbitalDebrisCloudIdType),
 }
-choice_convert_impls! {
-	OrbitalAnalysisObjectType - OrbitalAnalysisObjectTypeSerde
-	SpecificObject,
-	WorkingSobId,
-	DebrisCloudId,
+struct_like_serde! {
+	OrbitalAnalysisObjectType
+	SpecificObject -> "SpecificObject",
+	WorkingSobId -> "WorkingSOB_ID",
+	DebrisCloudId -> "DebrisCloudID",
 }
 
 #[doc = r#"Indicates the collection of Orbital Debris estimate information."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "OrbitalDebrisEstimateTypeSerde")]
-#[serde(try_from = "OrbitalDebrisEstimateTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum OrbitalDebrisEstimateType {
 	#[doc = r#"Indicates the ID of the file associated with the specific debris estimate information."#]
 	FileMetadataId(crate::v5_0::types::FileMetadataIdType),
 	#[doc = r#"Details the orbital debris cloud included in an orbital debris estimate. For single-object breakup events, there should only be one debris cloud. For collisions that involve 2 or more object, there will be a debris cloud for each object involved in the collision."#]
 	DebrisCloud(Vec<crate::v5_0::types::OrbitalDebrisCloudType>),
 }
-choice_convert_impls! {
-	OrbitalDebrisEstimateType - OrbitalDebrisEstimateTypeSerde
-	FileMetadataId,
-	DebrisCloud,
+struct_like_serde! {
+	OrbitalDebrisEstimateType
+	FileMetadataId -> "FileMetadataID",
+	DebrisCloud -> "DebrisCloud",
 }
 
 #[doc = r#"Indicates the source of the element set kinematics data."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "OrbitalElementSetSourceTypeSerde")]
-#[serde(try_from = "OrbitalElementSetSourceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum OrbitalElementSetSourceType {
 	#[doc = r#"The unique identifier that correspond to a System's orbital element set (TLE)."#]
 	SystemElementSetId(crate::v5_0::types::SystemOrbitalElementSetIdType),
@@ -5624,33 +5079,29 @@ pub enum OrbitalElementSetSourceType {
 	#[doc = r#"Indicates the default or "catalog" orbital element set (also known as two line element or TLE) for the satellite."#]
 	ExplicitElementSet(crate::v5_0::types::TleBaseType),
 }
-choice_convert_impls! {
-	OrbitalElementSetSourceType - OrbitalElementSetSourceTypeSerde
-	SystemElementSetId,
-	EntityElementSetId,
-	ExplicitElementSet,
+struct_like_serde! {
+	OrbitalElementSetSourceType
+	SystemElementSetId -> "SystemElementSetID",
+	EntityElementSetId -> "EntityElementSetID",
+	ExplicitElementSet -> "ExplicitElementSet",
 }
 
 #[doc = r#"Indicates the ephemeris expressed in one of several orbital kinematics standards."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "OrbitalEphemerisChoiceTypeSerde")]
-#[serde(try_from = "OrbitalEphemerisChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum OrbitalEphemerisChoiceType {
 	#[doc = r#"Indicates ephemeris expressed in terms of a standard frame centered on a celestial object."#]
 	StandardFrame(OrbitalKinematicsStandardEphemerisType),
 	#[doc = r#"Indicates ephemeris expressed relative to a reference object that is in orbit around a celestial object."#]
 	OrbitingObjectRelative(crate::v5_0::types::OrbitalKinematicsRelativeEphemerisType),
 }
-choice_convert_impls! {
-	OrbitalEphemerisChoiceType - OrbitalEphemerisChoiceTypeSerde
-	StandardFrame,
-	OrbitingObjectRelative,
+struct_like_serde! {
+	OrbitalEphemerisChoiceType
+	StandardFrame -> "StandardFrame",
+	OrbitingObjectRelative -> "OrbitingObjectRelative",
 }
 
 #[doc = r#"Indicates the source of the ephemeris kinematics data."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "OrbitalEphemerisSourceTypeSerde")]
-#[serde(try_from = "OrbitalEphemerisSourceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum OrbitalEphemerisSourceType {
 	#[doc = r#"This element references the ephemeris ID."#]
 	SystemEphemerisId(crate::v5_0::types::SystemOrbitalEphemerisIdType),
@@ -5659,33 +5110,29 @@ pub enum OrbitalEphemerisSourceType {
 	#[doc = r#"Indicates ephemeris expressed in terms of a standard frame centered on a celestial object."#]
 	OrbitalEphemeris(OrbitalEphemerisChoiceType),
 }
-choice_convert_impls! {
-	OrbitalEphemerisSourceType - OrbitalEphemerisSourceTypeSerde
-	SystemEphemerisId,
-	EntityEphemerisId,
-	OrbitalEphemeris,
+struct_like_serde! {
+	OrbitalEphemerisSourceType
+	SystemEphemerisId -> "SystemEphemerisID",
+	EntityEphemerisId -> "EntityEphemerisID",
+	OrbitalEphemeris -> "OrbitalEphemeris",
 }
 
 #[doc = r#"Indicates the kinematics expressed in one of several orbital kinematics standards."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "OrbitalKinematicsChoiceTypeSerde")]
-#[serde(try_from = "OrbitalKinematicsChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum OrbitalKinematicsChoiceType {
 	#[doc = r#"Indicates kinematics expressed in terms of a standard frame centered on a celestial object."#]
 	StandardFrame(OrbitalKinematicsStandardFrameChoiceType),
 	#[doc = r#"Indicates kinematics expressed relative to a reference object that is in orbit around a celestial object."#]
 	OrbitingObjectRelative(crate::v5_0::types::OrbitalKinematicsObjectRelativeType),
 }
-choice_convert_impls! {
-	OrbitalKinematicsChoiceType - OrbitalKinematicsChoiceTypeSerde
-	StandardFrame,
-	OrbitingObjectRelative,
+struct_like_serde! {
+	OrbitalKinematicsChoiceType
+	StandardFrame -> "StandardFrame",
+	OrbitingObjectRelative -> "OrbitingObjectRelative",
 }
 
 #[doc = r#"Provides the choice of orbital kinematics reference frames."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "OrbitalKinematicsFrameChoiceTypeSerde")]
-#[serde(try_from = "OrbitalKinematicsFrameChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum OrbitalKinematicsFrameChoiceType {
 	#[doc = r#"Indicates the orbital element set for the satellite."#]
 	OrbitalElements(crate::v5_0::types::TleWithParametersType),
@@ -5696,18 +5143,16 @@ pub enum OrbitalKinematicsFrameChoiceType {
 	#[doc = r#"Indicates kinematic vector or vectors in the Barycentric Celestial Reference System (BCRS)."#]
 	Bcrs(crate::v5_0::types::BcrsKinematicsType),
 }
-choice_convert_impls! {
-	OrbitalKinematicsFrameChoiceType - OrbitalKinematicsFrameChoiceTypeSerde
-	OrbitalElements,
-	J2k,
-	Gcrs,
-	Bcrs,
+struct_like_serde! {
+	OrbitalKinematicsFrameChoiceType
+	OrbitalElements -> "OrbitalElements",
+	J2k -> "J2K",
+	Gcrs -> "GCRS",
+	Bcrs -> "BCRS",
 }
 
 #[doc = r#"Indicates ephemeris expressed in terms of a standard reference frame centered on a celestial object."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "OrbitalKinematicsStandardEphemerisTypeSerde")]
-#[serde(try_from = "OrbitalKinematicsStandardEphemerisTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum OrbitalKinematicsStandardEphemerisType {
 	#[doc = r#"Indicates kinematic vector(s) in the Earth-Centered Inertial (ECI) J2000 (ECI-J2K) reference system."#]
 	J2kStateVector(Vec<crate::v5_0::types::J2kKinematicsType>),
@@ -5716,17 +5161,15 @@ pub enum OrbitalKinematicsStandardEphemerisType {
 	#[doc = r#"Indicates kinematic vector(s) in the barycentric celestial reference system (BCRS)."#]
 	BcrsStateVector(Vec<crate::v5_0::types::BcrsKinematicsType>),
 }
-choice_convert_impls! {
-	OrbitalKinematicsStandardEphemerisType - OrbitalKinematicsStandardEphemerisTypeSerde
-	J2kStateVector,
-	GcrsStateVector,
-	BcrsStateVector,
+struct_like_serde! {
+	OrbitalKinematicsStandardEphemerisType
+	J2kStateVector -> "J2K_StateVector",
+	GcrsStateVector -> "GCRS_StateVector",
+	BcrsStateVector -> "BCRS_StateVector",
 }
 
 #[doc = r#"Provides the choice of kinematics in terms of a standard coordinate reference frame."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "OrbitalKinematicsStandardFrameChoiceTypeSerde")]
-#[serde(try_from = "OrbitalKinematicsStandardFrameChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum OrbitalKinematicsStandardFrameChoiceType {
 	#[doc = r#"Indicates kinematic vector or vectors in the Earth-Centered Inertial (ECI) J2000 (ECI-J2K) Reference System."#]
 	J2k(crate::v5_0::types::J2kKinematicsType),
@@ -5735,33 +5178,29 @@ pub enum OrbitalKinematicsStandardFrameChoiceType {
 	#[doc = r#"Indicates kinematic vector or vectors in the Barycentric Celestial Reference System (BCRS)."#]
 	Bcrs(crate::v5_0::types::BcrsKinematicsType),
 }
-choice_convert_impls! {
-	OrbitalKinematicsStandardFrameChoiceType - OrbitalKinematicsStandardFrameChoiceTypeSerde
-	J2k,
-	Gcrs,
-	Bcrs,
+struct_like_serde! {
+	OrbitalKinematicsStandardFrameChoiceType
+	J2k -> "J2K",
+	Gcrs -> "GCRS",
+	Bcrs -> "BCRS",
 }
 
 #[doc = r#"Indicates the choice between two-line element kinematic data or state vector (ECI J2K) kinematic data."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "OrbitalKinematicsTleSvTypeSerde")]
-#[serde(try_from = "OrbitalKinematicsTleSvTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum OrbitalKinematicsTleSvType {
 	#[doc = r#"Indicates the object's kinematic state vector or vectors in the Earth-Centered Inertial (ECI) J2000 (ECI-J2K) reference system."#]
 	StateVector(crate::v5_0::types::J2kKinematicsType),
 	#[doc = r#"Indicates the orbital element set (also known as two line element or TLE) of the object."#]
 	Tle(crate::v5_0::types::TleBaseType),
 }
-choice_convert_impls! {
-	OrbitalKinematicsTleSvType - OrbitalKinematicsTleSvTypeSerde
-	StateVector,
-	Tle,
+struct_like_serde! {
+	OrbitalKinematicsTleSvType
+	StateVector -> "StateVector",
+	Tle -> "TLE",
 }
 
 #[doc = r#"Indicates orbital surveillance instructions and information to the sensor to enable appropriate sensor set-up and data collection to meet the orbital surveillance collection need."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "OrbitalSurveillanceCollectionRequirementsTypeSerde")]
-#[serde(try_from = "OrbitalSurveillanceCollectionRequirementsTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum OrbitalSurveillanceCollectionRequirementsType {
 	#[doc = r#"Indicates collection requirements to perform a metric collection sensor task."#]
 	MetricCollection(crate::v5_0::types::MetricCollectionType),
@@ -5778,37 +5217,33 @@ pub enum OrbitalSurveillanceCollectionRequirementsType {
 	#[doc = r#"Indicates collection requirements to perform a deployment detection sensor task."#]
 	DeploymentDetection(crate::v5_0::types::DeploymentDetectionType),
 }
-choice_convert_impls! {
-	OrbitalSurveillanceCollectionRequirementsType - OrbitalSurveillanceCollectionRequirementsTypeSerde
-	MetricCollection,
-	Search,
-	OrbitDetermination,
-	Characterization,
-	MultiObject,
-	ManeuverDetection,
-	DeploymentDetection,
+struct_like_serde! {
+	OrbitalSurveillanceCollectionRequirementsType
+	MetricCollection -> "MetricCollection",
+	Search -> "Search",
+	OrbitDetermination -> "OrbitDetermination",
+	Characterization -> "Characterization",
+	MultiObject -> "MultiObject",
+	ManeuverDetection -> "ManeuverDetection",
+	DeploymentDetection -> "DeploymentDetection",
 }
 
 #[doc = r#"Specifies span of time for individual collection based on duration or rotational periods of target."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "OrbitalSurveillanceSensorMinimumCollectionRequirementsTypeSerde")]
-#[serde(try_from = "OrbitalSurveillanceSensorMinimumCollectionRequirementsTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum OrbitalSurveillanceSensorMinimumCollectionRequirementsType {
 	#[doc = r#"Collection duration (in number of rotations)."#]
 	TargetRotationalPeriods(i32),
 	#[doc = r#"Collection duration (in seconds)."#]
 	Time(chrono::TimeDelta),
 }
-choice_convert_impls! {
-	OrbitalSurveillanceSensorMinimumCollectionRequirementsType - OrbitalSurveillanceSensorMinimumCollectionRequirementsTypeSerde
-	TargetRotationalPeriods,
-	Time,
+struct_like_serde! {
+	OrbitalSurveillanceSensorMinimumCollectionRequirementsType
+	TargetRotationalPeriods -> "TargetRotationalPeriods",
+	Time -> "Time",
 }
 
 #[doc = r#"Indicates the expected size of the smallest target for the task (or threshold for search) in either physical area  or apparent size appropriate to the phenomenology (e.g., radar cross section)."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "OrbitalSurveillanceSensorMinimumSizeTypeSerde")]
-#[serde(try_from = "OrbitalSurveillanceSensorMinimumSizeTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum OrbitalSurveillanceSensorMinimumSizeType {
 	#[doc = r#"See Base Description."#]
 	RadarCrossSection(crate::v5_0::types::PercentileRcstype),
@@ -5819,18 +5254,16 @@ pub enum OrbitalSurveillanceSensorMinimumSizeType {
 	#[doc = r#"Intensity measured in watts per steradian."#]
 	Intensity(f64),
 }
-choice_convert_impls! {
-	OrbitalSurveillanceSensorMinimumSizeType - OrbitalSurveillanceSensorMinimumSizeTypeSerde
-	RadarCrossSection,
-	VisualMagnitude,
-	Area,
-	Intensity,
+struct_like_serde! {
+	OrbitalSurveillanceSensorMinimumSizeType
+	RadarCrossSection -> "RadarCrossSection",
+	VisualMagnitude -> "VisualMagnitude",
+	Area -> "Area",
+	Intensity -> "Intensity",
 }
 
 #[doc = r#"Indicates the target of the Orbital Surveillance Sensor Task."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "OrbitalSurveillanceSensorTargetTypeSerde")]
-#[serde(try_from = "OrbitalSurveillanceSensorTargetTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum OrbitalSurveillanceSensorTargetType {
 	#[doc = r#"Indicates that the target of the Orbital Surveillance Sensor Task is defined by a sensor point list."#]
 	PointList(SensorPointListType),
@@ -5843,19 +5276,17 @@ pub enum OrbitalSurveillanceSensorTargetType {
 	#[doc = r#"Indicates that the target of the Orbital Surveillance Sensor is defined by a volume specified with the sensor at the origin."#]
 	SensorCentricVolume(crate::v5_0::types::SourceCoverageType),
 }
-choice_convert_impls! {
-	OrbitalSurveillanceSensorTargetType - OrbitalSurveillanceSensorTargetTypeSerde
-	PointList,
-	ElementSetCloud,
-	ObjectBased,
-	LocationBased,
-	SensorCentricVolume,
+struct_like_serde! {
+	OrbitalSurveillanceSensorTargetType
+	PointList -> "PointList",
+	ElementSetCloud -> "ElementSetCloud",
+	ObjectBased -> "ObjectBased",
+	LocationBased -> "LocationBased",
+	SensorCentricVolume -> "SensorCentricVolume",
 }
 
 #[doc = r#"Indicates a SubCapability of the Orbital Surveillance Capability, the second tier in the taxonomy of Orbital Surveillance.  For Orbital Surveillance, the second tier is the desired outcome of the collection.  See enumeration annotations for further details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "OrbitalSurveillanceSubCapabilityDetailsChoiceTypeSerde")]
-#[serde(try_from = "OrbitalSurveillanceSubCapabilityDetailsChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum OrbitalSurveillanceSubCapabilityDetailsChoiceType {
 	#[doc = r#"Indicates a task to search an a region of space or for a specific object."#]
 	Search(crate::v5_0::types::OrbitalSurveillanceSearchType),
@@ -5870,20 +5301,18 @@ pub enum OrbitalSurveillanceSubCapabilityDetailsChoiceType {
 	#[doc = r#"Indicates a task that monitors primary target to detect deployment of secondary object or objects."#]
 	DeploymentDetection(crate::v5_0::types::DeploymentDetectionType),
 }
-choice_convert_impls! {
-	OrbitalSurveillanceSubCapabilityDetailsChoiceType - OrbitalSurveillanceSubCapabilityDetailsChoiceTypeSerde
-	Search,
-	OrbitAccuracy,
-	Characterization,
-	MultiObject,
-	ManeuverDetection,
-	DeploymentDetection,
+struct_like_serde! {
+	OrbitalSurveillanceSubCapabilityDetailsChoiceType
+	Search -> "Search",
+	OrbitAccuracy -> "OrbitAccuracy",
+	Characterization -> "Characterization",
+	MultiObject -> "MultiObject",
+	ManeuverDetection -> "ManeuverDetection",
+	DeploymentDetection -> "DeploymentDetection",
 }
 
 #[doc = r#"Indicates the target of the Orbital Surveillance Task as either object based, location based, or zone based."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "OrbitalSurveillanceTargetTypeSerde")]
-#[serde(try_from = "OrbitalSurveillanceTargetTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum OrbitalSurveillanceTargetType {
 	#[doc = r#"Indicates that the target of the Orbital Surveillance Task is a specified object or objects or relative to a specified object."#]
 	ObjectBased(crate::v5_0::types::OrbitalSurveillanceObjectsType),
@@ -5892,11 +5321,11 @@ pub enum OrbitalSurveillanceTargetType {
 	#[doc = r#"Indicates that the target of the Orbital Surveillance Task is defined by a geocentric zone."#]
 	ZoneBased(crate::v5_0::types::OrbitalSurveillanceZoneTargetType),
 }
-choice_convert_impls! {
-	OrbitalSurveillanceTargetType - OrbitalSurveillanceTargetTypeSerde
-	ObjectBased,
-	LocationBased,
-	ZoneBased,
+struct_like_serde! {
+	OrbitalSurveillanceTargetType
+	ObjectBased -> "ObjectBased",
+	LocationBased -> "LocationBased",
+	ZoneBased -> "ZoneBased",
 }
 
 #[doc = r#"Encoding types for CVEnumISMCATOwnerProducer Version 2 controlled vocabulary enumerations.  Derived from the CVEnumISMCATOwnerProducer.xml CVE.(U) 
@@ -5908,89 +5337,77 @@ choice_convert_impls! {
 						   The permissible values for this simple type are defined in the Controlled Value Enumeration:
 
 						   CVEnumISMCATOwnerProducer.xml"#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "OwnerProducerChoiceTypeSerde")]
-#[serde(try_from = "OwnerProducerChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum OwnerProducerChoiceType {
 	#[doc = r#"CVEnumISMCATOwnerProducer Values"#]
 	GovernmentIdentifier(crate::v5_0::enums::OwnerProducerEnum),
 	#[doc = r#"North Atlantic Treaty Organization Special Words"#]
 	NatoSpecialWord(crate::v5_0::common::NatoSpecialWordsType),
 }
-choice_convert_impls! {
-	OwnerProducerChoiceType - OwnerProducerChoiceTypeSerde
-	GovernmentIdentifier,
-	NatoSpecialWord,
+struct_like_serde! {
+	OwnerProducerChoiceType
+	GovernmentIdentifier -> "GovernmentIdentifier",
+	NatoSpecialWord -> "NATO_SpecialWord",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ParameterValueTypeSerde")]
-#[serde(try_from = "ParameterValueTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ParameterValueType {
 	#[doc = r#"Current value of the configuration parameter."#]
 	Value(crate::v5_0::common::VisibleString256Type),
 	#[doc = r#"If this is selected, the parameter called out should be returned to its default value."#]
 	ReturnToDefault(crate::v5_0::common::EmptyType),
 }
-choice_convert_impls! {
-	ParameterValueType - ParameterValueTypeSerde
-	Value,
-	ReturnToDefault,
+struct_like_serde! {
+	ParameterValueType
+	Value -> "Value",
+	ReturnToDefault -> "ReturnToDefault",
 }
 
 #[doc = r#"Specify a section of a path, by time or by segments."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PathConstraintsTypeSerde")]
-#[serde(try_from = "PathConstraintsTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PathConstraintsType {
 	#[doc = r#"Specify a segment window within a path. The absence of a begin segment indicates the window begins at the first segment within the path. The absence of an end segment indicates the window extends to the end of the path."#]
 	SegmentWindow(crate::v5_0::types::SegmentRangeType),
 	#[doc = r#"Specify a time window within a path. The absence of a begin time indicates the window begins at the beginning of the path. The absence of an end time indicates the window extends to the end of the path."#]
 	TimeWindow(crate::v5_0::types::TimeWindowType),
 }
-choice_convert_impls! {
-	PathConstraintsType - PathConstraintsTypeSerde
-	SegmentWindow,
-	TimeWindow,
+struct_like_serde! {
+	PathConstraintsType
+	SegmentWindow -> "SegmentWindow",
+	TimeWindow -> "TimeWindow",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PathSegmentSpeedChoiceTypeSerde")]
-#[serde(try_from = "PathSegmentSpeedChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PathSegmentSpeedChoiceType {
 	#[doc = r#"Indicates the speed that the vehicle shall traverse the path segment."#]
 	SpeedValue(crate::v5_0::types::PathSegmentSpeedValueType),
 	#[doc = r#"Indicates the unitless Mach number realized at a particular speed during flight."#]
 	MachValue(crate::v5_0::common::MachType),
 }
-choice_convert_impls! {
-	PathSegmentSpeedChoiceType - PathSegmentSpeedChoiceTypeSerde
-	SpeedValue,
-	MachValue,
+struct_like_serde! {
+	PathSegmentSpeedChoiceType
+	SpeedValue -> "SpeedValue",
+	MachValue -> "MachValue",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PlanActivationAutonomyTypeSerde")]
-#[serde(try_from = "PlanActivationAutonomyTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PlanActivationAutonomyType {
 	#[doc = r#"Indicates autonomous, simultaneous activation of all sub-*Plans (TaskPlan, OrbitPlan and OrbitActivityPlan for example) of a MissionPlan into the same activation state."#]
 	ByMissionPlan(crate::v5_0::types::MissionPlanActivationSettingType),
 	#[doc = r#"Indicates autonomous activation by sub-*Plan (RoutePlan and ActivityPlan for example) of the MissionPlan, with potentially different states for each."#]
 	BySubPlan(Vec<crate::v5_0::types::SubPlanActivationSettingType>),
 }
-choice_convert_impls! {
-	PlanActivationAutonomyType - PlanActivationAutonomyTypeSerde
-	ByMissionPlan,
-	BySubPlan,
+struct_like_serde! {
+	PlanActivationAutonomyType
+	ByMissionPlan -> "ByMissionPlan",
+	BySubPlan -> "BySubPlan",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PlanReferenceIdChoiceTypeSerde")]
-#[serde(try_from = "PlanReferenceIdChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PlanReferenceIdChoiceType {
 	#[doc = r#"Indicates a reference to a MissionPlan."#]
 	MissionPlanId(crate::v5_0::types::MissionPlanIdType),
@@ -6015,41 +5432,37 @@ pub enum PlanReferenceIdChoiceType {
 	#[doc = r#"Indicates a reference to a ResponsePlan."#]
 	ResponsePlanId(crate::v5_0::types::ResponsePlanIdType),
 }
-choice_convert_impls! {
-	PlanReferenceIdChoiceType - PlanReferenceIdChoiceTypeSerde
-	MissionPlanId,
-	TaskPlanId,
-	OrbitPlanId,
-	OrbitActivityPlanId,
-	RoutePlanId,
-	RouteActivityPlanId,
-	CommScheduleAllocationId,
-	ActivityPlanId,
-	EffectPlanId,
-	ActionPlanId,
-	ResponsePlanId,
+struct_like_serde! {
+	PlanReferenceIdChoiceType
+	MissionPlanId -> "MissionPlanID",
+	TaskPlanId -> "TaskPlanID",
+	OrbitPlanId -> "OrbitPlanID",
+	OrbitActivityPlanId -> "OrbitActivityPlanID",
+	RoutePlanId -> "RoutePlanID",
+	RouteActivityPlanId -> "RouteActivityPlanID",
+	CommScheduleAllocationId -> "CommScheduleAllocationID",
+	ActivityPlanId -> "ActivityPlanID",
+	EffectPlanId -> "EffectPlanID",
+	ActionPlanId -> "ActionPlanID",
+	ResponsePlanId -> "ResponsePlanID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PlanWindowModificationTypeChoiceTypeSerde")]
-#[serde(try_from = "PlanWindowModificationTypeChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PlanWindowModificationTypeChoiceType {
 	#[doc = r#"The new time window within which this Plan, or set of Plans, should apply."#]
 	Window(crate::v5_0::types::DateTimeRangeType),
 	#[doc = r#"Indicates the time offset that the existing Window for a Plan, or set of Plans, should be shifted by."#]
 	TimeOffset(chrono::TimeDelta),
 }
-choice_convert_impls! {
-	PlanWindowModificationTypeChoiceType - PlanWindowModificationTypeChoiceTypeSerde
-	Window,
-	TimeOffset,
+struct_like_serde! {
+	PlanWindowModificationTypeChoiceType
+	Window -> "Window",
+	TimeOffset -> "TimeOffset",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PlanningByCaseTriggerTypeSerde")]
-#[serde(try_from = "PlanningByCaseTriggerTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PlanningByCaseTriggerType {
 	#[doc = r#"This trigger refers to a new Capability or SubCapability which becomes available or a previously failed Capability which has been restored."#]
 	CapabilityAdded(crate::v5_0::types::CapabilityTaxonomyType),
@@ -6100,38 +5513,36 @@ pub enum PlanningByCaseTriggerType {
 	#[doc = r#"This trigger indicates planning triggered by a Response and/or ResponsePlan."#]
 	ResponseId(crate::v5_0::types::ResponseIdType),
 }
-choice_convert_impls! {
-	PlanningByCaseTriggerType - PlanningByCaseTriggerTypeSerde
-	CapabilityAdded,
-	CapabilityFailure,
-	CommsLost,
-	DmpiOverDesignation,
-	DmpiUnderDesignation,
-	EnduranceLow,
-	OffRoute,
-	ProximityConflict,
-	ReleasePointOutsideLar,
-	RouteConflict,
-	RouteVulnerability,
-	SystemStateChange,
-	RequirementAdded,
-	RequirementDependencyFailed,
-	RequirementDropped,
-	RequirementFailed,
-	RequirementChange,
-	RequirementTiming,
-	ZoneViolation,
-	OrbitConflict,
-	OffPlannedOrbit,
-	SpacecraftEnduranceLow,
-	SpacecraftProximityConflict,
-	ResponseId,
+struct_like_serde! {
+	PlanningByCaseTriggerType
+	CapabilityAdded -> "CapabilityAdded",
+	CapabilityFailure -> "CapabilityFailure",
+	CommsLost -> "CommsLost",
+	DmpiOverDesignation -> "DMPI_OverDesignation",
+	DmpiUnderDesignation -> "DMPI_UnderDesignation",
+	EnduranceLow -> "EnduranceLow",
+	OffRoute -> "OffRoute",
+	ProximityConflict -> "ProximityConflict",
+	ReleasePointOutsideLar -> "ReleasePointOutsideLAR",
+	RouteConflict -> "RouteConflict",
+	RouteVulnerability -> "RouteVulnerability",
+	SystemStateChange -> "SystemStateChange",
+	RequirementAdded -> "RequirementAdded",
+	RequirementDependencyFailed -> "RequirementDependencyFailed",
+	RequirementDropped -> "RequirementDropped",
+	RequirementFailed -> "RequirementFailed",
+	RequirementChange -> "RequirementChange",
+	RequirementTiming -> "RequirementTiming",
+	ZoneViolation -> "ZoneViolation",
+	OrbitConflict -> "OrbitConflict",
+	OffPlannedOrbit -> "OffPlannedOrbit",
+	SpacecraftEnduranceLow -> "SpacecraftEnduranceLow",
+	SpacecraftProximityConflict -> "SpacecraftProximityConflict",
+	ResponseId -> "ResponseID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PlanningByResultTriggerTypeSerde")]
-#[serde(try_from = "PlanningByResultTriggerTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PlanningByResultTriggerType {
 	#[doc = r#"Indicates a replan of one *Plan resulting in the need to replan an existing Plan of the type given by this element. List size for this element is based on "Select All That Apply" condition."#]
 	ReplanRequired(Vec<crate::v5_0::enums::PlanTypeEnum>),
@@ -6140,17 +5551,15 @@ pub enum PlanningByResultTriggerType {
 	#[doc = r#"This result refers to a case where Requirements have been unallocated as a result of triggered replanning."#]
 	RequirementUnallocated(crate::v5_0::types::RequirementTriggerType),
 }
-choice_convert_impls! {
-	PlanningByResultTriggerType - PlanningByResultTriggerTypeSerde
-	ReplanRequired,
-	VulnerabilityChanged,
-	RequirementUnallocated,
+struct_like_serde! {
+	PlanningByResultTriggerType
+	ReplanRequired -> "ReplanRequired",
+	VulnerabilityChanged -> "VulnerabilityChanged",
+	RequirementUnallocated -> "RequirementUnallocated",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PlanningPointTypeSerde")]
-#[serde(try_from = "PlanningPointTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PlanningPointType {
 	#[doc = r#"Specifies a specific location to use for planning.  This choice is intended for users/services, such as allocators or route planners, which have and care to specify detailed vehicle routes and position data."#]
 	Specific(crate::v5_0::types::PlanningLocationType),
@@ -6159,17 +5568,15 @@ pub enum PlanningPointType {
 	#[doc = r#"Specifies a future time to use to establish/calculate/determine the point to use for planning.  This choice is intended for users/services which don't necessarily have, or care to specify, detailed vehicle position data.  Allocation and planning services would then be expected to determine a location corresponding to this Time, based on the current/previous *Plan or other information."#]
 	Time(chrono::DateTime<chrono::Utc>),
 }
-choice_convert_impls! {
-	PlanningPointType - PlanningPointTypeSerde
-	Specific,
-	OpPointId,
-	Time,
+struct_like_serde! {
+	PlanningPointType
+	Specific -> "Specific",
+	OpPointId -> "OpPointID",
+	Time -> "Time",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PlatformFunctionStatusCategoryTypeSerde")]
-#[serde(try_from = "PlatformFunctionStatusCategoryTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PlatformFunctionStatusCategoryType {
 	#[doc = r#"Enumeration listing systems that can be reported for aircraft."#]
 	Air(crate::v5_0::enums::PlatformFunctionAirEnum),
@@ -6180,370 +5587,324 @@ pub enum PlatformFunctionStatusCategoryType {
 	#[doc = r#"Enumeration listing systems that can be reported for electronic warfare systems."#]
 	Ew(crate::v5_0::enums::PlatformFunctionEwEnum),
 }
-choice_convert_impls! {
-	PlatformFunctionStatusCategoryType - PlatformFunctionStatusCategoryTypeSerde
-	Air,
-	SeaSurface,
-	Ground,
-	Ew,
+struct_like_serde! {
+	PlatformFunctionStatusCategoryType
+	Air -> "Air",
+	SeaSurface -> "SeaSurface",
+	Ground -> "Ground",
+	Ew -> "EW",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PmopSequenceTypeSerde")]
-#[serde(try_from = "PmopSequenceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PmopSequenceType {
 	#[doc = r#"Indicates an instance of measured phase in a phase shift keyed Signal.  A series of measured phases constitute a PMOP sequence.  This field is only expected when the sibling PMOP element indicates PMOP was detected. List size for this element is based on "Order List of Values"."#]
 	PmopSequencePhase(Vec<crate::v5_0::enums::PmopSequenceEnum>),
 	#[doc = r#"Indicates the actual, full length of the PMOP sequence."#]
 	PmopSequenceLength(u32),
 }
-choice_convert_impls! {
-	PmopSequenceType - PmopSequenceTypeSerde
-	PmopSequencePhase,
-	PmopSequenceLength,
+struct_like_serde! {
+	PmopSequenceType
+	PmopSequencePhase -> "PMOP_SequencePhase",
+	PmopSequenceLength -> "PMOP_SequenceLength",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PoAirTargetVolumeCommandTypeSerde")]
-#[serde(try_from = "PoAirTargetVolumeCommandTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PoAirTargetVolumeCommandType {
 	#[doc = r#"Indicates the commanded air volume extents."#]
 	AirVolume(PoAirTargetVolumeType),
 	#[doc = r#"Indicates the unique ID of an Entity that is the target of a cued search. This element can be used as the full specification of the target volume for the cued search. It can also be used in combination with the sibling AirVolume element to define extents of the cue volume around the Entity."#]
 	EntityId(crate::v5_0::types::EntityIdType),
 }
-choice_convert_impls! {
-	PoAirTargetVolumeCommandType - PoAirTargetVolumeCommandTypeSerde
-	AirVolume,
-	EntityId,
+struct_like_serde! {
+	PoAirTargetVolumeCommandType
+	AirVolume -> "AirVolume",
+	EntityId -> "EntityID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PoAirTargetVolumeTypeSerde")]
-#[serde(try_from = "PoAirTargetVolumeTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PoAirTargetVolumeType {
 	#[doc = r#"Indicates a 3D sensor referenced volume that an air volume capability is directed against. This will define the volume in terms of azimuth and elevation angles."#]
 	AirVolumeSensorReferenced(crate::v5_0::types::PoAirVolumeSensorReferencedType),
 	#[doc = r#"Indicates a 3D area that an air volume capability is directed against. This should define the latitude/longitude extents of the volume along with any guidance regarding the height of the volume."#]
 	AirVolumeLocation(crate::v5_0::types::ZoneType),
 }
-choice_convert_impls! {
-	PoAirTargetVolumeType - PoAirTargetVolumeTypeSerde
-	AirVolumeSensorReferenced,
-	AirVolumeLocation,
+struct_like_serde! {
+	PoAirTargetVolumeType
+	AirVolumeSensorReferenced -> "AirVolumeSensorReferenced",
+	AirVolumeLocation -> "AirVolumeLocation",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PoAngleConstraintControlsTypeSerde")]
-#[serde(try_from = "PoAngleConstraintControlsTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PoAngleConstraintControlsType {
 	#[doc = r#"Specifies commanded controls for the collection constraint."#]
 	Controls(crate::v5_0::types::PoConstraintControlsType),
 	#[doc = r#"The constraints on the angle."#]
 	Setting(crate::v5_0::types::AnglePairType),
 }
-choice_convert_impls! {
-	PoAngleConstraintControlsType - PoAngleConstraintControlsTypeSerde
-	Controls,
-	Setting,
+struct_like_serde! {
+	PoAngleConstraintControlsType
+	Controls -> "Controls",
+	Setting -> "Setting",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PoCollectionPatternConstraintControlsTypeSerde")]
-#[serde(try_from = "PoCollectionPatternConstraintControlsTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PoCollectionPatternConstraintControlsType {
 	#[doc = r#"Specifies commanded controls for the collection constraint."#]
 	Controls(crate::v5_0::types::PoConstraintControlsType),
 	#[doc = r#"The pattern to use when performing this collection."#]
 	Setting(crate::v5_0::enums::CollectionPatternEnum),
 }
-choice_convert_impls! {
-	PoCollectionPatternConstraintControlsType - PoCollectionPatternConstraintControlsTypeSerde
-	Controls,
-	Setting,
+struct_like_serde! {
+	PoCollectionPatternConstraintControlsType
+	Controls -> "Controls",
+	Setting -> "Setting",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PoCommandTypeSerde")]
-#[serde(try_from = "PoCommandTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PoCommandType {
 	#[doc = r#"Indicates a new invocation of a PO Capability. Generally, if accepted, the command will result in one or more new PO Activities being created and reported via the PO_Activity message. The request/response interaction terminates as soon as the command is accepted or rejected; this element is not used to interact with an "active" command. Updates and/or additional interaction with the resulting Activity (after the command is accepted) is accomplished via the sibling Activity element."#]
 	Capability(crate::v5_0::types::PoCapabilityCommandType),
 	#[doc = r#"Indicates a command to modify an existing PO Activity (which was previously reported via the PO_Activity message and was marked as "interactive"). The request/response interaction terminates as soon as the modification is accepted or rejected. The modifications are reflected in subsequent PO_Activity messages."#]
 	Activity(crate::v5_0::types::PoActivityCommandType),
 }
-choice_convert_impls! {
-	PoCommandType - PoCommandTypeSerde
-	Capability,
-	Activity,
+struct_like_serde! {
+	PoCommandType
+	Capability -> "Capability",
+	Activity -> "Activity",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PoComponentFStopSettingsTypeSerde")]
-#[serde(try_from = "PoComponentFStopSettingsTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PoComponentFStopSettingsType {
 	#[doc = r#"Indicates an optical aperture setting."#]
 	FStopSetting(f32),
 	#[doc = r#"Indicates the automatic subsystem control of the aperture setting."#]
 	AutoFStop(bool),
 }
-choice_convert_impls! {
-	PoComponentFStopSettingsType - PoComponentFStopSettingsTypeSerde
-	FStopSetting,
-	AutoFStop,
+struct_like_serde! {
+	PoComponentFStopSettingsType
+	FStopSetting -> "F_StopSetting",
+	AutoFStop -> "AutoF_Stop",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PoComponentFStopTypeSerde")]
-#[serde(try_from = "PoComponentFStopTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PoComponentFStopType {
 	#[doc = r#"Indicates that the aperture size is fixed."#]
 	FixedAperture(f32),
 	#[doc = r#"Indicates that the aperture size can be adjusted."#]
 	VariableAperture(crate::v5_0::types::PoComponentFStopVariableType),
 }
-choice_convert_impls! {
-	PoComponentFStopType - PoComponentFStopTypeSerde
-	FixedAperture,
-	VariableAperture,
+struct_like_serde! {
+	PoComponentFStopType
+	FixedAperture -> "FixedAperture",
+	VariableAperture -> "VariableAperture",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PoComponentLensAssemblyFieldOfViewTypeSerde")]
-#[serde(try_from = "PoComponentLensAssemblyFieldOfViewTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PoComponentLensAssemblyFieldOfViewType {
 	#[doc = r#"This field specifies the FOV for those lens that have a fixed FOV (do not support zooming)."#]
 	FixedFov(crate::v5_0::common::AngleQuarterType),
 	#[doc = r#"This field specifies the FOV for those lens whose FOV can be changed, i.e. support zooming. This field is for optical zoom only and not electronic zoom."#]
 	Zoom(crate::v5_0::types::PoComponentLensAssemblyZoomType),
 }
-choice_convert_impls! {
-	PoComponentLensAssemblyFieldOfViewType - PoComponentLensAssemblyFieldOfViewTypeSerde
-	FixedFov,
-	Zoom,
+struct_like_serde! {
+	PoComponentLensAssemblyFieldOfViewType
+	FixedFov -> "FixedFOV",
+	Zoom -> "Zoom",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PoComponentSettingsBandpassFrequencyTypeSerde")]
-#[serde(try_from = "PoComponentSettingsBandpassFrequencyTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PoComponentSettingsBandpassFrequencyType {
 	#[doc = r#"The new settings of the filter's band width."#]
 	FilterBandSetting(crate::v5_0::types::FrequencyRangeType),
 	#[doc = r#"Setting this field to true will enable the automatic enabling/disabling of the filter bandpass frequency. Setting this field to false will disable."#]
 	AutoFilterBand(bool),
 }
-choice_convert_impls! {
-	PoComponentSettingsBandpassFrequencyType - PoComponentSettingsBandpassFrequencyTypeSerde
-	FilterBandSetting,
-	AutoFilterBand,
+struct_like_serde! {
+	PoComponentSettingsBandpassFrequencyType
+	FilterBandSetting -> "FilterBandSetting",
+	AutoFilterBand -> "AutoFilterBand",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PoComponentSettingsFocalPlaneArrayCollectionTypeSerde")]
-#[serde(try_from = "PoComponentSettingsFocalPlaneArrayCollectionTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PoComponentSettingsFocalPlaneArrayCollectionType {
 	#[doc = r#"The new setting for this channel's collection time."#]
 	CollectionTimeSetting(chrono::TimeDelta),
 	#[doc = r#"Enabling auto collection time defers control of the channel's collection time settings to the Subsystem."#]
 	CollectionTimeControls(crate::v5_0::types::ComponentControlsBType),
 }
-choice_convert_impls! {
-	PoComponentSettingsFocalPlaneArrayCollectionType - PoComponentSettingsFocalPlaneArrayCollectionTypeSerde
-	CollectionTimeSetting,
-	CollectionTimeControls,
+struct_like_serde! {
+	PoComponentSettingsFocalPlaneArrayCollectionType
+	CollectionTimeSetting -> "CollectionTimeSetting",
+	CollectionTimeControls -> "CollectionTimeControls",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PoComponentSettingsFocalPlaneArrayNonUniformityCorrectionDataTypeSerde")]
-#[serde(try_from = "PoComponentSettingsFocalPlaneArrayNonUniformityCorrectionDataTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PoComponentSettingsFocalPlaneArrayNonUniformityCorrectionDataType {
 	#[doc = r#"The new setting for this channel's NUC."#]
 	NucTableNumber(u32),
 	#[doc = r#"The new reference and offset setting for this channel's NUC."#]
 	NucReferenceOffset(crate::v5_0::types::FocalPlaneArrayNonUniformityCorrectionReferenceType),
 }
-choice_convert_impls! {
-	PoComponentSettingsFocalPlaneArrayNonUniformityCorrectionDataType - PoComponentSettingsFocalPlaneArrayNonUniformityCorrectionDataTypeSerde
-	NucTableNumber,
-	NucReferenceOffset,
+struct_like_serde! {
+	PoComponentSettingsFocalPlaneArrayNonUniformityCorrectionDataType
+	NucTableNumber -> "NUC_TableNumber",
+	NucReferenceOffset -> "NUC_ReferenceOffset",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PoComponentSettingsFocalPlaneArrayNonUniformityCorrectionTypeSerde")]
-#[serde(try_from = "PoComponentSettingsFocalPlaneArrayNonUniformityCorrectionTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PoComponentSettingsFocalPlaneArrayNonUniformityCorrectionType {
 	#[doc = r#"The new setting for this channel's NUC."#]
 	NucSetting(PoComponentSettingsFocalPlaneArrayNonUniformityCorrectionDataType),
 	#[doc = r#"Enabling auto NUC defers control of the channel's NUC settings to the Subsystem."#]
 	NucControls(crate::v5_0::types::ComponentControlsBType),
 }
-choice_convert_impls! {
-	PoComponentSettingsFocalPlaneArrayNonUniformityCorrectionType - PoComponentSettingsFocalPlaneArrayNonUniformityCorrectionTypeSerde
-	NucSetting,
-	NucControls,
+struct_like_serde! {
+	PoComponentSettingsFocalPlaneArrayNonUniformityCorrectionType
+	NucSetting -> "NUC_Setting",
+	NucControls -> "NUC_Controls",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PoComponentSettingsFocalPlaneArrayOpticalBandTypeSerde")]
-#[serde(try_from = "PoComponentSettingsFocalPlaneArrayOpticalBandTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PoComponentSettingsFocalPlaneArrayOpticalBandType {
 	#[doc = r#"The new settings for this channel's frequency band. If a single frequency is desired, then set min and max to the same value."#]
 	BandSetting(crate::v5_0::types::FrequencyRangeType),
 	#[doc = r#"Enabling auto band control defers control of the channel's optical band to the Subsystem."#]
 	BandControls(crate::v5_0::types::ComponentControlsBType),
 }
-choice_convert_impls! {
-	PoComponentSettingsFocalPlaneArrayOpticalBandType - PoComponentSettingsFocalPlaneArrayOpticalBandTypeSerde
-	BandSetting,
-	BandControls,
+struct_like_serde! {
+	PoComponentSettingsFocalPlaneArrayOpticalBandType
+	BandSetting -> "BandSetting",
+	BandControls -> "BandControls",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PoComponentSettingsFocalPlaneArrayPixelAggregationTypeSerde")]
-#[serde(try_from = "PoComponentSettingsFocalPlaneArrayPixelAggregationTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PoComponentSettingsFocalPlaneArrayPixelAggregationType {
 	#[doc = r#"The new settings for this channel's aggregation. For most channels, 0 and 1 indicates a 1-by-1 aggregation, 2 indicates a 2-by-2 aggregation, etc."#]
 	AggregationSetting(u32),
 	#[doc = r#"Enabling auto pixel aggregation defers control of the channel's pixel aggregation to the Subsystem."#]
 	AggregationControls(crate::v5_0::types::ComponentControlsBType),
 }
-choice_convert_impls! {
-	PoComponentSettingsFocalPlaneArrayPixelAggregationType - PoComponentSettingsFocalPlaneArrayPixelAggregationTypeSerde
-	AggregationSetting,
-	AggregationControls,
+struct_like_serde! {
+	PoComponentSettingsFocalPlaneArrayPixelAggregationType
+	AggregationSetting -> "AggregationSetting",
+	AggregationControls -> "AggregationControls",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PoComponentSettingsFocalPlaneArrayPixelPolarityTypeSerde")]
-#[serde(try_from = "PoComponentSettingsFocalPlaneArrayPixelPolarityTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PoComponentSettingsFocalPlaneArrayPixelPolarityType {
 	#[doc = r#"The new setting for this channel's polarity.  Indicates whether 0 represents hot (false) or cold (true)."#]
 	PolaritySetting(bool),
 	#[doc = r#"Enabling auto polarity defers control of the channel's polarity settings to the Subsystem."#]
 	PolarityControls(crate::v5_0::types::ComponentControlsBType),
 }
-choice_convert_impls! {
-	PoComponentSettingsFocalPlaneArrayPixelPolarityType - PoComponentSettingsFocalPlaneArrayPixelPolarityTypeSerde
-	PolaritySetting,
-	PolarityControls,
+struct_like_serde! {
+	PoComponentSettingsFocalPlaneArrayPixelPolarityType
+	PolaritySetting -> "PolaritySetting",
+	PolarityControls -> "PolarityControls",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PoComponentSettingsFocalPlaneArrayPixelScalingTypeSerde")]
-#[serde(try_from = "PoComponentSettingsFocalPlaneArrayPixelScalingTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PoComponentSettingsFocalPlaneArrayPixelScalingType {
 	#[doc = r#"The new settings for this channel's pixel scaling."#]
 	ScalingSettings(crate::v5_0::types::PoComponentSettingsFocalPlaneArrayPixelScalingSettingsType),
 	#[doc = r#"Enabling auto scaling defers control of the channel's gain and offset setting to the Subsystem."#]
 	ScalingControls(crate::v5_0::types::ComponentControlsBType),
 }
-choice_convert_impls! {
-	PoComponentSettingsFocalPlaneArrayPixelScalingType - PoComponentSettingsFocalPlaneArrayPixelScalingTypeSerde
-	ScalingSettings,
-	ScalingControls,
+struct_like_serde! {
+	PoComponentSettingsFocalPlaneArrayPixelScalingType
+	ScalingSettings -> "ScalingSettings",
+	ScalingControls -> "ScalingControls",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PoComponentSettingsFocalPlaneArrayScanDirectionTypeSerde")]
-#[serde(try_from = "PoComponentSettingsFocalPlaneArrayScanDirectionTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PoComponentSettingsFocalPlaneArrayScanDirectionType {
 	#[doc = r#"The setting for this channel's scan direction, specifying the right or left side of the aircraft."#]
 	DirectionSetting(crate::v5_0::enums::RelativeDirectionEnum),
 	#[doc = r#"Enabling auto scan direction defers control of the channel's scan direction to the Subsystem."#]
 	DirectionControls(crate::v5_0::types::ComponentControlsBType),
 }
-choice_convert_impls! {
-	PoComponentSettingsFocalPlaneArrayScanDirectionType - PoComponentSettingsFocalPlaneArrayScanDirectionTypeSerde
-	DirectionSetting,
-	DirectionControls,
+struct_like_serde! {
+	PoComponentSettingsFocalPlaneArrayScanDirectionType
+	DirectionSetting -> "DirectionSetting",
+	DirectionControls -> "DirectionControls",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PoComponentSettingsFocalPlaneArrayTimeDelayIntegrationTypeSerde")]
-#[serde(try_from = "PoComponentSettingsFocalPlaneArrayTimeDelayIntegrationTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PoComponentSettingsFocalPlaneArrayTimeDelayIntegrationType {
 	#[doc = r#"The new setting for this channel's TDI. For most types of FPAs, this will be used to indicate the number of stages in the time dimension."#]
 	TdiSetting(f64),
 	#[doc = r#"Enabling autoTDI defers control of the channel's TDI to the Subsystem."#]
 	TdiControls(crate::v5_0::types::ComponentControlsBType),
 }
-choice_convert_impls! {
-	PoComponentSettingsFocalPlaneArrayTimeDelayIntegrationType - PoComponentSettingsFocalPlaneArrayTimeDelayIntegrationTypeSerde
-	TdiSetting,
-	TdiControls,
+struct_like_serde! {
+	PoComponentSettingsFocalPlaneArrayTimeDelayIntegrationType
+	TdiSetting -> "TDI_Setting",
+	TdiControls -> "TDI_Controls",
 }
 
 #[doc = r#"The position to start the focus lens at when starting the focus sweep."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PoComponentSettingsFocusSweepSettingsStartingPositionTypeSerde")]
-#[serde(try_from = "PoComponentSettingsFocusSweepSettingsStartingPositionTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PoComponentSettingsFocusSweepSettingsStartingPositionType {
 	#[doc = r#"This field specifies the starting position as a percentage of the total length that the focus lens can be moved, offset from the zero position of the focus lens."#]
 	Percentage(crate::v5_0::common::PercentType),
 	#[doc = r#"This field specifies the starting position as number of steps, e.g. when used with a stepper motor, or a number of positions that the lens can be positioned at, offset from the zero position of the focus lens."#]
 	NumberOfSteps(u32),
 }
-choice_convert_impls! {
-	PoComponentSettingsFocusSweepSettingsStartingPositionType - PoComponentSettingsFocusSweepSettingsStartingPositionTypeSerde
-	Percentage,
-	NumberOfSteps,
+struct_like_serde! {
+	PoComponentSettingsFocusSweepSettingsStartingPositionType
+	Percentage -> "Percentage",
+	NumberOfSteps -> "NumberOfSteps",
 }
 
 #[doc = r#"The increment used to move the focus lens between steps."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PoComponentSettingsFocusSweepSettingsStepIncrementTypeSerde")]
-#[serde(try_from = "PoComponentSettingsFocusSweepSettingsStepIncrementTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PoComponentSettingsFocusSweepSettingsStepIncrementType {
 	#[doc = r#"This field specifies the increment as a percentage of the total length that the focus lens can be moved."#]
 	Percentage(crate::v5_0::common::PercentType),
 	#[doc = r#"This field specifies the increment as number of steps, e.g. when used with a stepper motor, or a number of positions that the lens can be positioned at."#]
 	NumberOfSteps(u32),
 }
-choice_convert_impls! {
-	PoComponentSettingsFocusSweepSettingsStepIncrementType - PoComponentSettingsFocusSweepSettingsStepIncrementTypeSerde
-	Percentage,
-	NumberOfSteps,
+struct_like_serde! {
+	PoComponentSettingsFocusSweepSettingsStepIncrementType
+	Percentage -> "Percentage",
+	NumberOfSteps -> "NumberOfSteps",
 }
 
 #[doc = r#"The time required of each step in the focus sweep.  Generally only specified for line array sensors as this step time is fixed for grid array sensors."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PoComponentSettingsFocusSweepSettingsStepTimeTypeSerde")]
-#[serde(try_from = "PoComponentSettingsFocusSweepSettingsStepTimeTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PoComponentSettingsFocusSweepSettingsStepTimeType {
 	#[doc = r#"The size specified as the number of lines collected per step."#]
 	NumberOfLines(u32),
 	#[doc = r#"The time for each step in the focus sweep."#]
 	CollectionTime(i64),
 }
-choice_convert_impls! {
-	PoComponentSettingsFocusSweepSettingsStepTimeType - PoComponentSettingsFocusSweepSettingsStepTimeTypeSerde
-	NumberOfLines,
-	CollectionTime,
+struct_like_serde! {
+	PoComponentSettingsFocusSweepSettingsStepTimeType
+	NumberOfLines -> "NumberOfLines",
+	CollectionTime -> "CollectionTime",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PoComponentSettingsLensAssemblyFieldOfViewTypeSerde")]
-#[serde(try_from = "PoComponentSettingsLensAssemblyFieldOfViewTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PoComponentSettingsLensAssemblyFieldOfViewType {
 	#[doc = r#"The new setting for this lens' FOV."#]
 	FovSetting(crate::v5_0::common::AngleQuarterType),
@@ -6552,17 +5913,15 @@ pub enum PoComponentSettingsLensAssemblyFieldOfViewType {
 	#[doc = r#"This field supports incremental changes to the FOV where INCREASE increases the FOV, DECREASE decreases the FOV, and STOP cancels any current incremental change. The implementation can either step change by the change weight or some other value or use the STOP mechanic. The amount of change is affected by the ChangeWeight sub-element."#]
 	IncrementalChange(crate::v5_0::types::IncrementalChangeType),
 }
-choice_convert_impls! {
-	PoComponentSettingsLensAssemblyFieldOfViewType - PoComponentSettingsLensAssemblyFieldOfViewTypeSerde
-	FovSetting,
-	AutoZoom,
-	IncrementalChange,
+struct_like_serde! {
+	PoComponentSettingsLensAssemblyFieldOfViewType
+	FovSetting -> "FOV_Setting",
+	AutoZoom -> "AutoZoom",
+	IncrementalChange -> "IncrementalChange",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PoComponentSettingsLensAssemblyFocusTypeSerde")]
-#[serde(try_from = "PoComponentSettingsLensAssemblyFocusTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PoComponentSettingsLensAssemblyFocusType {
 	#[doc = r#"The new setting for this lens's focus. This value is interpreted as the current position of the lens as expressed as a percentage of the total distance the lens can travel."#]
 	FocusSetting(crate::v5_0::common::PercentType),
@@ -6573,82 +5932,72 @@ pub enum PoComponentSettingsLensAssemblyFocusType {
 	#[doc = r#"This field supports incremental changes to the focus where INCREASE increases the focus, DECREASE decreases the focus, and STOP cancels any current incremental change. The implementation can either step change by the change weight or some other value or use the STOP mechanic. The amount of change is affected by the ChangeWeight sub-element."#]
 	IncrementalChange(crate::v5_0::types::IncrementalChangeType),
 }
-choice_convert_impls! {
-	PoComponentSettingsLensAssemblyFocusType - PoComponentSettingsLensAssemblyFocusTypeSerde
-	FocusSetting,
-	AutoFocus,
-	AutoFocusZoom,
-	IncrementalChange,
+struct_like_serde! {
+	PoComponentSettingsLensAssemblyFocusType
+	FocusSetting -> "FocusSetting",
+	AutoFocus -> "AutoFocus",
+	AutoFocusZoom -> "AutoFocusZoom",
+	IncrementalChange -> "IncrementalChange",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PoComponentSettingsOutputProductSettingsTypeSerde")]
-#[serde(try_from = "PoComponentSettingsOutputProductSettingsTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PoComponentSettingsOutputProductSettingsType {
 	#[doc = r#"Specifies the settings that apply to this product."#]
 	ProductSettings(crate::v5_0::types::PoComponentSettingsProductSettingsType),
 	#[doc = r#"Setting this field to true will enable the automatic setting of this product generator's format specific configuration. Setting this field to false will disable."#]
 	AutoOutputProductSettings(bool),
 }
-choice_convert_impls! {
-	PoComponentSettingsOutputProductSettingsType - PoComponentSettingsOutputProductSettingsTypeSerde
-	ProductSettings,
-	AutoOutputProductSettings,
+struct_like_serde! {
+	PoComponentSettingsOutputProductSettingsType
+	ProductSettings -> "ProductSettings",
+	AutoOutputProductSettings -> "AutoOutputProductSettings",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PoComponentSettingsProcessingStageSettingsTypeSerde")]
-#[serde(try_from = "PoComponentSettingsProcessingStageSettingsTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PoComponentSettingsProcessingStageSettingsType {
 	#[doc = r#"This field contains the new settings of this processing stage."#]
 	ProcessingSettings(crate::v5_0::types::PoComponentSettingsProcessingStageProcessingSettingsType),
 	#[doc = r#"Setting this field to true will enable the automatic setting of this processing stage's sibling ProcessingSettings. Setting this field to false will disable."#]
 	AutoProcessingSettings(bool),
 }
-choice_convert_impls! {
-	PoComponentSettingsProcessingStageSettingsType - PoComponentSettingsProcessingStageSettingsTypeSerde
-	ProcessingSettings,
-	AutoProcessingSettings,
+struct_like_serde! {
+	PoComponentSettingsProcessingStageSettingsType
+	ProcessingSettings -> "ProcessingSettings",
+	AutoProcessingSettings -> "AutoProcessingSettings",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PoComponentSettingsProductGeneratorSettingsTypeSerde")]
-#[serde(try_from = "PoComponentSettingsProductGeneratorSettingsTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PoComponentSettingsProductGeneratorSettingsType {
 	#[doc = r#"Indicates the minimum and maximum possible product generator settings for this subsystem."#]
 	GeneratorSettings(crate::v5_0::types::PoComponentSettingsGeneratorSettingsType),
 	#[doc = r#"Setting this field to true will enable the automatic setting of this product generator's sibling GeneratorSettings. Setting this field to false will disable."#]
 	AutoGeneratorSettings(bool),
 }
-choice_convert_impls! {
-	PoComponentSettingsProductGeneratorSettingsType - PoComponentSettingsProductGeneratorSettingsTypeSerde
-	GeneratorSettings,
-	AutoGeneratorSettings,
+struct_like_serde! {
+	PoComponentSettingsProductGeneratorSettingsType
+	GeneratorSettings -> "GeneratorSettings",
+	AutoGeneratorSettings -> "AutoGeneratorSettings",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PoComponentStatusFocalPlaneArrayNonUniformityCorrectionDataTypeSerde")]
-#[serde(try_from = "PoComponentStatusFocalPlaneArrayNonUniformityCorrectionDataTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PoComponentStatusFocalPlaneArrayNonUniformityCorrectionDataType {
 	#[doc = r#"This field indicates the table number for NUC settings."#]
 	NucTableNumber(u32),
 	#[doc = r#"This field indicates the reference and offset for the channel's NUC."#]
 	NucReferenceOffset(crate::v5_0::types::FocalPlaneArrayNonUniformityCorrectionReferenceType),
 }
-choice_convert_impls! {
-	PoComponentStatusFocalPlaneArrayNonUniformityCorrectionDataType - PoComponentStatusFocalPlaneArrayNonUniformityCorrectionDataTypeSerde
-	NucTableNumber,
-	NucReferenceOffset,
+struct_like_serde! {
+	PoComponentStatusFocalPlaneArrayNonUniformityCorrectionDataType
+	NucTableNumber -> "NUC_TableNumber",
+	NucReferenceOffset -> "NUC_ReferenceOffset",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PoComponentStatusLensAssemblyFocusTypeSerde")]
-#[serde(try_from = "PoComponentStatusLensAssemblyFocusTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PoComponentStatusLensAssemblyFocusType {
 	#[doc = r#"This field contains the current focus setting of the lens. This value is interpreted as the current position of the lens as expressed as a percentage of the total distance the lens can travel."#]
 	FocusSetting(crate::v5_0::common::PercentType),
@@ -6659,50 +6008,44 @@ pub enum PoComponentStatusLensAssemblyFocusType {
 	#[doc = r#"The current incremental change enumeration."#]
 	ChangeType(crate::v5_0::enums::IncrementalChangeEnum),
 }
-choice_convert_impls! {
-	PoComponentStatusLensAssemblyFocusType - PoComponentStatusLensAssemblyFocusTypeSerde
-	FocusSetting,
-	AutoFocus,
-	AutoFocusZoom,
-	ChangeType,
+struct_like_serde! {
+	PoComponentStatusLensAssemblyFocusType
+	FocusSetting -> "FocusSetting",
+	AutoFocus -> "AutoFocus",
+	AutoFocusZoom -> "AutoFocusZoom",
+	ChangeType -> "ChangeType",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PoSlantRangeConstraintControlsTypeSerde")]
-#[serde(try_from = "PoSlantRangeConstraintControlsTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PoSlantRangeConstraintControlsType {
 	#[doc = r#"Specifies commanded controls for the collection constraint."#]
 	Controls(crate::v5_0::types::PoConstraintControlsType),
 	#[doc = r#"Distance from the sensor reference point (e.g. aperture reference point) to the ground reference point."#]
 	Setting(crate::v5_0::types::DistanceConstraintsType),
 }
-choice_convert_impls! {
-	PoSlantRangeConstraintControlsType - PoSlantRangeConstraintControlsTypeSerde
-	Controls,
-	Setting,
+struct_like_serde! {
+	PoSlantRangeConstraintControlsType
+	Controls -> "Controls",
+	Setting -> "Setting",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PoSweepSpeedConstraintControlsTypeSerde")]
-#[serde(try_from = "PoSweepSpeedConstraintControlsTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PoSweepSpeedConstraintControlsType {
 	#[doc = r#"Specifies commanded controls for the collection constraint."#]
 	Controls(crate::v5_0::types::PoConstraintControlsType),
 	#[doc = r#"The rate at which the sensor look-point moves across the terrain.  This is only applicable to area or line targets."#]
 	Setting(crate::v5_0::common::SpeedType),
 }
-choice_convert_impls! {
-	PoSweepSpeedConstraintControlsType - PoSweepSpeedConstraintControlsTypeSerde
-	Controls,
-	Setting,
+struct_like_serde! {
+	PoSweepSpeedConstraintControlsType
+	Controls -> "Controls",
+	Setting -> "Setting",
 }
 
 #[doc = r#"Indicates the position or location to point the XX Subsystem to do a XX collection, track, or search as part of an XX Activity. If the XX Subsystem cannot point itself, then the TurretSlaved Type is used. If the system wants to allow the subsystem to control its own LOS then the ActivitySlavedID is used. FixedPointing is used to point to a predetermined location defined by its Enum values."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PoTargetTypeSerde")]
-#[serde(try_from = "PoTargetTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PoTargetType {
 	#[doc = r#"Indicates the source of or explicit values for geospatial characteristics of the target of the Command. When multiple points/targets are given, a best-fit, multi-track or similar behavior is expected."#]
 	Geospatial(Vec<TargetType>),
@@ -6719,69 +6062,61 @@ pub enum PoTargetType {
 	#[doc = r#"Indicates that a subsystem with point to a predetermined location defined by its Enum values."#]
 	FixedPointing(crate::v5_0::enums::FixedPointingEnum),
 }
-choice_convert_impls! {
-	PoTargetType - PoTargetTypeSerde
-	Geospatial,
-	Pointed,
-	LosOption,
-	Volume,
-	TurretSlaved,
-	ActivitySlavedId,
-	FixedPointing,
+struct_like_serde! {
+	PoTargetType
+	Geospatial -> "Geospatial",
+	Pointed -> "Pointed",
+	LosOption -> "LOS_Option",
+	Volume -> "Volume",
+	TurretSlaved -> "TurretSlaved",
+	ActivitySlavedId -> "ActivitySlavedID",
+	FixedPointing -> "FixedPointing",
 }
 
 #[doc = r#"Specifies a location either as a geospatial location or a location relative to a separately defined reference frame."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PointChoice3DTypeSerde")]
-#[serde(try_from = "PointChoice3DTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PointChoice3DType {
 	#[doc = r#"Contains a geospatial location."#]
 	AbsolutePoint(crate::v5_0::types::Point3DType),
 	#[doc = r#"The offset of the location from the origin of the separately defined reference frame."#]
 	RelativePoint(crate::v5_0::types::Point3DRelativeType),
 }
-choice_convert_impls! {
-	PointChoice3DType - PointChoice3DTypeSerde
-	AbsolutePoint,
-	RelativePoint,
+struct_like_serde! {
+	PointChoice3DType
+	AbsolutePoint -> "AbsolutePoint",
+	RelativePoint -> "RelativePoint",
 }
 
 #[doc = r#"Specifies a location either as a geospatial location or a location relative to a separately defined reference frame."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PointChoice4DTypeSerde")]
-#[serde(try_from = "PointChoice4DTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PointChoice4DType {
 	#[doc = r#"Contains a geospatial location."#]
 	AbsolutePoint(crate::v5_0::types::Point4DType),
 	#[doc = r#"The offset of the area from the origin of the reference frame at the time provided."#]
 	RelativePoint(crate::v5_0::types::Point4DRelativeType),
 }
-choice_convert_impls! {
-	PointChoice4DType - PointChoice4DTypeSerde
-	AbsolutePoint,
-	RelativePoint,
+struct_like_serde! {
+	PointChoice4DType
+	AbsolutePoint -> "AbsolutePoint",
+	RelativePoint -> "RelativePoint",
 }
 
 #[doc = r#"Specifies a location either as a geospatial location or a location relative to a separately defined reference frame."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PointChoiceTypeSerde")]
-#[serde(try_from = "PointChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PointChoiceType {
 	#[doc = r#"Contains a geospatial location."#]
 	AbsolutePoint(crate::v5_0::types::Point2DType),
 	#[doc = r#"The offset of the area from the origin of the reference frame specified by the sibling field."#]
 	RelativePoint(crate::v5_0::types::Point2DRelativeType),
 }
-choice_convert_impls! {
-	PointChoiceType - PointChoiceTypeSerde
-	AbsolutePoint,
-	RelativePoint,
+struct_like_serde! {
+	PointChoiceType
+	AbsolutePoint -> "AbsolutePoint",
+	RelativePoint -> "RelativePoint",
 }
 
 #[doc = r#"Indicates the position or location to point the XX Subsystem to do a XX collection, track, or search as part of an XX Activity. If the XX Subsystem cannot point itself, then the TurretSlaved Type is used. If the system wants to allow the subsystem to control its own LOS then the ActivitySlavedID is used. FixedPointing is used to point to a predetermined location defined by its Enum values."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PointingTypeSerde")]
-#[serde(try_from = "PointingTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PointingType {
 	#[doc = r#"Indicates the source of or explicit values for geospatial characteristics of the target of the Command. When multiple points/targets are given, a best-fit, multi-track or similar behavior is expected."#]
 	Geospatial(Vec<TargetType>),
@@ -6796,36 +6131,32 @@ pub enum PointingType {
 	#[doc = r#"Indicates that a subsystem with point to a predetermined location defined by its Enum values."#]
 	FixedPointing(crate::v5_0::enums::FixedPointingEnum),
 }
-choice_convert_impls! {
-	PointingType - PointingTypeSerde
-	Geospatial,
-	LosOption,
-	Volume,
-	TurretSlaved,
-	ActivitySlavedId,
-	FixedPointing,
+struct_like_serde! {
+	PointingType
+	Geospatial -> "Geospatial",
+	LosOption -> "LOS_Option",
+	Volume -> "Volume",
+	TurretSlaved -> "TurretSlaved",
+	ActivitySlavedId -> "ActivitySlavedID",
+	FixedPointing -> "FixedPointing",
 }
 
 #[doc = r#"Specifies a polygon by geospatial locations or as locations relative to a separately defined reference frame."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PolygonPointChoiceTypeSerde")]
-#[serde(try_from = "PolygonPointChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PolygonPointChoiceType {
 	#[doc = r#"Geospatial points defining the vertices of a polygon."#]
 	Point2D(Vec<crate::v5_0::types::Point2DType>),
 	#[doc = r#"Indicates a polygon that is relative to a separately defined reference frame defined in ReferenceFrames message."#]
 	RelativePolygon(crate::v5_0::types::PolygonRelativeType),
 }
-choice_convert_impls! {
-	PolygonPointChoiceType - PolygonPointChoiceTypeSerde
-	Point2D,
-	RelativePolygon,
+struct_like_serde! {
+	PolygonPointChoiceType
+	Point2D -> "Point2D",
+	RelativePolygon -> "RelativePolygon",
 }
 
 #[doc = r#"Indicates the source of position data."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PositionSourceIdChoiceTypeSerde")]
-#[serde(try_from = "PositionSourceIdChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PositionSourceIdChoiceType {
 	#[doc = r#"Indicates the unique ID of the System that produced this report."#]
 	SystemId(crate::v5_0::types::SystemIdType),
@@ -6834,17 +6165,15 @@ pub enum PositionSourceIdChoiceType {
 	#[doc = r#"Indicates the unique ID of the Service that produced this report."#]
 	ServiceId(crate::v5_0::types::ServiceIdType),
 }
-choice_convert_impls! {
-	PositionSourceIdChoiceType - PositionSourceIdChoiceTypeSerde
-	SystemId,
-	SubsystemId,
-	ServiceId,
+struct_like_serde! {
+	PositionSourceIdChoiceType
+	SystemId -> "SystemID",
+	SubsystemId -> "SubsystemID",
+	ServiceId -> "ServiceID",
 }
 
 #[doc = r#"This element defines a filter which can be applied to any product regardless of type."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ProductFilterTypeSerde")]
-#[serde(try_from = "ProductFilterTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ProductFilterType {
 	#[doc = r#"This field specifies a filter criteria for the source of a product."#]
 	Source(crate::v5_0::types::SourceFilterType),
@@ -6863,22 +6192,20 @@ pub enum ProductFilterType {
 	#[doc = r#"The product type that the subplan applies to."#]
 	ProductType(crate::v5_0::enums::ProductTypeEnum),
 }
-choice_convert_impls! {
-	ProductFilterType - ProductFilterTypeSerde
-	Source,
-	Geospatial,
-	SourceGeospatial,
-	FileFormat,
-	SecurityInformation,
-	DateTimeRange,
-	XPath,
-	ProductType,
+struct_like_serde! {
+	ProductFilterType
+	Source -> "Source",
+	Geospatial -> "Geospatial",
+	SourceGeospatial -> "SourceGeospatial",
+	FileFormat -> "FileFormat",
+	SecurityInformation -> "SecurityInformation",
+	DateTimeRange -> "DateTimeRange",
+	XPath -> "X_Path",
+	ProductType -> "ProductType",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ProductGeospatialLocationTypeSerde")]
-#[serde(try_from = "ProductGeospatialLocationTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ProductGeospatialLocationType {
 	#[doc = r#"Indicates a point associated with the Product.  Generally, services are encouraged to send altitude and/or time data whenever it is known."#]
 	Point2D(crate::v5_0::types::Point2DType),
@@ -6887,33 +6214,29 @@ pub enum ProductGeospatialLocationType {
 	#[doc = r#"This element represents a line of sight reference for the product associated with this ProductMetadata."#]
 	RelativePosition(crate::v5_0::types::RelativePositionType),
 }
-choice_convert_impls! {
-	ProductGeospatialLocationType - ProductGeospatialLocationTypeSerde
-	Point2D,
-	Zone,
-	RelativePosition,
+struct_like_serde! {
+	ProductGeospatialLocationType
+	Point2D -> "Point2D",
+	Zone -> "Zone",
+	RelativePosition -> "RelativePosition",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ProductLocationTypeSerde")]
-#[serde(try_from = "ProductLocationTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ProductLocationType {
 	#[doc = r#"Indicates the network location at which the file or product, whose data format is not defined in the UCI schema, can be found."#]
 	Network(crate::v5_0::types::EndpointReferenceType),
 	#[doc = r#"Indicates that the File or Product is located in/on a System and is not reachable via a network URI; however, it can possibly be made reachable via a network URI if requested by a download request."#]
 	System(crate::v5_0::types::ProductSystemLocationType),
 }
-choice_convert_impls! {
-	ProductLocationType - ProductLocationTypeSerde
-	Network,
-	System,
+struct_like_serde! {
+	ProductLocationType
+	Network -> "Network",
+	System -> "System",
 }
 
 #[doc = r#"Indicates when the product is needed by."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ProductNeededByTypeSerde")]
-#[serde(try_from = "ProductNeededByTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ProductNeededByType {
 	#[doc = r#"Indicates that the product or products is needed as soon as possible."#]
 	AsSoonAsPossible(crate::v5_0::common::EmptyType),
@@ -6922,33 +6245,29 @@ pub enum ProductNeededByType {
 	#[doc = r#"Indicates that the product is needed no later by a particular time duration after an observed event (e.g. Maneuver or Detection)."#]
 	RelativeToEventTime(chrono::TimeDelta),
 }
-choice_convert_impls! {
-	ProductNeededByType - ProductNeededByTypeSerde
-	AsSoonAsPossible,
-	AbsoluteTime,
-	RelativeToEventTime,
+struct_like_serde! {
+	ProductNeededByType
+	AsSoonAsPossible -> "AsSoonAsPossible",
+	AbsoluteTime -> "AbsoluteTime",
+	RelativeToEventTime -> "RelativeToEventTime",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ProductParentTypeSerde")]
-#[serde(try_from = "ProductParentTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ProductParentType {
 	#[doc = r#"The ID of the Requirement that created (or is yet to create) the product."#]
 	RequirementId(RequirementInstanceIdChoiceType),
 	#[doc = r#"The ID of the ProductProcessingRequest that created (or is yet to create) the product."#]
 	ProductProcessingRequestId(Vec<crate::v5_0::types::RequestIdType>),
 }
-choice_convert_impls! {
-	ProductParentType - ProductParentTypeSerde
-	RequirementId,
-	ProductProcessingRequestId,
+struct_like_serde! {
+	ProductParentType
+	RequirementId -> "RequirementID",
+	ProductProcessingRequestId -> "ProductProcessingRequestID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ProductReferenceTypeSerde")]
-#[serde(try_from = "ProductReferenceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ProductReferenceType {
 	#[doc = r#"This element defines the file name of the product.  This can be used if the name of a product has been advertised by the system via an out-of-band source.  This only works if the service interface receiving this message is the service interface advertising the filename via the out-of-band source."#]
 	FileName(crate::v5_0::common::FileNameType),
@@ -6957,17 +6276,15 @@ pub enum ProductReferenceType {
 	#[doc = r#"This element references a product by the parent task or command that created it (or is yet to create it).  In some cases, a task or command can result in generation of more than one product type.  As a result, it is sometimes necessary to include the product type when referencing a product in this way."#]
 	ProductReferenceByParent(crate::v5_0::types::ProductReferenceByParentType),
 }
-choice_convert_impls! {
-	ProductReferenceType - ProductReferenceTypeSerde
-	FileName,
-	ProductMetadataId,
-	ProductReferenceByParent,
+struct_like_serde! {
+	ProductReferenceType
+	FileName -> "FileName",
+	ProductMetadataId -> "ProductMetadataID",
+	ProductReferenceByParent -> "ProductReferenceByParent",
 }
 
 #[doc = r#"This element defines a filter which can be applied to a specific product type."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ProductTypeFilterTypeSerde")]
-#[serde(try_from = "ProductTypeFilterTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ProductTypeFilterType {
 	#[doc = r#"This field specifies a filter criteria for the source of a product."#]
 	Source(crate::v5_0::types::SourceFilterType),
@@ -6984,53 +6301,47 @@ pub enum ProductTypeFilterType {
 	#[doc = r#"This field specifies a filter criteria for a specified XPath."#]
 	XPath(crate::v5_0::common::VisibleString1024Type),
 }
-choice_convert_impls! {
-	ProductTypeFilterType - ProductTypeFilterTypeSerde
-	Source,
-	Geospatial,
-	SourceGeospatial,
-	FileFormat,
-	SecurityInformation,
-	DateTimeRange,
-	XPath,
+struct_like_serde! {
+	ProductTypeFilterType
+	Source -> "Source",
+	Geospatial -> "Geospatial",
+	SourceGeospatial -> "SourceGeospatial",
+	FileFormat -> "FileFormat",
+	SecurityInformation -> "SecurityInformation",
+	DateTimeRange -> "DateTimeRange",
+	XPath -> "X_Path",
 }
 
 #[doc = r#"Indicates the choice of propagator types: A general Propagator or a VCM Propagator."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PropagatorChoiceTypeSerde")]
-#[serde(try_from = "PropagatorChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PropagatorChoiceType {
 	#[doc = r#"A fully-defined set of general propagator settings."#]
 	GeneralPropagator(crate::v5_0::types::PropagatorType),
 	#[doc = r#"A fully-defined set of USSF Astrodynamic Standards propagator settings."#]
 	VcmPropagator(crate::v5_0::types::VcmPropagatorType),
 }
-choice_convert_impls! {
-	PropagatorChoiceType - PropagatorChoiceTypeSerde
-	GeneralPropagator,
-	VcmPropagator,
+struct_like_serde! {
+	PropagatorChoiceType
+	GeneralPropagator -> "GeneralPropagator",
+	VcmPropagator -> "VCM_Propagator",
 }
 
 #[doc = r#"Indicates the choice of propagator settings. Specify an ID for an existing set of settings or manually specify a set."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "PropagatorSettingsChoiceTypeSerde")]
-#[serde(try_from = "PropagatorSettingsChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum PropagatorSettingsChoiceType {
 	#[doc = r#"An ID that references a pre-defined set of propagator settings."#]
 	PropagatorSettingsId(crate::v5_0::types::PropagatorSettingsIdType),
 	#[doc = r#"The type of propagator to use."#]
 	PropagatorChoice(PropagatorChoiceType),
 }
-choice_convert_impls! {
-	PropagatorSettingsChoiceType - PropagatorSettingsChoiceTypeSerde
-	PropagatorSettingsId,
-	PropagatorChoice,
+struct_like_serde! {
+	PropagatorSettingsChoiceType
+	PropagatorSettingsId -> "PropagatorSettingsID",
+	PropagatorChoice -> "PropagatorChoice",
 }
 
 #[doc = r#"This complex type provides the different types of proximity operations."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ProximityOrbitChoiceTypeSerde")]
-#[serde(try_from = "ProximityOrbitChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ProximityOrbitChoiceType {
 	#[doc = r#"Indicates the proximity operation is a natural motion type. Natural motion circumnavigation where the orbital parameters are such that minimal stationkeeping is required to maintain proximity operations."#]
 	NaturalMotion(crate::v5_0::common::EmptyType),
@@ -7043,19 +6354,17 @@ pub enum ProximityOrbitChoiceType {
 	#[doc = r#"Indicates the proximity operation's orbital solution must be within the defined relative plane angles min and max."#]
 	DeltaOrbitalPlaneTolerance(crate::v5_0::types::AngleHalfPairType),
 }
-choice_convert_impls! {
-	ProximityOrbitChoiceType - ProximityOrbitChoiceTypeSerde
-	NaturalMotion,
-	ForcedMotion,
-	RBarPerch,
-	VBarPerch,
-	DeltaOrbitalPlaneTolerance,
+struct_like_serde! {
+	ProximityOrbitChoiceType
+	NaturalMotion -> "NaturalMotion",
+	ForcedMotion -> "ForcedMotion",
+	RBarPerch -> "R_BarPerch",
+	VBarPerch -> "V_BarPerch",
+	DeltaOrbitalPlaneTolerance -> "DeltaOrbitalPlaneTolerance",
 }
 
 #[doc = r#"Compares the length of the sequence formed by the specified Step to the value indicated by this choice."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "QueryCountValueTypeSerde")]
-#[serde(try_from = "QueryCountValueTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum QueryCountValueType {
 	#[doc = r#"Tests if the length of the sequence formed by the specified Step is equal to this value."#]
 	Equals(u32),
@@ -7068,35 +6377,31 @@ pub enum QueryCountValueType {
 	#[doc = r#"Tests if the length of the sequence formed by the specified Step is greater than or equal to this value."#]
 	GreaterThanOrEqualTo(u32),
 }
-choice_convert_impls! {
-	QueryCountValueType - QueryCountValueTypeSerde
-	Equals,
-	LessThan,
-	LessThanOrEqualTo,
-	GreaterThan,
-	GreaterThanOrEqualTo,
+struct_like_serde! {
+	QueryCountValueType
+	Equals -> "Equals",
+	LessThan -> "LessThan",
+	LessThanOrEqualTo -> "LessThanOrEqualTo",
+	GreaterThan -> "GreaterThan",
+	GreaterThanOrEqualTo -> "GreaterThanOrEqualTo",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "QueryResultTypeSerde")]
-#[serde(try_from = "QueryResultTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum QueryResultType {
 	#[doc = r#"The messages located in response to the query request."#]
 	Message(Vec<crate::v5_0::types::MessageType>),
 	#[doc = r#"The object identifiers located in response to the query request."#]
 	Id(Vec<crate::v5_0::types::IdType>),
 }
-choice_convert_impls! {
-	QueryResultType - QueryResultTypeSerde
-	Message,
-	Id,
+struct_like_serde! {
+	QueryResultType
+	Message -> "Message",
+	Id -> "ID",
 }
 
 #[doc = r#"The mechanism by which queries navigate the data model of a UCI Message, which should be considered as a tree structure containing branch and leaf nodes.  Steps may either traverse up the tree (Ancestor and Parent), down the tree (Element, Descendant, and Child), or remain at the current context.  Steps are evaluated sequentially from the current context, with the default context of a query as the root of the tree, i.e. the top-level global element declaration.  The result of each Step forms a sequence of zero or more nodes that is then used as the input to the next Step, where each node of the input sequence is used as the current context with all sequences concatenated together, repeated until all Steps are evaluated.  Each node in this sequence is either a present optional field, a required field, or an item in a list.  For example, a Step that matches a list field with a length of two will result in a sequence of two nodes.  The resulting sequence is then evaluated by the query with a given operation.  Some operations, such as Equals, that operate on a single value are instead performed on each individual node in the sequence and the result is computed by the logical OR of all the results."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "QueryStepTypeSerde")]
-#[serde(try_from = "QueryStepTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum QueryStepType {
 	#[doc = r#"Forms a sequence of zero or more nodes by navigating to the direct child of the current context with the specified local name and namespace URI."#]
 	Element(crate::v5_0::types::NamedElementType),
@@ -7111,20 +6416,18 @@ pub enum QueryStepType {
 	#[doc = r#"Forms a sequence of zero or more nodes by navigating down the tree to any direct child of the current context that matches the specified wildcard local name and namespace URI."#]
 	Child(crate::v5_0::types::WildcardElementType),
 }
-choice_convert_impls! {
-	QueryStepType - QueryStepTypeSerde
-	Element,
-	Root,
-	Ancestor,
-	Descendant,
-	Parent,
-	Child,
+struct_like_serde! {
+	QueryStepType
+	Element -> "Element",
+	Root -> "Root",
+	Ancestor -> "Ancestor",
+	Descendant -> "Descendant",
+	Parent -> "Parent",
+	Child -> "Child",
 }
 
 #[doc = r#"Defines the generic UCI Query Language (UQL) operations.  Each operation has a single input, a node that is the current context of the query, and will output either true or false.  When determining whether a Message should be sent in a corresponding status, it should be sent if the output of the query is true.  The data model of a UCI Message should be considered as a tree structure containing branch and leaf nodes.  The default context of a query is the Message, i.e. the top-level global element declaration.  Each UQL query is evaluated separately for each Message.  For more information on how the tree is evaluated, see the annotations in QueryStepType."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "QueryTypeSerde")]
-#[serde(try_from = "QueryTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum QueryType {
 	#[doc = r#"Evaluates the query to true if any node in the sequence formed by the Step sub-element is equal to the Value sub-element."#]
 	Equals(crate::v5_0::types::QueryEqualsType),
@@ -7157,125 +6460,111 @@ pub enum QueryType {
 	#[doc = r#"Evaluates the query to true if the sub-query is evaluated to false."#]
 	Not(crate::v5_0::types::QueryPet),
 }
-choice_convert_impls! {
-	QueryType - QueryTypeSerde
-	Equals,
-	LessThan,
-	LessThanOrEqualTo,
-	GreaterThan,
-	GreaterThanOrEqualTo,
-	ContainsCaseSensitive,
-	ContainsCaseInsensitive,
-	InstanceOf,
-	Count,
-	Exists,
-	AnyMatch,
-	AllMatch,
-	And,
-	Or,
-	Not,
+struct_like_serde! {
+	QueryType
+	Equals -> "Equals",
+	LessThan -> "LessThan",
+	LessThanOrEqualTo -> "LessThanOrEqualTo",
+	GreaterThan -> "GreaterThan",
+	GreaterThanOrEqualTo -> "GreaterThanOrEqualTo",
+	ContainsCaseSensitive -> "ContainsCaseSensitive",
+	ContainsCaseInsensitive -> "ContainsCaseInsensitive",
+	InstanceOf -> "InstanceOf",
+	Count -> "Count",
+	Exists -> "Exists",
+	AnyMatch -> "AnyMatch",
+	AllMatch -> "AllMatch",
+	And -> "And",
+	Or -> "Or",
+	Not -> "Not",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "RadarAltimeterCommandTypeSerde")]
-#[serde(try_from = "RadarAltimeterCommandTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum RadarAltimeterCommandType {
 	#[doc = r#"Indicates a new invocation of an RadarAltimeter Capability.  Generally, if accepted, the command will result in one or more new RadarAltimeter Activities being created and reported via the RadarAltimeter_Activity message.  The request/response interaction terminates as soon as the command is accepted or rejected; this element is not used to interact with an "active" command.  Updates and/or additional interaction with the resulting Activity (after the command is accepted) is accomplished via the sibling Activity element."#]
 	Capability(crate::v5_0::types::RadarAltimeterCapabilityCommandType),
 	#[doc = r#"Indicates a command to modify an existing Activity (which was previously reported via the Activity message and was marked as "interactive").  The request/response interaction terminates as soon as the modification is accepted or rejected.  The modifications are reflected in subsequent Activity messages."#]
 	Activity(crate::v5_0::types::RadarAltimeterActivityCommandType),
 }
-choice_convert_impls! {
-	RadarAltimeterCommandType - RadarAltimeterCommandTypeSerde
-	Capability,
-	Activity,
+struct_like_serde! {
+	RadarAltimeterCommandType
+	Capability -> "Capability",
+	Activity -> "Activity",
 }
 
 #[doc = r#"This is a switch that allows TargetType to be a sibling of SensorReferencedCoverageArea."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "RadarPointingTargetTypeSerde")]
-#[serde(try_from = "RadarPointingTargetTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum RadarPointingTargetType {
 	#[doc = r#"Indicates details of the target of the Command."#]
 	GeospatialTarget(TargetType),
 	#[doc = r#"Indicates a coverage area specified by azimuth extent and elevation extent or azimuth extent and range extent."#]
 	SensorReferencedCoverageArea(crate::v5_0::types::SensorReferencedCoverageAreaType),
 }
-choice_convert_impls! {
-	RadarPointingTargetType - RadarPointingTargetTypeSerde
-	GeospatialTarget,
-	SensorReferencedCoverageArea,
+struct_like_serde! {
+	RadarPointingTargetType
+	GeospatialTarget -> "GeospatialTarget",
+	SensorReferencedCoverageArea -> "SensorReferencedCoverageArea",
 }
 
 #[doc = r#"Beam spoiling or taper to be applied to transmit or receive beam."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "RadarSpoilTaperTypeSerde")]
-#[serde(try_from = "RadarSpoilTaperTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum RadarSpoilTaperType {
 	#[doc = r#"Specific taper to be applied to this command. Note that capability does not necessarily implement every combination of taper that can be commanded.  If this value is chosen, collection performance may degrade."#]
 	Taper(crate::v5_0::types::RadarTaperType),
 	#[doc = r#"Beam spoiling to be applied.  This value is the ratio of the spoiled beam width to the unspoiled beam width.  If this value is chosen, collection performance may degrade."#]
 	Spoil(crate::v5_0::types::RadarSpoilType),
 }
-choice_convert_impls! {
-	RadarSpoilTaperType - RadarSpoilTaperTypeSerde
-	Taper,
-	Spoil,
+struct_like_serde! {
+	RadarSpoilTaperType
+	Taper -> "Taper",
+	Spoil -> "Spoil",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "RadarTaperWeightingFunctionTypeSerde")]
-#[serde(try_from = "RadarTaperWeightingFunctionTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum RadarTaperWeightingFunctionType {
 	#[doc = r#"Beam taper to be used during collection.  If this value is chosen, collection performance may degrade."#]
 	StandardWeightingFunction(crate::v5_0::enums::RadarWeightingFunctionsEnum),
 	#[doc = r#"Additional taper weighting functions may be commanded through the use of a foreign key type."#]
 	OtherTaper(crate::v5_0::types::ForeignKeyType),
 }
-choice_convert_impls! {
-	RadarTaperWeightingFunctionType - RadarTaperWeightingFunctionTypeSerde
-	StandardWeightingFunction,
-	OtherTaper,
+struct_like_serde! {
+	RadarTaperWeightingFunctionType
+	StandardWeightingFunction -> "StandardWeightingFunction",
+	OtherTaper -> "OtherTaper",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "RangeElevationExtentChoiceTypeSerde")]
-#[serde(try_from = "RangeElevationExtentChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum RangeElevationExtentChoiceType {
 	#[doc = r#"Elevation extent of the look area."#]
 	Elevation(crate::v5_0::types::AnglePairType),
 	#[doc = r#"Range extent of the look area."#]
 	Range(crate::v5_0::types::RangeExtentType),
 }
-choice_convert_impls! {
-	RangeElevationExtentChoiceType - RangeElevationExtentChoiceTypeSerde
-	Elevation,
-	Range,
+struct_like_serde! {
+	RangeElevationExtentChoiceType
+	Elevation -> "Elevation",
+	Range -> "Range",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ReadinessTimeSpanTypeSerde")]
-#[serde(try_from = "ReadinessTimeSpanTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ReadinessTimeSpanType {
 	#[doc = r#"Indicates the time period is the same as the time period for the Mission referenced by the associated MissionID.  The Mission's time period is given in the corresponding MissionDefinition message.  This choice allows a simple deferral to the time period of the Mission."#]
 	ByMission(crate::v5_0::common::EmptyType),
 	#[doc = r#"Indicates the time period is a discrete one, shorter than that of the entire associated Mission."#]
 	SubMission(ScheduleType),
 }
-choice_convert_impls! {
-	ReadinessTimeSpanType - ReadinessTimeSpanTypeSerde
-	ByMission,
-	SubMission,
+struct_like_serde! {
+	ReadinessTimeSpanType
+	ByMission -> "ByMission",
+	SubMission -> "SubMission",
 }
 
 #[doc = r#"Container to provide the appropriate object that is the origin of a reference frame created with message ReferenceFrame."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ReferenceFrameObjectToFollowTypeSerde")]
-#[serde(try_from = "ReferenceFrameObjectToFollowTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ReferenceFrameObjectToFollowType {
 	#[doc = r#"An Entity to use as the object reference."#]
 	EntityId(crate::v5_0::types::EntityIdType),
@@ -7284,17 +6573,15 @@ pub enum ReferenceFrameObjectToFollowType {
 	#[doc = r#"A SignalReport to use as the object reference.  When specifying a SignalReportID, the sender should ensure the SignalReport includes a location as this data is optional in that message."#]
 	SignalReportId(crate::v5_0::types::SignalReportIdType),
 }
-choice_convert_impls! {
-	ReferenceFrameObjectToFollowType - ReferenceFrameObjectToFollowTypeSerde
-	EntityId,
-	SystemId,
-	SignalReportId,
+struct_like_serde! {
+	ReferenceFrameObjectToFollowType
+	EntityId -> "EntityID",
+	SystemId -> "SystemID",
+	SignalReportId -> "SignalReportID",
 }
 
 #[doc = r#"Provides the object that is the origin of a reference frame. This allows defining an area around a point (object) that is not stationary, it moves along with the object so its definition is relative to that object."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ReferenceFrameOriginChoiceTypeSerde")]
-#[serde(try_from = "ReferenceFrameOriginChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ReferenceFrameOriginChoiceType {
 	#[doc = r#"This points to an alternative source that can provide reference frame origin information.  This would be established by individual Programs.  The "key" is a unique identifier for the alternative source."#]
 	AlternateSource(crate::v5_0::types::ForeignKeyType),
@@ -7305,18 +6592,16 @@ pub enum ReferenceFrameOriginChoiceType {
 	#[doc = r#"Physical location of the reference frame origin in geospatial coordinates."#]
 	KinematicsReferenceFrameOrigin(crate::v5_0::types::ReferenceFrameOriginKinematicsType),
 }
-choice_convert_impls! {
-	ReferenceFrameOriginChoiceType - ReferenceFrameOriginChoiceTypeSerde
-	AlternateSource,
-	ObjectToFollowIdentifier,
-	GeospatialPosition,
-	KinematicsReferenceFrameOrigin,
+struct_like_serde! {
+	ReferenceFrameOriginChoiceType
+	AlternateSource -> "AlternateSource",
+	ObjectToFollowIdentifier -> "ObjectToFollowIdentifier",
+	GeospatialPosition -> "GeospatialPosition",
+	KinematicsReferenceFrameOrigin -> "KinematicsReferenceFrameOrigin",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ReferenceObjectTypeSerde")]
-#[serde(try_from = "ReferenceObjectTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ReferenceObjectType {
 	#[doc = r#"Indicates the reference object is an Entity."#]
 	EntityId(crate::v5_0::types::EntityIdType),
@@ -7325,81 +6610,71 @@ pub enum ReferenceObjectType {
 	#[doc = r#"Indicates the reference object is a System UUID."#]
 	SystemId(crate::v5_0::types::SystemIdType),
 }
-choice_convert_impls! {
-	ReferenceObjectType - ReferenceObjectTypeSerde
-	EntityId,
-	OpPointId,
-	SystemId,
+struct_like_serde! {
+	ReferenceObjectType
+	EntityId -> "EntityID",
+	OpPointId -> "OpPointID",
+	SystemId -> "SystemID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "RefuelCapabilityCommandTypeSerde")]
-#[serde(try_from = "RefuelCapabilityCommandTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum RefuelCapabilityCommandType {
 	#[doc = r#"Expansion point for commands associated with a capability of a tanker equipped with a boom."#]
 	Boom(crate::v5_0::common::EmptyType),
 	#[doc = r#"Commands associated for a capability for a tanker equipped with a drogue."#]
 	Drogue(crate::v5_0::types::RefuelCapabilityDrogueCommandType),
 }
-choice_convert_impls! {
-	RefuelCapabilityCommandType - RefuelCapabilityCommandTypeSerde
-	Boom,
-	Drogue,
+struct_like_serde! {
+	RefuelCapabilityCommandType
+	Boom -> "Boom",
+	Drogue -> "Drogue",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "RefuelCapabilityStatusTypeSerde")]
-#[serde(try_from = "RefuelCapabilityStatusTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum RefuelCapabilityStatusType {
 	#[doc = r#"Expansion point for a capability for a tanker equipped with a boom."#]
 	Boom(crate::v5_0::common::EmptyType),
 	#[doc = r#"Status associated for a capability for a tanker equipped with a drogue."#]
 	Drogue(crate::v5_0::types::RefuelCapabilityDrogueStatusType),
 }
-choice_convert_impls! {
-	RefuelCapabilityStatusType - RefuelCapabilityStatusTypeSerde
-	Boom,
-	Drogue,
+struct_like_serde! {
+	RefuelCapabilityStatusType
+	Boom -> "Boom",
+	Drogue -> "Drogue",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "RefuelCommandTypeSerde")]
-#[serde(try_from = "RefuelCommandTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum RefuelCommandType {
 	#[doc = r#"Indicates a new invocation of an Refuel Capability.  Generally, if accepted, the command will result in one or more new Tanking Activities being created and reported via the TankingActivity message.  The request/response interaction terminates as soon as the command is accepted or rejected; this element is not used to interact with an "active" command.  Updates and/or additional interaction with the resulting Activity (after the command is accepted) is accomplished via the sibling Activity element."#]
 	Capability(crate::v5_0::types::RefuelCapabilityExtendCommandType),
 	#[doc = r#"Indicates a command to modify an existing Tanking Activity (which was previously reported via the TankingActivity message and was marked as "interactive").  The request/response interaction terminates as soon as the modification is accepted or rejected.  The modifications are reflected in subsequent TankingActivity messages."#]
 	Activity(crate::v5_0::types::RefuelActivityCommandType),
 }
-choice_convert_impls! {
-	RefuelCommandType - RefuelCommandTypeSerde
-	Capability,
-	Activity,
+struct_like_serde! {
+	RefuelCommandType
+	Capability -> "Capability",
+	Activity -> "Activity",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "RefuelConnectionTypeSerde")]
-#[serde(try_from = "RefuelConnectionTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum RefuelConnectionType {
 	#[doc = r#"Expansion point for an activity of a tanker equipped with a boom."#]
 	Boom(crate::v5_0::common::EmptyType),
 	#[doc = r#"Commands associated for an activity for a tanker equipped with a drogue."#]
 	Drogue(crate::v5_0::types::RefuelActivityDrogueCommandType),
 }
-choice_convert_impls! {
-	RefuelConnectionType - RefuelConnectionTypeSerde
-	Boom,
-	Drogue,
+struct_like_serde! {
+	RefuelConnectionType
+	Boom -> "Boom",
+	Drogue -> "Drogue",
 }
 
 #[doc = r#"Describes the relationship between two identified objects."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "RelationshipTypeSerde")]
-#[serde(try_from = "RelationshipTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum RelationshipType {
 	#[doc = r#"Reports an active engagement between a friendly entity and a hostile."#]
 	EngagementStatus(crate::v5_0::enums::ExternalCommandExecutionStateEnum),
@@ -7412,13 +6687,13 @@ pub enum RelationshipType {
 	#[doc = r#"Reports a control relationship between the Source and Destination. This is separate from the control status reported in a ControlStatus message. The distinction is required to communicate control of vehicles that aren't UCI Systems. This would occur if the vehicle is controlled by voice or a data link that is not being received."#]
 	ControllingUnit(crate::v5_0::types::RelationshipControllingUnitType),
 }
-choice_convert_impls! {
-	RelationshipType - RelationshipTypeSerde
-	EngagementStatus,
-	Pairing,
-	Threat,
-	ElectronicWarfare,
-	ControllingUnit,
+struct_like_serde! {
+	RelationshipType
+	EngagementStatus -> "EngagementStatus",
+	Pairing -> "Pairing",
+	Threat -> "Threat",
+	ElectronicWarfare -> "ElectronicWarfare",
+	ControllingUnit -> "ControllingUnit",
 }
 
 #[doc = r#"Encoding types for CVEnumISMCATRelTo Version 2 controlled vocabulary enumerations.  Derived from the CVEnumISMCATRelTo.xml CVE.(U) 
@@ -7430,25 +6705,21 @@ choice_convert_impls! {
 						   The permissible values for this simple type are defined in the Controlled Value Enumeration:
 
 						   CVEnumISMCATRelTo.xml"#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ReleasableToChoiceTypeSerde")]
-#[serde(try_from = "ReleasableToChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ReleasableToChoiceType {
 	#[doc = r#"CVEnumISMCATRelTo Values"#]
 	GovernmentIdentifier(crate::v5_0::enums::ReleasableToEnum),
 	#[doc = r#"North Atlantic Treaty Organization Special Words"#]
 	NatoSpecialWord(crate::v5_0::common::NatoSpecialWordsType),
 }
-choice_convert_impls! {
-	ReleasableToChoiceType - ReleasableToChoiceTypeSerde
-	GovernmentIdentifier,
-	NatoSpecialWord,
+struct_like_serde! {
+	ReleasableToChoiceType
+	GovernmentIdentifier -> "GovernmentIdentifier",
+	NatoSpecialWord -> "NATO_SpecialWord",
 }
 
 #[doc = r#"Provides a choice between event types to act as a trigger for an event-based repetition."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "RepetitionEventTypeSerde")]
-#[serde(try_from = "RepetitionEventTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum RepetitionEventType {
 	#[doc = r#"PositionChange is a way to specify a time based on an object change in position."#]
 	PositionChange(RepetitionPositionChangeType),
@@ -7457,17 +6728,15 @@ pub enum RepetitionEventType {
 	#[doc = r#"OrbitalEvent is a way to specify a time based on when a space object reaches a specific point in orbit or in life cycle."#]
 	OrbitalEvent(crate::v5_0::enums::OrbitalEventEnum),
 }
-choice_convert_impls! {
-	RepetitionEventType - RepetitionEventTypeSerde
-	PositionChange,
-	RouteEvent,
-	OrbitalEvent,
+struct_like_serde! {
+	RepetitionEventType
+	PositionChange -> "PositionChange",
+	RouteEvent -> "RouteEvent",
+	OrbitalEvent -> "OrbitalEvent",
 }
 
 #[doc = r#"Provides a choice of position delta types."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "RepetitionPositionChangeTypeSerde")]
-#[serde(try_from = "RepetitionPositionChangeTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum RepetitionPositionChangeType {
 	#[doc = r#"Indicates the change in LOS from commanded System to target, which triggers repetition of the Requirement."#]
 	LosBearingElevation(crate::v5_0::types::LosType),
@@ -7476,17 +6745,15 @@ pub enum RepetitionPositionChangeType {
 	#[doc = r#"Indicates the change in orbital RTN kinematics from the commanded System to target, which triggers repetition of the Requirement."#]
 	OrbitalRtn(crate::v5_0::types::ThresholdOffOrbitTriggerDataType),
 }
-choice_convert_impls! {
-	RepetitionPositionChangeType - RepetitionPositionChangeTypeSerde
-	LosBearingElevation,
-	LosAzEl,
-	OrbitalRtn,
+struct_like_serde! {
+	RepetitionPositionChangeType
+	LosBearingElevation -> "LOS_BearingElevation",
+	LosAzEl -> "LOS_AzEl",
+	OrbitalRtn -> "OrbitalRTN",
 }
 
 #[doc = r#"Represents a Time-Based repetition."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "RepetitionTimeBasedTypeSerde")]
-#[serde(try_from = "RepetitionTimeBasedTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum RepetitionTimeBasedType {
 	#[doc = r#"Indicates the Requirement should be done continuously, within other temporal constraints of the Requirement. This element is oriented towards Capabilities that are continuous in nature and interruptible. This element generally shouldn't be used for Capabilities that are discrete and/or single shot in nature with a physics- and/or design-driven duration."#]
 	Continuous(crate::v5_0::types::RepetitionContinuousType),
@@ -7495,33 +6762,29 @@ pub enum RepetitionTimeBasedType {
 	#[doc = r#"Indicates the Requirement should be repeated periodically within the overall temporal constraints of the Requirement. Depending on perspective and/or Capability type, this element indicates the time duration between starts of successive repetitions of the Requirement, time between revisits to a target or area in a search volume or other meanings. A periodic command with no end time continues until canceled. This element is oriented towards Capabilities that are discrete and/or single shot in nature."#]
 	Periodic(crate::v5_0::types::RepetitionPeriodicType),
 }
-choice_convert_impls! {
-	RepetitionTimeBasedType - RepetitionTimeBasedTypeSerde
-	Continuous,
-	Finite,
-	Periodic,
+struct_like_serde! {
+	RepetitionTimeBasedType
+	Continuous -> "Continuous",
+	Finite -> "Finite",
+	Periodic -> "Periodic",
 }
 
 #[doc = r#"Provides a choice between Time-Based and Event-Based Repetition."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "RepetitionTypeSerde")]
-#[serde(try_from = "RepetitionTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum RepetitionType {
 	#[doc = r#"Indicates when the Requirement should be repeated on a Time basis."#]
 	TimeBased(RepetitionTimeBasedType),
 	#[doc = r#"Since it may be difficult to predict the exact time of an event, this element allows for the same input to be used in planning as the cycle moves from week-ahead planning to day-ahead planning."#]
 	EventBased(crate::v5_0::types::RepetitionEventBasedType),
 }
-choice_convert_impls! {
-	RepetitionType - RepetitionTypeSerde
-	TimeBased,
-	EventBased,
+struct_like_serde! {
+	RepetitionType
+	TimeBased -> "TimeBased",
+	EventBased -> "EventBased",
 }
 
 #[doc = r#"This type provides the correlation between an activity, a BIT, or a Calibration and a subsystem's RF_ResourceAllocationRequest."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "RequestingFunctionIdChoiceTypeSerde")]
-#[serde(try_from = "RequestingFunctionIdChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum RequestingFunctionIdChoiceType {
 	#[doc = r#"Activity ID of the activity that is requesting resources."#]
 	ActivityId(crate::v5_0::types::ActivityIdType),
@@ -7530,17 +6793,15 @@ pub enum RequestingFunctionIdChoiceType {
 	#[doc = r#"Calibration ID of the internal subsystem calibration that requires resources."#]
 	CalibrationId(crate::v5_0::types::CalibrationIdType),
 }
-choice_convert_impls! {
-	RequestingFunctionIdChoiceType - RequestingFunctionIdChoiceTypeSerde
-	ActivityId,
-	BitId,
-	CalibrationId,
+struct_like_serde! {
+	RequestingFunctionIdChoiceType
+	ActivityId -> "ActivityID",
+	BitId -> "BIT_ID",
+	CalibrationId -> "CalibrationID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "RequirementAssociationConstraintTypeSerde")]
-#[serde(try_from = "RequirementAssociationConstraintTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum RequirementAssociationConstraintType {
 	#[doc = r#"Indicates a collection of Requirements which must all be planned and executed in order for any of them to be useful.  If all of the Requirements can't be planned and executed together then none should be."#]
 	AllOrNothing(crate::v5_0::types::AssociatedRequirementsType),
@@ -7549,33 +6810,29 @@ pub enum RequirementAssociationConstraintType {
 	#[doc = r#"Indicates a collection of Requirements which must be allocated to the same System.  If all Requirements must be performed this should be used with an all-or-nothing association constraint."#]
 	SameSystem(crate::v5_0::types::AssociatedRequirementsType),
 }
-choice_convert_impls! {
-	RequirementAssociationConstraintType - RequirementAssociationConstraintTypeSerde
-	AllOrNothing,
-	EitherOr,
-	SameSystem,
+struct_like_serde! {
+	RequirementAssociationConstraintType
+	AllOrNothing -> "AllOrNothing",
+	EitherOr -> "EitherOr",
+	SameSystem -> "SameSystem",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "RequirementChoiceTypeSerde")]
-#[serde(try_from = "RequirementChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum RequirementChoiceType {
 	#[doc = r#"Indicates a kind or type of Requirement."#]
 	ByType(RequirementTaxonomyChoiceType),
 	#[doc = r#"Indicates a specific instance of a Requirement."#]
 	ByInstance(RequirementInstanceIdChoiceType),
 }
-choice_convert_impls! {
-	RequirementChoiceType - RequirementChoiceTypeSerde
-	ByType,
-	ByInstance,
+struct_like_serde! {
+	RequirementChoiceType
+	ByType -> "ByType",
+	ByInstance -> "ByInstance",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "RequirementInstanceIdChoiceTypeSerde")]
-#[serde(try_from = "RequirementInstanceIdChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum RequirementInstanceIdChoiceType {
 	#[doc = r#"Indicates an instance of an Effect Requirement."#]
 	EffectId(crate::v5_0::types::EffectIdType),
@@ -7588,19 +6845,17 @@ pub enum RequirementInstanceIdChoiceType {
 	#[doc = r#"Indicates an instance of a Response Requirement."#]
 	ResponseId(crate::v5_0::types::ResponseIdType),
 }
-choice_convert_impls! {
-	RequirementInstanceIdChoiceType - RequirementInstanceIdChoiceTypeSerde
-	EffectId,
-	ActionId,
-	TaskId,
-	CapabilityCommandId,
-	ResponseId,
+struct_like_serde! {
+	RequirementInstanceIdChoiceType
+	EffectId -> "EffectID",
+	ActionId -> "ActionID",
+	TaskId -> "TaskID",
+	CapabilityCommandId -> "CapabilityCommandID",
+	ResponseId -> "ResponseID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "RequirementMetricsCategoryTypeSerde")]
-#[serde(try_from = "RequirementMetricsCategoryTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum RequirementMetricsCategoryType {
 	#[doc = r#"The collection metrics from the execution of a mission plan."#]
 	CollectionMetrics(crate::v5_0::types::CollectionTaskMetricsType),
@@ -7609,17 +6864,15 @@ pub enum RequirementMetricsCategoryType {
 	#[doc = r#"The communication relay metrics from the execution of a mission plan."#]
 	CommRelayMetrics(crate::v5_0::types::CommRelayTaskMetricsType),
 }
-choice_convert_impls! {
-	RequirementMetricsCategoryType - RequirementMetricsCategoryTypeSerde
-	CollectionMetrics,
-	StrikeMetrics,
-	CommRelayMetrics,
+struct_like_serde! {
+	RequirementMetricsCategoryType
+	CollectionMetrics -> "CollectionMetrics",
+	StrikeMetrics -> "StrikeMetrics",
+	CommRelayMetrics -> "CommRelayMetrics",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "RequirementTaxonomyChoiceTypeSerde")]
-#[serde(try_from = "RequirementTaxonomyChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum RequirementTaxonomyChoiceType {
 	#[doc = r#"Indicates a kind of Effect Requirement."#]
 	Effect(crate::v5_0::enums::EffectTypeEnum),
@@ -7632,19 +6885,17 @@ pub enum RequirementTaxonomyChoiceType {
 	#[doc = r#"Indicates a kind of Response Requirement."#]
 	Response(crate::v5_0::enums::ResponseTypeEnum),
 }
-choice_convert_impls! {
-	RequirementTaxonomyChoiceType - RequirementTaxonomyChoiceTypeSerde
-	Effect,
-	Action,
-	Task,
-	CapabilityCommand,
-	Response,
+struct_like_serde! {
+	RequirementTaxonomyChoiceType
+	Effect -> "Effect",
+	Action -> "Action",
+	Task -> "Task",
+	CapabilityCommand -> "CapabilityCommand",
+	Response -> "Response",
 }
 
 #[doc = r#"Specifies the desired aspects of the spacecraft to be characterized."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ResolvedCharacterizationAspectCoverageTypeSerde")]
-#[serde(try_from = "ResolvedCharacterizationAspectCoverageTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ResolvedCharacterizationAspectCoverageType {
 	#[doc = r#"See Base Description. List size for this element is based on "Select All That Apply" condition."#]
 	BodyReference(Vec<crate::v5_0::enums::BodyReferenceEnum>),
@@ -7653,49 +6904,43 @@ pub enum ResolvedCharacterizationAspectCoverageType {
 	#[doc = r#"Specifies span of attitude angles over which structural characterization data is required."#]
 	AspectSpan(crate::v5_0::common::AngleType),
 }
-choice_convert_impls! {
-	ResolvedCharacterizationAspectCoverageType - ResolvedCharacterizationAspectCoverageTypeSerde
-	BodyReference,
-	Attitude,
-	AspectSpan,
+struct_like_serde! {
+	ResolvedCharacterizationAspectCoverageType
+	BodyReference -> "BodyReference",
+	Attitude -> "Attitude",
+	AspectSpan -> "AspectSpan",
 }
 
 #[doc = r#"Allows a request or allocation to be directed to either RF or digital resources."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ResourceDefinitionChoiceTypeSerde")]
-#[serde(try_from = "ResourceDefinitionChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ResourceDefinitionChoiceType {
 	#[doc = r#"Allows the requester to identify RF aperture and payload resources, connected through an RF Distribution matrix and controlled by an RF Distribution and Control Subsystem."#]
 	AllocateRfResources(crate::v5_0::types::ResourceDefinitionRfType),
 	#[doc = r#"Allows the requester to identify digital MFA and digital MFP resources, along with sample rates and network rates, connected on a digital backbone."#]
 	AllocateDigitalResources(crate::v5_0::types::ResourceDefinitionDigitalType),
 }
-choice_convert_impls! {
-	ResourceDefinitionChoiceType - ResourceDefinitionChoiceTypeSerde
-	AllocateRfResources,
-	AllocateDigitalResources,
+struct_like_serde! {
+	ResourceDefinitionChoiceType
+	AllocateRfResources -> "AllocateRF_Resources",
+	AllocateDigitalResources -> "AllocateDigitalResources",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ResponseCommandTypeSerde")]
-#[serde(try_from = "ResponseCommandTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ResponseCommandType {
 	#[doc = r#"Indicates a new invocation of an Response Capability.  Generally, if accepted, the command will result in one or more new Response Activities being created and reported via the ResponseActivity message.  The request/response interresponse terminates as soon as the command is accepted or rejected; this element is not used to interact with an "active" command.  Updates and/or additional interresponse with the resulting Activity (after the command is accepted) is accomplished via the sibling Activity element."#]
 	Capability(crate::v5_0::types::ResponseCapabilityCommandType),
 	#[doc = r#"Indicates a command to modify an existing Response Activity (which was previously reported via the ResponseActivity message and was marked as "interactive").  The request/response interresponse terminates as soon as the modification is accepted or rejected.  The modifications are reflected in subsequent ResponseActivity messages."#]
 	Activity(crate::v5_0::types::ActivityCommandBaseType),
 }
-choice_convert_impls! {
-	ResponseCommandType - ResponseCommandTypeSerde
-	Capability,
-	Activity,
+struct_like_serde! {
+	ResponseCommandType
+	Capability -> "Capability",
+	Activity -> "Activity",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ResponseOptionTriggerTypeSerde")]
-#[serde(try_from = "ResponseOptionTriggerTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ResponseOptionTriggerType {
 	#[doc = r#"Indicates a trigger based on an Entity with filters/preconditions that must be met before the Option is triggered.  All immediate child element filters must be met before the Option is triggered; child elements are logically ANDed.  If a child element is omitted then any Entity matches that element's filter."#]
 	Entity(crate::v5_0::types::EntityFilterType),
@@ -7712,21 +6957,19 @@ pub enum ResponseOptionTriggerType {
 	#[doc = r#"Indicates a trigger based on any UCI message, filtered/constrained by a query filter.  Filter elements with cardinality greater than 1 are logically ORed.  Sibling filter elements are logically ANDed."#]
 	AnyMessage(crate::v5_0::types::QueryMessageType),
 }
-choice_convert_impls! {
-	ResponseOptionTriggerType - ResponseOptionTriggerTypeSerde
-	Entity,
-	System,
-	Requirement,
-	AccessAssessment,
-	Oloi,
-	ResponseCommand,
-	AnyMessage,
+struct_like_serde! {
+	ResponseOptionTriggerType
+	Entity -> "Entity",
+	System -> "System",
+	Requirement -> "Requirement",
+	AccessAssessment -> "AccessAssessment",
+	Oloi -> "OLOI",
+	ResponseCommand -> "ResponseCommand",
+	AnyMessage -> "AnyMessage",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ResponseOptionTypeSerde")]
-#[serde(try_from = "ResponseOptionTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ResponseOptionType {
 	#[doc = r#"Indicates the Effect type to generate for use in Planned C2.  This option leaves nearly all details of the Effect to be determined by an operator or Response management service based on trigger and/or battlespace context."#]
 	Effect(crate::v5_0::enums::EffectTypeEnum),
@@ -7749,22 +6992,20 @@ Note: When new Capability types are added to CapabilityTypeEnum, they should als
 	#[doc = r#"Indicates a [Capability]Command to use as a template for generating a new [Capability]Command (with new CapabilityCommandID) for use in Direct C2."#]
 	CapabilityCommandId(crate::v5_0::types::CommandIdType),
 }
-choice_convert_impls! {
-	ResponseOptionType - ResponseOptionTypeSerde
-	Effect,
-	EffectId,
-	Action,
-	ActionId,
-	Task,
-	TaskId,
-	CapabilityCommand,
-	CapabilityCommandId,
+struct_like_serde! {
+	ResponseOptionType
+	Effect -> "Effect",
+	EffectId -> "EffectID",
+	Action -> "Action",
+	ActionId -> "ActionID",
+	Task -> "Task",
+	TaskId -> "TaskID",
+	CapabilityCommand -> "CapabilityCommand",
+	CapabilityCommandId -> "CapabilityCommandID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ResponsePlanCommandIdChoiceTypeSerde")]
-#[serde(try_from = "ResponsePlanCommandIdChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ResponsePlanCommandIdChoiceType {
 	#[doc = r#"Indicates the unique ID of the ResponsePlanCommand associated with the ResponsePlan."#]
 	ResponsePlanCommandId(crate::v5_0::types::ResponsePlanCommandIdType),
@@ -7775,18 +7016,16 @@ pub enum ResponsePlanCommandIdChoiceType {
 	#[doc = r#"Indicates the unique ID of the MissionPlanValidationCommand associated with the ResponsePlan."#]
 	MissionPlanValidationCommandId(crate::v5_0::types::CommandIdType),
 }
-choice_convert_impls! {
-	ResponsePlanCommandIdChoiceType - ResponsePlanCommandIdChoiceTypeSerde
-	ResponsePlanCommandId,
-	ResponsePlanValidationCommandId,
-	MissionPlanCommandId,
-	MissionPlanValidationCommandId,
+struct_like_serde! {
+	ResponsePlanCommandIdChoiceType
+	ResponsePlanCommandId -> "ResponsePlanCommandID",
+	ResponsePlanValidationCommandId -> "ResponsePlanValidationCommandID",
+	MissionPlanCommandId -> "MissionPlanCommandID",
+	MissionPlanValidationCommandId -> "MissionPlanValidationCommandID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "RfThreadInstanceCommandTypeSerde")]
-#[serde(try_from = "RfThreadInstanceCommandTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum RfThreadInstanceCommandType {
 	#[doc = r#"Sets up the allocated RF Thread Instance that will be utilized by the subsystem (e.g. EA, ESM).  This information is passed to the Real Time Arbitration and Control component of the RFDC for configuration for future use."#]
 	SetupRfThreadInstance(Vec<crate::v5_0::types::SetupRfThreadInstanceType>),
@@ -7795,33 +7034,29 @@ pub enum RfThreadInstanceCommandType {
 	#[doc = r#"Remove RF Thread Instances that has been setup."#]
 	RemoveRfThreadInstance(Vec<crate::v5_0::types::RemoveRfThreadInstanceType>),
 }
-choice_convert_impls! {
-	RfThreadInstanceCommandType - RfThreadInstanceCommandTypeSerde
-	SetupRfThreadInstance,
-	ModifyRfThreadInstance,
-	RemoveRfThreadInstance,
+struct_like_serde! {
+	RfThreadInstanceCommandType
+	SetupRfThreadInstance -> "SetupRF_ThreadInstance",
+	ModifyRfThreadInstance -> "ModifyRF_ThreadInstance",
+	RemoveRfThreadInstance -> "RemoveRF_ThreadInstance",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "RfdGainSettingTypeSerde")]
-#[serde(try_from = "RfdGainSettingTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum RfdGainSettingType {
 	#[doc = r#"The valid gain range for the RFD."#]
 	GainRange(crate::v5_0::types::GainRangeType),
 	#[doc = r#"A list of predefined gain settings.  Can be defined as Low, Med, High, or 1,2,3, or other subsystem-specific list."#]
 	ValidGainSettings(Vec<crate::v5_0::common::VisibleString32Type>),
 }
-choice_convert_impls! {
-	RfdGainSettingType - RfdGainSettingTypeSerde
-	GainRange,
-	ValidGainSettings,
+struct_like_serde! {
+	RfdGainSettingType
+	GainRange -> "GainRange",
+	ValidGainSettings -> "ValidGainSettings",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "RouteActivityPlanCommandIdChoiceTypeSerde")]
-#[serde(try_from = "RouteActivityPlanCommandIdChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum RouteActivityPlanCommandIdChoiceType {
 	#[doc = r#"Indicates the unique ID of the RouteActivityPlanCommand associated with the RouteActivityPlan."#]
 	RouteActivityPlanCommandId(crate::v5_0::types::RouteActivityPlanCommandIdType),
@@ -7832,18 +7067,16 @@ pub enum RouteActivityPlanCommandIdChoiceType {
 	#[doc = r#"Indicates the unique ID of the MissionPlanValidationCommand associated with the RouteActivityPlan."#]
 	MissionPlanValidationCommandId(crate::v5_0::types::CommandIdType),
 }
-choice_convert_impls! {
-	RouteActivityPlanCommandIdChoiceType - RouteActivityPlanCommandIdChoiceTypeSerde
-	RouteActivityPlanCommandId,
-	RouteActivityPlanValidationCommandId,
-	MissionPlanCommandId,
-	MissionPlanValidationCommandId,
+struct_like_serde! {
+	RouteActivityPlanCommandIdChoiceType
+	RouteActivityPlanCommandId -> "RouteActivityPlanCommandID",
+	RouteActivityPlanValidationCommandId -> "RouteActivityPlanValidationCommandID",
+	MissionPlanCommandId -> "MissionPlanCommandID",
+	MissionPlanValidationCommandId -> "MissionPlanValidationCommandID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "RoutePlanCommandIdChoiceTypeSerde")]
-#[serde(try_from = "RoutePlanCommandIdChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum RoutePlanCommandIdChoiceType {
 	#[doc = r#"Indicates the unique ID of the RoutePlanCommand associated with the RoutePlan."#]
 	RoutePlanCommandId(crate::v5_0::types::RoutePlanCommandIdType),
@@ -7854,18 +7087,16 @@ pub enum RoutePlanCommandIdChoiceType {
 	#[doc = r#"Indicates the unique ID of the MissionPlanValidationCommand associated with the RoutePlan."#]
 	MissionPlanValidationCommandId(crate::v5_0::types::CommandIdType),
 }
-choice_convert_impls! {
-	RoutePlanCommandIdChoiceType - RoutePlanCommandIdChoiceTypeSerde
-	RoutePlanCommandId,
-	RoutePlanValidationCommandId,
-	MissionPlanCommandId,
-	MissionPlanValidationCommandId,
+struct_like_serde! {
+	RoutePlanCommandIdChoiceType
+	RoutePlanCommandId -> "RoutePlanCommandID",
+	RoutePlanValidationCommandId -> "RoutePlanValidationCommandID",
+	MissionPlanCommandId -> "MissionPlanCommandID",
+	MissionPlanValidationCommandId -> "MissionPlanValidationCommandID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "RuleResponseTypeSerde")]
-#[serde(try_from = "RuleResponseTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum RuleResponseType {
 	#[doc = r#"Indicates a Response of processing a Requirements template."#]
 	RequirementsTemplate(crate::v5_0::types::ResponseTemplateType),
@@ -7876,124 +7107,110 @@ pub enum RuleResponseType {
 	#[doc = r#"Indicates an explicit desire for no response when Option Rule is triggered."#]
 	DoNothing(crate::v5_0::common::EmptyType),
 }
-choice_convert_impls! {
-	RuleResponseType - RuleResponseTypeSerde
-	RequirementsTemplate,
-	ActivatePlan,
-	GenerateAlert,
-	DoNothing,
+struct_like_serde! {
+	RuleResponseType
+	RequirementsTemplate -> "RequirementsTemplate",
+	ActivatePlan -> "ActivatePlan",
+	GenerateAlert -> "GenerateAlert",
+	DoNothing -> "DoNothing",
 }
 
 #[doc = r#"Indicates the subcapability, SAR or ISAR, for this command."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "SarCapabilityCommandSubCapabilityTypeSerde")]
-#[serde(try_from = "SarCapabilityCommandSubCapabilityTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum SarCapabilityCommandSubCapabilityType {
 	#[doc = r#"Indicates a subcapability of Synthetic Aperture Radar (SAR) for this command."#]
 	Sar(crate::v5_0::types::SarSubCapabilityType),
 	#[doc = r#"Indicates a subcapability of Inverse Synthetic Aperture Radar (ISAR) for this command."#]
 	Isar(crate::v5_0::types::IsarSubCapabilityType),
 }
-choice_convert_impls! {
-	SarCapabilityCommandSubCapabilityType - SarCapabilityCommandSubCapabilityTypeSerde
-	Sar,
-	Isar,
+struct_like_serde! {
+	SarCapabilityCommandSubCapabilityType
+	Sar -> "SAR",
+	Isar -> "ISAR",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "SarCommandTypeSerde")]
-#[serde(try_from = "SarCommandTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum SarCommandType {
 	#[doc = r#"Indicates a new invocation of a SAR Capability.  Generally, if accepted, the command will result in one or more new SAR Activities being created and reported via the SAR_Activity message.  The request/response interaction terminates as soon as the command is accepted or rejected; this element is not used to interact with an "active" command.  Updates and/or additional interaction with the resulting Activity (after the command is accepted) is accomplished via the sibling Activity element."#]
 	Capability(crate::v5_0::types::SarCapabilityCommandType),
 	#[doc = r#"Indicates a command to modify an existing SAR Activity (which was previously reported via the SAR_Activity message and was marked as "interactive").  The request/response interaction terminates as soon as the modification is accepted or rejected.  The modifications are reflected in subsequent SAR_Activity messages."#]
 	Activity(crate::v5_0::types::SarActivityCommandType),
 }
-choice_convert_impls! {
-	SarCommandType - SarCommandTypeSerde
-	Capability,
-	Activity,
+struct_like_serde! {
+	SarCommandType
+	Capability -> "Capability",
+	Activity -> "Activity",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "SarDesiredWaveformTypeSerde")]
-#[serde(try_from = "SarDesiredWaveformTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum SarDesiredWaveformType {
 	#[doc = r#"This element defined the desired waveform to use for the collection."#]
 	WaveformType(crate::v5_0::enums::SarWaveformSelectionEnum),
 	#[doc = r#"This element defined the desired waveform to use for the collection as a foreign key type."#]
 	ForeignWaveform(crate::v5_0::types::ForeignKeyType),
 }
-choice_convert_impls! {
-	SarDesiredWaveformType - SarDesiredWaveformTypeSerde
-	WaveformType,
-	ForeignWaveform,
+struct_like_serde! {
+	SarDesiredWaveformType
+	WaveformType -> "WaveformType",
+	ForeignWaveform -> "ForeignWaveform",
 }
 
 #[doc = r#"Indicates whether this is a SAR task or an ISAR task."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "SarTaskTargetTypeSerde")]
-#[serde(try_from = "SarTaskTargetTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum SarTaskTargetType {
 	#[doc = r#"Indicates the details of a SAR target."#]
 	Sar(crate::v5_0::types::SarTargetType),
 	#[doc = r#"Indicated the details of an ISAR target."#]
 	Isar(IsarTargetType),
 }
-choice_convert_impls! {
-	SarTaskTargetType - SarTaskTargetTypeSerde
-	Sar,
-	Isar,
+struct_like_serde! {
+	SarTaskTargetType
+	Sar -> "SAR",
+	Isar -> "ISAR",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "SarWaveformTypeSerde")]
-#[serde(try_from = "SarWaveformTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum SarWaveformType {
 	#[doc = r#"This element defined the desired waveform to use for the collection."#]
 	WaveformType(crate::v5_0::enums::SarWaveformSelectionEnum),
 	#[doc = r#"This element defined the desired waveform to use for the collection as a foreign key type."#]
 	ForeignWaveform(crate::v5_0::types::ForeignKeyType),
 }
-choice_convert_impls! {
-	SarWaveformType - SarWaveformTypeSerde
-	WaveformType,
-	ForeignWaveform,
+struct_like_serde! {
+	SarWaveformType
+	WaveformType -> "WaveformType",
+	ForeignWaveform -> "ForeignWaveform",
 }
 
 #[doc = r#"Indicates the identity of an asset either by type or instance."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "SatelliteIdentityChoiceTypeSerde")]
-#[serde(try_from = "SatelliteIdentityChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum SatelliteIdentityChoiceType {
 	#[doc = r#"Identifies the object as being a 1st-person self-reporting asset or a 3rd-person tracked asset. This option differs from the sibling "ByType" element in that "ByInstance" references UCI defined IDs."#]
 	ByInstance(AssetType),
 	#[doc = r#"Identifies an orbiting object via non-UCI ID designators, such as satellite numbers."#]
 	ByType(crate::v5_0::types::SatelliteIdentityType),
 }
-choice_convert_impls! {
-	SatelliteIdentityChoiceType - SatelliteIdentityChoiceTypeSerde
-	ByInstance,
-	ByType,
+struct_like_serde! {
+	SatelliteIdentityChoiceType
+	ByInstance -> "ByInstance",
+	ByType -> "ByType",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ScheduleTypeSerde")]
-#[serde(try_from = "ScheduleTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ScheduleType {
 	#[doc = r#"Supports specifying multiple spans of time."#]
 	TimeSpan(Vec<crate::v5_0::types::DateTimeRangeType>),
 	#[doc = r#"Supports specifying daily periodicity."#]
 	WeekdayInterval(Vec<crate::v5_0::types::WeekdayIntervalType>),
 }
-choice_convert_impls! {
-	ScheduleType - ScheduleTypeSerde
-	TimeSpan,
-	WeekdayInterval,
+struct_like_serde! {
+	ScheduleType
+	TimeSpan -> "TimeSpan",
+	WeekdayInterval -> "WeekdayInterval",
 }
 
 #[doc = r#"Encoding types for CVEnumISMSCIControls Version 2 controlled vocabulary enumerations.  Derived from the CVEnumISMSCIControls.xml CVE.(U) All currently valid SCI controls from the published register
@@ -8002,41 +7219,35 @@ choice_convert_impls! {
 						   The permissible values for this simple type are defined in the Controlled Value Enumeration:
 
 						   CVEnumISMSCIControls.xml"#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "SciControlsChoiceTypeSerde")]
-#[serde(try_from = "SciControlsChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum SciControlsChoiceType {
 	#[doc = r#"CVEnumISMSCIControls Values"#]
 	StandardCompartment(crate::v5_0::enums::SciControlsEnum),
 	#[doc = r#"CVEnumISMSCIControls Patterns"#]
 	SubCompartment(crate::v5_0::common::SciControlsType),
 }
-choice_convert_impls! {
-	SciControlsChoiceType - SciControlsChoiceTypeSerde
-	StandardCompartment,
-	SubCompartment,
+struct_like_serde! {
+	SciControlsChoiceType
+	StandardCompartment -> "StandardCompartment",
+	SubCompartment -> "SubCompartment",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "SdaSpecialInstructionsConstraintTypeSerde")]
-#[serde(try_from = "SdaSpecialInstructionsConstraintTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum SdaSpecialInstructionsConstraintType {
 	#[doc = r#"When "All" is chosen, all of the special instructions must be accomplished to satisfy the Task."#]
 	All(crate::v5_0::types::SdaSpecialInstructionsSetType),
 	#[doc = r#"When "Any" is chosen, the Task can be satisfied by performing only one of the special instructions provided."#]
 	Any(crate::v5_0::types::SdaSpecialInstructionsSetType),
 }
-choice_convert_impls! {
-	SdaSpecialInstructionsConstraintType - SdaSpecialInstructionsConstraintTypeSerde
-	All,
-	Any,
+struct_like_serde! {
+	SdaSpecialInstructionsConstraintType
+	All -> "All",
+	Any -> "Any",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "SecurityEventTypeSerde")]
-#[serde(try_from = "SecurityEventTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum SecurityEventType {
 	#[doc = r#"Account Access event occurring around Logon and Logoff."#]
 	AccountAccess(crate::v5_0::types::SecurityAccessType),
@@ -8059,40 +7270,36 @@ pub enum SecurityEventType {
 	#[doc = r#"Specifies the type of audit event as sanitization."#]
 	Sanitization(crate::v5_0::types::SecuritySanitizationType),
 }
-choice_convert_impls! {
-	SecurityEventType - SecurityEventTypeSerde
-	AccountAccess,
-	Authentication,
-	Integrity,
-	AuditManagement,
-	FileManagement,
-	KeyManagement,
-	PolicyManagement,
-	System,
-	IntrusionDetection,
-	Sanitization,
+struct_like_serde! {
+	SecurityEventType
+	AccountAccess -> "AccountAccess",
+	Authentication -> "Authentication",
+	Integrity -> "Integrity",
+	AuditManagement -> "AuditManagement",
+	FileManagement -> "FileManagement",
+	KeyManagement -> "KeyManagement",
+	PolicyManagement -> "PolicyManagement",
+	System -> "System",
+	IntrusionDetection -> "IntrusionDetection",
+	Sanitization -> "Sanitization",
 }
 
 #[doc = r#"Used to identify the RF payload resource which is the subject of an RF_ResourceAllocationRequest."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "SelectPayloadResourceTypeSerde")]
-#[serde(try_from = "SelectPayloadResourceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum SelectPayloadResourceType {
 	#[doc = r#"Payload Resource the requesting subsystem would like to use. Defined in Shared Aperture Information Files."#]
 	PayloadResourceTypeIndex(u32),
 	#[doc = r#"Payload Resource the requesting subsystem would like to use. Defined in Shared Aperture Information Files."#]
 	PayloadResourceInstanceIndex(u32),
 }
-choice_convert_impls! {
-	SelectPayloadResourceType - SelectPayloadResourceTypeSerde
-	PayloadResourceTypeIndex,
-	PayloadResourceInstanceIndex,
+struct_like_serde! {
+	SelectPayloadResourceType
+	PayloadResourceTypeIndex -> "PayloadResourceTypeIndex",
+	PayloadResourceInstanceIndex -> "PayloadResourceInstanceIndex",
 }
 
 #[doc = r#"Indicates collection requirements for each sensor characterization choice."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "SensorCharacterizationChoiceTypeSerde")]
-#[serde(try_from = "SensorCharacterizationChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum SensorCharacterizationChoiceType {
 	#[doc = r#"Indicates phenomenology specific collection requirements for a sensor task."#]
 	PhemonemologySpecific(CharacterizationChoiceType),
@@ -8105,19 +7312,17 @@ pub enum SensorCharacterizationChoiceType {
 	#[doc = r#"Indicates collection requirements to perform an operations changes sensor task."#]
 	OperationsChanges(crate::v5_0::types::SatelliteOperationsChangesCharacterizationType),
 }
-choice_convert_impls! {
-	SensorCharacterizationChoiceType - SensorCharacterizationChoiceTypeSerde
-	PhemonemologySpecific,
-	StabilityAndOrientationAssessment,
-	StructureAssessment,
-	IdentificationVerification,
-	OperationsChanges,
+struct_like_serde! {
+	SensorCharacterizationChoiceType
+	PhemonemologySpecific -> "PhemonemologySpecific",
+	StabilityAndOrientationAssessment -> "StabilityAndOrientationAssessment",
+	StructureAssessment -> "StructureAssessment",
+	IdentificationVerification -> "IdentificationVerification",
+	OperationsChanges -> "OperationsChanges",
 }
 
 #[doc = r#"See the annotation in the associated message for an overall description of the message and this type."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "SensorFieldOfRegardTypeSerde")]
-#[serde(try_from = "SensorFieldOfRegardTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum SensorFieldOfRegardType {
 	#[doc = r#"Indicates the azimuth and elevation extents of the field of regard."#]
 	Extents(crate::v5_0::types::FieldOfRegardExtentsType),
@@ -8130,17 +7335,15 @@ The Min value reflects the Western most extent and the Max value represents the 
 Pay special attention to the values when the field crosses the Prime Meridian (0) and the 180th Meridian (-pi/pi)."#]
 	GeoLongitude(crate::v5_0::types::AnglePairType),
 }
-choice_convert_impls! {
-	SensorFieldOfRegardType - SensorFieldOfRegardTypeSerde
-	Extents,
-	Volume,
-	GeoLongitude,
+struct_like_serde! {
+	SensorFieldOfRegardType
+	Extents -> "Extents",
+	Volume -> "Volume",
+	GeoLongitude -> "GeoLongitude",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "SensorKinematicsChoiceTypeSerde")]
-#[serde(try_from = "SensorKinematicsChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum SensorKinematicsChoiceType {
 	#[doc = r#"Indicates the kinematics of the sensor system (or geographically disperse component of a sensor system) in LLA coordinates.   Each sibling element represents the kinematics at a different time which would be used to correlate to the timestamps of the measurements. If a sensor is stationary, only one element would need to be populated."#]
 	Kinematics(crate::v5_0::types::SignalNavDataType),
@@ -8149,17 +7352,15 @@ pub enum SensorKinematicsChoiceType {
 	#[doc = r#"Indicates the kinematics of the sensor system (or geographically disperse component of a sensor system) in ECEF coordinates. Each sibling element represents the kinematics at a different time that would be used to correlate to the timestamps of the measurements."#]
 	EcefKinematics(crate::v5_0::types::EcefSensorKinematicsType),
 }
-choice_convert_impls! {
-	SensorKinematicsChoiceType - SensorKinematicsChoiceTypeSerde
-	Kinematics,
-	OrbitalKinematics,
-	EcefKinematics,
+struct_like_serde! {
+	SensorKinematicsChoiceType
+	Kinematics -> "Kinematics",
+	OrbitalKinematics -> "OrbitalKinematics",
+	EcefKinematics -> "ECEF_Kinematics",
 }
 
 #[doc = r#"This is a set of points or directions desired for a sensor collection. The sensor coordinates are the origin. This can be used to specify a sensor search pattern."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "SensorPointListTypeSerde")]
-#[serde(try_from = "SensorPointListTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum SensorPointListType {
 	#[doc = r#"A list of azimuth angle, elevation angle and (if desired) range distance pairs/triplets desired for a sensor collection."#]
 	AzimuthElevationRangePointList(Vec<crate::v5_0::types::AzimuthElevationRangePointType>),
@@ -8168,33 +7369,29 @@ pub enum SensorPointListType {
 	#[doc = r#"A list of latitudes, longitudes, altitudes, and optional times desired for a sensor collection."#]
 	Point3Dlist(Vec<crate::v5_0::types::Point3DType>),
 }
-choice_convert_impls! {
-	SensorPointListType - SensorPointListTypeSerde
-	AzimuthElevationRangePointList,
-	RightAscensionDeclinationPointList,
-	Point3Dlist,
+struct_like_serde! {
+	SensorPointListType
+	AzimuthElevationRangePointList -> "AzimuthElevationRangePointList",
+	RightAscensionDeclinationPointList -> "RightAscensionDeclinationPointList",
+	Point3Dlist -> "Point3DList",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ServiceConfigurationChangeTypeSerde")]
-#[serde(try_from = "ServiceConfigurationChangeTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ServiceConfigurationChangeType {
 	#[doc = r#"The service configuration parameters to change along with the requested new value."#]
 	ParameterChange(Vec<crate::v5_0::types::ParameterAssertType>),
 	#[doc = r#"ItemsAffected indicates what ancillary items were affected by the configuration change."#]
 	ConfigurationFileReload(Vec<crate::v5_0::common::AttributedUriType>),
 }
-choice_convert_impls! {
-	ServiceConfigurationChangeType - ServiceConfigurationChangeTypeSerde
-	ParameterChange,
-	ConfigurationFileReload,
+struct_like_serde! {
+	ServiceConfigurationChangeType
+	ParameterChange -> "ParameterChange",
+	ConfigurationFileReload -> "ConfigurationFileReload",
 }
 
 #[doc = r#"This generic type provides a choice for 3-dimensional shapes (e.g. spheres, cones, etc.)."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "Shape3DChoiceTypeSerde")]
-#[serde(try_from = "Shape3DChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum Shape3DChoiceType {
 	#[doc = r#"This element describes the geometric parameters of a sphere via a radius. The location of the sphere is referenced by its center (see sibling Kinematics element for position of the center)."#]
 	Sphere(crate::v5_0::types::SphereType),
@@ -8213,22 +7410,20 @@ pub enum Shape3DChoiceType {
 	#[doc = r#"Indicates a volume defined by Inclination, Period, and Right Ascension deltas from the reference object."#]
 	IncRaPeriodVolume(crate::v5_0::types::IncRaPeriodVolumeType),
 }
-choice_convert_impls! {
-	Shape3DChoiceType - Shape3DChoiceTypeSerde
-	Sphere,
-	Dome,
-	Ellipsoid,
-	Cylinder,
-	Cone,
-	RectangularCone,
-	ArcVolume,
-	IncRaPeriodVolume,
+struct_like_serde! {
+	Shape3DChoiceType
+	Sphere -> "Sphere",
+	Dome -> "Dome",
+	Ellipsoid -> "Ellipsoid",
+	Cylinder -> "Cylinder",
+	Cone -> "Cone",
+	RectangularCone -> "RectangularCone",
+	ArcVolume -> "ArcVolume",
+	IncRaPeriodVolume -> "IncRaPeriodVolume",
 }
 
 #[doc = r#"Provides different status fields depending on the particular SupportCapability type providing the status."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "SharedApertureSupportCapabilityStatusItemTypeSerde")]
-#[serde(try_from = "SharedApertureSupportCapabilityStatusItemTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum SharedApertureSupportCapabilityStatusItemType {
 	#[doc = r#"This choice provides Support Capability status of a single Antenna used by a subsystem (e.g. EA, ESM) to update the status of Subsystem Capabilities that use those Support Capabilities.  This message correlates a single Support Capability with multiple Subsystem Capabilities that use them."#]
 	AntennaStatus(crate::v5_0::types::AntennaStatusType),
@@ -8237,81 +7432,71 @@ pub enum SharedApertureSupportCapabilityStatusItemType {
 	#[doc = r#"This choice provides Support Capability status and settings of an RF Distribution and Control (RFDC) subsystem."#]
 	RfdcStatus(crate::v5_0::types::RfdcStatusType),
 }
-choice_convert_impls! {
-	SharedApertureSupportCapabilityStatusItemType - SharedApertureSupportCapabilityStatusItemTypeSerde
-	AntennaStatus,
-	ResourceAllocatorStatus,
-	RfdcStatus,
+struct_like_serde! {
+	SharedApertureSupportCapabilityStatusItemType
+	AntennaStatus -> "AntennaStatus",
+	ResourceAllocatorStatus -> "ResourceAllocatorStatus",
+	RfdcStatus -> "RFDC_Status",
 }
 
 #[doc = r#"Indicates collection requirements to perform size estimation characterization in support a structure change detection sensor task."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "SizeEstimationCharacterizationTypeSerde")]
-#[serde(try_from = "SizeEstimationCharacterizationTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum SizeEstimationCharacterizationType {
 	#[doc = r#"Specifies span of time for individual collection based on duration or rotational periods of target."#]
 	MinCollection(OrbitalSurveillanceSensorMinimumCollectionRequirementsType),
 	#[doc = r#"Indicates the reporting requirements for RCS and Visual Magnitude sensor collections used for size estimation characterization."#]
 	SizeData(crate::v5_0::enums::OrbitalSurveillanceSizeDataEnum),
 }
-choice_convert_impls! {
-	SizeEstimationCharacterizationType - SizeEstimationCharacterizationTypeSerde
-	MinCollection,
-	SizeData,
+struct_like_serde! {
+	SizeEstimationCharacterizationType
+	MinCollection -> "MinCollection",
+	SizeData -> "SizeData",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "SmtiCollectionConstraintsQualityTypeSerde")]
-#[serde(try_from = "SmtiCollectionConstraintsQualityTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum SmtiCollectionConstraintsQualityType {
 	#[doc = r#"Moving Target Indication Interpretability Rating Scale."#]
 	Mtiirs(crate::v5_0::common::NiirsType),
 	#[doc = r#"The radius of a circle, centered on the MTI observation, in which there is a 90 percent probability that the target lies within."#]
 	CircularErrorProbable90(crate::v5_0::common::DistanceType),
 }
-choice_convert_impls! {
-	SmtiCollectionConstraintsQualityType - SmtiCollectionConstraintsQualityTypeSerde
-	Mtiirs,
-	CircularErrorProbable90,
+struct_like_serde! {
+	SmtiCollectionConstraintsQualityType
+	Mtiirs -> "MTIIRS",
+	CircularErrorProbable90 -> "CircularErrorProbable90",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "SmtiCommandTypeSerde")]
-#[serde(try_from = "SmtiCommandTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum SmtiCommandType {
 	#[doc = r#"Indicates a new invocation of an SMTI Capability.  Generally, if accepted, the command will result in one or more new SMTI Activities being created and reported via the SMTI_Activity message.  The request/response interaction terminates as soon as the command is accepted or rejected; this element is not used to interact with an "active" command.  Updates and/or additional interaction with the resulting Activity (after the command is accepted) is accomplished via the sibling Activity element."#]
 	Capability(crate::v5_0::types::SmtiCapabilityCommandType),
 	#[doc = r#"Indicates a command to modify an existing SMTI Activity (which was previously reported via the SMTI_Activity message and was marked as "interactive").  The request/response interaction terminates as soon as the modification is accepted or rejected.  The modifications are reflected in subsequent SMTI_Activity messages."#]
 	Activity(crate::v5_0::types::SmtiActivityCommandType),
 }
-choice_convert_impls! {
-	SmtiCommandType - SmtiCommandTypeSerde
-	Capability,
-	Activity,
+struct_like_serde! {
+	SmtiCommandType
+	Capability -> "Capability",
+	Activity -> "Activity",
 }
 
 #[doc = r#"A choice of solar radiation pressure (SRP) coefficient to use."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "SolarRadiationPressureCoefficientChoiceTypeSerde")]
-#[serde(try_from = "SolarRadiationPressureCoefficientChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum SolarRadiationPressureCoefficientChoiceType {
 	#[doc = r#"Used for VCM propagation. The SRP coefficient is defined as reflectivity coefficient times area over mass. It is a quantity with units of meters squared per kilogram. It accounts for the effects imposed by the reflectivity of the RSO with regard to the pressure exerted by solar radiation and includes mass and area."#]
 	VcmSolarRadiationPressureCoefficient(f64),
 	#[doc = r#"A dimensionless value based on how well the RSO reflects light that is used to help quantify the solar radiation pressure on the RSO."#]
 	ReflectivityCoefficient(f64),
 }
-choice_convert_impls! {
-	SolarRadiationPressureCoefficientChoiceType - SolarRadiationPressureCoefficientChoiceTypeSerde
-	VcmSolarRadiationPressureCoefficient,
-	ReflectivityCoefficient,
+struct_like_serde! {
+	SolarRadiationPressureCoefficientChoiceType
+	VcmSolarRadiationPressureCoefficient -> "VCM_SolarRadiationPressureCoefficient",
+	ReflectivityCoefficient -> "ReflectivityCoefficient",
 }
 
 #[doc = r#"Indicates the System, Subsystem, or Service for which this applies."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "SourceIdChoiceTypeSerde")]
-#[serde(try_from = "SourceIdChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum SourceIdChoiceType {
 	#[doc = r#"Indicates the System for which this applies."#]
 	SystemId(crate::v5_0::types::SystemIdType),
@@ -8320,49 +7505,43 @@ pub enum SourceIdChoiceType {
 	#[doc = r#"Indicates the Service for which this applies."#]
 	ServiceId(crate::v5_0::types::ServiceIdType),
 }
-choice_convert_impls! {
-	SourceIdChoiceType - SourceIdChoiceTypeSerde
-	SystemId,
-	SubsystemId,
-	ServiceId,
+struct_like_serde! {
+	SourceIdChoiceType
+	SystemId -> "SystemID",
+	SubsystemId -> "SubsystemID",
+	ServiceId -> "ServiceID",
 }
 
 #[doc = r#"Defines the type that allows a choice of space weather data type: SpaceWeather message or static values."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "SpaceWeatherDataChoiceTypeSerde")]
-#[serde(try_from = "SpaceWeatherDataChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum SpaceWeatherDataChoiceType {
 	#[doc = r#"Indicates the ID of the set of Space Weather data to be used by the atmospheric density model."#]
 	SpaceWeatherValuesId(crate::v5_0::types::SpaceWeatherIdType),
 	#[doc = r#"The static (non-changing) space weather values to be used by the atmospheric density model."#]
 	StaticValues(crate::v5_0::types::SpaceWeatherParameterType),
 }
-choice_convert_impls! {
-	SpaceWeatherDataChoiceType - SpaceWeatherDataChoiceTypeSerde
-	SpaceWeatherValuesId,
-	StaticValues,
+struct_like_serde! {
+	SpaceWeatherDataChoiceType
+	SpaceWeatherValuesId -> "SpaceWeatherValuesID",
+	StaticValues -> "StaticValues",
 }
 
 #[doc = r#"Defines the type of geomagnetic index to use: Kp or Ap."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "SpaceWeatherKpApChoiceTypeSerde")]
-#[serde(try_from = "SpaceWeatherKpApChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum SpaceWeatherKpApChoiceType {
 	#[doc = r#"Kp value of geomagnetic activity. Kp is an index of a 3-hourly range of geomagnetic measurements."#]
 	Kp(crate::v5_0::common::GeomagneticKpIndexType),
 	#[doc = r#"Ap value of geomagnetic activity. Ap is derived from Kp values."#]
 	Ap(crate::v5_0::common::GeomagneticApIndexType),
 }
-choice_convert_impls! {
-	SpaceWeatherKpApChoiceType - SpaceWeatherKpApChoiceTypeSerde
-	Kp,
-	Ap,
+struct_like_serde! {
+	SpaceWeatherKpApChoiceType
+	Kp -> "Kp",
+	Ap -> "Ap",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "StoreCommandTypeSerde")]
-#[serde(try_from = "StoreCommandTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum StoreCommandType {
 	#[doc = r#"For stores systems that must move stores into release position, this commands the stores manager to move the specified store station into release position."#]
 	NextStoreStation(crate::v5_0::types::ForeignKeyType),
@@ -8385,103 +7564,91 @@ FALSE = begin accepting wind velocity updates from the host platform and replace
 	#[doc = r#"Command to verify carriages and mission stores loaded onto a platform match an allowable configuration."#]
 	VerifyInventory(crate::v5_0::common::EmptyType),
 }
-choice_convert_impls! {
-	StoreCommandType - StoreCommandTypeSerde
-	NextStoreStation,
-	NextStoreType,
-	OverrideLar,
-	OverrideAttitudeConstraints,
-	MasterArm,
-	ReleaseConsent,
-	LarCalculationWindHold,
-	LarCalculationWindOverride,
-	VerifyInventory,
+struct_like_serde! {
+	StoreCommandType
+	NextStoreStation -> "NextStoreStation",
+	NextStoreType -> "NextStoreType",
+	OverrideLar -> "OverrideLAR",
+	OverrideAttitudeConstraints -> "OverrideAttitudeConstraints",
+	MasterArm -> "MasterArm",
+	ReleaseConsent -> "ReleaseConsent",
+	LarCalculationWindHold -> "LAR_CalculationWindHold",
+	LarCalculationWindOverride -> "LAR_CalculationWindOverride",
+	VerifyInventory -> "VerifyInventory",
 }
 
 #[doc = r#"What store type Mission or Carriage."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "StoreItemTypeSerde")]
-#[serde(try_from = "StoreItemTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum StoreItemType {
 	#[doc = r#"A mission store in a loadout (i.e. a weapon)."#]
 	Mission(crate::v5_0::types::StoreLoadoutMissionType),
 	#[doc = r#"A carriage within a loadout which may contain one or more weapons or other carriages."#]
 	Carriage(crate::v5_0::types::StoreLoadoutCarriageType),
 }
-choice_convert_impls! {
-	StoreItemType - StoreItemTypeSerde
-	Mission,
-	Carriage,
+struct_like_serde! {
+	StoreItemType
+	Mission -> "Mission",
+	Carriage -> "Carriage",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "StoreLoadoutChoiceTypeSerde")]
-#[serde(try_from = "StoreLoadoutChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum StoreLoadoutChoiceType {
 	#[doc = r#"The list of all StoreType held  at this location and by any child StoreType carriage items in the order they appear in StoreType list."#]
 	StoreList(Vec<crate::v5_0::types::StoreLoadoutItemPet>),
 	#[doc = r#"A uci:EmptyType used to signal the end of recursion."#]
 	Terminator(crate::v5_0::common::EmptyType),
 }
-choice_convert_impls! {
-	StoreLoadoutChoiceType - StoreLoadoutChoiceTypeSerde
-	StoreList,
-	Terminator,
+struct_like_serde! {
+	StoreLoadoutChoiceType
+	StoreList -> "StoreList",
+	Terminator -> "Terminator",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "StrikeCommandTypeSerde")]
-#[serde(try_from = "StrikeCommandTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum StrikeCommandType {
 	#[doc = r#"Indicates a new invocation of a Strike Capability.  Generally, if accepted, the command will result in one or more new Strike Activities being created and reported via the StrikeActivity message.  The request/response interaction terminates as soon as the command is accepted or rejected; this element is not used to interact with an "active" command.  Updates and/or additional interaction with the resulting Activity (after the command is accepted) is accomplished via the sibling Activity element."#]
 	Capability(crate::v5_0::types::StrikeCapabilityCommandType),
 	#[doc = r#"Indicates a command to modify an existing Strike Activity (which was previously reported via the StrikeActivity message and was marked as "interactive").  The request/response interaction terminates as soon as the modification is accepted or rejected.  The modifications are reflected in subsequent StrikeActivity messages."#]
 	Activity(crate::v5_0::types::StrikeActivityCommandType),
 }
-choice_convert_impls! {
-	StrikeCommandType - StrikeCommandTypeSerde
-	Capability,
-	Activity,
+struct_like_serde! {
+	StrikeCommandType
+	Capability -> "Capability",
+	Activity -> "Activity",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "StrikeTaskMetricsTargetingTypeSerde")]
-#[serde(try_from = "StrikeTaskMetricsTargetingTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum StrikeTaskMetricsTargetingType {
 	#[doc = r#"This element represents the positional accuracy of the entity.  It is the area, in square data miles, within which it is assessed that there is a 95% probability that the track/point lies."#]
 	Quality(f32),
 	#[doc = r#"This element represents an ellipse describing the position uncertainty.  The ellipse is defined by the length of its semi-major and semi-minor axes.  The orientation of the ellipse defines the angle between the semi-major axis and true north."#]
 	UncertaintyEllipse(crate::v5_0::types::EllipseType),
 }
-choice_convert_impls! {
-	StrikeTaskMetricsTargetingType - StrikeTaskMetricsTargetingTypeSerde
-	Quality,
-	UncertaintyEllipse,
+struct_like_serde! {
+	StrikeTaskMetricsTargetingType
+	Quality -> "Quality",
+	UncertaintyEllipse -> "UncertaintyEllipse",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "StrikeTaskReleaseConstraintsTypeSerde")]
-#[serde(try_from = "StrikeTaskReleaseConstraintsTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum StrikeTaskReleaseConstraintsType {
 	#[doc = r#"Release point within a Launch Acceptable Region (LAR)."#]
 	ReleasePoint(crate::v5_0::types::Point3DType),
 	#[doc = r#"Defines an area where release is acceptable."#]
 	ReleaseArea(crate::v5_0::types::AreaConstraintsType),
 }
-choice_convert_impls! {
-	StrikeTaskReleaseConstraintsType - StrikeTaskReleaseConstraintsTypeSerde
-	ReleasePoint,
-	ReleaseArea,
+struct_like_serde! {
+	StrikeTaskReleaseConstraintsType
+	ReleasePoint -> "ReleasePoint",
+	ReleaseArea -> "ReleaseArea",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "StrikeWeaponCommandTypeSerde")]
-#[serde(try_from = "StrikeWeaponCommandTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum StrikeWeaponCommandType {
 	#[doc = r#"If true, this store will be commanded into a state where it is ready to receive cryptographic keys."#]
 	SelectForKeyLoad(bool),
@@ -8498,53 +7665,47 @@ pub enum StrikeWeaponCommandType {
 	#[doc = r#"Indicates a PRF and/or PIM code supported by this store."#]
 	SelectAoCode(crate::v5_0::types::AoCodeType),
 }
-choice_convert_impls! {
-	StrikeWeaponCommandType - StrikeWeaponCommandTypeSerde
-	SelectForKeyLoad,
-	AssignTarget,
-	WeaponArm,
-	SelectForJettison,
-	GenerateDynamicLar,
-	SelectForRelease,
-	SelectAoCode,
+struct_like_serde! {
+	StrikeWeaponCommandType
+	SelectForKeyLoad -> "SelectForKeyLoad",
+	AssignTarget -> "AssignTarget",
+	WeaponArm -> "WeaponArm",
+	SelectForJettison -> "SelectForJettison",
+	GenerateDynamicLar -> "GenerateDynamicLAR",
+	SelectForRelease -> "SelectForRelease",
+	SelectAoCode -> "SelectAO_Code",
 }
 
 #[doc = r#"Indicates a task and requirements to enable characterization of or assessment of changes to the structure of a spacecraft."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "StructureAssessmentTypeSerde")]
-#[serde(try_from = "StructureAssessmentTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum StructureAssessmentType {
 	#[doc = r#"Task for collections to enable the estimation of the size of the object."#]
 	SizeEstimation(crate::v5_0::types::SizeEstimationType),
 	#[doc = r#"Conduct collection (and appropriate processing) to support assessment of length, width, height of a spacecraft as well as similar values and relative positions/orientations of spacecraft components (e.g., solar panels, telescopes, antennae)."#]
 	Resolved(crate::v5_0::types::ResolvedCharacterizationType),
 }
-choice_convert_impls! {
-	StructureAssessmentType - StructureAssessmentTypeSerde
-	SizeEstimation,
-	Resolved,
+struct_like_serde! {
+	StructureAssessmentType
+	SizeEstimation -> "SizeEstimation",
+	Resolved -> "Resolved",
 }
 
 #[doc = r#"Indicates whether an UCI Entity subject or an UCI System subject is to be selected."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "SubjectTypeSerde")]
-#[serde(try_from = "SubjectTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum SubjectType {
 	#[doc = r#"Indicates the unique ID of a UCI System subject.  See the SystemStatus message annotations for details of what it means to be a UCI System."#]
 	SystemId(crate::v5_0::types::SystemIdType),
 	#[doc = r#"Indicates the unique ID of a UCI Entity subject.  See the Entity message annotations for details of what it means to be a UCI Entity."#]
 	EntityId(crate::v5_0::types::EntityIdType),
 }
-choice_convert_impls! {
-	SubjectType - SubjectTypeSerde
-	SystemId,
-	EntityId,
+struct_like_serde! {
+	SubjectType
+	SystemId -> "SystemID",
+	EntityId -> "EntityID",
 }
 
 #[doc = r#"Identifies specific BIT IDs or Fault codes relevant to this command."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "SubsystemBitCommandTypeSerde")]
-#[serde(try_from = "SubsystemBitCommandTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum SubsystemBitCommandType {
 	#[doc = r#"Indicates the unique ID or IDs of the BIT or BITs to initiate."#]
 	InitiateBitId(Vec<crate::v5_0::types::BitIdType>),
@@ -8553,81 +7714,71 @@ pub enum SubsystemBitCommandType {
 	#[doc = r#"Indicates the "codes" or names of the faults to clear."#]
 	ClearFaultCode(Vec<crate::v5_0::common::VisibleString256Type>),
 }
-choice_convert_impls! {
-	SubsystemBitCommandType - SubsystemBitCommandTypeSerde
-	InitiateBitId,
-	CancelBitId,
-	ClearFaultCode,
+struct_like_serde! {
+	SubsystemBitCommandType
+	InitiateBitId -> "InitiateBIT_ID",
+	CancelBitId -> "CancelBIT_ID",
+	ClearFaultCode -> "ClearFaultCode",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "SubsystemCalibrationCommandIdChoiceTypeSerde")]
-#[serde(try_from = "SubsystemCalibrationCommandIdChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum SubsystemCalibrationCommandIdChoiceType {
 	#[doc = r#"Indicates the unique ID of the Calibration to initiate."#]
 	InitiateCalibrationId(crate::v5_0::types::CalibrationIdType),
 	#[doc = r#"Indicates the unique ID of the Calibration to cancel."#]
 	CancelCalibrationId(crate::v5_0::types::CalibrationIdType),
 }
-choice_convert_impls! {
-	SubsystemCalibrationCommandIdChoiceType - SubsystemCalibrationCommandIdChoiceTypeSerde
-	InitiateCalibrationId,
-	CancelCalibrationId,
+struct_like_serde! {
+	SubsystemCalibrationCommandIdChoiceType
+	InitiateCalibrationId -> "InitiateCalibrationID",
+	CancelCalibrationId -> "CancelCalibrationID",
 }
 
 #[doc = r#"A choice type to allow further recursion or a terminator to signal the end of recursion."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "SubsystemMaintenanceSubtestChoiceTypeSerde")]
-#[serde(try_from = "SubsystemMaintenanceSubtestChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum SubsystemMaintenanceSubtestChoiceType {
 	#[doc = r#"The list of Subtests."#]
 	Subtest(Vec<crate::v5_0::types::SubsystemMaintenanceTestPet>),
 	#[doc = r#"A uci:EmptyType used to signal the end of recursion."#]
 	Terminator(crate::v5_0::common::EmptyType),
 }
-choice_convert_impls! {
-	SubsystemMaintenanceSubtestChoiceType - SubsystemMaintenanceSubtestChoiceTypeSerde
-	Subtest,
-	Terminator,
+struct_like_serde! {
+	SubsystemMaintenanceSubtestChoiceType
+	Subtest -> "Subtest",
+	Terminator -> "Terminator",
 }
 
 #[doc = r#"A choice type to allow further recursion or a terminator to signal the end of recursion."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "SubsystemMaintenanceSubtestCommandChoiceTypeSerde")]
-#[serde(try_from = "SubsystemMaintenanceSubtestCommandChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum SubsystemMaintenanceSubtestCommandChoiceType {
 	#[doc = r#"The list of Subtests."#]
 	Subtest(Vec<crate::v5_0::types::SubsystemMaintenanceTestCommandPet>),
 	#[doc = r#"A uci:EmptyType used to signal the end of recursion."#]
 	Terminator(crate::v5_0::common::EmptyType),
 }
-choice_convert_impls! {
-	SubsystemMaintenanceSubtestCommandChoiceType - SubsystemMaintenanceSubtestCommandChoiceTypeSerde
-	Subtest,
-	Terminator,
+struct_like_serde! {
+	SubsystemMaintenanceSubtestCommandChoiceType
+	Subtest -> "Subtest",
+	Terminator -> "Terminator",
 }
 
 #[doc = r#"A choice type to allow further recursion or a terminator to signal the end of recursion."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "SubsystemMaintenanceSubtestResultChoiceTypeSerde")]
-#[serde(try_from = "SubsystemMaintenanceSubtestResultChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum SubsystemMaintenanceSubtestResultChoiceType {
 	#[doc = r#"List of test results associated with the sibling TestID. This may be a partial or full list. In the CompletedTest, this element will provide list of completed or failed maintenance test unit results.  In the CurrentTest, this element will provide list of results for maintenance test units in process or in queue."#]
 	SubtestResultData(Vec<crate::v5_0::types::SubsystemMaintenanceTestResultPet>),
 	#[doc = r#"A uci:EmptyType used to signal the end of recursion."#]
 	Terminator(crate::v5_0::common::EmptyType),
 }
-choice_convert_impls! {
-	SubsystemMaintenanceSubtestResultChoiceType - SubsystemMaintenanceSubtestResultChoiceTypeSerde
-	SubtestResultData,
-	Terminator,
+struct_like_serde! {
+	SubsystemMaintenanceSubtestResultChoiceType
+	SubtestResultData -> "SubtestResultData",
+	Terminator -> "Terminator",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "SystemCharacteristicTypeSerde")]
-#[serde(try_from = "SystemCharacteristicTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum SystemCharacteristicType {
 	#[doc = r#"Indicates an identity to be compared to the identity of the System."#]
 	Identity(EntityIdentityChoiceType),
@@ -8640,19 +7791,17 @@ pub enum SystemCharacteristicType {
 	#[doc = r#"Indicates behaviors, activities, use of capabilities, etc. to be compared to those of the battlespace object associated with the System."#]
 	Behavior(crate::v5_0::types::BehaviorType),
 }
-choice_convert_impls! {
-	SystemCharacteristicType - SystemCharacteristicTypeSerde
-	Identity,
-	PositionUncertainty,
-	PositionStaleness,
-	PrioritizationList,
-	Behavior,
+struct_like_serde! {
+	SystemCharacteristicType
+	Identity -> "Identity",
+	PositionUncertainty -> "PositionUncertainty",
+	PositionStaleness -> "PositionStaleness",
+	PrioritizationList -> "PrioritizationList",
+	Behavior -> "Behavior",
 }
 
 #[doc = r#"Indicates the choice of how the ephemeris of the orbiting System will be obtained. These include from the element set results, the element set's ID, or the  kinematics vectors from a standard reference frame."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "SystemEphemerisBasisChoiceTypeSerde")]
-#[serde(try_from = "SystemEphemerisBasisChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum SystemEphemerisBasisChoiceType {
 	#[doc = r#"Indicates the default or "catalog" orbital element set (also known as two line element or TLE) for the satellite."#]
 	ElementSet(crate::v5_0::types::TleBaseType),
@@ -8663,18 +7812,16 @@ pub enum SystemEphemerisBasisChoiceType {
 	#[doc = r#"Propagate using a complete VCM (vector covariance message) which includes a kinematic vector, along with other special perturbation parameters."#]
 	SystemVcmId(crate::v5_0::types::SystemOrbitalVcmIdType),
 }
-choice_convert_impls! {
-	SystemEphemerisBasisChoiceType - SystemEphemerisBasisChoiceTypeSerde
-	ElementSet,
-	SystemElementSetId,
-	KinematicVector,
-	SystemVcmId,
+struct_like_serde! {
+	SystemEphemerisBasisChoiceType
+	ElementSet -> "ElementSet",
+	SystemElementSetId -> "SystemElementSetID",
+	KinematicVector -> "KinematicVector",
+	SystemVcmId -> "SystemVCM_ID",
 }
 
 #[doc = r#"Indicates the initial conditions for a system estimation."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "SystemEstimationStartTypeSerde")]
-#[serde(try_from = "SystemEstimationStartTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum SystemEstimationStartType {
 	#[doc = r#"This element contains the time to use for the start of the estimation."#]
 	StartTime(chrono::DateTime<chrono::Utc>),
@@ -8683,17 +7830,15 @@ pub enum SystemEstimationStartType {
 	#[doc = r#"This element contains the estimation initial conditions for a space based system."#]
 	OrbitEstimationStart(crate::v5_0::types::OrbitEstimationStartType),
 }
-choice_convert_impls! {
-	SystemEstimationStartType - SystemEstimationStartTypeSerde
-	StartTime,
-	RouteEstimationStart,
-	OrbitEstimationStart,
+struct_like_serde! {
+	SystemEstimationStartType
+	StartTime -> "StartTime",
+	RouteEstimationStart -> "RouteEstimationStart",
+	OrbitEstimationStart -> "OrbitEstimationStart",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "SystemEstimationStopTypeSerde")]
-#[serde(try_from = "SystemEstimationStopTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum SystemEstimationStopType {
 	#[doc = r#"This element is used to specify the time at which to stop estimation."#]
 	Time(chrono::DateTime<chrono::Utc>),
@@ -8702,17 +7847,15 @@ pub enum SystemEstimationStopType {
 	#[doc = r#"This element is used to specify the orbit maneuver segment at which to stop estimation."#]
 	OrbitManeuverSegmentId(crate::v5_0::types::OrbitManeuverSegmentIdType),
 }
-choice_convert_impls! {
-	SystemEstimationStopType - SystemEstimationStopTypeSerde
-	Time,
-	RouteSegmentId,
-	OrbitManeuverSegmentId,
+struct_like_serde! {
+	SystemEstimationStopType
+	Time -> "Time",
+	RouteSegmentId -> "RouteSegmentID",
+	OrbitManeuverSegmentId -> "OrbitManeuverSegmentID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "SystemManagementRequestTypeSerde")]
-#[serde(try_from = "SystemManagementRequestTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum SystemManagementRequestType {
 	#[doc = r#"Indicates a request to modify the mode of a system."#]
 	SetMode(crate::v5_0::enums::MessageModeEnum),
@@ -8727,36 +7870,32 @@ pub enum SystemManagementRequestType {
 	#[doc = r#"Indicates a request to modify vehicle settings."#]
 	VehicleSettings(crate::v5_0::types::VehicleCommandDataType),
 }
-choice_convert_impls! {
-	SystemManagementRequestType - SystemManagementRequestTypeSerde
-	SetMode,
-	SetIdentity,
-	SetLink16Metadata,
-	SetVoiceControl,
-	SetSensorEntityReporting,
-	VehicleSettings,
+struct_like_serde! {
+	SystemManagementRequestType
+	SetMode -> "SetMode",
+	SetIdentity -> "SetIdentity",
+	SetLink16Metadata -> "SetLink16Metadata",
+	SetVoiceControl -> "SetVoiceControl",
+	SetSensorEntityReporting -> "SetSensorEntityReporting",
+	VehicleSettings -> "VehicleSettings",
 }
 
 #[doc = r#"Indicates the target of a TagAssociation, which could be a message or a string value."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "TagAssociationTargetTypeSerde")]
-#[serde(try_from = "TagAssociationTargetTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum TagAssociationTargetType {
 	#[doc = r#"Indicates a message as the TagAssociation target."#]
 	ByMessage(crate::v5_0::types::AssociatedMessageType),
 	#[doc = r#"Indicates the TagAssociation target."#]
 	ByValue(crate::v5_0::types::SecureStringType),
 }
-choice_convert_impls! {
-	TagAssociationTargetType - TagAssociationTargetTypeSerde
-	ByMessage,
-	ByValue,
+struct_like_serde! {
+	TagAssociationTargetType
+	ByMessage -> "ByMessage",
+	ByValue -> "ByValue",
 }
 
 #[doc = r#"Indicates or references geospatial characteristics of a target."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "TargetTypeSerde")]
-#[serde(try_from = "TargetTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum TargetType {
 	#[doc = r#"Indicates the target is an Entity."#]
 	EntityId(crate::v5_0::types::EntityIdType),
@@ -8783,26 +7922,24 @@ pub enum TargetType {
 	#[doc = r#"Indicates the target is a geospatial line."#]
 	LineTarget(crate::v5_0::types::LineTargetType),
 }
-choice_convert_impls! {
-	TargetType - TargetTypeSerde
-	EntityId,
-	SystemId,
-	OperatorLocationOfInterestId,
-	SignalId,
-	OpPointId,
-	OpZoneId,
-	OpVolumeId,
-	OpLineId,
-	PointTarget,
-	ZoneTarget,
-	VolumeTarget,
-	LineTarget,
+struct_like_serde! {
+	TargetType
+	EntityId -> "EntityID",
+	SystemId -> "SystemID",
+	OperatorLocationOfInterestId -> "OperatorLocationOfInterestID",
+	SignalId -> "SignalID",
+	OpPointId -> "OpPointID",
+	OpZoneId -> "OpZoneID",
+	OpVolumeId -> "OpVolumeID",
+	OpLineId -> "OpLineID",
+	PointTarget -> "PointTarget",
+	ZoneTarget -> "ZoneTarget",
+	VolumeTarget -> "VolumeTarget",
+	LineTarget -> "LineTarget",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "TaskPlanCommandIdChoiceTypeSerde")]
-#[serde(try_from = "TaskPlanCommandIdChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum TaskPlanCommandIdChoiceType {
 	#[doc = r#"Indicates the unique ID of the TaskPlanCommand associated with the TaskPlan."#]
 	TaskPlanCommandId(crate::v5_0::types::TaskPlanCommandIdType),
@@ -8813,18 +7950,16 @@ pub enum TaskPlanCommandIdChoiceType {
 	#[doc = r#"Indicates the unique ID of the MissionPlanValidationCommand associated with the TaskPlan."#]
 	MissionPlanValidationCommandId(crate::v5_0::types::CommandIdType),
 }
-choice_convert_impls! {
-	TaskPlanCommandIdChoiceType - TaskPlanCommandIdChoiceTypeSerde
-	TaskPlanCommandId,
-	TaskPlanValidationCommandId,
-	MissionPlanCommandId,
-	MissionPlanValidationCommandId,
+struct_like_serde! {
+	TaskPlanCommandIdChoiceType
+	TaskPlanCommandId -> "TaskPlanCommandID",
+	TaskPlanValidationCommandId -> "TaskPlanValidationCommandID",
+	MissionPlanCommandId -> "MissionPlanCommandID",
+	MissionPlanValidationCommandId -> "MissionPlanValidationCommandID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "TaskResponseTypeSerde")]
-#[serde(try_from = "TaskResponseTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum TaskResponseType {
 	#[doc = r#"Indicates a desire to create an AirSample Task as a mission response.  If details aren't specified, they are left to the discretion of the Task creator and/or implication of the response trigger."#]
 	AirSample(crate::v5_0::types::AirSampleTaskBaseType),
@@ -8865,33 +8000,31 @@ pub enum TaskResponseType {
 	#[doc = r#"Indicates a desire to create a WeatherRadar Task as a mission response.  If details aren't specified, they are left to the discretion of the Task creator and/or implication of the response trigger."#]
 	WeatherRadar(crate::v5_0::common::EmptyType),
 }
-choice_convert_impls! {
-	TaskResponseType - TaskResponseTypeSerde
-	AirSample,
-	Amti,
-	Ao,
-	CargoDelivery,
-	Comint,
-	CommRelay,
-	Ea,
-	Esm,
-	Flight,
-	OrbitChange,
-	OrbitalSurveillance,
-	Po,
-	Refuel,
-	Sar,
-	Smti,
-	Strike,
-	SystemDeployment,
-	TacticalOrder,
-	WeatherRadar,
+struct_like_serde! {
+	TaskResponseType
+	AirSample -> "AirSample",
+	Amti -> "AMTI",
+	Ao -> "AO",
+	CargoDelivery -> "CargoDelivery",
+	Comint -> "COMINT",
+	CommRelay -> "CommRelay",
+	Ea -> "EA",
+	Esm -> "ESM",
+	Flight -> "Flight",
+	OrbitChange -> "OrbitChange",
+	OrbitalSurveillance -> "OrbitalSurveillance",
+	Po -> "PO",
+	Refuel -> "Refuel",
+	Sar -> "SAR",
+	Smti -> "SMTI",
+	Strike -> "Strike",
+	SystemDeployment -> "SystemDeployment",
+	TacticalOrder -> "TacticalOrder",
+	WeatherRadar -> "WeatherRadar",
 }
 
 #[doc = r#"Identifies the type of this Task instance. Note: When modifying this complexType (whether adding or removing choices), there are equivalent complexTypes that require the same modifications. Changes to this type may necessitate a modification to CapabilityTaxonomyType."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "TaskTypeSerde")]
-#[serde(try_from = "TaskTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum TaskType {
 	#[doc = r#"Air sample includes direct sampling of the air (SAMPLE) and remote sensing with spectral analysis (SPECTROMETER) with the intent of detecting NBC events."#]
 	AirSample(crate::v5_0::types::AirSampleTaskType),
@@ -8936,35 +8069,33 @@ pub enum TaskType {
 	#[doc = r#"Indicates a task to collect weather radar data."#]
 	WeatherRadar(crate::v5_0::types::WeatherRadarTaskType),
 }
-choice_convert_impls! {
-	TaskType - TaskTypeSerde
-	AirSample,
-	Amti,
-	Ao,
-	CargoDelivery,
-	Comint,
-	CommRelay,
-	CounterSpace,
-	Ea,
-	Esm,
-	Flight,
-	OrbitChange,
-	OrbitalSurveillance,
-	OrbitalSurveillanceSensor,
-	Po,
-	Refuel,
-	Sar,
-	Smti,
-	Strike,
-	SystemDeployment,
-	TacticalOrder,
-	WeatherRadar,
+struct_like_serde! {
+	TaskType
+	AirSample -> "AirSample",
+	Amti -> "AMTI",
+	Ao -> "AO",
+	CargoDelivery -> "CargoDelivery",
+	Comint -> "COMINT",
+	CommRelay -> "CommRelay",
+	CounterSpace -> "CounterSpace",
+	Ea -> "EA",
+	Esm -> "ESM",
+	Flight -> "Flight",
+	OrbitChange -> "OrbitChange",
+	OrbitalSurveillance -> "OrbitalSurveillance",
+	OrbitalSurveillanceSensor -> "OrbitalSurveillanceSensor",
+	Po -> "PO",
+	Refuel -> "Refuel",
+	Sar -> "SAR",
+	Smti -> "SMTI",
+	Strike -> "Strike",
+	SystemDeployment -> "SystemDeployment",
+	TacticalOrder -> "TacticalOrder",
+	WeatherRadar -> "WeatherRadar",
 }
 
 #[doc = r#"Provides a choice of timing constraints including repetitive timing and event based repetition."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "TimingConstraintsTypeSerde")]
-#[serde(try_from = "TimingConstraintsTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum TimingConstraintsType {
 	#[doc = r#"Indicates that the timing should be As Soon As Possible."#]
 	AsSoonAsPossible(crate::v5_0::common::EmptyType),
@@ -8975,50 +8106,44 @@ pub enum TimingConstraintsType {
 	#[doc = r#"Indicates a repetition and defines the number and frequency of product collection and generation such as start/stop/frequency or min # of collections."#]
 	Repetitive(crate::v5_0::types::RepetitionConstraintsType),
 }
-choice_convert_impls! {
-	TimingConstraintsType - TimingConstraintsTypeSerde
-	AsSoonAsPossible,
-	TimeWindow,
-	WeekdayInterval,
-	Repetitive,
+struct_like_serde! {
+	TimingConstraintsType
+	AsSoonAsPossible -> "AsSoonAsPossible",
+	TimeWindow -> "TimeWindow",
+	WeekdayInterval -> "WeekdayInterval",
+	Repetitive -> "Repetitive",
 }
 
 #[doc = r#"Choice between a Link 16 TN or UCI EntityID_Type value."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "TrackNumberOrEntityTypeSerde")]
-#[serde(try_from = "TrackNumberOrEntityTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum TrackNumberOrEntityType {
 	#[doc = r#"UUID of the referenced vehicle."#]
 	EntityId(crate::v5_0::types::EntityIdType),
 	#[doc = r#"Link 16 Track Number of the referenced vehicle. Used to reference TNs without a matching UCI object."#]
 	TrackNumber(crate::v5_0::types::Link16TrackIdentifierType),
 }
-choice_convert_impls! {
-	TrackNumberOrEntityType - TrackNumberOrEntityTypeSerde
-	EntityId,
-	TrackNumber,
+struct_like_serde! {
+	TrackNumberOrEntityType
+	EntityId -> "EntityID",
+	TrackNumber -> "TrackNumber",
 }
 
 #[doc = r#"This element is used to specify whether a turn is a bank angle or turn radius."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "TurnGeometryChoiceTypeSerde")]
-#[serde(try_from = "TurnGeometryChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum TurnGeometryChoiceType {
 	#[doc = r#"Indicates the radius of the turn.  When neither BankAngle nor TurnRadius are specified, indicates that the TurnPoint is in the end of a turn."#]
 	TurnRadius(crate::v5_0::common::DistanceType),
 	#[doc = r#"Indicates bank angle of the turn.  When neither BankAngle nor TurnRadius are specified, indicates that the TurnPoint is in the end of a turn."#]
 	BankAngle(crate::v5_0::common::AngleHalfType),
 }
-choice_convert_impls! {
-	TurnGeometryChoiceType - TurnGeometryChoiceTypeSerde
-	TurnRadius,
-	BankAngle,
+struct_like_serde! {
+	TurnGeometryChoiceType
+	TurnRadius -> "TurnRadius",
+	BankAngle -> "BankAngle",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "TurretCommandChoiceTypeSerde")]
-#[serde(try_from = "TurretCommandChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum TurretCommandChoiceType {
 	#[doc = r#"Enumeration defining the Gimbal Modes that must be explicitly commanded. Other modes can be reached by generating an appropriate command (e.g. sending a platform referenced Position command will put the turret in a body fixed mode, while sending a PointTarget will put it into a geo-referenced mode)."#]
 	FixedMode(crate::v5_0::enums::FixedPointingEnum),
@@ -9031,51 +8156,45 @@ pub enum TurretCommandChoiceType {
 	#[doc = r#"Indicates the source of or explicit values for geospatial characteristics of the target of the Command."#]
 	Geospatial(TargetType),
 }
-choice_convert_impls! {
-	TurretCommandChoiceType - TurretCommandChoiceTypeSerde
-	FixedMode,
-	Position,
-	LosPosition,
-	Volume,
-	Geospatial,
+struct_like_serde! {
+	TurretCommandChoiceType
+	FixedMode -> "FixedMode",
+	Position -> "Position",
+	LosPosition -> "LOS_Position",
+	Volume -> "Volume",
+	Geospatial -> "Geospatial",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "TurretReportPointingTypeSerde")]
-#[serde(try_from = "TurretReportPointingTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum TurretReportPointingType {
 	#[doc = r#"Enumeration defining the Gimbal Modes that must be explicitly commanded. Other modes can be reached by generating an appropriate command (e.g. sending a platform referenced Position command will put the turret in a body fixed mode, while sending a PointTarget will put it into a geo-referenced mode)."#]
 	FixedPointing(crate::v5_0::enums::FixedPointingEnum),
 	#[doc = r#"Specifies the look angle of the gimbal using heading and pitch and optional heading and pitch rate of change."#]
 	Dynamic(crate::v5_0::types::TurretReportDynamicPointingType),
 }
-choice_convert_impls! {
-	TurretReportPointingType - TurretReportPointingTypeSerde
-	FixedPointing,
-	Dynamic,
+struct_like_serde! {
+	TurretReportPointingType
+	FixedPointing -> "FixedPointing",
+	Dynamic -> "Dynamic",
 }
 
 #[doc = r#"The ID type for UCI IDs that correspond to a Validator."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ValidatorTypeSerde")]
-#[serde(try_from = "ValidatorTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ValidatorType {
 	#[doc = r#"An Operator identifier."#]
 	OperatorId(crate::v5_0::types::OperatorIdType),
 	#[doc = r#"A non-Operator identifier that consists of a System and possibly a Service."#]
 	NonOperatorIdentifier(crate::v5_0::types::SystemServiceType),
 }
-choice_convert_impls! {
-	ValidatorType - ValidatorTypeSerde
-	OperatorId,
-	NonOperatorIdentifier,
+struct_like_serde! {
+	ValidatorType
+	OperatorId -> "OperatorID",
+	NonOperatorIdentifier -> "NonOperatorIdentifier",
 }
 
 #[doc = r#"Unique identifier for a vehicle. This will differ depending on the type of vehicle. Air platforms will have a Tail Number. Space assets will have a Sat ID. Ships and Subs will have AIS Numbers."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "VehicleUniqueIdentifierTypeSerde")]
-#[serde(try_from = "VehicleUniqueIdentifierTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum VehicleUniqueIdentifierType {
 	#[doc = r#"Indicates select maritime Automatic Identification System (AIS) settings for the asset/vessel."#]
 	Ais(crate::v5_0::types::AisType),
@@ -9086,82 +8205,72 @@ pub enum VehicleUniqueIdentifierType {
 	#[doc = r#"Unique identifier that does not fall into any of the other categories. e.g. A Land based vehicle."#]
 	AlternateIdentifier(crate::v5_0::common::AlphanumericDashSpaceUnderscoreString20Type),
 }
-choice_convert_impls! {
-	VehicleUniqueIdentifierType - VehicleUniqueIdentifierTypeSerde
-	Ais,
-	TailNumber,
-	Satellite,
-	AlternateIdentifier,
+struct_like_serde! {
+	VehicleUniqueIdentifierType
+	Ais -> "AIS",
+	TailNumber -> "TailNumber",
+	Satellite -> "Satellite",
+	AlternateIdentifier -> "AlternateIdentifier",
 }
 
 #[doc = r#"Video encoder output defines the multicast or file to contain the output from an encoder."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "VideoEncoderOutputTypeSerde")]
-#[serde(try_from = "VideoEncoderOutputTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum VideoEncoderOutputType {
 	#[doc = r#"Configure a Multicast or Broadcast IP connection for the video encoder."#]
 	SocketAddress(IpConnectionChoiceType),
 	#[doc = r#"File(s) to output the encoded video data. Type of file could be deduced from the file name extension or from the Type field."#]
 	File(crate::v5_0::types::FileNameAndOutputType),
 }
-choice_convert_impls! {
-	VideoEncoderOutputType - VideoEncoderOutputTypeSerde
-	SocketAddress,
-	File,
+struct_like_serde! {
+	VideoEncoderOutputType
+	SocketAddress -> "SocketAddress",
+	File -> "File",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "VolumeChoiceTypeSerde")]
-#[serde(try_from = "VolumeChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum VolumeChoiceType {
 	#[doc = r#"Indicates a volume defined by an existing OpVolume."#]
 	OpVolumeId(crate::v5_0::types::OpVolumeIdType),
 	#[doc = r#"Indicates a volume defined directly here."#]
 	VolumeTarget(OpVolumeType),
 }
-choice_convert_impls! {
-	VolumeChoiceType - VolumeChoiceTypeSerde
-	OpVolumeId,
-	VolumeTarget,
+struct_like_serde! {
+	VolumeChoiceType
+	OpVolumeId -> "OpVolumeID",
+	VolumeTarget -> "VolumeTarget",
 }
 
 #[doc = r#"Location associated with the specified waypoint expressed as either a geospatial or relative point."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "WayPointPointChoiceTypeSerde")]
-#[serde(try_from = "WayPointPointChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum WayPointPointChoiceType {
 	#[doc = r#"Indicates the geospatial point corresponding to the waypoint.  Generally, services are encouraged to send altitude and/or time data whenever it is known."#]
 	Point2D(crate::v5_0::types::Point2DType),
 	#[doc = r#"Indicates the Relative point corresponding to the waypoint.  Generally, services are encouraged to send altitude data whenever it is known."#]
 	RelativePoint(crate::v5_0::types::Point2DRelativeType),
 }
-choice_convert_impls! {
-	WayPointPointChoiceType - WayPointPointChoiceTypeSerde
-	Point2D,
-	RelativePoint,
+struct_like_serde! {
+	WayPointPointChoiceType
+	Point2D -> "Point2D",
+	RelativePoint -> "RelativePoint",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "WeaponRestrictionTypeSerde")]
-#[serde(try_from = "WeaponRestrictionTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum WeaponRestrictionType {
 	#[doc = r#"Only weapons of this type may be used against a target type and or within a zone."#]
 	WeaponsAllowed(Vec<crate::v5_0::types::StoreType>),
 	#[doc = r#"Weapons of this type are restricted against a target type and or within a zone."#]
 	WeaponsNotAllowed(Vec<crate::v5_0::types::StoreType>),
 }
-choice_convert_impls! {
-	WeaponRestrictionType - WeaponRestrictionTypeSerde
-	WeaponsAllowed,
-	WeaponsNotAllowed,
+struct_like_serde! {
+	WeaponRestrictionType
+	WeaponsAllowed -> "WeaponsAllowed",
+	WeaponsNotAllowed -> "WeaponsNotAllowed",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "WeaponTargetPairingChoiceTypeSerde")]
-#[serde(try_from = "WeaponTargetPairingChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum WeaponTargetPairingChoiceType {
 	#[doc = r#"Indicates a weapon-target pair or pairs given in a DMPI_Designation."#]
 	DmpiDesignationId(crate::v5_0::types::DmpiDesignationIdType),
@@ -9172,18 +8281,16 @@ pub enum WeaponTargetPairingChoiceType {
 	#[doc = r#"Indicates a weapon-target pair expressed directly, independent of DMPIs."#]
 	Weaponeering(Vec<crate::v5_0::types::WeaponeeringLocationType>),
 }
-choice_convert_impls! {
-	WeaponTargetPairingChoiceType - WeaponTargetPairingChoiceTypeSerde
-	DmpiDesignationId,
-	DmpiPatternId,
-	DmpiId,
-	Weaponeering,
+struct_like_serde! {
+	WeaponTargetPairingChoiceType
+	DmpiDesignationId -> "DMPI_DesignationID",
+	DmpiPatternId -> "DMPI_PatternID",
+	DmpiId -> "DMPI_ID",
+	Weaponeering -> "Weaponeering",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "WeatherDataTypeSerde")]
-#[serde(try_from = "WeatherDataTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum WeatherDataType {
 	#[doc = r#"This element represents a report of current or forecasted weather."#]
 	WeatherReport(crate::v5_0::types::WeatherReportDataType),
@@ -9192,97 +8299,85 @@ pub enum WeatherDataType {
 	#[doc = r#"This element references a weather product that is defined by ProductMetadata and ProductLocation messages. An example of this type of product would be a GRIB file."#]
 	WeatherProductId(crate::v5_0::types::ProductMetadataIdType),
 }
-choice_convert_impls! {
-	WeatherDataType - WeatherDataTypeSerde
-	WeatherReport,
-	WeatherWarning,
-	WeatherProductId,
+struct_like_serde! {
+	WeatherDataType
+	WeatherReport -> "WeatherReport",
+	WeatherWarning -> "WeatherWarning",
+	WeatherProductId -> "WeatherProductID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "WeatherRadarCommandTypeSerde")]
-#[serde(try_from = "WeatherRadarCommandTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum WeatherRadarCommandType {
 	#[doc = r#"Indicates a new invocation of a Weather Radar Capability.  Generally, if accepted, the command will result in one or more new Weather Radar Activities being created and reported via the WeatherRadarActivity message.  The request/response interaction terminates as soon as the command is accepted or rejected; this element is not used to interact with an "active" command.  Updates and/or additional interaction with the resulting Activity (after the command is accepted) is accomplished via the sibling Activity element."#]
 	Capability(crate::v5_0::types::WeatherRadarCapabilityCommandType),
 	#[doc = r#"Indicates a command to modify an existing Weather Radar Activity (which was previously reported via the WeatherRadarActivity message and was marked as "interactive").  The request/response interaction terminates as soon as the modification is accepted or rejected.  The modifications are reflected in subsequent WeatherRadarActivity messages."#]
 	Activity(crate::v5_0::types::RadarActivityCommandType),
 }
-choice_convert_impls! {
-	WeatherRadarCommandType - WeatherRadarCommandTypeSerde
-	Capability,
-	Activity,
+struct_like_serde! {
+	WeatherRadarCommandType
+	Capability -> "Capability",
+	Activity -> "Activity",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "WeatherReportTypeSerde")]
-#[serde(try_from = "WeatherReportTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum WeatherReportType {
 	#[doc = r#"This element represents a summary of the weather conditions across the entire weather area."#]
 	AreaData(crate::v5_0::types::WeatherAreaDataType),
 	#[doc = r#"This element represents a point at which Weather applies.  This allows weather to be expressed as a grid of points across the weather area."#]
 	GridData(Vec<crate::v5_0::types::WeatherReportGridDataType>),
 }
-choice_convert_impls! {
-	WeatherReportType - WeatherReportTypeSerde
-	AreaData,
-	GridData,
+struct_like_serde! {
+	WeatherReportType
+	AreaData -> "AreaData",
+	GridData -> "GridData",
 }
 
 #[doc = r#"Indicates wind as a velocity or as a magnitude and speed value."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "WindDataChoiceTypeSerde")]
-#[serde(try_from = "WindDataChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum WindDataChoiceType {
 	#[doc = r#"Indicates wind speed and direction."#]
 	WindVelocity(crate::v5_0::types::Velocity2DType),
 	#[doc = r#"Indicates a direction and a wind speed ."#]
 	WindMagnitude(crate::v5_0::types::WindMagnitudeType),
 }
-choice_convert_impls! {
-	WindDataChoiceType - WindDataChoiceTypeSerde
-	WindVelocity,
-	WindMagnitude,
+struct_like_serde! {
+	WindDataChoiceType
+	WindVelocity -> "WindVelocity",
+	WindMagnitude -> "WindMagnitude",
 }
 
 #[doc = r#"Contains the information."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "WorkingEobSourceIdChoiceTypeSerde")]
-#[serde(try_from = "WorkingEobSourceIdChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum WorkingEobSourceIdChoiceType {
 	#[doc = r#"Indicates the SystemID of the System whose "reference catalog" records should-be/were used to create the WorkingEOB."#]
 	SystemId(crate::v5_0::types::SystemIdType),
 	#[doc = r#"Indicates the unique ID of an existing "parent" WorkingEOB to-use/used as the basis to create the WorkingEOB."#]
 	WorkingEobId(crate::v5_0::types::WorkingEobIdType),
 }
-choice_convert_impls! {
-	WorkingEobSourceIdChoiceType - WorkingEobSourceIdChoiceTypeSerde
-	SystemId,
-	WorkingEobId,
+struct_like_serde! {
+	WorkingEobSourceIdChoiceType
+	SystemId -> "SystemID",
+	WorkingEobId -> "WorkingEOB_ID",
 }
 
 #[doc = r#"Contains the information for the source of a WorkingSOB."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "WorkingSobSourceIdChoiceTypeSerde")]
-#[serde(try_from = "WorkingSobSourceIdChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum WorkingSobSourceIdChoiceType {
 	#[doc = r#"Indicates the SystemID of the System whose "reference catalog" records should-be/were used to create the WorkingSOB."#]
 	SystemId(crate::v5_0::types::SystemIdType),
 	#[doc = r#"Indicates the unique ID of an existing "parent" WorkingSOB to-use/used as the basis to create the WorkingSOB."#]
 	WorkingSobId(crate::v5_0::types::WorkingSobIdType),
 }
-choice_convert_impls! {
-	WorkingSobSourceIdChoiceType - WorkingSobSourceIdChoiceTypeSerde
-	SystemId,
-	WorkingSobId,
+struct_like_serde! {
+	WorkingSobSourceIdChoiceType
+	SystemId -> "SystemID",
+	WorkingSobId -> "WorkingSOB_ID",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ZChoiceTypeSerde")]
-#[serde(try_from = "ZChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ZChoiceType {
 	#[doc = r#"Offset in the Z direction from the reference frame origin. Down is positive."#]
 	Z(crate::v5_0::common::DistanceOffsetType),
@@ -9291,26 +8386,24 @@ pub enum ZChoiceType {
 	#[doc = r#"Optional choice to use Absolute Altitude per altitude reference instead of a vertical offset from the reference frame origin."#]
 	AbsoluteAltitude(crate::v5_0::types::AltitudeReferenceType),
 }
-choice_convert_impls! {
-	ZChoiceType - ZChoiceTypeSerde
-	Z,
-	AltitudeOffset,
-	AbsoluteAltitude,
+struct_like_serde! {
+	ZChoiceType
+	Z -> "Z",
+	AltitudeOffset -> "AltitudeOffset",
+	AbsoluteAltitude -> "AbsoluteAltitude",
 }
 
 #[doc = r#"See annotations in child elements and messages/elements that use this type for details."#]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(into = "ZoneChoiceTypeSerde")]
-#[serde(try_from = "ZoneChoiceTypeSerde")]
+#[derive(Clone, Debug, PartialEq)]
 pub enum ZoneChoiceType {
 	#[doc = r#"Indicates a zone defined by an existing OpZone."#]
 	OpZoneId(crate::v5_0::types::OpZoneIdType),
 	#[doc = r#"Indicates a zone defined directly here."#]
 	ZoneTarget(crate::v5_0::types::ZoneExternalType),
 }
-choice_convert_impls! {
-	ZoneChoiceType - ZoneChoiceTypeSerde
-	OpZoneId,
-	ZoneTarget,
+struct_like_serde! {
+	ZoneChoiceType
+	OpZoneId -> "OpZoneID",
+	ZoneTarget -> "ZoneTarget",
 }
 
