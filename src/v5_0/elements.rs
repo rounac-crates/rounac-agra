@@ -1665,7 +1665,6 @@ impl Into<crate::v5_0::types::AirfieldReportMt> for AirfieldReport {
 
 #[doc = r#"This message indicates the combined in-work and to-do list of the AMTI Capability of a Subsystem of a System.  In general, a [Capability]Activity message describes what invoked Capabilities are doing.  It is generally a complete, coherent snapshot of all Activities of a Subsystem for an entire Capability category (such as ESM, AirSample, EA, etc.).  In other words, an Activity is the dynamic, per-use/per-invocation status of a Capability.  An Activity is an abstraction that includes 1) the autonomous (MDF-driven or MissionPlan-driven) activity of a Capability, 2) the activity resulting from manual commands (AMTI_Command) from an Operator or Capability management Service, 3) currently in-work AMTI, 4) AMTI scheduled for the future and 5) AMTI that was scheduled and/or attempted but couldn't be completed due to resource limitations or other reasons.  A single AMTI_Command or other triggering event can result in multiple activities within the AMTI_Activity message.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "AMTI_Activity")]
 pub struct AmtiActivity(
 	pub crate::v5_0::types::AmtiActivityMt,
 );
@@ -1704,7 +1703,6 @@ impl Into<crate::v5_0::types::AmtiActivityMt> for AmtiActivity {
 
 #[doc = r#"This message represents the AMTI (Airborne Moving Target Indicator) category of UCI Capability.  AMTI detects aircraft through active radar search and track.  This message "advertises" the mostly static characteristics of a mission-ready AMTI Capability (of a Subsystem of System) so that it can be "discovered" and used.  "Discovery" can be a misnomer depending on your perspective.  UCI Capability messages aren't meant to enable dynamic discovery of design details of never-before-seen Capabilities.  They don't eliminate the need for future software updates or configuration files with performance characteristics indexed by Subsystem model number.  UCI Capability messages are meant to support discovery of what changes for a Capability from mission to mission or even within the course of a mission, especially as it relates to command and control.  In UCI terminology, a Capability is something a System can do that is useful in Missions performed by a heterogeneous family of Systems and Services.  A [Capability]Capability message describes what a Subsystem is capable of doing if invoked.  A [Capability]Activity message describes what a Capability is doing.  Capabilities are aligned with end effects of Mission operations such as imagery collection, active target search, passive threat detection, electronic attack and others.  Functions which support these end effects turret control, carriage control and door control aren't considered UCI Capabilities but might be addressed by other UCI messages.  Capabilities are the standardized taxonomy of high level Mission end-effects functions a System can perform.  Further, the Capability taxonomy establishes the "level" at which the Mission Subsystems of a System: 1) can be controlled, 2) can be functionally re-integrated into new Systems without their application software changing, 3) are modeled by allocation and planning services including Task Allocation, Route Planning, Mission Monitoring/Contingency and Task Generation services, 4) are modeled by Capability management services including Capability Managers and Capability Controllers and 5) report their configuration, availability and status.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "AMTI_Capability")]
 pub struct AmtiCapability(
 	pub crate::v5_0::types::AmtiCapabilityMt,
 );
@@ -1743,7 +1741,6 @@ impl Into<crate::v5_0::types::AmtiCapabilityMt> for AmtiCapability {
 
 #[doc = r#"This message reports the current status of the AMTI capabilities available to the system.   This includes information regarding whether or not each capability is currently available based on hardware status, commanded operational states, associated RF profiles etc.  Since AMTI capabilities refer specifically to an active capability, an EMCON restriction can result in the AMTI capabilities being temporarily unavailable.UCI_PRIMITIVE: Status-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "AMTI_CapabilityStatus")]
 pub struct AmtiCapabilityStatus(
 	pub crate::v5_0::types::AmtiCapabilityStatusMt,
 );
@@ -1782,7 +1779,6 @@ impl Into<crate::v5_0::types::AmtiCapabilityStatusMt> for AmtiCapabilityStatus {
 
 #[doc = r#"This message is the AMTI (Airborne Moving Target Indicator) form of the general UCI Capability Command.  AMTI is a radar Capability that includes active transmission of RF signals.  It is used to manually invoke an AMTI Capability to perform a new AMTI Activity or to make a change to an existing interactive AMTI Activity.  It differs from an AMTI Task because it is intended for direct interaction with the host of the Capability and is not expected to impact the route of the host System or otherwise interrupt the planned MissionPlan.  Additionally, Capability Commands are intended to allow multiple clients to use a single Capability as a shared resource; see the Control* series of messages.  Capability Commands can be used in parallel with Tasks, but are generally deferential to them.  However, exceptions are allowed and even expected; the relationship between Tasks and Capability Commands is not rigidly dictated by the UCI schema.  Several mechanisms are provided in other messages to tailor the relationship and relative importance of Tasks and [Capability]Commands including Capability precedence, Task rank, [Capability]Command rank, [Capability]Activity rank and control Authorization.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "AMTI_Command")]
 pub struct AmtiCommand(
 	pub crate::v5_0::types::AmtiCommandMt,
 );
@@ -1821,7 +1817,6 @@ impl Into<crate::v5_0::types::AmtiCommandMt> for AmtiCommand {
 
 #[doc = r#"This message indicates the result of an AMTI_Command.  This message will reflect whether the command was received, accepted and/or rejected.  This message will only be used to status the command until the recipient determines whether or not it can be started or scheduled.  The details of the specific activity or activities that result from the command will report status via the AMTI_Activity message.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "AMTI_CommandStatus")]
 pub struct AmtiCommandStatus(
 	pub crate::v5_0::types::AmtiCommandStatusMt,
 );
@@ -1860,7 +1855,6 @@ impl Into<crate::v5_0::types::AmtiCommandStatusMt> for AmtiCommandStatus {
 
 #[doc = r#"This message is used to change the "settings" associated with all of the AMTI Capabilities of a Subsystem.  [Capability]SettingsCommands generally affect the subsequent operation of all applicable Capabilities of the Subsystem; they are considered presettings, independent of [Capability]Command.  Unlike most [Capability]Commands they are understood to remain set until changed.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "AMTI_SettingsCommand")]
 pub struct AmtiSettingsCommand(
 	pub crate::v5_0::types::AmtiSettingsCommandMt,
 );
@@ -1899,7 +1893,6 @@ impl Into<crate::v5_0::types::AmtiSettingsCommandMt> for AmtiSettingsCommand {
 
 #[doc = r#"Reports the acknowledgment and/or acceptance of an AMTI settings command.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "AMTI_SettingsCommandStatus")]
 pub struct AmtiSettingsCommandStatus(
 	pub crate::v5_0::types::AmtiSettingsCommandStatusMt,
 );
@@ -2052,7 +2045,6 @@ impl Into<crate::v5_0::types::AnalysisRouteRequestStatusMt> for AnalysisRouteReq
 
 #[doc = r#"This message indicates the combined in-work and to-do list of the AO Capability of a Subsystem of a System.  In general, a [Capability]Activity message describes what invoked Capabilities are doing.  It is generally a complete, coherent snapshot of all Activities of a Subsystem for an entire Capability category (such as ESM, AirSample, EA, etc.).  In other words, an Activity is the dynamic, per-use/per-invocation status of a Capability.  An Activity is an abstraction that includes 1) the autonomous (MDF-driven or MissionPlan-driven) activity of a Capability, 2) the activity resulting from manual commands (AO_Command) from an Operator or Capability management Service, 3) currently in-work AO, 4) AO scheduled for the future and 5) AO that was scheduled and/or attempted but couldn't be completed due to resource limitations or other reasons.  A single AO_Command or other triggering event can result in multiple activities within the AO_Activity message.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "AO_Activity")]
 pub struct AoActivity(
 	pub crate::v5_0::types::AoActivityMt,
 );
@@ -2091,7 +2083,6 @@ impl Into<crate::v5_0::types::AoActivityMt> for AoActivity {
 
 #[doc = r#"This message represents the AO (Active Optical) category of UCI Capability.  This message "advertises" the mostly static characteristics of a mission-ready AO Capability (of a Subsystem of System) so that it can be "discovered" and used.  "Discovery" can be a misnomer depending on your perspective.  UCI Capability messages aren't meant to enable dynamic discovery of design details of never-before-seen Capabilities.  They don't eliminate the need for future software updates or configuration files with performance characteristics indexed by Subsystem model number.  UCI Capability messages are meant to support discovery of what changes for a Capability from mission to mission or even within the course of a mission, especially as it relates to command and control.  In UCI terminology, a Capability is something a System can do that is useful in Missions performed by a heterogeneous family of Systems and Services.  A [Capability]Capability message describes what a Subsystem is capable of doing if invoked.  A [Capability]Activity message describes what a Capability is doing.  Capabilities are aligned with end effects of Mission operations such as imagery collection, active target search, passive threat detection, electronic attack and others.  Functions which support these end effects including turret control, carriage control and door control aren't considered UCI Capabilities but might be addressed by other UCI messages.  Capabilities are the standardized taxonomy of high level Mission end-effects functions a System can perform.  Further, the Capability taxonomy establishes the "level" at which the Mission Subsystems of a System: 1) can be controlled, 2) can be functionally re-integrated into new Systems without their application software changing, 3) are modeled by allocation and planning services including Task Allocation, Route Planning, Mission Monitoring/Contingency and Task Generation services, 4) are modeled by Capability management services including Capability Managers and Capability Controllers and 5) report their configuration, availability and status.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "AO_Capability")]
 pub struct AoCapability(
 	pub crate::v5_0::types::AoCapabilityMt,
 );
@@ -2130,7 +2121,6 @@ impl Into<crate::v5_0::types::AoCapabilityMt> for AoCapability {
 
 #[doc = r#"This message reports the current status of the AO capabilities available to the system.   This includes information regarding whether or not each capability is currently available based on hardware status, commanded operational states, associated RF profiles etc.  Since AO capabilities refer specifically to an active capability, an EMCON restriction can result in the AO capabilities being temporarily unavailable.UCI_PRIMITIVE: Status-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "AO_CapabilityStatus")]
 pub struct AoCapabilityStatus(
 	pub crate::v5_0::types::AoCapabilityStatusMt,
 );
@@ -2169,7 +2159,6 @@ impl Into<crate::v5_0::types::AoCapabilityStatusMt> for AoCapabilityStatus {
 
 #[doc = r#"This message is the AO (Active Optical) form of the general UCI Capability Command.  It is used to manually invoke an Active Optical Capability (such as a laser designation) to perform a new AO Activity or change an existing interactive AO Activity.  It differs from an AO Task because it is intended for direct interaction with the host of the Capability, not a planning Service, and therefore is not expected to impact the route of the host System or otherwise interrupt the planned MissionPlan.  Additionally, Capability Commands are intended to allow multiple clients to use a single Capability as a shared resource; see the Control* series of messages.  Capability Commands can be used in parallel with Tasks, but are generally deferential to them.  However, exceptions are allowed and even expected; the relationship between Tasks and Capability Commands is not rigidly dictated by the UCI schema.  Several mechanisms are provided in other messages to tailor the relationship and relative importance of Tasks and [Capability]Commands including Capability precedence, Task rank, [Capability]Command rank, [Capability]Activity rank and control Authorization.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "AO_Command")]
 pub struct AoCommand(
 	pub crate::v5_0::types::AoCommandMt,
 );
@@ -2208,7 +2197,6 @@ impl Into<crate::v5_0::types::AoCommandMt> for AoCommand {
 
 #[doc = r#"This message indicates the result of an AO_Command.  This message will reflect whether the command was received, accepted and/or rejected.  This message will only be used to status the command until the recipient determines whether or not it can be started or scheduled.  The details of the specific activity or activities that result from the command will report status via the AO_Activity message.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "AO_CommandStatus")]
 pub struct AoCommandStatus(
 	pub crate::v5_0::types::AoCommandStatusMt,
 );
@@ -2247,7 +2235,6 @@ impl Into<crate::v5_0::types::AoCommandStatusMt> for AoCommandStatus {
 
 #[doc = r#"This message is used to request consent to perform and Active Optical Activity.  Status for this command message is provided via the AO_ConsentRequestStatus message.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "AO_ConsentRequest")]
 pub struct AoConsentRequest(
 	pub crate::v5_0::types::AoConsentRequestMt,
 );
@@ -2286,7 +2273,6 @@ impl Into<crate::v5_0::types::AoConsentRequestMt> for AoConsentRequest {
 
 #[doc = r#"This message indicates the status of the consent request to perform an Active Optical Activity.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "AO_ConsentRequestStatus")]
 pub struct AoConsentRequestStatus(
 	pub crate::v5_0::types::AoConsentRequestStatusMt,
 );
@@ -2325,7 +2311,6 @@ impl Into<crate::v5_0::types::AoConsentRequestStatusMt> for AoConsentRequestStat
 
 #[doc = r#"This message is used to change the "settings" associated with all of the AO Capabilities of a Subsystem.  [Capability]SettingsCommands generally affect the subsequent operation of all applicable Capabilities of the Subsystem; they are considered presettings, independent of [Capability]Command.  Unlike most [Capability]Commands they are understood to remain set until changed.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "AO_SettingsCommand")]
 pub struct AoSettingsCommand(
 	pub crate::v5_0::types::AoSettingsCommandMt,
 );
@@ -2364,7 +2349,6 @@ impl Into<crate::v5_0::types::AoSettingsCommandMt> for AoSettingsCommand {
 
 #[doc = r#"This message indicates the status of an AO settings command.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "AO_SettingsCommandStatus")]
 pub struct AoSettingsCommandStatus(
 	pub crate::v5_0::types::AoSettingsCommandStatusMt,
 );
@@ -3087,7 +3071,6 @@ impl Into<crate::v5_0::types::CargoStatusMt> for CargoStatus {
 
 #[doc = r#"This message indicates the combined in-work and to-do list of the COMINT Capability of a Subsystem of a System.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "COMINT_Activity")]
 pub struct ComintActivity(
 	pub crate::v5_0::types::ComintActivityMt,
 );
@@ -3126,7 +3109,6 @@ impl Into<crate::v5_0::types::ComintActivityMt> for ComintActivity {
 
 #[doc = r#"This message represents the COMINT category of UCI Capability, and includes both COMINT and ELINT functions.  This message "advertises" the mostly static characteristics of a mission-ready Capability (of a Subsystem of System) so that it can be "discovered" and used.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "COMINT_Capability")]
 pub struct ComintCapability(
 	pub crate::v5_0::types::ComintCapabilityMt,
 );
@@ -3165,7 +3147,6 @@ impl Into<crate::v5_0::types::ComintCapabilityMt> for ComintCapability {
 
 #[doc = r#"This message reports the current status of the COMINT capabilities available to the system as advertised in the COMINT_Capability message.  This includes information regarding whether or not each capability is currently available based on hardware status, commanded operational states, associated RF profiles etc.UCI_PRIMITIVE: Status-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "COMINT_CapabilityStatus")]
 pub struct ComintCapabilityStatus(
 	pub crate::v5_0::types::ComintCapabilityStatusMt,
 );
@@ -3204,7 +3185,6 @@ impl Into<crate::v5_0::types::ComintCapabilityStatusMt> for ComintCapabilityStat
 
 #[doc = r#"This message is the COMINT form of the general UCI Capability Command.  It is used to manually invoke a COMINT Capability to perform a new COMINT Activity or change an existing interactive Activity.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "COMINT_Command")]
 pub struct ComintCommand(
 	pub crate::v5_0::types::ComintCommandMt,
 );
@@ -3243,7 +3223,6 @@ impl Into<crate::v5_0::types::ComintCommandMt> for ComintCommand {
 
 #[doc = r#"This message indicates the result of a Command.  This message will reflect whether the command was received, accepted and/or rejected.  This message will only be used to status the command until the recipient determines whether or not it can be started or scheduled.  The details of the specific activity or activities that result from the command will report status via the Activity message.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "COMINT_CommandStatus")]
 pub struct ComintCommandStatus(
 	pub crate::v5_0::types::ComintCommandStatusMt,
 );
@@ -3282,7 +3261,6 @@ impl Into<crate::v5_0::types::ComintCommandStatusMt> for ComintCommandStatus {
 
 #[doc = r#"This message is used to request consent to perform a function.  Status for this command message is provided via the ConsentRequestStatus message.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "COMINT_ConsentRequest")]
 pub struct ComintConsentRequest(
 	pub crate::v5_0::types::ComintConsentRequestMt,
 );
@@ -3321,7 +3299,6 @@ impl Into<crate::v5_0::types::ComintConsentRequestMt> for ComintConsentRequest {
 
 #[doc = r#"This message is used to report consent request status for its corresponding ConsentRequest message.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "COMINT_ConsentRequestStatus")]
 pub struct ComintConsentRequestStatus(
 	pub crate::v5_0::types::ComintConsentRequestStatusMt,
 );
@@ -3360,7 +3337,6 @@ impl Into<crate::v5_0::types::ComintConsentRequestStatusMt> for ComintConsentReq
 
 #[doc = r#"This message is used to change the "settings" associated with all of the Capabilities of a Subsystem.  [Capability]SettingsCommands generally affect the subsequent operation of all applicable Capabilities of the Subsystem; they are considered presettings, independent of [Capability]Command.  Unlike most [Capability]Commands they are understood to remain set until changed.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "COMINT_SettingsCommand")]
 pub struct ComintSettingsCommand(
 	pub crate::v5_0::types::ComintSettingsCommandMt,
 );
@@ -3399,7 +3375,6 @@ impl Into<crate::v5_0::types::ComintSettingsCommandMt> for ComintSettingsCommand
 
 #[doc = r#"This message is used to report settings status for its corresponding SettingsCommand message used to change the settings associated with known capabilities.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "COMINT_SettingsCommandStatus")]
 pub struct ComintSettingsCommandStatus(
 	pub crate::v5_0::types::ComintSettingsCommandStatusMt,
 );
@@ -7048,7 +7023,6 @@ impl Into<crate::v5_0::types::DiscreteStatusMt> for DiscreteStatus {
 
 #[doc = r#"This message represents a single Dynamic Launch Zone (DLZ).UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "DLZ")]
 pub struct Dlz(
 	pub crate::v5_0::types::DlzMt,
 );
@@ -7087,7 +7061,6 @@ impl Into<crate::v5_0::types::DlzMt> for Dlz {
 
 #[doc = r#"This message is used to request the generation of a Dynamic Launch Zone (DLZ) for a weapon.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "DLZ_Request")]
 pub struct DlzRequest(
 	pub crate::v5_0::types::DlzRequestMt,
 );
@@ -7126,7 +7099,6 @@ impl Into<crate::v5_0::types::DlzRequestMt> for DlzRequest {
 
 #[doc = r#"This message provides status for a previously submitted DLZ_Request.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "DLZ_RequestStatus")]
 pub struct DlzRequestStatus(
 	pub crate::v5_0::types::DlzRequestStatusMt,
 );
@@ -7166,7 +7138,6 @@ impl Into<crate::v5_0::types::DlzRequestStatusMt> for DlzRequestStatus {
 #[doc = r#"This message represents a single Designated/Desired Mean Point of Impact (DMPI) for a weapon/store.  The DMPI series of messages are designed to be used collectively to support a variety of use cases by separating data content into independent messages aligned with typical use case actors.  As an example, a dynamic mission planning use case would begin with a strike Task allocated to a System who would refer to it when sending a DMPI_DesignationRequest message.  A targeting cell or other system would then respond with a DMPI_Designation message plus one or more DMPI and DMPI_Status messages and, if applicable, a DMPI_Pattern message.  The System which the strike Task was allocated to (or its representative) would then report DMPI_Status as the strike Task proceeds.  A variety of pre-mission and other use cases are also supported.  For example, a targeting cell or other System could provide DMPI_Designation and/or DMPI messages independent of strike Tasks by omitting the DMPI_DesignationRequest message from the use case described above.
 A single DMPI can have multiple desired weapons/stores.  See annotations for the DMPI_Status message for further details.UCI_PRIMITIVE: DataRecord-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "DMPI")]
 pub struct Dmpi(
 	pub crate::v5_0::types::DmpiMt,
 );
@@ -7205,7 +7176,6 @@ impl Into<crate::v5_0::types::DmpiMt> for Dmpi {
 
 #[doc = r#"This message is a request to cancel a previously planned and allocated DMPI.  A planning input such as MetaTask, Task and DMPI can't easily be canceled or removed from the System due to race conditions between their various users and publishers, inevitability of the associated action, etc.  Additionally, the operator or service initiating the cancellation might be different than the one that manages the DMPI.  In order to avoid race conditions, receive positive feedback on the success of the cancellation and allow canceled messages/objects to remain in the system for historical purposes, an explicit DMPI_CancelCommand is necessary.  A DMPI_CancelCommand shall result in the DMPI being canceled unless execution was already inevitable.  Status or feedback for this message is given through DMPI_Status.  Therefore, it does not form a typical request/response pair.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "DMPI_CancelCommand")]
 pub struct DmpiCancelCommand(
 	pub crate::v5_0::types::DmpiCancelCommandMt,
 );
@@ -7244,7 +7214,6 @@ impl Into<crate::v5_0::types::DmpiCancelCommandMt> for DmpiCancelCommand {
 
 #[doc = r#"This message is sent in response to a DMPI_CancelCommand and indicates if the DMPI was canceled and if not why it was not canceled.  The resulting status of the DMPI is reported in DMPI_Status.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "DMPI_CancelCommandStatus")]
 pub struct DmpiCancelCommandStatus(
 	pub crate::v5_0::types::DmpiCancelCommandStatusMt,
 );
@@ -7283,7 +7252,6 @@ impl Into<crate::v5_0::types::DmpiCancelCommandStatusMt> for DmpiCancelCommandSt
 
 #[doc = r#"This message specifies a set of DMPIs or a DMPI pattern for a given target.  This message can be a response to DMPI_DesignationRequest.  It can also be sent independently as a means of establishing a DMPI designation or pattern during pre-mission planning or at any other time prior to being requested.  See the annotations for the DMPI message for an overview of the entire DMPI series of messages.UCI_PRIMITIVE: DataRecord-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "DMPI_Designation")]
 pub struct DmpiDesignation(
 	pub crate::v5_0::types::DmpiDesignationMt,
 );
@@ -7322,7 +7290,6 @@ impl Into<crate::v5_0::types::DmpiDesignationMt> for DmpiDesignation {
 
 #[doc = r#"This message is used to request DMPIs (to target an Entity) from a targeting cell or other node.  See the annotations for the DMPI message for an overview of the entire DMPI series of messages.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "DMPI_DesignationRequest")]
 pub struct DmpiDesignationRequest(
 	pub crate::v5_0::types::DmpiDesignationRequestMt,
 );
@@ -7361,7 +7328,6 @@ impl Into<crate::v5_0::types::DmpiDesignationRequestMt> for DmpiDesignationReque
 
 #[doc = r#"This message provides status for a DMPI_DesignationRequest.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "DMPI_DesignationRequestStatus")]
 pub struct DmpiDesignationRequestStatus(
 	pub crate::v5_0::types::DmpiDesignationRequestStatusMt,
 );
@@ -7400,7 +7366,6 @@ impl Into<crate::v5_0::types::DmpiDesignationRequestStatusMt> for DmpiDesignatio
 
 #[doc = r#"This message represents a pattern or group of DMPIs.  DMPI patterns are used to express spatial relationships between DMPIs of a single target.  See the annotations for the DMPI message for an overview of the entire DMPI series of messages.UCI_PRIMITIVE: DataRecord-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "DMPI_Pattern")]
 pub struct DmpiPattern(
 	pub crate::v5_0::types::DmpiPatternMt,
 );
@@ -7442,7 +7407,6 @@ For a single store DMPI (a DMPI that will be attacked with a single weapon/store
 For a multiple store DMPI associated with multiple Tasks this element provides partial status for one Task.  Multiple DMPI_Status messages from multiple sources are expected in this case, each referencing the same DMPI_ID but different Tasks, Systems and/or mission plans.
 See the annotations for the DMPI message for an overview of the entire DMPI series of messages.UCI_PRIMITIVE: Status-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "DMPI_Status")]
 pub struct DmpiStatus(
 	pub crate::v5_0::types::DmpiStatusMt,
 );
@@ -7595,7 +7559,6 @@ impl Into<crate::v5_0::types::DoorStatusMt> for DoorStatus {
 
 #[doc = r#"This message indicates the combined in-work and to-do list of the EA Capability of a Subsystem of a System.  In general, a [Capability]Activity message describes what invoked Capabilities are doing.  It is generally a complete, coherent snapshot of all Activities of a Subsystem for an entire Capability category (such as ESM, AirSample, EA, etc.).  In other words, an Activity is the dynamic, per-use/per-invocation status of a Capability.  An Activity is an abstraction that includes 1) the autonomous (MDF-driven or MissionPlan-driven) activity of a Capability, 2) the activity resulting from manual commands (EA_Command) from an Operator or Capability management Service, 3) currently in-work EA, 4) EA scheduled for the future and 5) EA that was scheduled and/or attempted but couldn't be completed due to resource limitations or other reasons.  A single EA_Command or other triggering event can result in multiple activities within the EA_Activity message.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "EA_Activity")]
 pub struct EaActivity(
 	pub crate::v5_0::types::EaActivityMt,
 );
@@ -7634,7 +7597,6 @@ impl Into<crate::v5_0::types::EaActivityMt> for EaActivity {
 
 #[doc = r#"This message represents the EA (Electronic Attack) category of UCI Capability.  This message "advertises" the mostly static characteristics of a mission-ready EA Capability (of a Subsystem of System) so that it can be "discovered" and used.  "Discovery" can be a misnomer depending on your perspective.  UCI Capability messages aren't meant to enable dynamic discovery of design details of never-before-seen Capabilities.  They don't eliminate the need for future software updates or configuration files with performance characteristics indexed by Subsystem model number.  UCI Capability messages are meant to support discovery of what changes for a Capability from mission to mission or even within the course of a mission, especially as it relates to command and control.  In UCI terminology, a Capability is something a System can do that is useful in Missions performed by a heterogeneous family of Systems and Services.  A [Capability]Capability message describes what a Subsystem is capable of doing if invoked.  A [Capability]Activity message describes what a Capability is doing.  Capabilities are aligned with end effects of Mission operations such as imagery collection, active target search, passive threat detection, electronic attack and others.  Functions which support these end effects including turret control, carriage control and door control aren't considered UCI Capabilities but might be addressed by other UCI messages.  Capabilities are the standardized taxonomy of high level Mission end-effects functions a System can perform.  Further, the Capability taxonomy establishes the "level" at which the Mission Subsystems of a System: 1) can be controlled, 2) can be functionally re-integrated into new Systems without their application software changing, 3) are modeled by allocation and planning services including Task Allocation, Route Planning, Mission Monitoring/Contingency and Task Generation services, 4) are modeled by Capability management services including Capability Managers and Capability Controllers and 5) report their configuration, availability and status.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "EA_Capability")]
 pub struct EaCapability(
 	pub crate::v5_0::types::EaCapabilityMt,
 );
@@ -7673,7 +7635,6 @@ impl Into<crate::v5_0::types::EaCapabilityMt> for EaCapability {
 
 #[doc = r#"This message is used to report the current status of the EA (Electronic Attack) capabilities available to the system as advertised in the EA_Capability message.  This includes information regarding whether or not each capability is currently available based on hardware status, commanded operational states, associated RF profiles etc.UCI_PRIMITIVE: Status-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "EA_CapabilityStatus")]
 pub struct EaCapabilityStatus(
 	pub crate::v5_0::types::EaCapabilityStatusMt,
 );
@@ -7712,7 +7673,6 @@ impl Into<crate::v5_0::types::EaCapabilityStatusMt> for EaCapabilityStatus {
 
 #[doc = r#"This message is the EA (Electronic Attack) form of the general UCI Capability Command.  It is used to manually invoke an EA Capability to perform a new EA Activity or change an existing interactive EA Activity.  It differs from an EA Task because it is intended for direct interaction with the host of the Capability, not a planning Service, and therefore is not expected to impact the route of the host System or otherwise interrupt the planned MissionPlan.  Additionally, Capability Commands are intended to allow multiple clients to use a single Capability as a shared resource; see the Control* series of messages.  Capability Commands can be used in parallel with Tasks, but are generally deferential to them.  However, exceptions are allowed and even expected; the relationship between Tasks and Capability Commands is not rigidly dictated by the UCI schema.  Several mechanisms are provided in other messages to tailor the relationship and relative importance of Tasks and [Capability]Commands including Capability precedence, Task rank, [Capability]Command rank, [Capability]Activity rank and control Authorization.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "EA_Command")]
 pub struct EaCommand(
 	pub crate::v5_0::types::EaCommandMt,
 );
@@ -7751,7 +7711,6 @@ impl Into<crate::v5_0::types::EaCommandMt> for EaCommand {
 
 #[doc = r#"This message indicates the result of an EA_Command.  This message will reflect whether the command was received, accepted and/or rejected.  This message will only be used to status the command until the recipient determines whether or not it can be started or scheduled.  The details of the specific activity or activities that result from the command will report status via the EA_Activity message.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "EA_CommandStatus")]
 pub struct EaCommandStatus(
 	pub crate::v5_0::types::EaCommandStatusMt,
 );
@@ -7790,7 +7749,6 @@ impl Into<crate::v5_0::types::EaCommandStatusMt> for EaCommandStatus {
 
 #[doc = r#"This message is used to request consent to perform EA.  Status for this command message is provided via the EA_ConsentRequestStatus message.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "EA_ConsentRequest")]
 pub struct EaConsentRequest(
 	pub crate::v5_0::types::EaConsentRequestMt,
 );
@@ -7829,7 +7787,6 @@ impl Into<crate::v5_0::types::EaConsentRequestMt> for EaConsentRequest {
 
 #[doc = r#"This message is used to report consent request status for its corresponding EA_ConsentRequest message used to perform Electronic Attack (EA) capabilities.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "EA_ConsentRequestStatus")]
 pub struct EaConsentRequestStatus(
 	pub crate::v5_0::types::EaConsentRequestStatusMt,
 );
@@ -7868,7 +7825,6 @@ impl Into<crate::v5_0::types::EaConsentRequestStatusMt> for EaConsentRequestStat
 
 #[doc = r#"This message is used to change the "settings" associated with all of the EA Capabilities of a Subsystem.  [Capability]SettingsCommands generally affect the subsequent operation of all applicable Capabilities of the Subsystem; they are considered presettings, independent of [Capability]Command.  Unlike most [Capability]Commands they are understood to remain set until changed.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "EA_SettingsCommand")]
 pub struct EaSettingsCommand(
 	pub crate::v5_0::types::EaSettingsCommandMt,
 );
@@ -7907,7 +7863,6 @@ impl Into<crate::v5_0::types::EaSettingsCommandMt> for EaSettingsCommand {
 
 #[doc = r#"This message is used to report settings status for its corresponding EA_SettingsCommand message used to change the settings associated with its advertised Electronic Attack (EA) capabilities.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "EA_SettingsCommandStatus")]
 pub struct EaSettingsCommandStatus(
 	pub crate::v5_0::types::EaSettingsCommandStatusMt,
 );
@@ -7984,7 +7939,6 @@ impl Into<crate::v5_0::types::EarthOrientationParametersMt> for EarthOrientation
 
 #[doc = r#"This message contains, Essential Elements of Information (EEI); ad-hoc free text that describes information which is referred to during tasking and mission planning.  EEI are used to describe essential information that may not be available in other UCI messages.UCI_PRIMITIVE: DataRecord-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "EEI")]
 pub struct Eei(
 	pub crate::v5_0::types::EeiMt,
 );
@@ -9290,7 +9244,6 @@ impl Into<crate::v5_0::types::EntityNotificationMt> for EntityNotification {
 
 #[doc = r#"This messages represents closely-space operations (CSO) of orbiting entities, observed and characterized over a period of time including behavioral details beyond basic kinematics. This message applies to any object that is being observed by a sensor suite (including blue, red, and gray objects).UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "EntityOrbitalCSO")]
 pub struct EntityOrbitalCso(
 	pub crate::v5_0::types::EntityOrbitalCsoMt,
 );
@@ -9595,7 +9548,6 @@ impl Into<crate::v5_0::types::EntityOrbitalManeuverMt> for EntityOrbitalManeuver
 
 #[doc = r#"This message represents a "vector covariance matrix" or VCM which is a specialized state vector, along with extensive propagation parameters, tailored specifically for customers who are using an ASW system to propagate the vector.  A VCM should not be confused with the simpler and more common kinematic variance for position-position or position-velocity.  The VCM has all the additional information needed to correctly propagate the vector using the Special Perturbations Ephemeris Generator in ASW. The VCM includes a covariance matrix that provides the epoch covariance in equinoctial elements and only provides UVW variances.  Single position kinematics, TLE and ephemeris for an Entity are given in other Entity* messages.  Placing Entity related data into separate messages enables multiple sources/Services to report data for the same Entity instance.   For example, an identity fusion service could publish the base Entity message to establish the existence of a battlespace object and other kinematic fusion and/or kinematic propagation services could publish Entity kinematics at higher rates and in different reference frames without resending the base Entity data that did not change.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "EntityOrbitalVCM")]
 pub struct EntityOrbitalVcm(
 	pub crate::v5_0::types::EntityOrbitalVcmMt,
 );
@@ -9634,7 +9586,6 @@ impl Into<crate::v5_0::types::EntityOrbitalVcmMt> for EntityOrbitalVcm {
 
 #[doc = r#"This message requests an orbital Vector Covariance Matrix (VCM) for an Entity that is in orbit.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "EntityOrbitalVCM_Request")]
 pub struct EntityOrbitalVcmRequest(
 	pub crate::v5_0::types::EntityOrbitalVcmRequestMt,
 );
@@ -9673,7 +9624,6 @@ impl Into<crate::v5_0::types::EntityOrbitalVcmRequestMt> for EntityOrbitalVcmReq
 
 #[doc = r#"This message contains the response to an EntityOrbitalVCM_Request message.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "EntityOrbitalVCM_RequestStatus")]
 pub struct EntityOrbitalVcmRequestStatus(
 	pub crate::v5_0::types::EntityOrbitalVcmRequestStatusMt,
 );
@@ -9750,7 +9700,6 @@ impl Into<crate::v5_0::types::EntityPropagationMt> for EntityPropagation {
 
 #[doc = r#"This message represents an "EOB correlation record". This is the correlated data, from either a Signal Report or Entity, that was potentially used to update an EOB Record.UCI_PRIMITIVE: DataRecord-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "EOB_CorrelationRecord")]
 pub struct EobCorrelationRecord(
 	pub crate::v5_0::types::EobCorrelationRecordMt,
 );
@@ -9789,7 +9738,6 @@ impl Into<crate::v5_0::types::EobCorrelationRecordMt> for EobCorrelationRecord {
 
 #[doc = r#"This message indicates the combined in-work and to-do list of the ESM Capability of a Subsystem of a System.  In general, a [Capability]Activity message describes what invoked Capabilities are doing.  It is generally a complete, coherent snapshot of all Activities of a Subsystem for an entire Capability category (such as ESM, AirSample, EA, etc.).  In other words, an Activity is the dynamic, per-use/per-invocation status of a Capability.  An Activity is an abstraction that includes 1) the autonomous (MDF-driven or MissionPlan-driven) activity of a Capability, 2) the activity resulting from manual commands (ESM_Command) from an Operator or Capability management Service, 3) currently in-work ESM, 4) ESM scheduled for the future and 5) ESM that was scheduled and/or attempted but couldn't be completed due to resource limitations or other reasons.  A single ESM_Command or other triggering event can result in multiple activities within the ESM_Activity message.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "ESM_Activity")]
 pub struct EsmActivity(
 	pub crate::v5_0::types::EsmActivityMt,
 );
@@ -9828,7 +9776,6 @@ impl Into<crate::v5_0::types::EsmActivityMt> for EsmActivity {
 
 #[doc = r#"This message represents the Electronic Support Measure (ESM) category of UCI Capability.  ESM is a form of signals intelligence.  ESM is distinct from COMINT and ELINT.  This message "advertises" the mostly static characteristics of a mission-ready ESM Capability (of a Subsystem of System) so that it can be "discovered" and used.  "Discovery" can be a misnomer depending on your perspective.  UCI Capability messages aren't meant to enable dynamic discovery of design details of never-before-seen Capabilities.  They don't eliminate the need for future software updates or configuration files with performance characteristics indexed by Subsystem model number.  UCI Capability messages are meant to support discovery of what changes for a Capability from mission to mission or even within the course of a mission, especially as it relates to command and control.  In UCI terminology, a Capability is something a System can do that is useful in Missions performed by a heterogeneous family of Systems and Services.  A [Capability]Capability message describes what a Subsystem is capable of doing if invoked.  A [Capability]Activity message describes what a Capability is doing.  Capabilities are aligned with end effects of Mission operations such as imagery collection, active target search, passive threat detection, electronic attack and others.  Functions which support these end effects including turret control, carriage control and door control aren't considered UCI Capabilities but might be addressed by other UCI messages.  Capabilities are the standardized taxonomy of high level Mission end-effects functions a System can perform.  Further, the Capability taxonomy establishes the "level" at which the Mission Subsystems of a System: 1) can be controlled, 2) can be functionally re-integrated into new Systems without their application software changing, 3) are modeled by allocation and planning services including Task Allocation, Route Planning, Mission Monitoring/Contingency and Task Generation services, 4) are modeled by Capability management services including Capability Managers and Capability Controllers and 5) report their configuration, availability and status.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "ESM_Capability")]
 pub struct EsmCapability(
 	pub crate::v5_0::types::EsmCapabilityMt,
 );
@@ -9867,7 +9814,6 @@ impl Into<crate::v5_0::types::EsmCapabilityMt> for EsmCapability {
 
 #[doc = r#"This message reports the current status of the ESM (Electronic Support Measures) capabilities available to the system as advertised in the ESM_Capability message.  This includes information regarding whether or not each capability is currently available based on hardware status, commanded operational states, associated RF profiles etc.UCI_PRIMITIVE: Status-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "ESM_CapabilityStatus")]
 pub struct EsmCapabilityStatus(
 	pub crate::v5_0::types::EsmCapabilityStatusMt,
 );
@@ -9906,7 +9852,6 @@ impl Into<crate::v5_0::types::EsmCapabilityStatusMt> for EsmCapabilityStatus {
 
 #[doc = r#"This message is the ESM (Electronic Support Measures) form of the general UCI Capability Command.  It is used to manually invoke an ESM Capability to perform a new ESM Activity or change an existing interactive ESM Activity.  It differs from an ESM Task because it is intended for direct interaction with the host of the Capability, not a planning Service, and therefore is not expected to impact the route of the host System or otherwise interrupt the planned MissionPlan.  Additionally, Capability Commands are intended to allow multiple clients to use a single Capability as a shared resource; see the Control* series of messages.  Capability Commands can be used in parallel with Tasks, but are generally deferential to them.  However, exceptions are allowed and even expected; the relationship between Tasks and Capability Commands is not rigidly dictated by the UCI schema.  Several mechanisms are provided in other messages to tailor the relationship and relative importance of Tasks and [Capability]Commands including Capability precedence, Task rank, [Capability]Command rank, [Capability]Activity rank and control Authorization.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "ESM_Command")]
 pub struct EsmCommand(
 	pub crate::v5_0::types::EsmCommandMt,
 );
@@ -9945,7 +9890,6 @@ impl Into<crate::v5_0::types::EsmCommandMt> for EsmCommand {
 
 #[doc = r#"This message indicates the result of an ESM_Command.  This message will reflect whether the command was received, accepted and/or rejected.  This message will only be used to status the command until the recipient determines whether or not it can be started or scheduled.  The details of the specific activity or activities that result from the command will report status via the ESM_Activity message.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "ESM_CommandStatus")]
 pub struct EsmCommandStatus(
 	pub crate::v5_0::types::EsmCommandStatusMt,
 );
@@ -9984,7 +9928,6 @@ impl Into<crate::v5_0::types::EsmCommandStatusMt> for EsmCommandStatus {
 
 #[doc = r#"This message is used to request consent to perform ESM.  Status for this command message is provided via the ESM_ConsentRequestStatus message.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "ESM_ConsentRequest")]
 pub struct EsmConsentRequest(
 	pub crate::v5_0::types::EsmConsentRequestMt,
 );
@@ -10023,7 +9966,6 @@ impl Into<crate::v5_0::types::EsmConsentRequestMt> for EsmConsentRequest {
 
 #[doc = r#"This message is used to report consent request status for its corresponding ESM_ConsentRequest message used to perform Electronic Support Measures (ESM) capabilities.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "ESM_ConsentRequestStatus")]
 pub struct EsmConsentRequestStatus(
 	pub crate::v5_0::types::EsmConsentRequestStatusMt,
 );
@@ -10062,7 +10004,6 @@ impl Into<crate::v5_0::types::EsmConsentRequestStatusMt> for EsmConsentRequestSt
 
 #[doc = r#"This message is used to change the "settings" associated with all of the ESM Capabilities of a Subsystem.  [Capability]SettingsCommands generally affect the subsequent operation of all applicable Capabilities of the Subsystem; they are considered presettings, independent of [Capability]Command.  Unlike most [Capability]Commands they are understood to remain set until changed.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "ESM_SettingsCommand")]
 pub struct EsmSettingsCommand(
 	pub crate::v5_0::types::EsmSettingsCommandMt,
 );
@@ -10101,7 +10042,6 @@ impl Into<crate::v5_0::types::EsmSettingsCommandMt> for EsmSettingsCommand {
 
 #[doc = r#"This message is used to report settings status for its corresponding ESM_SettingsCommand message used to change the settings associated with known Electronic Support Measures (ESM) capabilities.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "ESM_SettingsCommandStatus")]
 pub struct EsmSettingsCommandStatus(
 	pub crate::v5_0::types::EsmSettingsCommandStatusMt,
 );
@@ -10140,7 +10080,6 @@ impl Into<crate::v5_0::types::EsmSettingsCommandStatusMt> for EsmSettingsCommand
 
 #[doc = r#"This message is used to document the configuration settings of RF based subsystems such as ESM, EA, ELINT and COMINT.  These configuration settings can be used by a resource manager service to configure and match the subsystem capabilities  to the available RF Distribution and internal channel definitions.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "EW_Configuration")]
 pub struct EwConfiguration(
 	pub crate::v5_0::types::EwConfigurationMt,
 );
@@ -10939,7 +10878,6 @@ impl Into<crate::v5_0::types::GatewaySettingsCommandStatusMt> for GatewaySetting
 
 #[doc = r#"This message indicates the combined in-work and to-do list of the IFF Capability of a Subsystem of a System.  In general, a [Capability]Activity message describes what invoked Capabilities are doing.  It is generally a complete, coherent snapshot of all Activities of a Subsystem for an entire Capability category (such as ESM, AirSample, EA, etc.).  In other words, an Activity is the dynamic, per-use/per-invocation status of a Capability.  An Activity is an abstraction that includes 1) the autonomous (MDF-driven or MissionPlan-driven) activity of a Capability, 2) the activity resulting from manual commands (IFF_Command) from an Operator or Capability management Service, 3) currently in-work IFF, 4) IFF scheduled for the future and 5) IFF that was scheduled and/or attempted but couldn't be completed due to resource limitations or other reasons.  A single IFF_Command or other triggering event can result in multiple activities within the IFF_Activity message.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "IFF_Activity")]
 pub struct IffActivity(
 	pub crate::v5_0::types::IffActivityMt,
 );
@@ -10978,7 +10916,6 @@ impl Into<crate::v5_0::types::IffActivityMt> for IffActivity {
 
 #[doc = r#"This message represents the Identify Friend or Foe (IFF) category of UCI Capability. It covers both the Transponder and Interrogator SubCapablities. This message "advertises" the mostly static characteristics of a mission-ready IFF Capability (of a Subsystem of System) so that it can be "discovered" and used.  "Discovery" can be a misnomer depending on your perspective.  UCI Capability messages aren't meant to enable dynamic discovery of design details of never-before-seen Capabilities.  They don't eliminate the need for future software updates or configuration files with performance characteristics indexed by Subsystem model number.  UCI Capability messages are meant to support discovery of what changes for a Capability from mission to mission or even within the course of a mission, especially as it relates to command and control.  In UCI terminology, a Capability is something a System can do that is useful in Missions performed by a heterogeneous family of Systems and Services.  A [Capability]Capability message describes what a Subsystem is capable of doing if invoked.  A [Capability]Activity message describes what a Capability is doing.  Capabilities are aligned with end effects of Mission operations such as imagery collection, active target search, passive threat detection, electronic attack and others.  Functions which support these end effects including turret control, carriage control and door control aren't considered UCI Capabilities but might be addressed by other UCI messages.  Capabilities are the standardized taxonomy of high level Mission end-effects functions a System can perform.  Further, the Capability taxonomy establishes the "level" at which the Mission Subsystems of a System: 1) can be controlled, 2) can be functionally re-integrated into new Systems without their application software changing, 3) are modeled by allocation and planning services including Task Allocation, Route Planning, Mission Monitoring/Contingency and Task Generation services, 4) are modeled by Capability management services including Capability Managers and Capability Controllers and 5) report their configuration, availability and status.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "IFF_Capability")]
 pub struct IffCapability(
 	pub crate::v5_0::types::IffCapabilityMt,
 );
@@ -11017,7 +10954,6 @@ impl Into<crate::v5_0::types::IffCapabilityMt> for IffCapability {
 
 #[doc = r#"This message reports the current status of the IFF (Identify Friend or Foe) capabilities available to the system as advertised in the IFF_Capability message.  This includes information regarding whether or not each capability is currently available based on hardware status, commanded operational states, associated RF profiles etc.UCI_PRIMITIVE: Status-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "IFF_CapabilityStatus")]
 pub struct IffCapabilityStatus(
 	pub crate::v5_0::types::IffCapabilityStatusMt,
 );
@@ -11056,7 +10992,6 @@ impl Into<crate::v5_0::types::IffCapabilityStatusMt> for IffCapabilityStatus {
 
 #[doc = r#"This message is the IFF (Identify Friend or Foe) form of the general UCI Capability Command.  IFF is a communication Capability that has both an Interrogation and Transponder SubCapability.  It is used to manually invoke an IFF Capability to perform a new IFF Activity or to make a change to an existing interactive IFF Activity.  Capability Commands are intended to allow multiple clients to use a single Capability as a shared resource; see the Control* series of messages.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "IFF_Command")]
 pub struct IffCommand(
 	pub crate::v5_0::types::IffCommandMt,
 );
@@ -11095,7 +11030,6 @@ impl Into<crate::v5_0::types::IffCommandMt> for IffCommand {
 
 #[doc = r#"This message indicates the result of an IFF_Command.  This message will reflect whether the command was received, accepted and/or rejected.  This message will only be used to status the command until the recipient determines whether or not it can be started or scheduled.  The details of the specific activity or activities that result from the command will report status via the IFF_Activity message.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "IFF_CommandStatus")]
 pub struct IffCommandStatus(
 	pub crate::v5_0::types::IffCommandStatusMt,
 );
@@ -11134,7 +11068,6 @@ impl Into<crate::v5_0::types::IffCommandStatusMt> for IffCommandStatus {
 
 #[doc = r#"This message is used to request consent to perform IFF when applicable.  Status for this command message is provided via the IFF_ConsentRequestStatus message.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "IFF_ConsentRequest")]
 pub struct IffConsentRequest(
 	pub crate::v5_0::types::IffConsentRequestMt,
 );
@@ -11173,7 +11106,6 @@ impl Into<crate::v5_0::types::IffConsentRequestMt> for IffConsentRequest {
 
 #[doc = r#"This message is used to report consent request status for its corresponding IFF_ConsentRequest message used to perform IFF capabilities.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "IFF_ConsentRequestStatus")]
 pub struct IffConsentRequestStatus(
 	pub crate::v5_0::types::IffConsentRequestStatusMt,
 );
@@ -11212,7 +11144,6 @@ impl Into<crate::v5_0::types::IffConsentRequestStatusMt> for IffConsentRequestSt
 
 #[doc = r#"This message is used to change the "settings" associated with the Interrogator SubCapability of the IFF Capabilities of a Subsystem.  There are no relevant commandable settings for the Transponder SubCapability.  [Capability]SettingsCommands generally affect the subsequent operation of all applicable Capabilities of the Subsystem; they are considered presettings, independent of [Capability]Command.  Unlike most [Capability]Commands they are understood to remain set until changed.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "IFF_SettingsCommand")]
 pub struct IffSettingsCommand(
 	pub crate::v5_0::types::IffSettingsCommandMt,
 );
@@ -11251,7 +11182,6 @@ impl Into<crate::v5_0::types::IffSettingsCommandMt> for IffSettingsCommand {
 
 #[doc = r#"This message is used to report settings status for its corresponding ESM_SettingsCommand message used to change the settings associated with known Identify Friend or Foe (IFF) capabilities.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "IFF_SettingsCommandStatus")]
 pub struct IffSettingsCommandStatus(
 	pub crate::v5_0::types::IffSettingsCommandStatusMt,
 );
@@ -11290,7 +11220,6 @@ impl Into<crate::v5_0::types::IffSettingsCommandStatusMt> for IffSettingsCommand
 
 #[doc = r#"This message provides the ability to command actions for a User IO Port.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "IO_PortCommand")]
 pub struct IoPortCommand(
 	pub crate::v5_0::types::IoPortCommandMt,
 );
@@ -11329,7 +11258,6 @@ impl Into<crate::v5_0::types::IoPortCommandMt> for IoPortCommand {
 
 #[doc = r#"This message is the response to IO_PortCommand and gives the processing status.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "IO_PortCommandStatus")]
 pub struct IoPortCommandStatus(
 	pub crate::v5_0::types::IoPortCommandStatusMt,
 );
@@ -11368,7 +11296,6 @@ impl Into<crate::v5_0::types::IoPortCommandStatusMt> for IoPortCommandStatus {
 
 #[doc = r#"This message provides the status of each User IO Port.UCI_PRIMITIVE: Status-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "IO_PortStatus")]
 pub struct IoPortStatus(
 	pub crate::v5_0::types::IoPortStatusMt,
 );
@@ -11407,7 +11334,6 @@ impl Into<crate::v5_0::types::IoPortStatusMt> for IoPortStatus {
 
 #[doc = r#"This message represents a single Launch Acceptability Region (LAR).UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "LAR")]
 pub struct Lar(
 	pub crate::v5_0::types::LarMt,
 );
@@ -11446,7 +11372,6 @@ impl Into<crate::v5_0::types::LarMt> for Lar {
 
 #[doc = r#"This message provides a System's status in relation to a Launch Acceptability Region (LAR).UCI_PRIMITIVE: Status-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "LAR_Report")]
 pub struct LarReport(
 	pub crate::v5_0::types::LarReportMt,
 );
@@ -11485,7 +11410,6 @@ impl Into<crate::v5_0::types::LarReportMt> for LarReport {
 
 #[doc = r#"This message is used to request the generation of a Launch Acceptability Region (LAR) for a weapon.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "LAR_Request")]
 pub struct LarRequest(
 	pub crate::v5_0::types::LarRequestMt,
 );
@@ -11524,7 +11448,6 @@ impl Into<crate::v5_0::types::LarRequestMt> for LarRequest {
 
 #[doc = r#"This message provides status for a previously submitted LAR_Request.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "LAR_RequestStatus")]
 pub struct LarRequestStatus(
 	pub crate::v5_0::types::LarRequestStatusMt,
 );
@@ -11639,7 +11562,6 @@ impl Into<crate::v5_0::types::LogMt> for Log {
 
 #[doc = r#"The Acceptable Level of Risk (ALR) command message allows an operator to set a specific level of risk the MA is allowed to incur during the execution of a Mission Plan. The setting options (AcceptableRiskSetting) include HIGH, MEDIUM, LOW, or NONE at the package or vehicle level. This ALR setting applies to all tasks and actions for the vehicle or package. The ALR is a separate message from the SurvivabilityRiskLevelMT message in that the ALR defines the maximum risk that MA is allowed to plan for and the SurvivabilityRiskLevelMT describes what HIGH, MEDIUM, and LOW mean with respect to the Maximum Continuous Exposure for a given Vulnerability Type. The SurvivabilityRiskLevelID specifies the ID of the SurvivabilityRiskLevelMT message that should be active or used. The C2 operator will send the ALR command directly to a Package lead or an individual ACP. The Package Lead will distribute this command message to all followers, or the applicable ACPs. A new command will override any previously sent message, even if the CommandID has changed. The current ALR setting can be deactivated by sending a Command with the CommandState field set to CANCEL. If the MA does not have a command, its ALR will be NONE by default.UCI_PRIMITIVE: Command-2"#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_AcceptableLevelOfRiskCommand")]
 pub struct MaAcceptableLevelOfRiskCommand(
 	pub crate::v5_0::types::MaAcceptableLevelOfRiskCommandMt,
 );
@@ -11678,7 +11600,6 @@ impl Into<crate::v5_0::types::MaAcceptableLevelOfRiskCommandMt> for MaAcceptable
 
 #[doc = r#"This message indicates the status for the MA_AcceptableLevelOfRiskCommand message.UCI_PRIMITIVE: Command-2"#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_AcceptableLevelOfRiskCommandStatus")]
 pub struct MaAcceptableLevelOfRiskCommandStatus(
 	pub crate::v5_0::types::MaAcceptableLevelOfRiskCommandStatusMt,
 );
@@ -11717,7 +11638,6 @@ impl Into<crate::v5_0::types::MaAcceptableLevelOfRiskCommandStatusMt> for MaAcce
 
 #[doc = r#"This message provides status of MA with respect to the active or current Acceptable Level of Risk setting, the activated SurvivabilityRiskLevel ID, and the Package or System ID with which it is associated.UCI_PRIMITIVE: Status-1"#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_AcceptableLevelOfRiskStatus")]
 pub struct MaAcceptableLevelOfRiskStatus(
 	pub crate::v5_0::types::MaAcceptableLevelOfRiskStatusMt,
 );
@@ -11756,7 +11676,6 @@ impl Into<crate::v5_0::types::MaAcceptableLevelOfRiskStatusMt> for MaAcceptableL
 
 #[doc = r#"This message specifies a C2 Requirement in the form/abstraction of an Action.  Other C2 Requirement forms include Effect, Task, [Capability]Command and  Response.  For example, a DEFEAT Effect could be planned/decomposed into a FIND Action, SAR Task, SAR_Command, Attack Action and Strike Task.  See the child EffectType element and its enumerates for the Effect taxonomy.  Actions can be planned (*Plan messages), directly commanded (ActionCommand* messages) and/or event-driven responses (Response* messages).UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_Action")]
 pub struct MaAction(
 	pub crate::v5_0::types::MaActionMt,
 );
@@ -11795,7 +11714,6 @@ impl Into<crate::v5_0::types::MaActionMt> for MaAction {
 
 #[doc = r#"This message represents the Action category of UCI Capability.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_ActionCapability")]
 pub struct MaActionCapability(
 	pub crate::v5_0::types::MaActionCapabilityMt,
 );
@@ -11834,7 +11752,6 @@ impl Into<crate::v5_0::types::MaActionCapabilityMt> for MaActionCapability {
 
 #[doc = r#"This message is the Action form of the general UCI Capability Command.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_ActionCommand")]
 pub struct MaActionCommand(
 	pub crate::v5_0::types::MaActionCommandMt,
 );
@@ -11873,7 +11790,6 @@ impl Into<crate::v5_0::types::MaActionCommandMt> for MaActionCommand {
 
 #[doc = r#"This message indicates the result of an ActionCommand.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_ActionCommandStatus")]
 pub struct MaActionCommandStatus(
 	pub crate::v5_0::types::MaActionCommandStatusMt,
 );
@@ -11915,7 +11831,6 @@ An ActionPlan can be an input and/or output of planning processes.  For example 
 Additional details such as timing, dependencies, decomposition, etc. can be added during the Action allocation process and captured in the ActionPlan to supplement the information in the allocated Actions themselves.
 An ActionPlan can be created discretely or as part of a MissionPlan that includes other *Plans.  An ActionPlan can only be activated and executed as part of a MissionPlan.  A MissionPlan can be used to plan the execution order of multiple ActionPlans and *Plans in general.  An ActionPlan can be subject to approval per Approval* messages.  Planning, approval, activation and execution state information for an ActionPlan are given in other ActionPlan* messages.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_ActionPlan")]
 pub struct MaActionPlan(
 	pub crate::v5_0::types::MaActionPlanMt,
 );
@@ -11954,7 +11869,6 @@ impl Into<crate::v5_0::types::MaActionPlanMt> for MaActionPlan {
 
 #[doc = r#"This message indicates the status of a command to create/update an ActionPlan, including the current state in a command and processing state machine; see the ActionPlanCommand message.  Creation/update of an ActionPlan  may occur autonomously, without an ActionPlanCommand in which case the current state of the plan could be given in the ActionPlanStatus message.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_ActionPlanCommand")]
 pub struct MaActionPlanCommand(
 	pub crate::v5_0::types::MaActionPlanCommandMt,
 );
@@ -11993,7 +11907,6 @@ impl Into<crate::v5_0::types::MaActionPlanCommandMt> for MaActionPlanCommand {
 
 #[doc = r#"This message indicates the status of a command to create/update an ActionPlan, including the current state in a command and processing state machine; see the ActionPlanCommand message.  Creation/update of an ActionPlan  may occur autonomously, without an ActionPlanCommand in which case the current state of the plan could be given in the ActionPlanStatus message.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_ActionPlanCommandStatus")]
 pub struct MaActionPlanCommandStatus(
 	pub crate::v5_0::types::MaActionPlanCommandStatusMt,
 );
@@ -12032,7 +11945,6 @@ impl Into<crate::v5_0::types::MaActionPlanCommandStatusMt> for MaActionPlanComma
 
 #[doc = r#"This message indicates the status of the validation, including the current state in a validation state machine, and details of invalid items. Validation may occur periodically, or onesie twosie. See the ActionPlanValidationCommand message.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_ActionPlanValidation")]
 pub struct MaActionPlanValidation(
 	pub crate::v5_0::types::MaActionPlanValidationMt,
 );
@@ -12071,7 +11983,6 @@ impl Into<crate::v5_0::types::MaActionPlanValidationMt> for MaActionPlanValidati
 
 #[doc = r#"Indicates the execution status for an Action.UCI_PRIMITIVE: Status-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_ActionStatus")]
 pub struct MaActionStatus(
 	pub crate::v5_0::types::MaActionStatusMt,
 );
@@ -12113,7 +12024,6 @@ An ActivityPlan can be an input and/or output of planning processes.  For exampl
 A single System can have multiple independent ActivityPlans for different Task, Capability, sensor, etc. types; that are developed by one or more services across a multi-System service oriented architecture; at different times then independently updated and approved.  Optionally, all types of activities for a System can be included in a single ActivityPlan.
 An ActivityPlan can be created discretely or as part of a MissionPlan that includes other *Plans.  An ActivityPlan can only be activated and executed as part of a MissionPlan.  A MissionPlan can be used to plan the execution order of multiple ActivityPlans and *Plans in general.  An ActivityPlan can be subject to approval per Approval* messages.  Planning, approval, activation and execution state information for an ActivityPlan are given in other ActivityPlan* messages.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_ActivityPlan")]
 pub struct MaActivityPlan(
 	pub crate::v5_0::types::MaActivityPlanMt,
 );
@@ -12155,7 +12065,6 @@ The command includes options for constraining the planning function in a variety
 The command includes environment overrides to selectively modify details of the current planning environment in the context of a single planning command. For example, a known threat Entity in the environment could be removed and an expected Entity could be for added to the environment in the context of a single planning command in support of speculative or "what-if"  contingency planning.
 The command includes settings for "weightings" that influence the decisions of operators or planning algorithms performing the planning.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_ActivityPlanCommand")]
 pub struct MaActivityPlanCommand(
 	pub crate::v5_0::types::MaActivityPlanCommandMt,
 );
@@ -12194,7 +12103,6 @@ impl Into<crate::v5_0::types::MaActivityPlanCommandMt> for MaActivityPlanCommand
 
 #[doc = r#"This message indicates the status of a command to create/update an ActivityPlan, including the current state in a command and processing state machine; see the ActivityPlanCommand message.  Creation/update of an ActivityPlan may occur autonomously, without an ActivityPlanCommand, in which case the current state of the plan could be given in the ActivityPlanStatus message.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_ActivityPlanCommandStatus")]
 pub struct MaActivityPlanCommandStatus(
 	pub crate::v5_0::types::MaActivityPlanCommandStatusMt,
 );
@@ -12233,7 +12141,6 @@ impl Into<crate::v5_0::types::MaActivityPlanCommandStatusMt> for MaActivityPlanC
 
 #[doc = r#"This message indicates the status of the validation, including the current state in a validation state machine, and details of invalid items. Validation may occur periodically, or onesie twosie. See the ActivityPlanValidationCommand message.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_ActivityPlanValidation")]
 pub struct MaActivityPlanValidation(
 	pub crate::v5_0::types::MaActivityPlanValidationMt,
 );
@@ -12272,7 +12179,6 @@ impl Into<crate::v5_0::types::MaActivityPlanValidationMt> for MaActivityPlanVali
 
 #[doc = r#"This message represents the AMTI (Airborne Moving Target Indicator) category of UCI Capability.  AMTI detects aircraft through active radar search and track.  This message "advertises" the mostly static characteristics of a mission-ready AMTI Capability (of a Subsystem of System) so that it can be "discovered" and used.  "Discovery" can be a misnomer depending on your perspective.  UCI Capability messages aren't meant to enable dynamic discovery of design details of never-before-seen Capabilities.  They don't eliminate the need for future software updates or configuration files with performance characteristics indexed by Subsystem model number.  UCI Capability messages are meant to support discovery of what changes for a Capability from mission to mission or even within the course of a mission, especially as it relates to command and control.  In UCI terminology, a Capability is something a System can do that is useful in Missions performed by a heterogeneous family of Systems and Services.  A [Capability]Capability message describes what a Subsystem is capable of doing if invoked.  A [Capability]Activity message describes what a Capability is doing.  Capabilities are aligned with end effects of Mission operations such as imagery collection, active target search, passive threat detection, electronic attack and others.  Functions which support these end effects turret control, carriage control and door control aren't considered UCI Capabilities but might be addressed by other UCI messages.  Capabilities are the standardized taxonomy of high level Mission end-effects functions a System can perform.  Further, the Capability taxonomy establishes the "level" at which the Mission Subsystems of a System: 1) can be controlled, 2) can be functionally re-integrated into new Systems without their application software changing, 3) are modeled by allocation and planning services including Task Allocation, Route Planning, Mission Monitoring/Contingency and Task Generation services, 4) are modeled by Capability management services including Capability Managers and Capability Controllers and 5) report their configuration, availability and status.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_AMTI_Capability")]
 pub struct MaAmtiCapability(
 	pub crate::v5_0::types::MaAmtiCapabilityMt,
 );
@@ -12311,7 +12217,6 @@ impl Into<crate::v5_0::types::MaAmtiCapabilityMt> for MaAmtiCapability {
 
 #[doc = r#"This message assigns ApprovalPolicy to a System or Systems and specifies which System or Systems is the approval authority for that policy.  An approval authority is responsible for approving or rejecting activities specified in the ApprovalPolicy for the specified System.  See the annotations for the ApprovalPolicy message for an overview of the entire Approval* series of messages.UCI_PRIMITIVE: DataRecord-1"#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_ApprovalAuthority")]
 pub struct MaApprovalAuthority(
 	pub crate::v5_0::types::MaApprovalAuthorityMt,
 );
@@ -12350,7 +12255,6 @@ impl Into<crate::v5_0::types::MaApprovalAuthorityMt> for MaApprovalAuthority {
 
 #[doc = r#"Indicates a command for on demand approval management processing for a given approvable item.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_ApprovalManagementCommand")]
 pub struct MaApprovalManagementCommand(
 	pub crate::v5_0::types::MaApprovalManagementCommandMt,
 );
@@ -12389,7 +12293,6 @@ impl Into<crate::v5_0::types::MaApprovalManagementCommandMt> for MaApprovalManag
 
 #[doc = r#"An Approval Management Command status is used by a service to report status/state of an ApprovalManagementCommand.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_ApprovalManagementCommandStatus")]
 pub struct MaApprovalManagementCommandStatus(
 	pub crate::v5_0::types::MaApprovalManagementCommandStatusMt,
 );
@@ -12428,7 +12331,6 @@ impl Into<crate::v5_0::types::MaApprovalManagementCommandStatusMt> for MaApprova
 
 #[doc = r#"This message specifies which activities of a system require approval from an approval authority.  The Approval* series of messages are designed to request and establish an approval hierarchy that governs select, possibly automated, activities of the UCI family of services such as route planning and task execution.  They can be used collectively to support a variety of activity approval use cases by separating data content into independent messages aligned with typical use case actors.  As an example, one System could create/manage ApprovalPolicy while another could assign them to Systems and assign approval authorities via the ApprovalAuthority message.  Then, one or more other Systems could make ApprovalRequests based on the ApprovalPolicy.  Finally, the System or Systems assigned by ApprovalAuthority approve or reject the ApprovalRequest using ApprovalRequestStatus.  The messages allow multiple approval authorities per ApprovalPolicy and/or multiple ApprovalPolicy per System.  When multiple ApprovalPolicy apply to a single System, they should be evaluated independently; if any policy requires approval for a certain condition then approval is necessary; if multiple policies required approval for a certain condition then approval should be requested for each.  The messages PlanningFunction*, Approval*, MissionContingencyAlert and ControlStatus are closely related.  They use a common taxonomy of autonomous functions (task allocation, route planning, mission activation and mission execution), triggers for those functions (new threats, new zones, failures, etc.) and results of those functions (dropped Tasks, changes in vulnerability, etc.).  ControlStatus indicates the full set of available autonomous functions/settings of a System.  PlanningFunction* indicates how the available settings are currently configured.  MissionContingencyAlert indicates an autonomous function/setting that has been triggered.  Approval* messages allow Operators to approve the results of autonomous responses as needed.  Updates supersede previous  or instances of the message; each instance of the message shall have a complete specification of the approval policy.UCI_PRIMITIVE: DataRecord-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_ApprovalPolicy")]
 pub struct MaApprovalPolicy(
 	pub crate::v5_0::types::MaApprovalPolicyMt,
 );
@@ -12467,7 +12369,6 @@ impl Into<crate::v5_0::types::MaApprovalPolicyMt> for MaApprovalPolicy {
 
 #[doc = r#"This message is a request for approval of an activity specified in an associated ApprovalPolicy.  See the annotations for the ApprovalPolicy message for an overview of the entire Approval* series of messages.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_ApprovalRequest")]
 pub struct MaApprovalRequest(
 	pub crate::v5_0::types::MaApprovalRequestMt,
 );
@@ -12506,7 +12407,6 @@ impl Into<crate::v5_0::types::MaApprovalRequestMt> for MaApprovalRequest {
 
 #[doc = r#"This message is the response to an ApprovalRequest.  See the annotations for the ApprovalPolicy message for an overview of the entire Approval* series of messages.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_ApprovalRequestStatus")]
 pub struct MaApprovalRequestStatus(
 	pub crate::v5_0::types::MaApprovalRequestStatusMt,
 );
@@ -12545,7 +12445,6 @@ impl Into<crate::v5_0::types::MaApprovalRequestStatusMt> for MaApprovalRequestSt
 
 #[doc = r#"This message provides an assessment of other UCI data.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_Assessment")]
 pub struct MaAssessment(
 	pub crate::v5_0::types::MaAssessmentMt,
 );
@@ -12584,7 +12483,6 @@ impl Into<crate::v5_0::types::MaAssessmentMt> for MaAssessment {
 
 #[doc = r#"This message is a request to generate different types of assessments.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_AssessmentRequest")]
 pub struct MaAssessmentRequest(
 	pub crate::v5_0::types::MaAssessmentRequestMt,
 );
@@ -12623,7 +12521,6 @@ impl Into<crate::v5_0::types::MaAssessmentRequestMt> for MaAssessmentRequest {
 
 #[doc = r#"This message is the response to the request for an assessment.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_AssessmentRequestStatus")]
 pub struct MaAssessmentRequestStatus(
 	pub crate::v5_0::types::MaAssessmentRequestStatusMt,
 );
@@ -12662,7 +12559,6 @@ impl Into<crate::v5_0::types::MaAssessmentRequestStatusMt> for MaAssessmentReque
 
 #[doc = r#"This message establishes authorization for a User to task a System.  Authorization to task is independent of the C2 hierarchy established via the Control* series of messages.  It is also independent of the approval hierarchy established via the Approval* series of messages.  For example, System1 could have mission control of System2 and have responsibility for approving System2's Tasks for execution but not be authorized to Task System2.  Further, authorization to task a System has different meanings based on the type of System and its position in the C2 hierarchy.  For example, authorization for System3 to task System4, where System4 is a vehicle, means that Tasks created by System3 can only be allocated to System4 even if other capable siblings of System4 are available.  In another example, authorization for System5 to task System6, where System6 controls many Systems, each of which controls multiple vehicle Systems, means that Tasks created by System5 can be allocated to any System subordinate to System6.UCI_PRIMITIVE: DataRecord-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_Authorization")]
 pub struct MaAuthorization(
 	pub crate::v5_0::types::MaAuthorizationMt,
 );
@@ -12701,7 +12597,6 @@ impl Into<crate::v5_0::types::MaAuthorizationMt> for MaAuthorization {
 
 #[doc = r#"This message contains the CAP status of vehicles executing a CAP.UCI_PRIMITIVE: Status-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_CAP_ExecutionStatusReport")]
 pub struct MaCapExecutionStatusReport(
 	pub crate::v5_0::types::MaCapExecutionStatusReportMt,
 );
@@ -12740,7 +12635,6 @@ impl Into<crate::v5_0::types::MaCapExecutionStatusReportMt> for MaCapExecutionSt
 
 #[doc = r#"The MA_CapabilitySet message provides a set of Capabilities that can optionally be linked to a System, Mission, or MissionPlan that the set is relevant to.UCI_PRIMITIVE: DataRecord-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_CapabilitySet")]
 pub struct MaCapabilitySet(
 	pub crate::v5_0::types::MaCapabilitySetMt,
 );
@@ -12779,7 +12673,6 @@ impl Into<crate::v5_0::types::MaCapabilitySetMt> for MaCapabilitySet {
 
 #[doc = r#"This message indicates the state of an carrier.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_CarrierReport")]
 pub struct MaCarrierReport(
 	pub crate::v5_0::types::MaCarrierReportMt,
 );
@@ -12818,7 +12711,6 @@ impl Into<crate::v5_0::types::MaCarrierReportMt> for MaCarrierReport {
 
 #[doc = r#"This message indicates the state of an carrier.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_CarrierState")]
 pub struct MaCarrierState(
 	pub crate::v5_0::types::MaCarrierStateMt,
 );
@@ -12857,7 +12749,6 @@ impl Into<crate::v5_0::types::MaCarrierStateMt> for MaCarrierState {
 
 #[doc = r#"Publishes available network endpoints as provided by network overhead messages.UCI_PRIMITIVE: Data-1"#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_CommAvailableEndpoints")]
 pub struct MaCommAvailableEndpoints(
 	pub crate::v5_0::types::MaCommAvailableEndpointsMt,
 );
@@ -12896,7 +12787,6 @@ impl Into<crate::v5_0::types::MaCommAvailableEndpointsMt> for MaCommAvailableEnd
 
 #[doc = r#"This message represents a general report of an communication error that is of significance to other Systems, Services, etc. in the network.  This message is not intended for remote, centralized error logging; it is meant for "error awareness".UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_CommErrorReport")]
 pub struct MaCommErrorReport(
 	pub crate::v5_0::types::MaCommErrorReportMt,
 );
@@ -12935,7 +12825,6 @@ impl Into<crate::v5_0::types::MaCommErrorReportMt> for MaCommErrorReport {
 
 #[doc = r#"This message provides the status for the available endpoints within the communication network.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_CommTeamReport")]
 pub struct MaCommTeamReport(
 	pub crate::v5_0::types::MaCommTeamReportMt,
 );
@@ -12974,7 +12863,6 @@ impl Into<crate::v5_0::types::MaCommTeamReportMt> for MaCommTeamReport {
 
 #[doc = r#"The Constraint Priority List (CPL) allows an operator to set default values for the Priority field in OpZoneMT, OpVolumnMT, and OpLineMT (further referred to as geozones) messages based on type. If the field in those pre-planned messages are empty and the type is in the CPL, the Priority value from the CPL shall be used to set the Priority value for that message. A Priority value of zero (0) is the highest priority value. If the geozone message Priority field is empty and the geozone type is not in the CPL, the Priority field shall be set to the DefaultPriority from the CPL. Only a single CPL can be active at any given time, but CPLs can be associated with OpZones or OpVolumes to indicate when they shall be activated to override a default CPL.UCI_PRIMITIVE: Data-1"#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_ConstraintPriorityList")]
 pub struct MaConstraintPriorityList(
 	pub crate::v5_0::types::MaConstraintPriorityListMt,
 );
@@ -13013,7 +12901,6 @@ impl Into<crate::v5_0::types::MaConstraintPriorityListMt> for MaConstraintPriori
 
 #[doc = r#"This message, when activated by the MA_ConstraintPriorityListCommand, defines what MA_ConstraintPriorityListMT message shall be active as default, or when the ACP is within specific geozones.UCI_PRIMITIVE: Data-1"#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_ConstraintPriorityListActivationData")]
 pub struct MaConstraintPriorityListActivationData(
 	pub crate::v5_0::types::MaConstraintPriorityListActivationDataMt,
 );
@@ -13052,7 +12939,6 @@ impl Into<crate::v5_0::types::MaConstraintPriorityListActivationDataMt> for MaCo
 
 #[doc = r#"This message provides status of MA with respect to the activated MA_ConstraintPriorityListMT ID, the activated MA_ConstraintPriorityListActivationData ID, and the Package or System ID its associated with.UCI_PRIMITIVE: Status-1"#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_ConstraintPriorityListActivationStatus")]
 pub struct MaConstraintPriorityListActivationStatus(
 	pub crate::v5_0::types::MaConstraintPriorityListActivationStatusMt,
 );
@@ -13091,7 +12977,6 @@ impl Into<crate::v5_0::types::MaConstraintPriorityListActivationStatusMt> for Ma
 
 #[doc = r#"This message allows a C2 to activate a specific MA_ConstraintPriorityListActivationData message. The C2 will send this command message to a Package lead or an individual ACP directly. The Package Lead will distribute this command message to the rest of the ACPs. Any new command will override any previously sent message, even if the CommandID has changed. The command can be deactivated by sending a CommandState with CANCEL message. If the MA does not have a command, this is the same as having no Constraint Priority List.UCI_PRIMITIVE: Command-2"#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_ConstraintPriorityListCommand")]
 pub struct MaConstraintPriorityListCommand(
 	pub crate::v5_0::types::MaConstraintPriorityListCommandMt,
 );
@@ -13130,7 +13015,6 @@ impl Into<crate::v5_0::types::MaConstraintPriorityListCommandMt> for MaConstrain
 
 #[doc = r#"This message indicates the status for the MA_ConstraintPriorityListCommandMT message.UCI_PRIMITIVE: Command-2"#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_ConstraintPriorityListCommandStatus")]
 pub struct MaConstraintPriorityListCommandStatus(
 	pub crate::v5_0::types::MaConstraintPriorityListCommandStatusMt,
 );
@@ -13169,7 +13053,6 @@ impl Into<crate::v5_0::types::MaConstraintPriorityListCommandStatusMt> for MaCon
 
 #[doc = r#"This message specifies the granted control assignment of an A-GRA compliant system per the A-GRA Custody Construct.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_ControlAssignment")]
 pub struct MaControlAssignment(
 	pub crate::v5_0::types::MaControlAssignmentMt,
 );
@@ -13208,7 +13091,6 @@ impl Into<crate::v5_0::types::MaControlAssignmentMt> for MaControlAssignment {
 
 #[doc = r#"This message specifies the permitted control configuration of an A-GRA compliant system per the A-GRA Custody Construct.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_ControlConfiguration")]
 pub struct MaControlConfiguration(
 	pub crate::v5_0::types::MaControlConfigurationMt,
 );
@@ -13247,7 +13129,6 @@ impl Into<crate::v5_0::types::MaControlConfigurationMt> for MaControlConfigurati
 
 #[doc = r#"This message requests control of a UCI System or its Capabilities/Tasks per the A-GRA Custody Construct.  UCI Systems are collections of capabilities that can be pseudo-independently shared/controlled by multiple users.  Control of a UCI System or its Capabilities/Tasks can be requested using this message.  The System/Service that currently has control (mission control) or is the primary controller (capability control) is responsible for responding to this message.  The controlling System/Service informs the controlled System/Service of control changes via the ControlSourcesCommand.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_ControlRequest")]
 pub struct MaControlRequest(
 	pub crate::v5_0::types::MaControlRequestMt,
 );
@@ -13286,7 +13167,6 @@ impl Into<crate::v5_0::types::MaControlRequestMt> for MaControlRequest {
 
 #[doc = r#"This message is sent in response to a MA_ControlRequest.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_ControlRequestStatus")]
 pub struct MaControlRequestStatus(
 	pub crate::v5_0::types::MaControlRequestStatusMt,
 );
@@ -13325,7 +13205,6 @@ impl Into<crate::v5_0::types::MaControlRequestStatusMt> for MaControlRequestStat
 
 #[doc = r#"Contains the current COP configuration settings.UCI_PRIMITIVE: Status-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_COP_ConfigurationSettings")]
 pub struct MaCopConfigurationSettings(
 	pub crate::v5_0::types::MaCopConfigurationSettingsMt,
 );
@@ -13364,7 +13243,6 @@ impl Into<crate::v5_0::types::MaCopConfigurationSettingsMt> for MaCopConfigurati
 
 #[doc = r#"Command message to adjust the configuration settings for the COP among ACPs.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_COP_ConfigurationSettingsCommand")]
 pub struct MaCopConfigurationSettingsCommand(
 	pub crate::v5_0::types::MaCopConfigurationSettingsCommandMt,
 );
@@ -13403,7 +13281,6 @@ impl Into<crate::v5_0::types::MaCopConfigurationSettingsCommandMt> for MaCopConf
 
 #[doc = r#"Command status message in response to MA_COP_ConfigurationSettingsCommand.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_COP_ConfigurationSettingsCommandStatus")]
 pub struct MaCopConfigurationSettingsCommandStatus(
 	pub crate::v5_0::types::MaCopConfigurationSettingsCommandStatusMt,
 );
@@ -13442,7 +13319,6 @@ impl Into<crate::v5_0::types::MaCopConfigurationSettingsCommandStatusMt> for MaC
 
 #[doc = r#"Data request message to request the current COP configuration settings.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_COP_ConfigurationSettingsRequest")]
 pub struct MaCopConfigurationSettingsRequest(
 	pub crate::v5_0::types::MaCopConfigurationSettingsRequestMt,
 );
@@ -13481,7 +13357,6 @@ impl Into<crate::v5_0::types::MaCopConfigurationSettingsRequestMt> for MaCopConf
 
 #[doc = r#"Data request status message which provides current COP configuration settings.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_COP_ConfigurationSettingsRequestStatus")]
 pub struct MaCopConfigurationSettingsRequestStatus(
 	pub crate::v5_0::types::MaCopConfigurationSettingsRequestStatusMt,
 );
@@ -13520,7 +13395,6 @@ impl Into<crate::v5_0::types::MaCopConfigurationSettingsRequestStatusMt> for MaC
 
 #[doc = r#"This message sends a route plan, via Action Request, as a possible resolution for an identified path conflict between two or more platforms. Conflict status is included to indicate whether this proposed route plan resolves the conflict or not.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_DeconflictionSolutionRequest")]
 pub struct MaDeconflictionSolutionRequest(
 	pub crate::v5_0::types::MaDeconflictionSolutionRequestMt,
 );
@@ -13559,7 +13433,6 @@ impl Into<crate::v5_0::types::MaDeconflictionSolutionRequestMt> for MaDeconflict
 
 #[doc = r#"This message defines a response to a proposed solution to a route path conflict, as either ACCEPTED or REJECTEDUCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_DeconflictionSolutionRequestStatus")]
 pub struct MaDeconflictionSolutionRequestStatus(
 	pub crate::v5_0::types::MaDeconflictionSolutionRequestStatusMt,
 );
@@ -13598,7 +13471,6 @@ impl Into<crate::v5_0::types::MaDeconflictionSolutionRequestStatusMt> for MaDeco
 
 #[doc = r#"This message is used to explicitly designate one or more specific objects as a target or non-target.  Optionally, the objective of the designation can be given.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_Designation")]
 pub struct MaDesignation(
 	pub crate::v5_0::types::MaDesignationMt,
 );
@@ -13637,7 +13509,6 @@ impl Into<crate::v5_0::types::MaDesignationMt> for MaDesignation {
 
 #[doc = r#"This message is used to request designation of one or more objects as either a target or a non-target.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_DesignationRequest")]
 pub struct MaDesignationRequest(
 	pub crate::v5_0::types::MaDesignationRequestMt,
 );
@@ -13676,7 +13547,6 @@ impl Into<crate::v5_0::types::MaDesignationRequestMt> for MaDesignationRequest {
 
 #[doc = r#"This message is sent in response to a MA_DesignationRequest message.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_DesignationRequestStatus")]
 pub struct MaDesignationRequestStatus(
 	pub crate::v5_0::types::MaDesignationRequestStatusMt,
 );
@@ -13715,7 +13585,6 @@ impl Into<crate::v5_0::types::MaDesignationRequestStatusMt> for MaDesignationReq
 
 #[doc = r#"This message represents the Effect category of UCI Capability.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_EffectCapability")]
 pub struct MaEffectCapability(
 	pub crate::v5_0::types::MaEffectCapabilityMt,
 );
@@ -13758,7 +13627,6 @@ impl Into<crate::v5_0::types::MaEffectCapabilityMt> for MaEffectCapability {
 3. "Weightings" that influence the decisions of operators or planning algorithms performing the planning.
 4. Temporal and/or kinematic begin and end points.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_EffectPlanCommand")]
 pub struct MaEffectPlanCommand(
 	pub crate::v5_0::types::MaEffectPlanCommandMt,
 );
@@ -13797,7 +13665,6 @@ impl Into<crate::v5_0::types::MaEffectPlanCommandMt> for MaEffectPlanCommand {
 
 #[doc = r#"This message indicates the status of a command to create/update an EffectPlan, including the current state in a command and processing state machine; see the EffectPlanCommand message.  Creation/update of an EffectPlan  may occur autonomously, without an EffectPlanCommand in which case the current state of the plan could be given in the EffectPlanStatus message.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_EffectPlanCommandStatus")]
 pub struct MaEffectPlanCommandStatus(
 	pub crate::v5_0::types::MaEffectPlanCommandStatusMt,
 );
@@ -13836,7 +13703,6 @@ impl Into<crate::v5_0::types::MaEffectPlanCommandStatusMt> for MaEffectPlanComma
 
 #[doc = r#"This message indicates the status of the validation, including the current state in a validation state machine, and details of invalid items. Validation may occur periodically, or onesie twosie. See the EffectPlanValidationCommand message.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_EffectPlanValidation")]
 pub struct MaEffectPlanValidation(
 	pub crate::v5_0::types::MaEffectPlanValidationMt,
 );
@@ -13875,7 +13741,6 @@ impl Into<crate::v5_0::types::MaEffectPlanValidationMt> for MaEffectPlanValidati
 
 #[doc = r#"Indicates the execution status for an Effect.UCI_PRIMITIVE: Status-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_EffectStatus")]
 pub struct MaEffectStatus(
 	pub crate::v5_0::types::MaEffectStatusMt,
 );
@@ -13914,7 +13779,6 @@ impl Into<crate::v5_0::types::MaEffectStatusMt> for MaEffectStatus {
 
 #[doc = r#"This message indicates the combined in-work and to-do list of the Escort Capability of a Subsystem of a System.  In general, a [Capability]Activity message describes what invoked Capabilities are doing.  It is generally a complete, coherent snapshot of all Activities of a Subsystem for an entire Capability category (such as ESM, AirSample, EA, etc.).  In other words, an Activity is the dynamic, per-use/per-invocation status of a Capability.  An Activity is an abstraction that includes 1) the autonomous (MDF-driven or MissionPlan-driven) activity of a Capability, 2) the activity resulting from manual commands (EscortCommand) from an Operator or Capability management Service, 3) currently in-work Escort, 4) Escort scheduled for the future and 5) Escort that was scheduled and/or attempted but couldn't be completed due to resource limitations or other reasons.  A single EscortCommand or other triggering event can result in multiple activities within the EscortActivity message.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_EscortActivity")]
 pub struct MaEscortActivity(
 	pub crate::v5_0::types::MaEscortActivityMt,
 );
@@ -13953,7 +13817,6 @@ impl Into<crate::v5_0::types::MaEscortActivityMt> for MaEscortActivity {
 
 #[doc = r#"This message represents the Escort category of UCI Capability.  This message "advertises" the mostly static characteristics of a mission-ready Strike Capability (of a Subsystem of System) so that it can be "discovered" and used.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_EscortCapability")]
 pub struct MaEscortCapability(
 	pub crate::v5_0::types::MaEscortCapabilityMt,
 );
@@ -13992,7 +13855,6 @@ impl Into<crate::v5_0::types::MaEscortCapabilityMt> for MaEscortCapability {
 
 #[doc = r#"This message reports the current status of the Escort capabilities available to the system as advertised in the EscortCapability message.  This includes information regarding whether or not each capability is currently available based on hardware status, commanded operational states, associated RF profiles, etc.UCI_PRIMITIVE: Status-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_EscortCapabilityStatus")]
 pub struct MaEscortCapabilityStatus(
 	pub crate::v5_0::types::MaEscortCapabilityStatusMt,
 );
@@ -14031,7 +13893,6 @@ impl Into<crate::v5_0::types::MaEscortCapabilityStatusMt> for MaEscortCapability
 
 #[doc = r#"This message is the Escort form of the general UCI Capability Command.  It is used to manually invoke a Escort Capability to perform a new Escort Activity or change an existing interactive Escort Activity.  It differs from a Escort Task because it is intended for direct interaction with the host of the Capability, not a planning Service, and therefore is not expected to impact the route of the host System or otherwise interrupt the planned MissionPlan.  Additionally, Capability Commands are intended to allow multiple clients to use a single Capability as a shared resource; see the Control* series of messages.  Capability Commands can be used in parallel with Tasks, but are generally deferential to them.  However, exceptions are allowed and even expected; the relationship between Tasks and Capability Commands is not rigidly dictated by the UCI schema.  Several mechanisms are provided in other messages to tailor the relationship and relative importance of Tasks and [Capability]Commands including Capability precedence, Task rank, [Capability]Command rank, [Capability]Activity rank and control Authorization.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_EscortCommand")]
 pub struct MaEscortCommand(
 	pub crate::v5_0::types::MaEscortCommandMt,
 );
@@ -14070,7 +13931,6 @@ impl Into<crate::v5_0::types::MaEscortCommandMt> for MaEscortCommand {
 
 #[doc = r#"This message indicates the result of an EscortCommand.  This message will reflect whether the command was received, accepted and/or rejected.  This message will only be used to status the command until the recipient determines whether or not it can be started or scheduled.  The details of the specific activity or activities that result from the command will report status via the EscortActivity message.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_EscortCommandStatus")]
 pub struct MaEscortCommandStatus(
 	pub crate::v5_0::types::MaEscortCommandStatusMt,
 );
@@ -14109,7 +13969,6 @@ impl Into<crate::v5_0::types::MaEscortCommandStatusMt> for MaEscortCommandStatus
 
 #[doc = r#"The Execution Priority List (EPL) allows an operator to set default values for the Rank field in the TaskMT and ActionMT (further referred to as task) messages based on the type. If the Rank field in those messages is empty and the type is in the EPL, the Rank from the EPL can be used. A Rank→ Priority value of zero (0) is the highest priority value, and an empty field is the lowest. If the planned task message Rank field is empty and the task type is not in the EPL, the Rank field should be left empty and have the lowest priority. Only a single EPL can be active at any given time, but EPLs should be associated with OpZones or OpVolumes to indicate when they should be activated to override a default EPL.UCI_PRIMITIVE: Data-1"#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_ExecutionPriorityList")]
 pub struct MaExecutionPriorityList(
 	pub crate::v5_0::types::MaExecutionPriorityListMt,
 );
@@ -14148,7 +14007,6 @@ impl Into<crate::v5_0::types::MaExecutionPriorityListMt> for MaExecutionPriority
 
 #[doc = r#"This message, when activated by the MA_ExecutionPriorityListCommand, defines what MA_ExecutionPriorityListMT message shall be active as default, or when the ACP is within specific geozones.UCI_PRIMITIVE: Data-1"#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_ExecutionPriorityListActivationData")]
 pub struct MaExecutionPriorityListActivationData(
 	pub crate::v5_0::types::MaExecutionPriorityListActivationDataMt,
 );
@@ -14187,7 +14045,6 @@ impl Into<crate::v5_0::types::MaExecutionPriorityListActivationDataMt> for MaExe
 
 #[doc = r#"This message provides status of MA with respect to the activated MA_ExecutionPriorityListMT ID, the activated MA_ExecutionPriorityListActivationData ID, and the Package or System ID its associated with.UCI_PRIMITIVE: Status-1"#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_ExecutionPriorityListActivationStatus")]
 pub struct MaExecutionPriorityListActivationStatus(
 	pub crate::v5_0::types::MaExecutionPriorityListActivationStatusMt,
 );
@@ -14226,7 +14083,6 @@ impl Into<crate::v5_0::types::MaExecutionPriorityListActivationStatusMt> for MaE
 
 #[doc = r#"This message allows a C2 to activate a specific MA_ExecutionPriorityListActivationData message. The C2 will send this command message to a Package lead or an individual ACP directly. The Package Lead will distribute this command message to the rest of the ACPs. Any new command will override any previously sent message, even if the CommandID has changed. The command can be deactivated by sending a CommandState with CANCEL message. If the MA does not have a command, this is the same as having no Execution Priority List.UCI_PRIMITIVE: Command-2"#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_ExecutionPriorityListCommand")]
 pub struct MaExecutionPriorityListCommand(
 	pub crate::v5_0::types::MaExecutionPriorityListCommandMt,
 );
@@ -14265,7 +14121,6 @@ impl Into<crate::v5_0::types::MaExecutionPriorityListCommandMt> for MaExecutionP
 
 #[doc = r#"This message indicates the status for the MA_ExecutionPriorityListCommandMT message.UCI_PRIMITIVE: Command-2"#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_ExecutionPriorityListCommandStatus")]
 pub struct MaExecutionPriorityListCommandStatus(
 	pub crate::v5_0::types::MaExecutionPriorityListCommandStatusMt,
 );
@@ -14304,7 +14159,6 @@ impl Into<crate::v5_0::types::MaExecutionPriorityListCommandStatusMt> for MaExec
 
 #[doc = r#"This represents a fault for the system.  Intended to be used by services such as a health monitoring service for centralized fault management and fault isolation of a system.  Allows announcing a fault state change (raised or cleared) from a service as opposed to a capability or component of a subsystem.  Also conveys a service relationship in addition to a subsystem relationship.  Extended to include a modified Fault Severity Enumeration for Mission Autonomy.UCI_PRIMITIVE: DataRecord-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_Fault")]
 pub struct MaFault(
 	pub crate::v5_0::types::MaFaultMt,
 );
@@ -14343,7 +14197,6 @@ impl Into<crate::v5_0::types::MaFaultMt> for MaFault {
 
 #[doc = r#"A [Capability]Activity message describes what a Capability is actively doing  It is generally a complete, coherent snapshot of all Activities for a Capability category (ESM, EA, etc.). In UCI terminology, an Activity is the dynamic, per-use status of a Capability. An Activity is an abstraction that includes the autonomous (MDF-driven or MissionPlan-driven) activity of a Capability.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_FlightActivity")]
 pub struct MaFlightActivity(
 	pub crate::v5_0::types::MaFlightActivityMt,
 );
@@ -14382,7 +14235,6 @@ impl Into<crate::v5_0::types::MaFlightActivityMt> for MaFlightActivity {
 
 #[doc = r#"This message represents the Flight category of UCI Capability.  It "advertises" the mostly static characteristics of a mission-ready Flight Capability so that it can be "discovered" and used. "Discovery" can be a misnomer depending on your perspective. UCI Capability messages aren't meant to enable dynamic discovery of design details of never-before-seen Capabilities. They don't eliminate the need for future software updates or configuration files. UCI Capability messages are meant to support discovery of what changes for a Capability from mission to mission or even within the course of a mission. In UCI terminology, a Capability is something a System can do that is useful in Missions performed by a heterogeneous family of Systems and Services. A [Capability]Capability message describes what a Subsystem is capable of doing if invoked. A [Capability]Activity message describes what a Capability is doing. Capabilities are aligned with end effects of Mission operations and for the Flight Capability, it could be a required route sequence, orbit/loiter point, etc.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_FlightCapability")]
 pub struct MaFlightCapability(
 	pub crate::v5_0::types::MaFlightCapabilityMt,
 );
@@ -14421,7 +14273,6 @@ impl Into<crate::v5_0::types::MaFlightCapabilityMt> for MaFlightCapability {
 
 #[doc = r#"This message reports the current status of the Flight capabilities available to the system. This includes information regarding whether or not each capability is currently available based on hardware status, operational states, etc.UCI_PRIMITIVE: Status-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_FlightCapabilityStatus")]
 pub struct MaFlightCapabilityStatus(
 	pub crate::v5_0::types::MaFlightCapabilityStatusMt,
 );
@@ -14460,7 +14311,6 @@ impl Into<crate::v5_0::types::MaFlightCapabilityStatusMt> for MaFlightCapability
 
 #[doc = r#"This message is the Flight form of the general UCI Capability Command.  It is used to manually invoke a Flight Capability to perform a new Flight Activity or change an existing interactive Flight Activity.  It differs from a Flight Task because it is intended for direct interaction with the host of the Capability, not a planning Service, and therefore is not expected to impact the route of the host System or otherwise interrupt the planned MissionPlan.  Additionally, Capability Commands are intended to allow multiple clients to use a single Capability as a shared resource; see the Control* series of messages.  Capability Commands can be used in parallel with Tasks, but are generally deferential to them.  However, exceptions are allowed and even expected; the relationship between Tasks and Capability Commands is not rigidly dictated by the UCI schema.  Several mechanisms are provided in other messages to tailor the relationship and relative importance of Tasks and [Capability]Commands including Capability precedence, Task rank, [Capability]Command rank, [Capability]Activity rank and control Authorization.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_FlightCommand")]
 pub struct MaFlightCommand(
 	pub crate::v5_0::types::MaFlightCommandMt,
 );
@@ -14499,7 +14349,6 @@ impl Into<crate::v5_0::types::MaFlightCommandMt> for MaFlightCommand {
 
 #[doc = r#"This message indicates the result of a FlightCommand. This message will reflect whether the command was received, accepted and/or rejected.  This message will only be used to status the command until the recipient determines whether or not it can be started or scheduled.  The details of the specific activity or activities that result from the command will report status via the FlightActivity message.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_FlightCommandStatus")]
 pub struct MaFlightCommandStatus(
 	pub crate::v5_0::types::MaFlightCommandStatusMt,
 );
@@ -14538,7 +14387,6 @@ impl Into<crate::v5_0::types::MaFlightCommandStatusMt> for MaFlightCommandStatus
 
 #[doc = r#"The Ignore Zone Constraints command message allows an operator to specify individual tasks to ignore specific geozones. The task(s) are specified in the ReferenceType field and can be the ID of any of the following: Effect, Action, Task, Response, or Capability Command. The ListOfConstraintsToIgnore field allows setting one or more OpZone or OpVolume ID to be ignored. The IgnoreAllConstraints field allows the operator to override any and all constraints as an attempt to accomplish a task. The C2 can send a new command by setting the information as needed, along with a unique CommandID and the CommandState set to NEW. A command can be updated by C2 sending the message with the same CommandID as an active message and setting the CommandState to UPDATE. A command can be deactivated by C2 sending the message with the same CommandID as an active message and setting the CommandState to CANCEL.UCI_PRIMITIVE: Command-2"#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_IgnoreConstraintCommand")]
 pub struct MaIgnoreConstraintCommand(
 	pub crate::v5_0::types::MaIgnoreConstraintCommandMt,
 );
@@ -14577,7 +14425,6 @@ impl Into<crate::v5_0::types::MaIgnoreConstraintCommandMt> for MaIgnoreConstrain
 
 #[doc = r#"This message indicates the status for the MA_IgnoreConstraintCommand message.UCI_PRIMITIVE: Command-2"#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_IgnoreConstraintCommandStatus")]
 pub struct MaIgnoreConstraintCommandStatus(
 	pub crate::v5_0::types::MaIgnoreConstraintCommandStatusMt,
 );
@@ -14616,7 +14463,6 @@ impl Into<crate::v5_0::types::MaIgnoreConstraintCommandStatusMt> for MaIgnoreCon
 
 #[doc = r#"This message specifies how interoperability concerns should be handled by Mission Autonomy.  Interoperability concerns arise when multiple valid approaches are possible for a given process, but different platforms taking different approaches can lead to incompatibilities in implementation.  Specifying which approach should be taken in the A-GRA requirements would go against the A-GRA goal of permitting alternative approaches so long as interoperability is maintained between all compliant implementations.  Instead, Interoperability Policy provides a place to align which implementation all platforms' Mission Autonomy implementations will take, ensuring interoperability but allowing different approaches to be chosen when and where desired.  Platforms shall obey the implementation prescribed in the interoperability policy. InteroperabilityPolicy shall be updated identically to all platforms on startup.  Updates supersede previous instances of the message; each instance of the message shall have a complete specification of the Interoperability policy.UCI_PRIMITIVE: DataRecord-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_InteroperabilityPolicy")]
 pub struct MaInteroperabilityPolicy(
 	pub crate::v5_0::types::MaInteroperabilityPolicyMt,
 );
@@ -14655,7 +14501,6 @@ impl Into<crate::v5_0::types::MaInteroperabilityPolicyMt> for MaInteroperability
 
 #[doc = r#"This message is sent between peers to initiate a package leader election, share vehicle leadership fitness scores, and/or assign/nominate a package leader.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_LeaderUpdateRequest")]
 pub struct MaLeaderUpdateRequest(
 	pub crate::v5_0::types::MaLeaderUpdateRequestMt,
 );
@@ -14694,7 +14539,6 @@ impl Into<crate::v5_0::types::MaLeaderUpdateRequestMt> for MaLeaderUpdateRequest
 
 #[doc = r#"This message is sent in response to a LeaderUpdateRequest with a defined Status field. The message shall contain the vehicle's response to being nominated/assigned to be the leader.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_LeaderUpdateRequestStatus")]
 pub struct MaLeaderUpdateRequestStatus(
 	pub crate::v5_0::types::MaLeaderUpdateRequestStatusMt,
 );
@@ -14733,7 +14577,6 @@ impl Into<crate::v5_0::types::MaLeaderUpdateRequestStatusMt> for MaLeaderUpdateR
 
 #[doc = r#"This message specifies vehicle leadership fitness scores and the leader election method for use in determination of package leader.UCI_PRIMITIVE: Data-1"#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_LeadershipMetrics")]
 pub struct MaLeadershipMetrics(
 	pub crate::v5_0::types::MaLeadershipMetricsMt,
 );
@@ -14772,7 +14615,6 @@ impl Into<crate::v5_0::types::MaLeadershipMetricsMt> for MaLeadershipMetrics {
 
 #[doc = r#"This message indicates a command to adjust the topic subscription settings for the Decentralized Messaging Service (DMS) interface between ACP's on a network.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_MessagingSubscriptionSettingCommand")]
 pub struct MaMessagingSubscriptionSettingCommand(
 	pub crate::v5_0::types::MaMessagingSubscriptionSettingCommandMt,
 );
@@ -14811,7 +14653,6 @@ impl Into<crate::v5_0::types::MaMessagingSubscriptionSettingCommandMt> for MaMes
 
 #[doc = r#"This message indicates the status of a command to change the topic subscription settings.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_MessagingSubscriptionSettingCommandStatus")]
 pub struct MaMessagingSubscriptionSettingCommandStatus(
 	pub crate::v5_0::types::MaMessagingSubscriptionSettingCommandStatusMt,
 );
@@ -14850,7 +14691,6 @@ impl Into<crate::v5_0::types::MaMessagingSubscriptionSettingCommandStatusMt> for
 
 #[doc = r#"This message reports the active messaging subscriptions which may be activated, deactivated, or deleted via MA_MessagingSubscriptionSettingCommand.UCI_PRIMITIVE: Status-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_MessagingSubscriptionStatus")]
 pub struct MaMessagingSubscriptionStatus(
 	pub crate::v5_0::types::MaMessagingSubscriptionStatusMt,
 );
@@ -14890,7 +14730,6 @@ impl Into<crate::v5_0::types::MaMessagingSubscriptionStatusMt> for MaMessagingSu
 #[doc = r#"This message specifies an integrated set of sub-*Plans (TaskPlan, RoutePlan and RouteActivityPlan for example) that together are the mission plan for a single System.  Mission planning can be done manually by operators, by planning services or a combination.  This message references a set of coherent sub-*Plans and indicates the order in which they will be executed when activated.  The sub-*Plans can be discretely created then integrated into the MissionPlan or created near simultaneously in a single or multiple step mission planning process that creates all sub-*Plans.  A MissionPlan can be created, updated and approved somewhat independent of its sub-*Plans.  For a hierarchical System of Systems, a higher tiered System's MissionPlan can reference the related/coherent MissionPlans of subordinate Systems.
 *Plans can only be activated and executed as part of a MissionPlan.  A MissionPlan can be subject to approval per Approval* messages.  Planning, approval, activation and execution state information for a MissionPlan are given in other MissionPlan* messages.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_MissionPlan")]
 pub struct MaMissionPlan(
 	pub crate::v5_0::types::MaMissionPlanMt,
 );
@@ -14929,7 +14768,6 @@ impl Into<crate::v5_0::types::MaMissionPlanMt> for MaMissionPlan {
 
 #[doc = r#"This message provides the ability to command activation of a *Plan.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_MissionPlanActivationCommand")]
 pub struct MaMissionPlanActivationCommand(
 	pub crate::v5_0::types::MaMissionPlanActivationCommandMt,
 );
@@ -14968,7 +14806,6 @@ impl Into<crate::v5_0::types::MaMissionPlanActivationCommandMt> for MaMissionPla
 
 #[doc = r#"This message is the response to a MissionPlanActivationCommand.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_MissionPlanActivationCommandStatus")]
 pub struct MaMissionPlanActivationCommandStatus(
 	pub crate::v5_0::types::MaMissionPlanActivationCommandStatusMt,
 );
@@ -15007,7 +14844,6 @@ impl Into<crate::v5_0::types::MaMissionPlanActivationCommandStatusMt> for MaMiss
 
 #[doc = r#"This message provides status of a mission plan and its subplans along the planning, conversion, upload, and activation chain.  *Plan related status is given in multiple messages aligned with the different types of Systems and Services that provide the status and the different times it is given.  Those messages are *PlanStatus, *PlanApprovalStatus, MissionPlanActivationStatus, *PlanExecutionStatus; see their annotations for further details.UCI_PRIMITIVE: Status-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_MissionPlanActivationStatus")]
 pub struct MaMissionPlanActivationStatus(
 	pub crate::v5_0::types::MaMissionPlanActivationStatusMt,
 );
@@ -15046,7 +14882,6 @@ impl Into<crate::v5_0::types::MaMissionPlanActivationStatusMt> for MaMissionPlan
 
 #[doc = r#"This message indicates the status of a command to create/update a MissionPlan, including the current state in a command and processing state machine; see the MissionPlanCommand message.  Creation/update of a MissionPlan  may occur autonomously, without a MissionPlanCommand in which case the current state of the plan could be given in the MissionPlanStatus message.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_MissionPlanCommand")]
 pub struct MaMissionPlanCommand(
 	pub crate::v5_0::types::MaMissionPlanCommandMt,
 );
@@ -15085,7 +14920,6 @@ impl Into<crate::v5_0::types::MaMissionPlanCommandMt> for MaMissionPlanCommand {
 
 #[doc = r#"This message indicates the status of a command to create/update a MissionPlan, including the current state in a command and processing state machine; see the MissionPlanCommand message.  Creation/update of a MissionPlan  may occur autonomously, without a MissionPlanCommand in which case the current state of the plan could be given in the MissionPlanStatus message.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_MissionPlanCommandStatus")]
 pub struct MaMissionPlanCommandStatus(
 	pub crate::v5_0::types::MaMissionPlanCommandStatusMt,
 );
@@ -15126,7 +14960,6 @@ impl Into<crate::v5_0::types::MaMissionPlanCommandStatusMt> for MaMissionPlanCom
 
 *Plan related status is given in multiple messages aligned with the different types of Systems and Services that provide the status and the different times it is given.  Those messages are *PlanStatus, *PlanApprovalStatus, MissionPlanActivationStatus, *PlanExecutionStatus; see their annotations for further details.UCI_PRIMITIVE: Status-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_MissionPlanExecutionStatus")]
 pub struct MaMissionPlanExecutionStatus(
 	pub crate::v5_0::types::MaMissionPlanExecutionStatusMt,
 );
@@ -15165,7 +14998,6 @@ impl Into<crate::v5_0::types::MaMissionPlanExecutionStatusMt> for MaMissionPlanE
 
 #[doc = r#"This message indicates the status of the validation, including the current state in a validation state machine, and details of invalid items. Validation may occur periodically, or onesie twosie. See the MissionPlanValidationCommand message.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_MissionPlanValidation")]
 pub struct MaMissionPlanValidation(
 	pub crate::v5_0::types::MaMissionPlanValidationMt,
 );
@@ -15204,7 +15036,6 @@ impl Into<crate::v5_0::types::MaMissionPlanValidationMt> for MaMissionPlanValida
 
 #[doc = r#"This message indicates a command to validate/re-validate an existing MissionPlan.  A MissionPlan can become invalid due to changes in Task timing, weather, order of battle, kinematic movement constraints, operator manual edits and many, many other reasons.  The message allows an existing MissionPlan to be checked for validity given such changes.  The variables a given planning service, operator or system considers when validating a plan varies.  Different variables might be considered depending on the level of detail of the plan or stage in the overall planning process.  The scope and meaning of "valid" comes from context of the services, operator and systems creating the plan.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_MissionPlanValidationCommand")]
 pub struct MaMissionPlanValidationCommand(
 	pub crate::v5_0::types::MaMissionPlanValidationCommandMt,
 );
@@ -15243,7 +15074,6 @@ impl Into<crate::v5_0::types::MaMissionPlanValidationCommandMt> for MaMissionPla
 
 #[doc = r#"This message indicates the status of a command to validate a MissionPlan, including the current state in a command and processing state machine.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_MissionPlanValidationCommandStatus")]
 pub struct MaMissionPlanValidationCommandStatus(
 	pub crate::v5_0::types::MaMissionPlanValidationCommandStatusMt,
 );
@@ -15282,7 +15112,6 @@ impl Into<crate::v5_0::types::MaMissionPlanValidationCommandStatusMt> for MaMiss
 
 #[doc = r#"This message provides the status of the Requirements of a given MissionPlan.  It enables aggregation of Requirement planning, execution approval and execution status per MissionPlan.  This message provides no more information than is already available directly in the corresponding Requirement status messages; TaskPlanningStatus, TaskExecutionApprovalStatus and TaskStatus for example.  It is as an optional mechanism for reporting and monitoring the progress of a mission, from a Requirement perspective, through a single message.UCI_PRIMITIVE: Status-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_MissionRequirementStatus")]
 pub struct MaMissionRequirementStatus(
 	pub crate::v5_0::types::MaMissionRequirementStatusMt,
 );
@@ -15321,7 +15150,6 @@ impl Into<crate::v5_0::types::MaMissionRequirementStatusMt> for MaMissionRequire
 
 #[doc = r#"This message is the Command for Op* types.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_OpCommand")]
 pub struct MaOpCommand(
 	pub crate::v5_0::types::MaOpCommandMt,
 );
@@ -15360,7 +15188,6 @@ impl Into<crate::v5_0::types::MaOpCommandMt> for MaOpCommand {
 
 #[doc = r#"This message indicates the result of an MA_OpCommand.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_OpCommandStatus")]
 pub struct MaOpCommandStatus(
 	pub crate::v5_0::types::MaOpCommandStatusMt,
 );
@@ -15399,7 +15226,6 @@ impl Into<crate::v5_0::types::MaOpCommandStatusMt> for MaOpCommandStatus {
 
 #[doc = r#"This message represents a line which may be taken into consideration by services during their operation.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_OpLine")]
 pub struct MaOpLine(
 	pub crate::v5_0::types::MaOpLineMt,
 );
@@ -15442,7 +15268,6 @@ An OpPlan can be an input and/or output of planning processes.
 
 An OpPlan can be created discretely or as part of a MissionPlan that includes other *Plans.  An OpPlan can only be activated and executed as part of a MissionPlan.  A MissionPlan can be used to plan the execution order of multiple OpPlans and *Plans in general.  Planning, approval, activation and execution state information for an OpPlan are given in other OpPlan* messages.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_OpPlan")]
 pub struct MaOpPlan(
 	pub crate::v5_0::types::MaOpPlanMt,
 );
@@ -15481,7 +15306,6 @@ impl Into<crate::v5_0::types::MaOpPlanMt> for MaOpPlan {
 
 #[doc = r#"This message represents a special class of points which may be taken into consideration by Services during their operation.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_OpPoint")]
 pub struct MaOpPoint(
 	pub crate::v5_0::types::MaOpPointMt,
 );
@@ -15520,7 +15344,6 @@ impl Into<crate::v5_0::types::MaOpPointMt> for MaOpPoint {
 
 #[doc = r#"This message represents routing constraints which may be taken into consideration by Systems and Services during their operation.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_OpRouting")]
 pub struct MaOpRouting(
 	pub crate::v5_0::types::MaOpRoutingMt,
 );
@@ -15559,7 +15382,6 @@ impl Into<crate::v5_0::types::MaOpRoutingMt> for MaOpRouting {
 
 #[doc = r#"Indicates the status for an Op* type.UCI_PRIMITIVE: Status-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_OpStatus")]
 pub struct MaOpStatus(
 	pub crate::v5_0::types::MaOpStatusMt,
 );
@@ -15598,7 +15420,6 @@ impl Into<crate::v5_0::types::MaOpStatusMt> for MaOpStatus {
 
 #[doc = r#"This message represents a 3-dimensional zone which may be taken into consideration by services during their operation.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_OpVolume")]
 pub struct MaOpVolume(
 	pub crate::v5_0::types::MaOpVolumeMt,
 );
@@ -15637,7 +15458,6 @@ impl Into<crate::v5_0::types::MaOpVolumeMt> for MaOpVolume {
 
 #[doc = r#"This message represents a zone which may be taken into consideration by Services during their operation. Its primary use is airspace coordination.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_OpZone")]
 pub struct MaOpZone(
 	pub crate::v5_0::types::MaOpZoneMt,
 );
@@ -15676,7 +15496,6 @@ impl Into<crate::v5_0::types::MaOpZoneMt> for MaOpZone {
 
 #[doc = r#"This messages defines an Operator Role such that it can be referenced within other messages and queried for.UCI_PRIMITIVE: DataRecord-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_OperatorRole")]
 pub struct MaOperatorRole(
 	pub crate::v5_0::types::MaOperatorRoleMt,
 );
@@ -15719,7 +15538,6 @@ impl Into<crate::v5_0::types::MaOperatorRoleMt> for MaOperatorRole {
 3. "Weightings" that influence the decisions of operators or planning algorithms performing the planning.
 4. Temporal and/or kinematic begin and end points.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_OrbitActivityPlanCommand")]
 pub struct MaOrbitActivityPlanCommand(
 	pub crate::v5_0::types::MaOrbitActivityPlanCommandMt,
 );
@@ -15758,7 +15576,6 @@ impl Into<crate::v5_0::types::MaOrbitActivityPlanCommandMt> for MaOrbitActivityP
 
 #[doc = r#"This message indicates the status of a command to create/update an OrbitActivityPlan, including the current state in a command and processing state machine; see the OrbitActivityPlanCommand message.  Creation/update of an OrbitActivityPlan  may occur autonomously, without an OrbitActivityPlanCommand in which case the current state of the plan could be given in the OrbitActivityPlanStatus message.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_OrbitActivityPlanCommandStatus")]
 pub struct MaOrbitActivityPlanCommandStatus(
 	pub crate::v5_0::types::MaOrbitActivityPlanCommandStatusMt,
 );
@@ -15797,7 +15614,6 @@ impl Into<crate::v5_0::types::MaOrbitActivityPlanCommandStatusMt> for MaOrbitAct
 
 #[doc = r#"This message indicates the status of the validation, including the current state in a validation state machine, and details of invalid items. Validation may occur periodically, or onesie twosie. See the OrbitActivityPlanValidationCommand message.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_OrbitActivityPlanValidation")]
 pub struct MaOrbitActivityPlanValidation(
 	pub crate::v5_0::types::MaOrbitActivityPlanValidationMt,
 );
@@ -15836,7 +15652,6 @@ impl Into<crate::v5_0::types::MaOrbitActivityPlanValidationMt> for MaOrbitActivi
 
 #[doc = r#"This message is used to command one or more entities to form, join or leave a Package.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_PackageManagementCommand")]
 pub struct MaPackageManagementCommand(
 	pub crate::v5_0::types::MaPackageManagementCommandMt,
 );
@@ -15875,7 +15690,6 @@ impl Into<crate::v5_0::types::MaPackageManagementCommandMt> for MaPackageManagem
 
 #[doc = r#"This message is sent in response to a PackageManagementCommand and indicates if the command was accepted and if not why it was rejected.  The resulting status of the Package Change is reported in PackagePartnerStatusReport for each system in the original command.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_PackageManagementCommandStatus")]
 pub struct MaPackageManagementCommandStatus(
 	pub crate::v5_0::types::MaPackageManagementCommandStatusMt,
 );
@@ -15914,7 +15728,6 @@ impl Into<crate::v5_0::types::MaPackageManagementCommandStatusMt> for MaPackageM
 
 #[doc = r#"This message reports the resulting status of a package change for a PackageManagementCommand for individual entities in a package.UCI_PRIMITIVE: Status-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_PackagePartnerStatusReport")]
 pub struct MaPackagePartnerStatusReport(
 	pub crate::v5_0::types::MaPackagePartnerStatusReportMt,
 );
@@ -15953,7 +15766,6 @@ impl Into<crate::v5_0::types::MaPackagePartnerStatusReportMt> for MaPackagePartn
 
 #[doc = r#"This message provides the ability to modify a Plan or set of Plans.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_PlanModificationRequest")]
 pub struct MaPlanModificationRequest(
 	pub crate::v5_0::types::MaPlanModificationRequestMt,
 );
@@ -15992,7 +15804,6 @@ impl Into<crate::v5_0::types::MaPlanModificationRequestMt> for MaPlanModificatio
 
 #[doc = r#"This message indicates the current status of a PlanModificationRequest received by the applicable C2 system. In the event that the modification was incomplete, this message should provide details on why the modification was unsuccessful. If successful, a new Plan message or messages should be sent out.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_PlanModificationRequestStatus")]
 pub struct MaPlanModificationRequestStatus(
 	pub crate::v5_0::types::MaPlanModificationRequestStatusMt,
 );
@@ -16031,7 +15842,6 @@ impl Into<crate::v5_0::types::MaPlanModificationRequestStatusMt> for MaPlanModif
 
 #[doc = r#"This message indicates all supported planning-related functions and interfaces of a System.  The closely related PlanningFunctionStatus message indicates how planning-related functions and interfaces of the System are currently configured.  Planning functions indicated here can be performed by human operators and/or machines/Services.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_PlanningFunction")]
 pub struct MaPlanningFunction(
 	pub crate::v5_0::types::MaPlanningFunctionMt,
 );
@@ -16070,7 +15880,6 @@ impl Into<crate::v5_0::types::MaPlanningFunctionMt> for MaPlanningFunction {
 
 #[doc = r#"This message changes the configuration of planning-related functions and interfaces of a System.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_PlanningFunctionSettingsCommand")]
 pub struct MaPlanningFunctionSettingsCommand(
 	pub crate::v5_0::types::MaPlanningFunctionSettingsCommandMt,
 );
@@ -16109,7 +15918,6 @@ impl Into<crate::v5_0::types::MaPlanningFunctionSettingsCommandMt> for MaPlannin
 
 #[doc = r#"This message provides transactional status for the PlanningFunctionsSettingsCommand message.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_PlanningFunctionSettingsCommandStatus")]
 pub struct MaPlanningFunctionSettingsCommandStatus(
 	pub crate::v5_0::types::MaPlanningFunctionSettingsCommandStatusMt,
 );
@@ -16148,7 +15956,6 @@ impl Into<crate::v5_0::types::MaPlanningFunctionSettingsCommandStatusMt> for MaP
 
 #[doc = r#"This message indicates the configuration/status of currently enabled planning-related functions and interfaces of a System.  The closely related PlanningFunction message indicates all supported planning-related functions and interfaces.UCI_PRIMITIVE: Status-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_PlanningFunctionStatus")]
 pub struct MaPlanningFunctionStatus(
 	pub crate::v5_0::types::MaPlanningFunctionStatusMt,
 );
@@ -16187,7 +15994,6 @@ impl Into<crate::v5_0::types::MaPlanningFunctionStatusMt> for MaPlanningFunction
 
 #[doc = r#"This message indicates the location and speed of a System or Resource. It is one of the "station-keeping" series of messages reported by most UCI Systems.  The station-keeping series includes PositionReport, SystemStatus, NavigationReport, [Capability]Status and [Capability]Activity.UCI_PRIMITIVE: Status-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_PositionReport")]
 pub struct MaPositionReport(
 	pub crate::v5_0::types::MaPositionReportMt,
 );
@@ -16226,7 +16032,6 @@ impl Into<crate::v5_0::types::MaPositionReportMt> for MaPositionReport {
 
 #[doc = r#"This message indicates the location, speed, and direction of a System or Resource. It is not one of the "station-keeping" series of messages, but is designed to provide positional information at a much higher frequency than PositionReport, and allows for multiple redundant systems to provide reports in the same message.UCI_PRIMITIVE: Status-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_PositionReportDetailed")]
 pub struct MaPositionReportDetailed(
 	pub crate::v5_0::types::MaPositionReportDetailedMt,
 );
@@ -16265,7 +16070,6 @@ impl Into<crate::v5_0::types::MaPositionReportDetailedMt> for MaPositionReportDe
 
 #[doc = r#"This message represents a list of battlespace objects or actors, prioritized for an enumerated purpose or perspective.  It establishes an order/priority by which objects should be addressed/processed.  This message has a spectrum of possible uses from the very broad focused to the very narrowly focused.  For example, it could be used broadly to establish the priority of threats/targets as general guidance to all of the Systems in a System of Systems, agnostic of their individual Missions, Capabilities or Services.   Alternatively, it could be very narrowly focused to establish a different priority of threats/targets for each phase of F2T2EA, filtered/tailored by System, Service, time or space.UCI_PRIMITIVE: DataRecord-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_PrioritizationList")]
 pub struct MaPrioritizationList(
 	pub crate::v5_0::types::MaPrioritizationListMt,
 );
@@ -16304,7 +16108,6 @@ impl Into<crate::v5_0::types::MaPrioritizationListMt> for MaPrioritizationList {
 
 #[doc = r#"This message is a Raft AppendEntries request sent by the current leader to maintain authority via heartbeat, preventing subsequent elections and optionally to replicate log entries.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_RaftAppendEntriesRequest")]
 pub struct MaRaftAppendEntriesRequest(
 	pub crate::v5_0::types::MaRaftAppendEntriesRequestMt,
 );
@@ -16343,7 +16146,6 @@ impl Into<crate::v5_0::types::MaRaftAppendEntriesRequestMt> for MaRaftAppendEntr
 
 #[doc = r#"This message is sent in response to the preceding Raft AppendEntries request. It includes the follower's current term, which may cause the leader to update its term, and an optional success boolean indicating whether the follower's log contains a matching entry.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_RaftAppendEntriesRequestStatus")]
 pub struct MaRaftAppendEntriesRequestStatus(
 	pub crate::v5_0::types::MaRaftAppendEntriesRequestStatusMt,
 );
@@ -16382,7 +16184,6 @@ impl Into<crate::v5_0::types::MaRaftAppendEntriesRequestStatusMt> for MaRaftAppe
 
 #[doc = r#"This message is sent by a candidate to request votes during a Raft leader election.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_RaftVoteRequest")]
 pub struct MaRaftVoteRequest(
 	pub crate::v5_0::types::MaRaftVoteRequestMt,
 );
@@ -16421,7 +16222,6 @@ impl Into<crate::v5_0::types::MaRaftVoteRequestMt> for MaRaftVoteRequest {
 
 #[doc = r#"This message is sent in response to the preceding Raft leader election vote request. This request status message includes the current term and whether the vote was granted.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_RaftVoteRequestStatus")]
 pub struct MaRaftVoteRequestStatus(
 	pub crate::v5_0::types::MaRaftVoteRequestStatusMt,
 );
@@ -16466,7 +16266,6 @@ For Planned C2, evaluating a Response option based on Requirements or *Plans gen
 
 A Response can continue to execute (triggering events can continue to be monitored) after a Response option has been initiated.  An instantiation of a Response option is detailed in the ResponseActivity message.  Response can be manually initiated via the ResponseCommand message.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_Response")]
 pub struct MaResponse(
 	pub crate::v5_0::types::MaResponseMt,
 );
@@ -16505,7 +16304,6 @@ impl Into<crate::v5_0::types::MaResponseMt> for MaResponse {
 
 #[doc = r#"This message indicates the combined in-work and to-do list of the Response Capability of a System.  Response Activities start at the time when monitoring for the triggering event starts.  A given trigger can occur multiple times in the course of a Mission.  Therefore a Response Activity can indicate multiple current and past trigger instances.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_ResponseActivity")]
 pub struct MaResponseActivity(
 	pub crate::v5_0::types::MaResponseActivityMt,
 );
@@ -16544,7 +16342,6 @@ impl Into<crate::v5_0::types::MaResponseActivityMt> for MaResponseActivity {
 
 #[doc = r#"This message indicates a command to perform a response allocation plan process or function. The ResponsePlan message/object is the output of a response allocation plan process or function.  The ResponsePlan output of one response allocation plan process function could be an input to the next function.  UCI enables "discovery" of the response allocation plan processes and functions of a System via the ControlStatus message. This mechanism for discovery empowers a System performing response allocation planning for subordinate Systems of heterogeneous types and/or service/function/process architecture to selectively use, replace or supplement them.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_ResponsePlanCommand")]
 pub struct MaResponsePlanCommand(
 	pub crate::v5_0::types::MaResponsePlanCommandMt,
 );
@@ -16583,7 +16380,6 @@ impl Into<crate::v5_0::types::MaResponsePlanCommandMt> for MaResponsePlanCommand
 
 #[doc = r#"This message indicates the status of a command to create/update a ResponsePlan, including the current state in a command and processing state machine; see the ResponsePlanCommand message.  Creation/update of a ResponsePlan  may occur autonomously, without a ResponsePlanCommand in which case the current state of the plan could be given in the ResponsePlanStatus message.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_ResponsePlanCommandStatus")]
 pub struct MaResponsePlanCommandStatus(
 	pub crate::v5_0::types::MaResponsePlanCommandStatusMt,
 );
@@ -16622,7 +16418,6 @@ impl Into<crate::v5_0::types::MaResponsePlanCommandStatusMt> for MaResponsePlanC
 
 #[doc = r#"This message indicates the status of the validation, including the current state in a validation state machine, and details of invalid items. Validation may occur periodically, or onesie twosie. See the ResponsePlanValidationCommand message.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_ResponsePlanValidation")]
 pub struct MaResponsePlanValidation(
 	pub crate::v5_0::types::MaResponsePlanValidationMt,
 );
@@ -16662,7 +16457,6 @@ impl Into<crate::v5_0::types::MaResponsePlanValidationMt> for MaResponsePlanVali
 #[doc = r#"Indicates the execution status for a Response.
 ***For Responses, "execution" only includes the explicit response management action indicated in the Response message; it does not include subsequent creation of *Plans, execution of Requirements, etc. that may or may not follow.  For example, a Response is executing as soon as its triggers are being monitored.  The triggers may never happen even if the Response is executing.  If a trigger happens, the Response continues to execute but is now "instantiated" once, with details given in the ResponseActivity message.UCI_PRIMITIVE: Status-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_ResponseStatus")]
 pub struct MaResponseStatus(
 	pub crate::v5_0::types::MaResponseStatusMt,
 );
@@ -16706,7 +16500,6 @@ A single System can have multiple independent RouteActivityPlans for different T
 
 A RouteActivityPlan can be created discretely or as part of a MissionPlan that includes other *Plans.  A RouteActivityPlan can only be activated and executed as part of a MissionPlan.  A MissionPlan can be used to plan the execution order of multiple RouteActivityPlans and *Plans in general.  A RouteActivityPlan can be subject to approval per Approval* messages.  Planning, approval, activation and execution state information for a RouteActivityPlan are given in other RouteActivityPlan* messages.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_RouteActivityPlan")]
 pub struct MaRouteActivityPlan(
 	pub crate::v5_0::types::MaRouteActivityPlanMt,
 );
@@ -16753,7 +16546,6 @@ impl Into<crate::v5_0::types::MaRouteActivityPlanMt> for MaRouteActivityPlan {
 
 4. Temporal and/or kinematic begin and end points.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_RouteActivityPlanCommand")]
 pub struct MaRouteActivityPlanCommand(
 	pub crate::v5_0::types::MaRouteActivityPlanCommandMt,
 );
@@ -16792,7 +16584,6 @@ impl Into<crate::v5_0::types::MaRouteActivityPlanCommandMt> for MaRouteActivityP
 
 #[doc = r#"This message indicates the status of a command to create/update a RouteActivityPlan, including the current state in a command and processing state machine; see the RouteActivityPlanCommand message.  Creation/update of a RouteActivityPlan  may occur autonomously, without a RouteActivityPlanCommand in which case the current state of the plan could be given in the RouteActivityPlanStatus message.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_RouteActivityPlanCommandStatus")]
 pub struct MaRouteActivityPlanCommandStatus(
 	pub crate::v5_0::types::MaRouteActivityPlanCommandStatusMt,
 );
@@ -16831,7 +16622,6 @@ impl Into<crate::v5_0::types::MaRouteActivityPlanCommandStatusMt> for MaRouteAct
 
 #[doc = r#"This message indicates the status of the validation, including the current state in a validation state machine, and details of invalid items. Validation may occur periodically, or onesie twosie. See the RouteActivityPlanValidationCommand message.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_RouteActivityPlanValidation")]
 pub struct MaRouteActivityPlanValidation(
 	pub crate::v5_0::types::MaRouteActivityPlanValidationMt,
 );
@@ -16870,7 +16660,6 @@ impl Into<crate::v5_0::types::MaRouteActivityPlanValidationMt> for MaRouteActivi
 
 #[doc = r#"This message associates a set of path conflict meta data to a unique conflict identifier that can be used as a reference when proposing resolutions to the detected conflict.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_RouteDeconflictionAlert")]
 pub struct MaRouteDeconflictionAlert(
 	pub crate::v5_0::types::MaRouteDeconflictionAlertMt,
 );
@@ -16915,7 +16704,6 @@ A single System can have multiple independent RoutePlans for different types of 
 
 A RoutePlan can be created discretely or as part of a MissionPlan that includes other *Plans.  A RoutePlan can only be activated and executed as part of a MissionPlan.  A MissionPlan can be used to plan the execution order of multiple RoutePlans and *Plans in general.  A RoutePlan can be subject to approval per Approval* messages.  Planning, approval, activation and execution state information for a RoutePlan are given in other RoutePlan* messages.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_RoutePlan")]
 pub struct MaRoutePlan(
 	pub crate::v5_0::types::MaRoutePlanMt,
 );
@@ -16954,7 +16742,6 @@ impl Into<crate::v5_0::types::MaRoutePlanMt> for MaRoutePlan {
 
 #[doc = r#"The Rules Of Engagement (ROE) allows an operator to set specific criteria for the target designation and weapons employment process. For the ROE message, all fields but 1 Boolean (MA_RulesOfEngagementMT.StrikeConsentRequired) are optional, and if they are left blank then the ROE does not allow for that activity to be authorized. The IdMatrixCriteria provides criteria that can be used to assign or confirm the setting of the Identity of an EntityMT (EntityMDT.Identity.Standard.StandardIdentity) to be FRIEND, NEUTRAL, SUSPECT or HOSTILE. The TargetDesignationCriteria field provides a mechanism to specify what criteria can be used to set or confirm that an EntityMT is a Target (meaning that a MA_DesignationRequestMT can be created, and sent to be approved by the related Target Authority who would then send a MA_DesignationMT). The TargetAuthorityCriteria field specifies who is authorized to approve or set something as a Target (by sending a MA_DesignationMT or a specific commanded/approved task defined in the associated ApprovalPolicyMT) and specifies who is authorized to respond to a StrikeConsentRequestMT. The TargetCustodyCriteria field can be used to define what must be true while the ACP is performing a Weapons Engagement on an Entity. The StrikeConsentRequired field specifies whether (TRUE) or not (FALSE) the Strike Activities requires consent to transition from the ENABLED state to an ACTIVE state. If TRUE, each Strike Activity would be required to send a StrikeConsentRequestMT to an Authorized Operator (defined in the TargetAuthorityCriteria field) and receive a StrikeConsentRequestStatusMT before each Strike Activity can execute the Strike.UCI_PRIMITIVE: Data-1"#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_RulesOfEngagement")]
 pub struct MaRulesOfEngagement(
 	pub crate::v5_0::types::MaRulesOfEngagementMt,
 );
@@ -16993,7 +16780,6 @@ impl Into<crate::v5_0::types::MaRulesOfEngagementMt> for MaRulesOfEngagement {
 
 #[doc = r#"This message allows a C2 to activate a specific MA_RulesOfEngagementMT message and set optional parameters of the associated geozone (ApplicableRegion) and valid time (TimeValid) window for where and when the Rules Of Engagement message is valid. If the ApplicableRegion field is configured, the ACP must be in this region when it fires, and the calculated weapon impact location of the Target must be within this region. The MA shall only start an engagement for targets inside of the Region(s). If the TimeValid field is configured, the Rules of Engagement is only active during that time. If the TimeValid field is left empty, the Rules of Engagement is valid until the Command is canceled or an updated.UCI_PRIMITIVE: Command-2"#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_RulesOfEngagementCommand")]
 pub struct MaRulesOfEngagementCommand(
 	pub crate::v5_0::types::MaRulesOfEngagementCommandMt,
 );
@@ -17032,7 +16818,6 @@ impl Into<crate::v5_0::types::MaRulesOfEngagementCommandMt> for MaRulesOfEngagem
 
 #[doc = r#"This message indicates the status for the MA_RulesOfEngagementCommandMT message.UCI_PRIMITIVE: Command-2"#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_RulesOfEngagementCommandStatus")]
 pub struct MaRulesOfEngagementCommandStatus(
 	pub crate::v5_0::types::MaRulesOfEngagementCommandStatusMt,
 );
@@ -17071,7 +16856,6 @@ impl Into<crate::v5_0::types::MaRulesOfEngagementCommandStatusMt> for MaRulesOfE
 
 #[doc = r#"This message indicates the status for the active Rules of Engagement information that was configured by the MA_RulesOfEngagementCommandMT. It provides the RulesOfEngagementID and the optional parameters of the associated geozone (ApplicableRegion) and valid time (TimeValid) window for where and when the RulesOfEngagementID is valid. If the ApplicableRegion field is set, the ACP must be in this region when it fires, and the calculated weapon impact location of the Target must be within this region. The MA shall only start an engagement for targets inside of the Region(s). If the TimeValid field is set, the Rules of Engagement is only active during that time. If the TimeValid  field is left empty, the Rules of Engagement is valid until the Command is canceled or an updated.UCI_PRIMITIVE: Status-1"#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_RulesOfEngagementStatus")]
 pub struct MaRulesOfEngagementStatus(
 	pub crate::v5_0::types::MaRulesOfEngagementStatusMt,
 );
@@ -17110,7 +16894,6 @@ impl Into<crate::v5_0::types::MaRulesOfEngagementStatusMt> for MaRulesOfEngageme
 
 #[doc = r#"This message represents the hexbinary data payload received by the Decentralized Messaging Service (DMS).UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_RxDataPayload")]
 pub struct MaRxDataPayload(
 	pub crate::v5_0::types::MaRxDataPayloadMt,
 );
@@ -17149,7 +16932,6 @@ impl Into<crate::v5_0::types::MaRxDataPayloadMt> for MaRxDataPayload {
 
 #[doc = r#"This message reports the availability of weapon capabilities and MDF state and status.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_StrikeActivity")]
 pub struct MaStrikeActivity(
 	pub crate::v5_0::types::MaStrikeActivityMt,
 );
@@ -17188,7 +16970,6 @@ impl Into<crate::v5_0::types::MaStrikeActivityMt> for MaStrikeActivity {
 
 #[doc = r#"This message represents the Strike category of UCI Capability.  This message "advertises" the mostly static characteristics of a mission-ready Strike Capability (of a Subsystem of System) so that it can be "discovered" and used.  "Discovery" can be a misnomer depending on your perspective.  UCI Capability messages aren't meant to enable dynamic discovery of design details of never-before-seen Capabilities.  They don't eliminate the need for future software updates or configuration files with performance characteristics indexed by Subsystem model number.  UCI Capability messages are meant to support discovery of what changes for a Capability from mission to mission or even within the course of a mission, especially as it relates to command and control.  In UCI terminology, a Capability is something a System can do that is useful in Missions performed by a heterogeneous family of Systems and Services.  A [Capability]Capability message describes what a Subsystem is capable of doing if invoked.  A [Capability]Activity message describes what a Capability is doing.  Capabilities are aligned with end effects of Mission operations such as imagery collection, active target search, passive threat detection, electronic attack and others.  Functions which support these end effects including turret control, carriage control and door control aren't considered UCI Capabilities but might be addressed by other UCI messages.  Capabilities are the standardized taxonomy of high level Mission end-effects functions a System can perform.  Further, the Capability taxonomy establishes the "level" at which the Mission Subsystems of a System: 1) can be controlled, 2) can be functionally re-integrated into new Systems without their application software changing, 3) are modeled by allocation and planning services including Task Allocation, Route Planning, Mission Monitoring/Contingency and Task Generation services, 4) are modeled by Capability management services including Capability Managers and Capability Controllers and 5) report their configuration, availability and status.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_StrikeCapability")]
 pub struct MaStrikeCapability(
 	pub crate::v5_0::types::MaStrikeCapabilityMt,
 );
@@ -17227,7 +17008,6 @@ impl Into<crate::v5_0::types::MaStrikeCapabilityMt> for MaStrikeCapability {
 
 #[doc = r#"This message is used to request changes to a system's status or configurable settings.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_SystemManagementRequest")]
 pub struct MaSystemManagementRequest(
 	pub crate::v5_0::types::MaSystemManagementRequestMt,
 );
@@ -17266,7 +17046,6 @@ impl Into<crate::v5_0::types::MaSystemManagementRequestMt> for MaSystemManagemen
 
 #[doc = r#"This message represents a response to a SystemManagementRequest message.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_SystemManagementRequestStatus")]
 pub struct MaSystemManagementRequestStatus(
 	pub crate::v5_0::types::MaSystemManagementRequestStatusMt,
 );
@@ -17305,7 +17084,6 @@ impl Into<crate::v5_0::types::MaSystemManagementRequestStatusMt> for MaSystemMan
 
 #[doc = r#"This message provides a notification related to a System.  There are endless possible events, states, state changes and behaviors of Systems to monitor/observe.  In lieu of enumerating them all, this message categorizes them into "perspectives" such as kinematics, weather and identity.  For example, a weather monitoring Service could produce a SystemNotification message advising that a particular System is entering an area with potential weather hazards.  This message optionally references other messages that triggered or are related to the notification.  For example, a SystemNotification with a weather perspective could reference a WeatherDataset message with detailed weather data.UCI_PRIMITIVE: Data-1"#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_SystemNotification")]
 pub struct MaSystemNotification(
 	pub crate::v5_0::types::MaSystemNotificationMt,
 );
@@ -17344,7 +17122,6 @@ impl Into<crate::v5_0::types::MaSystemNotificationMt> for MaSystemNotification {
 
 #[doc = r#"Indicates the minimum number of systems needed to complete a desired set of tasks.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_SystemsNeededRequest")]
 pub struct MaSystemsNeededRequest(
 	pub crate::v5_0::types::MaSystemsNeededRequestMt,
 );
@@ -17383,7 +17160,6 @@ impl Into<crate::v5_0::types::MaSystemsNeededRequestMt> for MaSystemsNeededReque
 
 #[doc = r#"This message indicates the result of a SystemsNeededRequest.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_SystemsNeededRequestStatus")]
 pub struct MaSystemsNeededRequestStatus(
 	pub crate::v5_0::types::MaSystemsNeededRequestStatusMt,
 );
@@ -17422,7 +17198,6 @@ impl Into<crate::v5_0::types::MaSystemsNeededRequestStatusMt> for MaSystemsNeede
 
 #[doc = r#"This message specifies a Task that a System will perform against a specific entity or geographical location.  Tasks include flight, collection, strike, electronic attack, directed energy, laser designation, cargo delivery and communication relay.  They are abstracted to a level of C2 and autonomy derived from UCI operational vignettes.  Tasks enable services, operators and other actors to do automated, dynamic, machine-to-machine allocation of Tasks to Systems and subsequent mission planning.  If necessary, authorization of Users to Task Systems can be controlled using the Authorization message.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_Task")]
 pub struct MaTask(
 	pub crate::v5_0::types::MaTaskMt,
 );
@@ -17461,7 +17236,6 @@ impl Into<crate::v5_0::types::MaTaskMt> for MaTask {
 
 #[doc = r#"This message is the Task form of the general UCI Capability Command.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_TaskCommand")]
 pub struct MaTaskCommand(
 	pub crate::v5_0::types::MaTaskCommandMt,
 );
@@ -17500,7 +17274,6 @@ impl Into<crate::v5_0::types::MaTaskCommandMt> for MaTaskCommand {
 
 #[doc = r#"This message indicates the result of an MA_TaskCommand.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_TaskCommandStatus")]
 pub struct MaTaskCommandStatus(
 	pub crate::v5_0::types::MaTaskCommandStatusMt,
 );
@@ -17545,7 +17318,6 @@ Additional details such as timing, dependencies, decomposition, etc. can be adde
 
 A TaskPlan can be created discretely or as part of a MissionPlan that includes other *Plans.  A TaskPlan can only be activated and executed as part of a MissionPlan.  A MissionPlan can be used to plan the execution order of multiple TaskPlans and *Plans in general.  A TaskPlan can be subject to approval per Approval* messages.  Planning, approval, activation and execution state information for a TaskPlan are given in other TaskPlan* messages.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_TaskPlan")]
 pub struct MaTaskPlan(
 	pub crate::v5_0::types::MaTaskPlanMt,
 );
@@ -17584,7 +17356,6 @@ impl Into<crate::v5_0::types::MaTaskPlanMt> for MaTaskPlan {
 
 #[doc = r#"This message indicates a command to perform a task allocation plan process or function. The TaskPlan message/object is the output of a task allocation plan process or function.  The TaskPlan output of one task allocation plan process function could be an input to the next function.  UCI enables "discovery" of the task allocation plan process and function of a System via the ControlStatus message. This mechanism for discovery empowers a System performing task allocation planning for subordinate Systems of heterogeneous types and/or service/function/process architecture to selectively use, replace or supplement them.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_TaskPlanCommand")]
 pub struct MaTaskPlanCommand(
 	pub crate::v5_0::types::MaTaskPlanCommandMt,
 );
@@ -17623,7 +17394,6 @@ impl Into<crate::v5_0::types::MaTaskPlanCommandMt> for MaTaskPlanCommand {
 
 #[doc = r#"This message indicates the status of a command to create/update a TaskPlan, including the current state in a command and processing state machine; see the TaskPlanCommand message.  Creation/update of a TaskPlan  may occur autonomously, without a TaskPlanCommand in which case the current state of the plan could be given in the TaskPlanStatus message.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_TaskPlanCommandStatus")]
 pub struct MaTaskPlanCommandStatus(
 	pub crate::v5_0::types::MaTaskPlanCommandStatusMt,
 );
@@ -17662,7 +17432,6 @@ impl Into<crate::v5_0::types::MaTaskPlanCommandStatusMt> for MaTaskPlanCommandSt
 
 #[doc = r#"This message indicates the status of the validation, including the current state in a validation state machine, and details of invalid items. Validation may occur periodically, or onesie twosie. See the TaskPlanValidationCommand message.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_TaskPlanValidation")]
 pub struct MaTaskPlanValidation(
 	pub crate::v5_0::types::MaTaskPlanValidationMt,
 );
@@ -17701,7 +17470,6 @@ impl Into<crate::v5_0::types::MaTaskPlanValidationMt> for MaTaskPlanValidation {
 
 #[doc = r#"Indicates the execution status for a Task.UCI_PRIMITIVE: Status-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_TaskStatus")]
 pub struct MaTaskStatus(
 	pub crate::v5_0::types::MaTaskStatusMt,
 );
@@ -17740,7 +17508,6 @@ impl Into<crate::v5_0::types::MaTaskStatusMt> for MaTaskStatus {
 
 #[doc = r#"This message indicates a command to send an encoded data payload offboard to either a single or multiple network endpoints.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_TxDataPayloadCommand")]
 pub struct MaTxDataPayloadCommand(
 	pub crate::v5_0::types::MaTxDataPayloadCommandMt,
 );
@@ -17779,7 +17546,6 @@ impl Into<crate::v5_0::types::MaTxDataPayloadCommandMt> for MaTxDataPayloadComma
 
 #[doc = r#"This message indicates the status of a command to send an encoded data payload.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_TxDataPayloadCommandStatus")]
 pub struct MaTxDataPayloadCommandStatus(
 	pub crate::v5_0::types::MaTxDataPayloadCommandStatusMt,
 );
@@ -17818,7 +17584,6 @@ impl Into<crate::v5_0::types::MaTxDataPayloadCommandStatusMt> for MaTxDataPayloa
 
 #[doc = r#"This message represents a single Weapon Engagement Zone (WEZ). The WEZ represents a less dynamic capability than the DLZ for air to air engagements and is not reliant on target state data to be produced.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_WEZ")]
 pub struct MaWez(
 	pub crate::v5_0::types::MaWezMt,
 );
@@ -17857,7 +17622,6 @@ impl Into<crate::v5_0::types::MaWezMt> for MaWez {
 
 #[doc = r#"This message is used to request the generation of a Weapon Engagement Zone (WEZ). The WEZ represents a less dynamic capability than the DLZ for air to air engagements and is not reliant on target state data to be produced.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_WEZ_Request")]
 pub struct MaWezRequest(
 	pub crate::v5_0::types::MaWezRequestMt,
 );
@@ -17896,7 +17660,6 @@ impl Into<crate::v5_0::types::MaWezRequestMt> for MaWezRequest {
 
 #[doc = r#"This message provides status for a previously submitted MA_WEZ_Request.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "MA_WEZ_RequestStatus")]
 pub struct MaWezRequestStatus(
 	pub crate::v5_0::types::MaWezRequestStatusMt,
 );
@@ -21744,7 +21507,6 @@ impl Into<crate::v5_0::types::PlanningFunctionStatusMt> for PlanningFunctionStat
 
 #[doc = r#"A [Capability]Activity message describes what a Capability is doing. A [Capability]Capability message describes what a Subsystem is capable of doing if invoked; it is generally a complete, coherent snapshot of all Activities of a Subsystem for a Capability category (ESM, EA, etc.). This message indicates the combined in-work and to-do list of the PO Capability of a Subsystem of a System. In UCI terminology, an Activity is the dynamic, per-use status of a Capability. An Activity is an abstraction that includes 1) the autonomous (MDF-driven or MissionPlan-driven) activity of a Capability, 2) the activity resulting from manual commands (PO_Command) from an Operator or Capability management Service, 3) currently in-work PO, 4) PO scheduled for the future and 5) PO that was scheduled and/or attempted but couldn't be completed due to resource limitations or other reasons. A single PO_Command or other triggering event can result in multiple activities within the PO_Activity message.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "PO_Activity")]
 pub struct PoActivity(
 	pub crate::v5_0::types::PoActivityMt,
 );
@@ -21783,7 +21545,6 @@ impl Into<crate::v5_0::types::PoActivityMt> for PoActivity {
 
 #[doc = r#"This message represents the PO (Passive Optical which includes search and track) category of UCI Capability. This message "advertises" the mostly static characteristics of a mission-ready PO Capability (of a Subsystem of System) so that it can be "discovered" and used. "Discovery" can be a misnomer depending on your perspective. UCI Capability messages aren't meant to enable dynamic discovery of design details of never-before-seen Capabilities. They don't eliminate the need for future software updates or configuration files with performance characteristics indexed by Subsystem model number. UCI Capability messages are meant to support discovery of what changes for a Capability from mission to mission or even within the course of a mission, especially as it relates to command and control. In UCI terminology, a Capability is something a System can do that is useful in Missions performed by a heterogeneous family of Systems and Services. A [Capability]Capability message describes what a Subsystem is capable of doing if invoked. A [Capability]Activity message describes what a Capability is doing. Capabilities are aligned with end effects of Mission operations such as imagery collection, active target search, passive threat detection, electronic attack and others. Functions which support these end effects including turret control, carriage control and door control aren't considered UCI Capabilities but might be addressed by other UCI messages. Capabilities are the standardized taxonomy of high level Mission end-effects functions a System can perform. Further, the Capability taxonomy establishes the "level" at which the Mission Subsystems of a System: 1) can be controlled, 2) can be functionally re-integrated into new Systems without their application software changing, 3) are modeled by allocation and planning services including Task Allocation, Route Planning, Mission Monitoring/Contingency and Task Generation services, 4) are modeled by Capability management services including Capability Managers and Capability Controllers and 5) report their configuration, availability and status.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "PO_Capability")]
 pub struct PoCapability(
 	pub crate::v5_0::types::PoCapabilityMt,
 );
@@ -21822,7 +21583,6 @@ impl Into<crate::v5_0::types::PoCapabilityMt> for PoCapability {
 
 #[doc = r#"This message reports the current status of the PO capabilities available to the system. This includes information regarding whether or not each capability is currently available based on hardware status, commanded operational states etc.UCI_PRIMITIVE: Status-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "PO_CapabilityStatus")]
 pub struct PoCapabilityStatus(
 	pub crate::v5_0::types::PoCapabilityStatusMt,
 );
@@ -21861,7 +21621,6 @@ impl Into<crate::v5_0::types::PoCapabilityStatusMt> for PoCapabilityStatus {
 
 #[doc = r#"This message is the PO (Passive Optical which includes search and track) form of the general UCI Capability Command. It is used to manually invoke a Passive Optical Capability to perform a new PO Activity or change an existing interactive PO Activity. It differs from a PO Task because it is intended for direct interaction with the host of the Capability, not a planning Service, and therefore is not expected to impact the route of the host System or otherwise interrupt the planned MissionPlan. Additionally, Capability Commands are intended to allow multiple clients to use a single Capability as a shared resource; see the Control* series of messages. Capability Commands can be used in parallel with Tasks, but are generally deferential to them. However, exceptions are allowed and even expected; the relationship between Tasks and Capability Commands is not rigidly dictated by the UCI schema. Several mechanisms are provided in other messages to tailor the relationship and relative importance of Tasks and [Capability]Commands including Capability precedence, Task rank, [Capability]Command rank, [Capability]Activity rank and control Authorization.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "PO_Command")]
 pub struct PoCommand(
 	pub crate::v5_0::types::PoCommandMt,
 );
@@ -21900,7 +21659,6 @@ impl Into<crate::v5_0::types::PoCommandMt> for PoCommand {
 
 #[doc = r#"This message indicates the result of a PO_Command. This message will reflect whether the command was received, accepted and/or rejected. This message will only be used to status the command until the recipient determines whether or not it can be started or scheduled. The details of the specific activity or activities that result from the command will report status via the PO_Activity message.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "PO_CommandStatus")]
 pub struct PoCommandStatus(
 	pub crate::v5_0::types::PoCommandStatusMt,
 );
@@ -21939,7 +21697,6 @@ impl Into<crate::v5_0::types::PoCommandStatusMt> for PoCommandStatus {
 
 #[doc = r#"This message is used to change the "settings" associated with all of the PO Capabilities of a Subsystem. [Capability]SettingsCommands generally affect the subsequent operation of all applicable Capabilities of the Subsystem; they are considered presettings, independent of [Capability]Command. Unlike most [Capability]Commands they are understood to remain set until changed.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "PO_SettingsCommand")]
 pub struct PoSettingsCommand(
 	pub crate::v5_0::types::PoSettingsCommandMt,
 );
@@ -21978,7 +21735,6 @@ impl Into<crate::v5_0::types::PoSettingsCommandMt> for PoSettingsCommand {
 
 #[doc = r#"This message reports the receipt, acceptance, or rejection of its corresponding PO_SettingsCommand message.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "PO_SettingsCommandStatus")]
 pub struct PoSettingsCommandStatus(
 	pub crate::v5_0::types::PoSettingsCommandStatusMt,
 );
@@ -23872,7 +23628,6 @@ impl Into<crate::v5_0::types::RadarAltimeterSettingsCommandStatusMt> for RadarAl
 
 #[doc = r#"This message instructs the recipient (subscriber) that an RDMA is ready to be established.  The subscriber should use the information in this message to complete an RDMA connection using the libfabrics API/library.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "RDMA_Initialize")]
 pub struct RdmaInitialize(
 	pub crate::v5_0::types::RdmaInitializeMt,
 );
@@ -23911,7 +23666,6 @@ impl Into<crate::v5_0::types::RdmaInitializeMt> for RdmaInitialize {
 
 #[doc = r#"This message requests the server open an RDMA connection using the supplied information.  The server should respond with an RDMA_Initialize message to confirm RDMA connection details and signal the RDMA connection is ready for connection after initializing the connection using the libfabrics API/library.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "RDMA_InitializeSetup")]
 pub struct RdmaInitializeSetup(
 	pub crate::v5_0::types::RdmaInitializeSetupMt,
 );
@@ -25531,7 +25285,6 @@ impl Into<crate::v5_0::types::ResponseStatusMt> for ResponseStatus {
 
 #[doc = r#"This message controls the RF use of a Capability.  Control is specified in the form of RF profiles (RF_Profile message).  When multiple profiles are specified, they should be logically ANDed; the Capability is allowed to operate in the intersection the profiles.  A given RF_ControlCommand must always express the full set of profiles for the target Capability.  In other words, RF_ControlCommand is not additive/subtractive; each instance wholly supersedes the previous instance for a given Capability, regardless of whether the CommandID or ObjectState changes.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "RF_ControlCommand")]
 pub struct RfControlCommand(
 	pub crate::v5_0::types::RfControlCommandMt,
 );
@@ -25570,7 +25323,6 @@ impl Into<crate::v5_0::types::RfControlCommandMt> for RfControlCommand {
 
 #[doc = r#"This message is the response and status to an RF_ControlCommand.  Only the Service which hosts the Capability given in the corresponding RF_ControlCommand should respond with this status message.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "RF_ControlCommandStatus")]
 pub struct RfControlCommandStatus(
 	pub crate::v5_0::types::RfControlCommandStatusMt,
 );
@@ -25609,7 +25361,6 @@ impl Into<crate::v5_0::types::RfControlCommandStatusMt> for RfControlCommandStat
 
 #[doc = r#"A profile of either allowed or denied frequencies.  Multiple profiles may be combined to restrict the RF radiation of a capability or individual command.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "RF_Profile")]
 pub struct RfProfile(
 	pub crate::v5_0::types::RfProfileMt,
 );
@@ -25648,7 +25399,6 @@ impl Into<crate::v5_0::types::RfProfileMt> for RfProfile {
 
 #[doc = r#"Indicates information about the past, current and/or future RF usage of a Capability.  Use of this message is highly dependent on the performance and RF coordination/deconfliction needs of a given System or System of Systems and is left for specific program related documentation and other System Engineering products to describe.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "RF_Report")]
 pub struct RfReport(
 	pub crate::v5_0::types::RfReportMt,
 );
@@ -25687,7 +25437,6 @@ impl Into<crate::v5_0::types::RfReportMt> for RfReport {
 
 #[doc = r#"Used for successful Resource Allocation, Rejection is provided by the RF_ResourceAllocationRequestStatus.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "RF_ResourceAllocation")]
 pub struct RfResourceAllocation(
 	pub crate::v5_0::types::RfResourceAllocationMt,
 );
@@ -25726,7 +25475,6 @@ impl Into<crate::v5_0::types::RfResourceAllocationMt> for RfResourceAllocation {
 
 #[doc = r#"Used with Shared RF Array systems to request a resource allocation from a Resource Manager. If not sent, the Resource manager bases its resource allocation off the Command and Activity.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "RF_ResourceAllocationRequest")]
 pub struct RfResourceAllocationRequest(
 	pub crate::v5_0::types::RfResourceAllocationRequestMt,
 );
@@ -25765,7 +25513,6 @@ impl Into<crate::v5_0::types::RfResourceAllocationRequestMt> for RfResourceAlloc
 
 #[doc = r#"This message is sent from the Resource Manager in response to the RF_ResourceAllocationRequest.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "RF_ResourceAllocationRequestStatus")]
 pub struct RfResourceAllocationRequestStatus(
 	pub crate::v5_0::types::RfResourceAllocationRequestStatusMt,
 );
@@ -25804,7 +25551,6 @@ impl Into<crate::v5_0::types::RfResourceAllocationRequestStatusMt> for RfResourc
 
 #[doc = r#"Command used by a subsystem (e.g. EA, ESM) or a centralized beam manager to preload controls on allocated resources.  This command configures the controls for the RFDC components and the Antenna subsystem, and assigns a priority to the requested controls.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "RF_ThreadInstanceSetupCommand")]
 pub struct RfThreadInstanceSetupCommand(
 	pub crate::v5_0::types::RfThreadInstanceSetupCommandMt,
 );
@@ -25843,7 +25589,6 @@ impl Into<crate::v5_0::types::RfThreadInstanceSetupCommandMt> for RfThreadInstan
 
 #[doc = r#"Command used by Antenna and RFDC subsystems to acknowledge the preloaded controls on allocated resources that were sent by the subsystem (e.g. EA, ESM).UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "RF_ThreadInstanceSetupCommandStatus")]
 pub struct RfThreadInstanceSetupCommandStatus(
 	pub crate::v5_0::types::RfThreadInstanceSetupCommandStatusMt,
 );
@@ -26797,7 +26542,6 @@ impl Into<crate::v5_0::types::RoutePlanValidationCommandStatusMt> for RoutePlanV
 
 #[doc = r#"This message indicates the combined in-work and to-do list of the SAR Capability of a Subsystem of a System.  In general, a [Capability]Activity message describes what invoked Capabilities are doing.  It is generally a complete, coherent snapshot of all Activities of a Subsystem for an entire Capability category (such as ESM, AirSample, EA, etc.).  In other words, an Activity is the dynamic, per-use/per-invocation status of a Capability.  An Activity is an abstraction that includes 1) the autonomous (MDF-driven or MissionPlan-driven) activity of a Capability, 2) the activity resulting from manual commands (SAR_Command) from an Operator or Capability management Service, 3) currently in-work SAR, 4) SAR scheduled for the future and 5) SAR that was scheduled and/or attempted but couldn't be completed due to resource limitations or other reasons.  A single SAR_Command or other triggering event can result in multiple activities within the SAR_Activity message.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "SAR_Activity")]
 pub struct SarActivity(
 	pub crate::v5_0::types::SarActivityMt,
 );
@@ -26836,7 +26580,6 @@ impl Into<crate::v5_0::types::SarActivityMt> for SarActivity {
 
 #[doc = r#"This message represents the SAR (Synthetic Aperture Radar) form of UCI Capability.  This message "advertises" the mostly static characteristics of a mission-ready SAR Capability (of a Subsystem of System) so that it can be "discovered" and used.  "Discovery" can be a misnomer depending on your perspective.  UCI Capability messages aren't meant to enable dynamic discovery of design details of never-before-seen Capabilities.  They don't eliminate the need for future software updates or configuration files with performance characteristics indexed by Subsystem model number.  UCI Capability messages are meant to support discovery of what changes for a Capability from mission to mission or even within the course of a mission, especially as it relates to command and control.  In UCI terminology, a Capability is something a System can do that is useful in Missions performed by a heterogeneous family of Systems and Services.  A [Capability]Capability message describes what a Subsystem is capable of doing if invoked.  A [Capability]Activity message describes what a Capability is doing.  Capabilities are aligned with end effects of Mission operations such as imagery collection, active target search, passive threat detection, electronic attack and others.  Functions which support these end effects including turret control, carriage control and door control aren't considered UCI Capabilities but might be addressed by other UCI messages.  Capabilities are the standardized taxonomy of high level Mission end-effects functions a System can perform.  Further, the Capability taxonomy establishes the "level" at which the Mission Subsystems of a System: 1) can be controlled, 2) can be functionally re-integrated into new Systems without their application software changing, 3) are modeled by allocation and planning services including Task Allocation, Route Planning, Mission Monitoring/Contingency and Task Generation services, 4) are modeled by Capability management services including Capability Managers and Capability Controllers and 5) report their configuration, availability and status.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "SAR_Capability")]
 pub struct SarCapability(
 	pub crate::v5_0::types::SarCapabilityMt,
 );
@@ -26875,7 +26618,6 @@ impl Into<crate::v5_0::types::SarCapabilityMt> for SarCapability {
 
 #[doc = r#"This message reports the current status of the SAR capabilities.   This includes whether or not each capability is currently available based on hardware status, commanded operational states, associated RF profiles etc.UCI_PRIMITIVE: Status-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "SAR_CapabilityStatus")]
 pub struct SarCapabilityStatus(
 	pub crate::v5_0::types::SarCapabilityStatusMt,
 );
@@ -26914,7 +26656,6 @@ impl Into<crate::v5_0::types::SarCapabilityStatusMt> for SarCapabilityStatus {
 
 #[doc = r#"This message is the SAR (Synthetic Aperture Radar) form of the general UCI Capability Command.  It is used to manually invoke a SAR Capability to perform a new SAR Activity or change an existing interactive SAR Activity.  It differs from a SAR Task because it is intended for direct interaction with the host of the Capability, not a planning Service, and therefore is not expected to impact the route of the host System or otherwise interrupt the planned MissionPlan.  Additionally, Capability Commands are intended to allow multiple clients to use a single Capability as a shared resource; see the Control* series of messages.  Capability Commands can be used in parallel with Tasks, but are generally deferential to them.  However, exceptions are allowed and even expected; the relationship between Tasks and Capability Commands is not rigidly dictated by the UCI schema.  Several mechanisms are provided in other messages to tailor the relationship and relative importance of Tasks and [Capability]Commands including Capability precedence, Task rank, [Capability]Command rank, [Capability]Activity rank and control Authorization.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "SAR_Command")]
 pub struct SarCommand(
 	pub crate::v5_0::types::SarCommandMt,
 );
@@ -26953,7 +26694,6 @@ impl Into<crate::v5_0::types::SarCommandMt> for SarCommand {
 
 #[doc = r#"This message indicates the result of a SAR_Command.  This message will reflect whether the command was received, accepted and/or rejected.  This message will only be used to status the command until the recipient determines whether or not it can be started or scheduled.  The details of the specific activity or activities that result from the command will report status via the SAR_Activity message.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "SAR_CommandStatus")]
 pub struct SarCommandStatus(
 	pub crate::v5_0::types::SarCommandStatusMt,
 );
@@ -26992,7 +26732,6 @@ impl Into<crate::v5_0::types::SarCommandStatusMt> for SarCommandStatus {
 
 #[doc = r#"This message is used to change the "settings" associated with all of the SAR Capabilities of a Subsystem.  [Capability]SettingsCommands generally affect the subsequent operation of all applicable Capabilities of the Subsystem; they are considered presettings, independent of [Capability]Command.  Unlike most [Capability]Commands they are understood to remain set until changed.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "SAR_SettingsCommand")]
 pub struct SarSettingsCommand(
 	pub crate::v5_0::types::SarSettingsCommandMt,
 );
@@ -27031,7 +26770,6 @@ impl Into<crate::v5_0::types::SarSettingsCommandMt> for SarSettingsCommand {
 
 #[doc = r#"Reports the acknowledgment and/or acceptance of a SAR settings command.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "SAR_SettingsCommandStatus")]
 pub struct SarSettingsCommandStatus(
 	pub crate::v5_0::types::SarSettingsCommandStatusMt,
 );
@@ -27830,7 +27568,6 @@ impl Into<crate::v5_0::types::SignalReportMt> for SignalReport {
 
 #[doc = r#"This message indicates the combined in-work and to-do list of the SMTI Capability of a Subsystem of a System.  In general, a [Capability]Activity message describes what invoked Capabilities are doing.  It is generally a complete, coherent snapshot of all Activities of a Subsystem for an entire Capability category (such as ESM, AirSample, EA, etc.).  In other words, an Activity is the dynamic, per-use/per-invocation status of a Capability.  An Activity is an abstraction that includes 1) the autonomous (MDF-driven or MissionPlan-driven) activity of a Capability, 2) the activity resulting from manual commands (SMTI_Command) from an Operator or Capability management Service, 3) currently in-work SMTI, 4) SMTI scheduled for the future and 5) SMTI that was scheduled and/or attempted but couldn't be completed due to resource limitations or other reasons.  A single SMTI_Command or other triggering event can result in multiple activities within the SMTI_Activity message.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "SMTI_Activity")]
 pub struct SmtiActivity(
 	pub crate::v5_0::types::SmtiActivityMt,
 );
@@ -27869,7 +27606,6 @@ impl Into<crate::v5_0::types::SmtiActivityMt> for SmtiActivity {
 
 #[doc = r#"This message represents the SMTI (Surface Moving Target Indication) category of UCI Capability.  SMTI detects non-airborne items through active radar search and track.  In UCI, SMTI is defined as not-Air MTI; it includes both ground MTI (GMTI) and maritime MTI (MMTI).  This message "advertises" the mostly static characteristics of a mission-ready SMTI Capability (of a Subsystem of System) so that it can be "discovered" and used.  "Discovery" can be a misnomer depending on your perspective.  UCI Capability messages aren't meant to enable dynamic discovery of design details of never-before-seen Capabilities.  They don't eliminate the need for future software updates or configuration files with performance characteristics indexed by Subsystem model number.  UCI Capability messages are meant to support discovery of what changes for a Capability from mission to mission or even within the course of a mission, especially as it relates to command and control.  In UCI terminology, a Capability is something a System can do that is useful in Missions performed by a heterogeneous family of Systems and Services.  A [Capability]Capability message describes what a Subsystem is capable of doing if invoked.  A [Capability]Activity message describes what a Capability is doing.  Capabilities are aligned with end effects of Mission operations such as imagery collection, active target search, passive threat detection, electronic attack and others.  Functions which support these end effects including turret control, carriage control and door control aren't considered UCI Capabilities but might be addressed by other UCI messages.  Capabilities are the standardized taxonomy of high level Mission end-effects functions a System can perform.  Further, the Capability taxonomy establishes the "level" at which the Mission Subsystems of a System: 1) can be controlled, 2) can be functionally re-integrated into new Systems without their application software changing, 3) are modeled by allocation and planning services including Task Allocation, Route Planning, Mission Monitoring/Contingency and Task Generation services, 4) are modeled by Capability management services including Capability Managers and Capability Controllers and 5) report their configuration, availability and status.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "SMTI_Capability")]
 pub struct SmtiCapability(
 	pub crate::v5_0::types::SmtiCapabilityMt,
 );
@@ -27908,7 +27644,6 @@ impl Into<crate::v5_0::types::SmtiCapabilityMt> for SmtiCapability {
 
 #[doc = r#"This message reports the current status of the SMTI capabilities.   This includes whether or not each capability is currently available based on hardware status, commanded operational states, associated RF profiles etc.UCI_PRIMITIVE: Status-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "SMTI_CapabilityStatus")]
 pub struct SmtiCapabilityStatus(
 	pub crate::v5_0::types::SmtiCapabilityStatusMt,
 );
@@ -27947,7 +27682,6 @@ impl Into<crate::v5_0::types::SmtiCapabilityStatusMt> for SmtiCapabilityStatus {
 
 #[doc = r#"This message is the SMTI (Radar Surface Moving Target Indicator, where "surface" includes ground and maritime backgrounds) form of the general UCI Capability Command.  It is used to manually invoke a SMTI Capability to perform a new SMTI Activity or change an existing interactive SMTI Activity.  It differs from a SMTI Task because it is intended for direct interaction with the host of the Capability, not a planning Service, and therefore is not expected to impact the route of the host System or otherwise interrupt the planned MissionPlan.  Additionally, Capability Commands are intended to allow multiple clients to use a single Capability as a shared resource; see the Control* series of messages.  Capability Commands can be used in parallel with Tasks, but are generally deferential to them.  However, exceptions are allowed and even expected; the relationship between Tasks and Capability Commands is not rigidly dictated by the UCI schema.  Several mechanisms are provided in other messages to tailor the relationship and relative importance of Tasks and [Capability]Commands including Capability precedence, Task rank, [Capability]Command rank, [Capability]Activity rank and control Authorization.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "SMTI_Command")]
 pub struct SmtiCommand(
 	pub crate::v5_0::types::SmtiCommandMt,
 );
@@ -27986,7 +27720,6 @@ impl Into<crate::v5_0::types::SmtiCommandMt> for SmtiCommand {
 
 #[doc = r#"This message indicates the result of an SMTI_Command.  This message will reflect whether the command was received, accepted and/or rejected.  This message will only be used to status the command until the recipient determines whether or not it can be started or scheduled.  The details of the specific activity or activities that result from the command will report status via the SMTI_Activity message.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "SMTI_CommandStatus")]
 pub struct SmtiCommandStatus(
 	pub crate::v5_0::types::SmtiCommandStatusMt,
 );
@@ -28025,7 +27758,6 @@ impl Into<crate::v5_0::types::SmtiCommandStatusMt> for SmtiCommandStatus {
 
 #[doc = r#"This message is used to change the "settings" associated with all of the SMTI Capabilities of a Subsystem.  [Capability]SettingsCommands generally affect the subsequent operation of all applicable Capabilities of the Subsystem; they are considered presettings, independent of [Capability]Command.  Unlike most [Capability]Commands they are understood to remain set until changed.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "SMTI_SettingsCommand")]
 pub struct SmtiSettingsCommand(
 	pub crate::v5_0::types::SmtiSettingsCommandMt,
 );
@@ -28064,7 +27796,6 @@ impl Into<crate::v5_0::types::SmtiSettingsCommandMt> for SmtiSettingsCommand {
 
 #[doc = r#"Reports the acknowledgment and/or acceptance of an SMTI settings command.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "SMTI_SettingsCommandStatus")]
 pub struct SmtiSettingsCommandStatus(
 	pub crate::v5_0::types::SmtiSettingsCommandStatusMt,
 );
@@ -28103,7 +27834,6 @@ impl Into<crate::v5_0::types::SmtiSettingsCommandStatusMt> for SmtiSettingsComma
 
 #[doc = r#"This message indicates the attributes of a C2 node (such as a ground station) associated with a satellite or multiple satellites.UCI_PRIMITIVE: DataRecord-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "SOB_C2_Record")]
 pub struct SobC2Record(
 	pub crate::v5_0::types::SobC2RecordMt,
 );
@@ -28142,7 +27872,6 @@ impl Into<crate::v5_0::types::SobC2RecordMt> for SobC2Record {
 
 #[doc = r#"This message indicates a potential correlation (match) between an existing SOB_C2_Record/SOB_SatelliteRecord and another message occurred.  For example an Entity* message from a source that provides situational awareness on Resident Space Objects (RSO) might have an orbit, RF emissions and/or an identity that matches those of an SOB_C2_Record/SOB_SatelliteRecord.  This message records the correlation along with a snapshot of select data for later review and analysis followed by potential updates to the "truth" or "reference" catalog of SOB_C2_Record/SOB_SatelliteRecords.UCI_PRIMITIVE: DataRecord-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "SOB_CorrelationRecord")]
 pub struct SobCorrelationRecord(
 	pub crate::v5_0::types::SobCorrelationRecordMt,
 );
@@ -28181,7 +27910,6 @@ impl Into<crate::v5_0::types::SobCorrelationRecordMt> for SobCorrelationRecord {
 
 #[doc = r#"This message indicates the attributes of the satellite or the launch vehicle. This information includes, but not limited to, the identity of the satellite or launch vehicle, orbit information, time stamps, operational status, type of mission, TLE data, etc.UCI_PRIMITIVE: DataRecord-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "SOB_SatelliteRecord")]
 pub struct SobSatelliteRecord(
 	pub crate::v5_0::types::SobSatelliteRecordMt,
 );
@@ -28866,7 +28594,6 @@ impl Into<crate::v5_0::types::StrikeSettingsCommandStatusMt> for StrikeSettingsC
 
 #[doc = r#"This message is used to command BIT or BIT-related functions.  Some Subsystems only support commanded/initiated BIT via SubsystemStateCommand.  This message is intended for command/initiated BIT that isn't a Subsystem state and generally doesn't interrupt other Subsystem functions.  See SubsystemBIT_Configuration for further details regarding the difference between types of commanded/initiated BIT.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "SubsystemBIT_Command")]
 pub struct SubsystemBitCommand(
 	pub crate::v5_0::types::SubsystemBitCommandMt,
 );
@@ -28905,7 +28632,6 @@ impl Into<crate::v5_0::types::SubsystemBitCommandMt> for SubsystemBitCommand {
 
 #[doc = r#"This message is used to report command status in response to the corresponding SubsystemBIT_Command received by the subsystem.UCI_PRIMITIVE: Command-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "SubsystemBIT_CommandStatus")]
 pub struct SubsystemBitCommandStatus(
 	pub crate::v5_0::types::SubsystemBitCommandStatusMt,
 );
@@ -28944,7 +28670,6 @@ impl Into<crate::v5_0::types::SubsystemBitCommandStatusMt> for SubsystemBitComma
 
 #[doc = r#"This message indicates the Built In Test (BIT) messaging interfaces and specific tests supported by a Subsystem.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "SubsystemBIT_Configuration")]
 pub struct SubsystemBitConfiguration(
 	pub crate::v5_0::types::SubsystemBitConfigurationMt,
 );
@@ -28983,7 +28708,6 @@ impl Into<crate::v5_0::types::SubsystemBitConfigurationMt> for SubsystemBitConfi
 
 #[doc = r#"This message indicates the current status and results of Subsystem Built In Tests (BIT) along with faults.  This message is used for BIT status regardless of how the BIT is initiated.UCI_PRIMITIVE: Status-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "SubsystemBIT_Status")]
 pub struct SubsystemBitStatus(
 	pub crate::v5_0::types::SubsystemBitStatusMt,
 );
@@ -30618,7 +30342,6 @@ impl Into<crate::v5_0::types::SystemOrbitalPositionReportMt> for SystemOrbitalPo
 
 #[doc = r#"This message represents a "vector covariance matrix" or VCM which is a specialized state vector, along with extensive propagation parameters, tailored specifically for customers who are using an ASW system to propagate the vector.  A VCM should not be confused with the simpler and more common kinematic variance for position-position or position-velocity.  The VCM has all the additional information needed to correctly propagate the vector using the Special Perturbations Ephemeris Generator in ASW. The VCM includes a covariance matrix that provides the epoch covariance in equinoctial elements and only provides UVW variances. TLE and ephemeris for a System are given in other System* messages.UCI_PRIMITIVE: Data-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "SystemOrbitalVCM")]
 pub struct SystemOrbitalVcm(
 	pub crate::v5_0::types::SystemOrbitalVcmMt,
 );
@@ -30657,7 +30380,6 @@ impl Into<crate::v5_0::types::SystemOrbitalVcmMt> for SystemOrbitalVcm {
 
 #[doc = r#"This message requests an orbital VCM for a System.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "SystemOrbitalVCM_Request")]
 pub struct SystemOrbitalVcmRequest(
 	pub crate::v5_0::types::SystemOrbitalVcmRequestMt,
 );
@@ -30696,7 +30418,6 @@ impl Into<crate::v5_0::types::SystemOrbitalVcmRequestMt> for SystemOrbitalVcmReq
 
 #[doc = r#"This message represents the status in response to a request for an orbital VCM for a System.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "SystemOrbitalVCM_RequestStatus")]
 pub struct SystemOrbitalVcmRequestStatus(
 	pub crate::v5_0::types::SystemOrbitalVcmRequestStatusMt,
 );
@@ -32305,7 +32026,6 @@ impl Into<crate::v5_0::types::WeatherRadarSettingsCommandStatusMt> for WeatherRa
 
 #[doc = r#"This message represents a "working" Electronic Order of Battle (EOB); a subset of the whole EOB bound by a corresponding OpZone.UCI_PRIMITIVE: DataRecord-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "WorkingEOB")]
 pub struct WorkingEob(
 	pub crate::v5_0::types::WorkingEobMt,
 );
@@ -32344,7 +32064,6 @@ impl Into<crate::v5_0::types::WorkingEobMt> for WorkingEob {
 
 #[doc = r#"This message requests creation of a new WorkingEOB from an optionally filtered subset of a System's EOB catalog or from an existing WorkingEOB.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "WorkingEOB_Request")]
 pub struct WorkingEobRequest(
 	pub crate::v5_0::types::WorkingEobRequestMt,
 );
@@ -32383,7 +32102,6 @@ impl Into<crate::v5_0::types::WorkingEobRequestMt> for WorkingEobRequest {
 
 #[doc = r#"This message is the response to a WorkingEOB_Request message.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "WorkingEOB_RequestStatus")]
 pub struct WorkingEobRequestStatus(
 	pub crate::v5_0::types::WorkingEobRequestStatusMt,
 );
@@ -32422,7 +32140,6 @@ impl Into<crate::v5_0::types::WorkingEobRequestStatusMt> for WorkingEobRequestSt
 
 #[doc = r#"Indicates an order of battle (OB) set of Resident Space Objects (RSO) and their characteristics that are under consideration by a planning service.  The OB is "working" in the sense that it is tailored/curated to suit the planning needs of a particular set of services, a particular mission, a particular course of action of a mission, etc.UCI_PRIMITIVE: DataRecord-1."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "WorkingSOB")]
 pub struct WorkingSob(
 	pub crate::v5_0::types::WorkingSobMt,
 );
@@ -32461,7 +32178,6 @@ impl Into<crate::v5_0::types::WorkingSobMt> for WorkingSob {
 
 #[doc = r#"This message requests creation of a new WorkingSOB from an optionally filtered subset of a System's SOB catalog or from an existing WorkingSOB.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "WorkingSOB_Request")]
 pub struct WorkingSobRequest(
 	pub crate::v5_0::types::WorkingSobRequestMt,
 );
@@ -32500,7 +32216,6 @@ impl Into<crate::v5_0::types::WorkingSobRequestMt> for WorkingSobRequest {
 
 #[doc = r#"This message is the response to a WorkingSOB_Request message.UCI_PRIMITIVE: ActionRequest-2."#]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename = "WorkingSOB_RequestStatus")]
 pub struct WorkingSobRequestStatus(
 	pub crate::v5_0::types::WorkingSobRequestStatusMt,
 );
