@@ -16,5 +16,6 @@ paste = "1.0"
 iso8601 = "0.6.3"
 
 [features]
-default = ["v5_0"]
+default = ["v6_0a"]
 v5_0 = []
+v6_0a = []
